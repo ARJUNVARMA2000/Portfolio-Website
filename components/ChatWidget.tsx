@@ -318,7 +318,7 @@ export default function ChatWidget() {
                       onClick={() => append({ role: "user", content: "Tell me about Arjun's experience at ZS Associates" })}
                       className="text-left px-4 py-2.5 bg-t-surface border border-t-border rounded-lg text-sm text-t-text hover:border-t-accent hover:bg-t-accent/5 transition-all duration-200"
                     >
-                      Tell me about Arjun's experience at ZS Associates
+                      Tell me about Arjun&apos;s experience at ZS Associates
                     </button>
                   </div>
                 </motion.div>

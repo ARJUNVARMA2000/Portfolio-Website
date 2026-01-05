@@ -15,7 +15,7 @@ const openrouter = createOpenAI({
   },
 });
 
-const MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-5.2";
+const MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-4o-mini";
 
 export async function POST(req: Request) {
   const { messages } = await req.json().catch(() => ({ messages: [] }));

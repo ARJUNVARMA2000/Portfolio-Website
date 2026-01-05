@@ -32,7 +32,7 @@ Vercel is the creators of Next.js and offers the best integration.
 3. **Configure Environment Variables**
    In the project settings, add:
    - `OPENROUTER_API_KEY` (Required) - Your OpenRouter API key
-   - `OPENROUTER_MODEL` (Optional) - Default: `openai/gpt-5.2`
+   - `OPENROUTER_MODEL` (Optional) - Default: `openai/gpt-4o-mini`
    - `OR_SITE_URL` (Optional) - Your site URL for attribution
    - `OR_APP_NAME` (Optional) - App name for attribution
 
@@ -195,7 +195,7 @@ Vercel is the creators of Next.js and offers the best integration.
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
 | `OPENROUTER_API_KEY` | ✅ Yes | Your OpenRouter API key | `sk-or-v1-...` |
-| `OPENROUTER_MODEL` | ❌ No | Model to use (default: `openai/gpt-5.2`) | `openai/gpt-4o` |
+| `OPENROUTER_MODEL` | ❌ No | Model to use (default: `openai/gpt-4o-mini`) | `openai/gpt-4o` |
 | `OR_SITE_URL` | ❌ No | Your site URL for OpenRouter attribution | `https://yourportfolio.com` |
 | `OR_APP_NAME` | ❌ No | App name for OpenRouter attribution | `Arjun's Portfolio` |
 
