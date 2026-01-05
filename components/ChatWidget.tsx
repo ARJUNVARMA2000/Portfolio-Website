@@ -10,14 +10,38 @@ export default function ChatWidget() {
   const [isNudgeDismissed, setIsNudgeDismissed] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    append,
+    error,
+    reload,
+  } = useChat({
     api: "/api/chat",
+    keepLastMessageOnError: true,
+    onResponse: async (res) => {
+      if (res.ok) return;
+      try {
+        const data = (await res.json()) as { error?: string; hint?: string };
+        const msg = [data?.error, data?.hint].filter(Boolean).join("\n");
+        throw new Error(msg || `Request failed (${res.status})`);
+      } catch {
+        throw new Error(`Request failed (${res.status})`);
+      }
+    },
+    onError: (e) => {
+      // eslint-disable-next-line no-console
+      console.error("Chat error:", e);
+    },
     initialMessages: [
       {
         id: "welcome",
         role: "assistant",
         content:
-          "Hi! I’m Arjun’s AI assistant—ask me anything about his experience, projects, or skills.",
+          "Hi! I'm Arjun's AI assistant—ask me anything about his experience, projects, or skills.",
       },
     ],
   });
@@ -188,7 +212,7 @@ export default function ChatWidget() {
                     Ask Arjun&apos;s AI
                   </h3>
                   <p className="text-xs text-gray-500">
-                    Powered by OpenRouter • GPT-5.2
+                    Powered by OpenRouter
                   </p>
                 </div>
               </div>
@@ -196,6 +220,21 @@ export default function ChatWidget() {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {error && (
+                <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-t-text">
+                  <div className="font-medium">Chat is unavailable right now.</div>
+                  <div className="text-xs text-t-muted mt-1 whitespace-pre-line">
+                    {error.message}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => reload()}
+                    className="mt-2 inline-flex items-center gap-2 rounded-md border border-t-border bg-t-bg px-3 py-1.5 text-xs hover:border-t-accent/60 transition-colors"
+                  >
+                    Retry
+                  </button>
+                </div>
+              )}
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
@@ -256,6 +295,35 @@ export default function ChatWidget() {
                   </div>
                 </motion.div>
               )}
+              
+              {/* Suggested Questions - Show only when no user messages exist */}
+              {messages.filter(m => m.role === "user").length === 0 && !isLoading && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="space-y-2 mt-4"
+                >
+                  <p className="text-xs text-gray-500 mb-2">Try asking:</p>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      type="button"
+                      onClick={() => append({ role: "user", content: "What ML projects has Arjun worked on?" })}
+                      className="text-left px-4 py-2.5 bg-t-surface border border-t-border rounded-lg text-sm text-t-text hover:border-t-accent hover:bg-t-accent/5 transition-all duration-200"
+                    >
+                      What ML projects has Arjun worked on?
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => append({ role: "user", content: "Tell me about Arjun's experience at ZS Associates" })}
+                      className="text-left px-4 py-2.5 bg-t-surface border border-t-border rounded-lg text-sm text-t-text hover:border-t-accent hover:bg-t-accent/5 transition-all duration-200"
+                    >
+                      Tell me about Arjun's experience at ZS Associates
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+              
               <div ref={messagesEndRef} />
             </div>
 
@@ -270,19 +338,17 @@ export default function ChatWidget() {
                   value={input}
                   onChange={handleInputChange}
                   placeholder="Ask about Arjun's experience..."
-                  className="flex-1 px-4 py-2 bg-t-surface border border-t-border rounded-lg text-t-text text-sm focus:border-t-accent focus:outline-none transition-colors"
+                  disabled={!!error}
+                  className="flex-1 px-4 py-2 bg-t-surface border border-t-border rounded-lg text-t-text text-sm focus:border-t-accent focus:outline-none transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 />
                 <button
                   type="submit"
-                  disabled={isLoading || !input.trim()}
+                  disabled={!!error || isLoading || !input.trim()}
                   className="px-4 py-2 bg-t-accent text-t-onAccent rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <FaPaperPlane size={14} />
                 </button>
               </div>
-              <p className="text-xs text-gray-600 mt-2 text-center">
-                Try: &ldquo;What ML projects has Arjun done?&rdquo;
-              </p>
             </form>
           </motion.div>
         )}

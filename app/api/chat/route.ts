@@ -18,7 +18,7 @@ const openrouter = createOpenAI({
 const MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-5.2";
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages } = await req.json().catch(() => ({ messages: [] }));
 
   if (!process.env.OPENROUTER_API_KEY) {
     return new Response(
@@ -26,17 +26,47 @@ export async function POST(req: Request) {
         error:
           "Missing OPENROUTER_API_KEY. Set it in .env.local (dev) or your hosting provider env vars (prod).",
       }),
-      { status: 500, headers: { "content-type": "application/json" } }
+      { status: 401, headers: { "content-type": "application/json" } }
     );
   }
 
-  const result = await streamText({
-    model: openrouter(MODEL),
-    system: SYSTEM_PROMPT,
-    messages,
-    maxTokens: 700,
-    temperature: 0.7,
-  });
+  if (!Array.isArray(messages)) {
+    return new Response(
+      JSON.stringify({
+        error: "Invalid request body: expected { messages: [...] }",
+      }),
+      { status: 400, headers: { "content-type": "application/json" } }
+    );
+  }
 
-  return result.toDataStreamResponse();
+  try {
+    const result = await streamText({
+      model: openrouter(MODEL),
+      system: SYSTEM_PROMPT,
+      messages,
+      maxTokens: 700,
+      temperature: 0.5,
+    });
+
+    return result.toDataStreamResponse();
+  } catch (err: unknown) {
+    const message =
+      err instanceof Error ? err.message : "Unknown error while generating chat response.";
+
+    const status =
+      typeof message === "string" && message.toLowerCase().includes("unauthorized")
+        ? 401
+        : 500;
+
+    return new Response(
+      JSON.stringify({
+        error: message,
+        hint:
+          status === 401
+            ? "Your OpenRouter key/model may be invalid. Check OPENROUTER_API_KEY and OPENROUTER_MODEL."
+            : "See server logs for details.",
+      }),
+      { status, headers: { "content-type": "application/json" } }
+    );
+  }
 }
