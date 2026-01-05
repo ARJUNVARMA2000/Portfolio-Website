@@ -41,7 +41,7 @@ export default function ChatWidget() {
         id: "welcome",
         role: "assistant",
         content:
-          "Hi! I'm Arjun's AI assistant—ask me anything about his experience, projects, or skills.",
+          "Hi! I'm Arjun's portfolio assistant—ask me anything about his experience, projects, or skills.",
       },
     ],
   });
