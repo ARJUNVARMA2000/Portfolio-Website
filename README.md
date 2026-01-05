@@ -1,156 +1,125 @@
-# Arjun Varma - Portfolio Website
+# Arjun Varma
 
-A futuristic cyberpunk-themed portfolio website with an AI-powered chat assistant that can answer questions about my professional background.
+**Advanced Data Science Associate Consultant | MS Data Science @ Columbia University**
 
-![Portfolio Preview](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat-square&logo=tailwind-css)
+---
 
-## Features
+## About Me
 
-- **Cyberpunk Design**: Neon colors, glitch effects, animated backgrounds
-- **AI Chat Assistant**: GPT-4o powered chat that answers questions about my experience
-- **Responsive**: Looks great on all devices
-- **Interactive**: Smooth animations with Framer Motion
-- **SEO Optimized**: Meta tags and Open Graph support
-- **Easy Deployment**: One-click deploy to Vercel
+I'm an Advanced Data Science Associate Consultant with a passion for building intelligent systems that drive real business impact. Currently pursuing my Master's in Data Science at Columbia University, I bring **3+ years of experience** from ZS Associates where I've worked with **Fortune 500 healthcare clients** on ML platforms, predictive analytics, and LLM-powered solutions.
 
-## Tech Stack
+I specialize in transforming complex data into actionable insights using Python, SQL, PySpark, and modern ML frameworks. My work spans from building organization-wide analytics platforms to developing **early cancer detection models** that can potentially save lives.
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **AI**: Vercel AI SDK + OpenAI GPT-4o
-- **Icons**: React Icons
-- **Deployment**: Vercel
+---
 
-## Getting Started
+## 🚀 Key Achievements
 
-### Prerequisites
+- **Fast-Track Promotion**: Promoted to Associate Consultant in 4 cycles (typical: 5) via accelerated performance
+- **Award Winner**: Received Client Contraste Award for outstanding client outcomes and feedback
+- **Top Performer**: Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical
+- **Impact at Scale**: Drove adoption by **1,000+ sales reps and HQ leaders**, replacing Excel reports and cutting prep time from days to minutes
+- **Academic Excellence**: 4.0/4.0 GPA (WES Evaluated) from Vellore Institute of Technology; Special Achiever Award & Merit Scholarship recipient
 
-- Node.js 18+ installed
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+---
 
-### Installation
+## 💼 Professional Experience
 
-1. Clone the repository:
-```bash
-git clone https://github.com/ARJUNVARMA2000/portfolio.git
-cd portfolio
-```
+### Advanced Data Science Associate Consultant @ ZS Associates
+*Feb 2025 - Jun 2025 | Pune, India*
 
-2. Install dependencies:
-```bash
-npm install
-```
+- Built and deployed an **organization-wide analytics + ML platform** consolidating multiple data sources to surface real-time KPIs by territory and product; partnered with PMs and marketing heads for a **>$10B revenue oncology portfolio**
+- Piloted a **retrieval-augmented LLM** to turn FDA approval documents into concise briefs for commercial teams
+- Worked in Performance Analytics, Forecasting, and Data Science teams for Fortune 500 healthcare clients; collaborated with US-based stakeholders
 
-3. Create your environment file:
-```bash
-# Create .env.local and add your OpenAI API key
-echo "OPENAI_API_KEY=sk-your-api-key-here" > .env.local
-```
+### Decision Analytics Associate Consultant @ ZS Associates
+*Jul 2024 - Jan 2025 | Pune, India*
 
-4. Run the development server:
-```bash
-npm run dev
-```
+- Led a 5-member team on a strategic initiative to overhaul legacy business rules and modernize processes, **saving ~50 hrs/mo** and improving first-pass quality to **>99%**
+- Built and productionized **Positive-Unlabeled (PU) learning models** at a Fortune 500 organization to systematically infer missing categorical labels in transactional data
+- Implemented automated model drift checks and unit testing to ensure long-term reliability
+- **Award Winner**: Received Client Contraste Award
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+### Decision Analytics Associate @ ZS Associates
+*Feb 2022 - Jun 2024 | Pune, India*
 
-## Environment Variables
+- Engineered PySpark/SQL pipelines integrating multiple data sources to deliver brand performance insights across multiple products
+- Defined patient-cohort inclusion/exclusion rules robust to missing/miscoded fields; yielded consistent, audit-ready analytics
+- Drove reporting and ad-hoc analytics that surfaced care gaps and market opportunities, informing key brand strategies across multiple new launches
+- **Fast-Track Promotion**: Promoted in 4 cycles (typical: 5); received Expert Associate and Insight Illuminate Awards
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `OPENROUTER_API_KEY` | Yes | Your OpenRouter API key for the chat feature |
-| `OPENROUTER_MODEL` | No | Override model (default: `openai/gpt-5.2`) |
-| `OR_SITE_URL` | No | Optional attribution header `HTTP-Referer` for OpenRouter |
-| `OR_APP_NAME` | No | Optional attribution header `X-Title` for OpenRouter |
+---
 
-## Deployment
+## 🎓 Education
 
-### Deploy to Vercel (Recommended)
+**Master of Science in Data Science**  
+*Columbia University | New York, NY*  
+*Aug 2025 - Dec 2026*
 
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your repository
-4. Add your environment variables:
-   - `OPENROUTER_API_KEY`: Your OpenRouter API key
-   - (optional) `OPENROUTER_MODEL`: `openai/gpt-5.2`
-5. Click Deploy
+- TA for Business Analytics II: Foundations of AI at Columbia Business School
+- Volunteer at Columbia Disability Services
 
-That's it! Your site will be live in minutes.
+**B.Tech in Electronics & Communication Engineering**  
+*Vellore Institute of Technology | Vellore, India*  
+*Jul 2018 - May 2022*
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ARJUNVARMA2000/portfolio)
+- GPA: **4.0/4.0** (WES Evaluated)
+- Special Achiever Award & Merit Scholarship
 
-## Project Structure
+---
 
-```
-Portfolio2/
-├── app/
-│   ├── api/chat/route.ts    # AI chat API endpoint
-│   ├── globals.css          # Global styles + cyberpunk theme
-│   ├── layout.tsx           # Root layout with metadata
-│   └── page.tsx             # Main page component
-├── components/
-│   ├── Hero.tsx             # Hero section with glitch effects
-│   ├── About.tsx            # About me + education
-│   ├── Experience.tsx       # Work experience timeline
-│   ├── Projects.tsx         # Project showcase
-│   ├── Skills.tsx           # Technical skills grid
-│   ├── FPLCard.tsx          # Fantasy Premier League card
-│   ├── Contact.tsx          # Contact form + social links
-│   ├── ChatWidget.tsx       # AI chat assistant
-│   ├── Navbar.tsx           # Navigation bar
-│   └── Footer.tsx           # Footer
-├── lib/
-│   ├── resume-context.ts    # AI system prompt with resume data
-│   └── utils.ts             # Utility functions
-├── public/
-│   └── resume.txt           # Downloadable resume (included)
-└── ...config files
-```
+## 🛠️ Technical Skills
 
-## Customization
+**Programming**: Python, SQL, C++, R  
+**ML & Analytics**: PyTorch, Scikit-learn, Pandas, NumPy, Deep Learning  
+**Big Data & MLOps**: PySpark, Databricks, MLflow, AWS (S3, EMR, Athena, SageMaker)  
+**Tools & Platforms**: Git, Jupyter, Streamlit, Docker, LangChain, ChromaDB, RAG, LLMs
 
-### Updating Content
+---
 
-1. **Personal Info**: Edit `lib/resume-context.ts` to update the AI's knowledge
-2. **Experience**: Modify the `experiences` array in `components/Experience.tsx`
-3. **Projects**: Update the `projects` array in `components/Projects.tsx`
-4. **Skills**: Edit `skillCategories` in `components/Skills.tsx`
+## 🎯 Notable Projects
 
-### Changing Theme Colors
+### BTC Cancer Early Detection
+Developed an ML model to predict monthly Bile Tract Cancer diagnoses from a pool of **250M patients**. Addressed critical 45-day claims data delay and improved performance using advanced clustering techniques. Presented at industry conference.
 
-Edit the `colors.cyber` section in `tailwind.config.ts`:
+**Tech**: Python, K-means, Gaussian Mixtures, NLP, Scikit-learn
 
-```typescript
-colors: {
-  cyber: {
-    black: "#0a0a0f",
-    cyan: "#00fff5",    // Primary color
-    magenta: "#ff00ff", // Accent color
-    yellow: "#ffff00",  // Secondary accent
-  },
-},
-```
+### Financial RAG Chatbot
+Built an LLM-powered RAG chatbot that answers questions about company financials from SEC filings. Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval. Achieved **4.5/5 quality score** via OpenEval.
 
-## Resume
+**Tech**: Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
 
-The template ships with `public/resume.txt` and the UI links to it by default.
+### Agricultural Product Classification (RAG)
+Built an AI-assisted, retrieval-augmented generation product-classification system for a Series-B East African agtech. Achieved **99% holdout accuracy** using GPT-4 with real-time REST API and compliance & risk alerts.
 
-If you prefer a PDF, add `public/resume.pdf` and update the links in `components/Navbar.tsx` and `components/Contact.tsx`.
+**Tech**: Python, GPT-4, RAG, REST API, Dashboard
 
-## License
+### Scene-AI
+AI-powered scene understanding and analysis application deployed on Railway. Leverages modern ML techniques for intelligent scene recognition and processing.
 
-MIT License - feel free to use this template for your own portfolio!
+**Tech**: Python, PyTorch, Railway, REST API
 
-## Contact
+---
 
-- **Email**: av3342@columbia.edu
+## 🌟 What Sets Me Apart
+
+- **Proven Track Record**: Fast-track promotions, awards, and measurable business impact
+- **Full-Stack Data Science**: From data engineering pipelines to production ML models and LLM applications
+- **Healthcare Domain Expertise**: Deep experience with Fortune 500 healthcare clients and life-saving applications
+- **Academic Excellence**: Perfect GPA, currently at Columbia University, teaching assistant experience
+- **Leadership**: Led cross-functional teams and drove adoption of analytics platforms at scale
+
+---
+
+## 📞 Let's Connect
+
+I'm always open to discussing new opportunities, collaborations, or interesting projects in data science, machine learning, and AI.
+
+- **Email**: [av3342@columbia.edu](mailto:av3342@columbia.edu)
+- **Phone**: (347) 987 9427
+- **Location**: New York, NY
 - **LinkedIn**: [linkedin.com/in/vvarma-arjun](https://linkedin.com/in/vvarma-arjun)
 - **GitHub**: [github.com/ARJUNVARMA2000](https://github.com/ARJUNVARMA2000)
 
 ---
 
-Built with ❤️ using Next.js and AI
+*Building intelligent systems with ML, Deep Learning & AI* 🚀
