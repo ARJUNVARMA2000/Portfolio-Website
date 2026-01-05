@@ -7,6 +7,7 @@ import { useChat } from "ai/react";
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isNudgeDismissed, setIsNudgeDismissed] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
@@ -16,24 +17,125 @@ export default function ChatWidget() {
         id: "welcome",
         role: "assistant",
         content:
-          "👋 Hey! I'm Arjun's AI assistant. Ask me anything about his experience, projects, or skills!",
+          "Hi! I’m Arjun’s AI assistant—ask me anything about his experience, projects, or skills.",
       },
     ],
   });
+
+  // Show the chat nudge until user dismisses it (persisted)
+  useEffect(() => {
+    try {
+      const dismissed = localStorage.getItem("chatNudgeDismissed");
+      setIsNudgeDismissed(dismissed === "1");
+    } catch {
+      // Ignore (e.g., privacy mode)
+      setIsNudgeDismissed(false);
+    }
+  }, []);
 
   // Auto scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const dismissNudge = () => {
+    setIsNudgeDismissed(true);
+    try {
+      localStorage.setItem("chatNudgeDismissed", "1");
+    } catch {
+      // Ignore
+    }
+  };
+
+  const openChatFromNudge = () => {
+    dismissNudge();
+    setIsOpen(true);
+  };
+
   return (
     <>
+      {/* Mascot + CTA (only when closed) */}
+      <AnimatePresence>
+        {!isOpen && !isNudgeDismissed && (
+          <motion.div
+            key="chat-nudge"
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed bottom-6 right-24 z-50 flex items-end gap-2"
+          >
+            {/* Mascot */}
+            <motion.div
+              aria-hidden="true"
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-cyber-cyan/30 to-cyber-magenta/25 border border-cyber-cyan/30 shadow-neon-cyan flex items-center justify-center"
+            >
+              <FaRobot className="text-cyber-cyan" size={18} />
+              {/* Waving arm */}
+              <motion.div
+                className="absolute -right-2 top-2 w-4 h-4"
+                style={{ transformOrigin: "15% 85%" }}
+                animate={{ rotate: [0, 18, -10, 18, 0] }}
+                transition={{
+                  duration: 1.6,
+                  repeat: Infinity,
+                  repeatDelay: 1.4,
+                  ease: "easeInOut",
+                }}
+              >
+                <div className="w-4 h-[10px] rounded-full bg-cyber-cyan/40 border border-cyber-cyan/40" />
+                <div className="absolute -right-[2px] -top-[1px] w-[10px] h-[10px] rounded-full bg-cyber-magenta/25 border border-cyber-magenta/40" />
+              </motion.div>
+              <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-cyber-magenta rounded-full animate-pulse" />
+            </motion.div>
+
+            {/* Speech bubble */}
+            <div className="relative pointer-events-auto">
+              <button
+                type="button"
+                onClick={openChatFromNudge}
+                className="group max-w-[16.5rem] text-left bg-cyber-black/95 border border-cyber-cyan/30 rounded-xl px-3.5 py-2.5 shadow-2xl hover:border-cyber-cyan/60 transition-colors"
+                aria-label="Open chat to learn about Arjun's experiences"
+              >
+                <div className="text-sm text-white font-medium leading-snug">
+                  Chat to learn about Arjun&apos;s experiences
+                </div>
+                <div className="text-xs text-gray-500 mt-0.5">
+                  Ask about projects, impact, and skills.
+                </div>
+              </button>
+
+              {/* Bubble tail */}
+              <div
+                aria-hidden="true"
+                className="absolute -right-2 bottom-3 w-4 h-4 bg-cyber-black/95 border-r border-b border-cyber-cyan/30 rotate-45"
+              />
+
+              {/* Dismiss */}
+              <button
+                type="button"
+                onClick={dismissNudge}
+                className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-cyber-black border border-cyber-cyan/30 flex items-center justify-center hover:border-cyber-magenta/60 transition-colors"
+                aria-label="Dismiss chat prompt"
+              >
+                <FaTimes className="text-gray-400" size={12} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Chat button */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1.5, type: "spring" }}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!isOpen) dismissNudge();
+          setIsOpen(!isOpen);
+        }}
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
           isOpen
             ? "bg-cyber-magenta shadow-neon-magenta"
