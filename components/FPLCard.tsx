@@ -29,18 +29,18 @@ export default function FPLCard() {
               {/* Content */}
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                  <FaTrophy className="text-cyber-yellow" />
-                  <h3 className="font-cyber text-xl md:text-2xl text-white">
+                  <FaTrophy className="text-t-accent3" />
+                  <h3 className="font-cyber text-xl md:text-2xl text-t-text">
                     Fantasy Premier League
                   </h3>
                 </div>
                 <p className="text-gray-300 mb-4">
                   Avid FPL player with{" "}
-                  <span className="text-cyber-cyan font-bold">
+                  <span className="text-t-accent font-bold">
                     Top 1% finishes
                   </span>{" "}
                   for{" "}
-                  <span className="text-cyber-magenta font-bold">
+                  <span className="text-t-accent2 font-bold">
                     4 consecutive years
                   </span>
                   . Combining data analysis passion with sports strategy!

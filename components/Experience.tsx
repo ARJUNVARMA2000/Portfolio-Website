@@ -50,7 +50,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-4 relative bg-cyber-darker/50">
+    <section id="experience" className="py-20 px-4 relative bg-t-bg2/60">
       <div className="absolute inset-0 grid-bg opacity-20" />
       
       <div className="max-w-5xl mx-auto relative z-10">
@@ -62,17 +62,17 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-cyber-cyan">&lt;</span> Experience{" "}
-            <span className="text-cyber-cyan">/&gt;</span>
+          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-t-text mb-4">
+            <span className="text-t-accent">&lt;</span> Experience{" "}
+            <span className="text-t-accent">/&gt;</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-t-accent to-t-accent2 mx-auto" />
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-cyan via-cyber-magenta to-cyber-yellow" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-t-accent via-t-accent2 to-t-accent3" />
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -91,10 +91,10 @@ export default function Experience() {
                   index % 2 === 0 ? "left-0 md:-right-2 md:left-auto" : "-left-2"
                 } ${
                   exp.color === "cyan"
-                    ? "border-cyber-cyan bg-cyber-cyan/30 shadow-neon-cyan"
+                    ? "border-t-accent bg-t-accent/20 shadow-sm"
                     : exp.color === "magenta"
-                    ? "border-cyber-magenta bg-cyber-magenta/30 shadow-neon-magenta"
-                    : "border-cyber-yellow bg-cyber-yellow/30 shadow-neon-yellow"
+                    ? "border-t-accent2 bg-t-accent2/20 shadow-sm"
+                    : "border-t-accent3 bg-t-accent3/20 shadow-sm"
                 }`}
               />
 
@@ -103,12 +103,12 @@ export default function Experience() {
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   {exp.award && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-cyber-magenta/20 text-cyber-magenta rounded border border-cyber-magenta/30">
+                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-t-accent2/10 text-t-accent2 rounded border border-t-accent2/25">
                       <FaAward size={10} /> Award Winner
                     </span>
                   )}
                   {exp.promoted && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-cyber-yellow/20 text-cyber-yellow rounded border border-cyber-yellow/30">
+                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-t-accent3/10 text-t-accent3 rounded border border-t-accent3/25">
                       <FaRocket size={10} /> Fast-Track Promotion
                     </span>
                   )}
@@ -118,25 +118,25 @@ export default function Experience() {
                   <FaBriefcase
                     className={`mt-1 flex-shrink-0 ${
                       exp.color === "cyan"
-                        ? "text-cyber-cyan"
+                        ? "text-t-accent"
                         : exp.color === "magenta"
-                        ? "text-cyber-magenta"
-                        : "text-cyber-yellow"
+                        ? "text-t-accent2"
+                        : "text-t-accent3"
                     }`}
                   />
                   <div>
                     <h3
                       className={`font-cyber text-lg font-bold ${
                         exp.color === "cyan"
-                          ? "text-cyber-cyan"
+                          ? "text-t-accent"
                           : exp.color === "magenta"
-                          ? "text-cyber-magenta"
-                          : "text-cyber-yellow"
+                          ? "text-t-accent2"
+                          : "text-t-accent3"
                       }`}
                     >
                       {exp.title}
                     </h3>
-                    <p className="text-white font-medium">{exp.company}</p>
+                    <p className="text-t-text font-medium">{exp.company}</p>
                     <p className="text-gray-400 text-sm">
                       {exp.location} | {exp.period}
                     </p>
@@ -147,15 +147,15 @@ export default function Experience() {
                   {exp.highlights.map((highlight, i) => (
                     <li
                       key={i}
-                      className="text-gray-300 text-sm flex items-start gap-2"
+                      className="text-t-muted text-sm flex items-start gap-2"
                     >
                       <span
                         className={`mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
                           exp.color === "cyan"
-                            ? "bg-cyber-cyan"
+                            ? "bg-t-accent"
                             : exp.color === "magenta"
-                            ? "bg-cyber-magenta"
-                            : "bg-cyber-yellow"
+                            ? "bg-t-accent2"
+                            : "bg-t-accent3"
                         }`}
                       />
                       {highlight}

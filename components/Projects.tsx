@@ -78,11 +78,11 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-cyber-cyan">&lt;</span> Projects{" "}
-            <span className="text-cyber-cyan">/&gt;</span>
+          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-t-text mb-4">
+            <span className="text-t-accent">&lt;</span> Projects{" "}
+            <span className="text-t-accent">/&gt;</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-t-accent to-t-accent2 mx-auto" />
         </motion.div>
 
         {/* Projects grid */}
@@ -116,10 +116,10 @@ export default function Projects() {
                       <div
                         className={`p-3 rounded-lg ${
                           project.color === "cyan"
-                            ? "bg-cyber-cyan/10 text-cyber-cyan"
+                            ? "bg-t-accent/10 text-t-accent"
                             : project.color === "magenta"
-                            ? "bg-cyber-magenta/10 text-cyber-magenta"
-                            : "bg-cyber-yellow/10 text-cyber-yellow"
+                            ? "bg-t-accent2/10 text-t-accent2"
+                            : "bg-t-accent3/10 text-t-accent3"
                         }`}
                       >
                         <Icon size={24} />
@@ -128,10 +128,10 @@ export default function Projects() {
                         <h3
                           className={`font-cyber text-lg font-bold ${
                             project.color === "cyan"
-                              ? "text-cyber-cyan"
+                              ? "text-t-accent"
                               : project.color === "magenta"
-                              ? "text-cyber-magenta"
-                              : "text-cyber-yellow"
+                              ? "text-t-accent2"
+                              : "text-t-accent3"
                           }`}
                         >
                           {project.title}
@@ -147,7 +147,7 @@ export default function Projects() {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-cyber-cyan transition-colors"
+                          className="text-t-muted hover:text-t-accent transition-colors"
                         >
                           <FaGithub size={20} />
                         </a>
@@ -157,7 +157,7 @@ export default function Projects() {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-cyber-cyan transition-colors"
+                          className="text-t-muted hover:text-t-accent transition-colors"
                         >
                           <FaExternalLinkAlt size={18} />
                         </a>
@@ -166,7 +166,7 @@ export default function Projects() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                  <p className="text-t-muted text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
 
@@ -176,15 +176,15 @@ export default function Projects() {
                       {project.highlights.map((highlight) => (
                         <li
                           key={highlight}
-                          className="text-gray-400 text-xs flex items-center gap-2"
+                          className="text-t-muted text-xs flex items-center gap-2"
                         >
                           <span
                             className={`w-1 h-1 rounded-full ${
                               project.color === "cyan"
-                                ? "bg-cyber-cyan"
+                                ? "bg-t-accent"
                                 : project.color === "magenta"
-                                ? "bg-cyber-magenta"
-                                : "bg-cyber-yellow"
+                                ? "bg-t-accent2"
+                                : "bg-t-accent3"
                             }`}
                           />
                           {highlight}
@@ -200,10 +200,10 @@ export default function Projects() {
                         key={tech}
                         className={`px-2 py-1 text-xs rounded border ${
                           project.color === "cyan"
-                            ? "border-cyber-cyan/30 text-cyber-cyan bg-cyber-cyan/5"
+                            ? "border-t-accent/30 text-t-accent bg-t-accent/5"
                             : project.color === "magenta"
-                            ? "border-cyber-magenta/30 text-cyber-magenta bg-cyber-magenta/5"
-                            : "border-cyber-yellow/30 text-cyber-yellow bg-cyber-yellow/5"
+                            ? "border-t-accent2/30 text-t-accent2 bg-t-accent2/5"
+                            : "border-t-accent3/30 text-t-accent3 bg-t-accent3/5"
                         }`}
                       >
                         {tech}

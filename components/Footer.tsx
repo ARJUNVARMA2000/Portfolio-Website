@@ -4,23 +4,23 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 border-t border-gray-800">
+    <footer className="py-8 px-4 border-t border-t-border">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo & copyright */}
           <div className="flex items-center gap-4">
-            <span className="font-cyber text-xl font-bold text-cyber-cyan">
-              AV<span className="text-cyber-magenta">.</span>
+            <span className="font-cyber text-xl font-bold text-t-accent">
+              AV<span className="text-t-accent2">.</span>
             </span>
-            <span className="text-gray-500 text-sm">
+            <span className="text-t-muted2 text-sm">
               © {new Date().getFullYear()} Arjun Varma. All rights reserved.
             </span>
           </div>
 
           {/* Made with love */}
-          <div className="flex items-center gap-2 text-gray-500 text-sm">
+          <div className="flex items-center gap-2 text-t-muted2 text-sm">
             <span>Built with</span>
-            <FaHeart className="text-cyber-magenta animate-pulse" />
+            <FaHeart className="text-t-accent2 animate-pulse" />
             <span>using Next.js & AI</span>
           </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
               href="https://github.com/ARJUNVARMA2000"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-cyber-cyan transition-colors"
+              className="text-t-muted2 hover:text-t-accent transition-colors"
             >
               <FaGithub size={20} />
             </a>
@@ -38,13 +38,13 @@ export default function Footer() {
               href="https://linkedin.com/in/vvarma-arjun"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-cyber-cyan transition-colors"
+              className="text-t-muted2 hover:text-t-accent transition-colors"
             >
               <FaLinkedin size={20} />
             </a>
             <a
               href="mailto:av3342@columbia.edu"
-              className="text-gray-500 hover:text-cyber-cyan transition-colors"
+              className="text-t-muted2 hover:text-t-accent transition-colors"
             >
               <FaEnvelope size={20} />
             </a>

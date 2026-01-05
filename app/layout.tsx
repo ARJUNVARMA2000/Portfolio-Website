@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Arjun Varma | ML & Data Science Portfolio",
@@ -19,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="noise-bg">
-        <div className="scanline-overlay" />
-        {children}
+        <ThemeProvider>
+          <div className="scanline-overlay" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

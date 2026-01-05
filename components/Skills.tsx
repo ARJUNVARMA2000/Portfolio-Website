@@ -86,7 +86,7 @@ const additionalSkills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 px-4 relative bg-cyber-darker/50">
+    <section id="skills" className="py-20 px-4 relative bg-t-bg2/60">
       <div className="absolute inset-0 grid-bg opacity-20" />
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -98,11 +98,11 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-cyber-cyan">&lt;</span> Skills{" "}
-            <span className="text-cyber-cyan">/&gt;</span>
+          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-t-text mb-4">
+            <span className="text-t-accent">&lt;</span> Skills{" "}
+            <span className="text-t-accent">/&gt;</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-t-accent to-t-accent2 mx-auto" />
         </motion.div>
 
         {/* Skill categories */}
@@ -119,10 +119,10 @@ export default function Skills() {
               <h3
                 className={`font-cyber text-lg font-bold mb-4 text-center ${
                   category.color === "cyan"
-                    ? "text-cyber-cyan"
+                    ? "text-t-accent"
                     : category.color === "magenta"
-                    ? "text-cyber-magenta"
-                    : "text-cyber-yellow"
+                    ? "text-t-accent2"
+                    : "text-t-accent3"
                 }`}
               >
                 {category.title}
@@ -136,23 +136,23 @@ export default function Skills() {
                       whileHover={{ scale: 1.05 }}
                       className={`flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-300 ${
                         category.color === "cyan"
-                          ? "border-cyber-cyan/20 hover:border-cyber-cyan hover:shadow-glow-sm"
+                          ? "border-t-border hover:border-t-accent hover:shadow-sm"
                           : category.color === "magenta"
-                          ? "border-cyber-magenta/20 hover:border-cyber-magenta hover:shadow-[0_0_10px_rgba(255,0,255,0.5)]"
-                          : "border-cyber-yellow/20 hover:border-cyber-yellow hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                          ? "border-t-border hover:border-t-accent2 hover:shadow-sm"
+                          : "border-t-border hover:border-t-accent3 hover:shadow-sm"
                       }`}
                     >
                       <Icon
                         size={28}
                         className={
                           category.color === "cyan"
-                            ? "text-cyber-cyan"
+                            ? "text-t-accent"
                             : category.color === "magenta"
-                            ? "text-cyber-magenta"
-                            : "text-cyber-yellow"
+                            ? "text-t-accent2"
+                            : "text-t-accent3"
                         }
                       />
-                      <span className="text-gray-300 text-xs text-center">
+                      <span className="text-t-muted text-xs text-center">
                         {skill.name}
                       </span>
                     </motion.div>
@@ -171,7 +171,7 @@ export default function Skills() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <h3 className="font-mono text-sm text-gray-500 mb-4 uppercase tracking-wider">
+          <h3 className="font-mono text-sm text-t-muted2 mb-4 uppercase tracking-wider">
             Also experienced with
           </h3>
           <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
@@ -182,7 +182,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.02 }}
-                className="px-3 py-1 text-sm border border-gray-700 text-gray-400 rounded-full hover:border-cyber-cyan hover:text-cyber-cyan transition-colors"
+                className="px-3 py-1 text-sm border border-t-border text-t-muted rounded-full hover:border-t-accent hover:text-t-accent transition-colors"
               >
                 {skill}
               </motion.span>

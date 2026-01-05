@@ -11,7 +11,7 @@ import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-cyber-black">
+    <main className="min-h-screen bg-t-bg text-t-text">
       <Navbar />
       <Hero />
       <About />

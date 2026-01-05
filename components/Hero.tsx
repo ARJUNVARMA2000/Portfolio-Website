@@ -69,7 +69,7 @@ export default function Hero() {
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full bg-cyber-cyan"
+            className="absolute rounded-full bg-t-accent"
             style={{
               width: particle.size,
               height: particle.size,
@@ -91,7 +91,7 @@ export default function Hero() {
       </div>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cyber-black via-transparent to-cyber-black" />
+      <div className="absolute inset-0 bg-gradient-to-b from-t-bg via-transparent to-t-bg" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
@@ -102,7 +102,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-4"
         >
-          <span className="text-cyber-cyan font-mono text-sm md:text-base tracking-[0.3em] uppercase">
+          <span className="text-t-accent font-mono text-sm md:text-base tracking-[0.3em] uppercase">
             Welcome to the portfolio of
           </span>
         </motion.div>
@@ -113,10 +113,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative font-cyber text-5xl md:text-7xl lg:text-8xl font-black mb-6"
         >
-          <span
-            className="glitch-text text-glow-cyan text-white"
-            data-text="ARJUN VARMA"
-          >
+          <span className="text-glow-cyan text-t-text">
             ARJUN VARMA
           </span>
         </motion.h1>
@@ -128,14 +125,14 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="h-12 md:h-16 flex items-center justify-center mb-8"
         >
-          <span className="font-mono text-xl md:text-3xl text-cyber-magenta">
+          <span className="font-mono text-xl md:text-3xl text-t-accent2">
             {"< "}
           </span>
-          <span className="font-mono text-xl md:text-3xl text-white min-w-[280px] md:min-w-[400px]">
+          <span className="font-mono text-xl md:text-3xl text-t-text min-w-[280px] md:min-w-[400px]">
             {displayText}
             <span className="typing-cursor">&nbsp;</span>
           </span>
-          <span className="font-mono text-xl md:text-3xl text-cyber-magenta">
+          <span className="font-mono text-xl md:text-3xl text-t-accent2">
             {" />"}
           </span>
         </motion.div>
@@ -145,7 +142,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-t-muted text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           MS Data Science @ Columbia University | Advanced Data Science Consultant @ ZS Associates | 
           Building intelligent systems with ML, Deep Learning & AI
@@ -166,7 +163,7 @@ export default function Hero() {
           </a>
           <a
             href="#contact"
-            className="cyber-btn !border-cyber-magenta !text-cyber-magenta hover:!bg-cyber-magenta hover:!text-cyber-black hover:shadow-neon-magenta"
+            className="cyber-btn !border-[rgb(var(--t-accent2))] !text-[rgb(var(--t-accent2))] hover:!bg-[rgb(var(--t-accent2))] hover:!text-[rgb(var(--t-on-accent))] hover:shadow-md"
           >
             Get in Touch
           </a>
@@ -183,7 +180,7 @@ export default function Hero() {
             href="https://github.com/ARJUNVARMA2000"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-cyber-cyan transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,245,0.8)]"
+            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
           >
             <FaGithub size={28} />
           </a>
@@ -191,13 +188,13 @@ export default function Hero() {
             href="https://linkedin.com/in/vvarma-arjun"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-cyber-cyan transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,245,0.8)]"
+            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
           >
             <FaLinkedin size={28} />
           </a>
           <a
             href="mailto:av3342@columbia.edu"
-            className="text-gray-400 hover:text-cyber-cyan transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,245,0.8)]"
+            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
           >
             <FaEnvelope size={28} />
           </a>
@@ -215,17 +212,17 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-cyber-cyan"
+          className="text-t-accent"
         >
           <FaChevronDown size={24} />
         </motion.div>
       </motion.div>
 
       {/* Corner decorations */}
-      <div className="absolute top-4 left-4 w-20 h-20 border-l-2 border-t-2 border-cyber-cyan opacity-50" />
-      <div className="absolute top-4 right-4 w-20 h-20 border-r-2 border-t-2 border-cyber-cyan opacity-50" />
-      <div className="absolute bottom-4 left-4 w-20 h-20 border-l-2 border-b-2 border-cyber-cyan opacity-50" />
-      <div className="absolute bottom-4 right-4 w-20 h-20 border-r-2 border-b-2 border-cyber-cyan opacity-50" />
+      <div className="absolute top-4 left-4 w-20 h-20 border-l-2 border-t-2 border-t-border opacity-50" />
+      <div className="absolute top-4 right-4 w-20 h-20 border-r-2 border-t-2 border-t-border opacity-50" />
+      <div className="absolute bottom-4 left-4 w-20 h-20 border-l-2 border-b-2 border-t-border opacity-50" />
+      <div className="absolute bottom-4 right-4 w-20 h-20 border-r-2 border-b-2 border-t-border opacity-50" />
     </section>
   );
 }

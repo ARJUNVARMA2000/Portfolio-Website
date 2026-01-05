@@ -55,12 +55,12 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-cyber-cyan">&lt;</span> Contact{" "}
-            <span className="text-cyber-cyan">/&gt;</span>
+          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-t-text mb-4">
+            <span className="text-t-accent">&lt;</span> Contact{" "}
+            <span className="text-t-accent">/&gt;</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-magenta mx-auto mb-4" />
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-t-accent to-t-accent2 mx-auto mb-4" />
+          <p className="text-t-muted max-w-xl mx-auto">
             Interested in collaborating or have a question? Feel free to reach out!
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-cyber text-xl text-cyber-cyan mb-6">
+          <h3 className="font-cyber text-xl text-t-accent mb-6">
               Get in Touch
             </h3>
 
@@ -83,34 +83,34 @@ export default function Contact() {
                 href="mailto:av3342@columbia.edu"
                 className="cyber-card p-4 rounded-lg flex items-center gap-4 group"
               >
-                <div className="w-12 h-12 rounded-lg bg-cyber-cyan/10 flex items-center justify-center group-hover:bg-cyber-cyan/20 transition-colors">
-                  <FaEnvelope className="text-cyber-cyan" size={20} />
+                <div className="w-12 h-12 rounded-lg bg-t-accent/10 flex items-center justify-center group-hover:bg-t-accent/15 transition-colors">
+                  <FaEnvelope className="text-t-accent" size={20} />
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm">Email</p>
-                  <p className="text-white group-hover:text-cyber-cyan transition-colors">
+                  <p className="text-t-text group-hover:text-t-accent transition-colors">
                     av3342@columbia.edu
                   </p>
                 </div>
               </a>
 
               <div className="cyber-card p-4 rounded-lg flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-cyber-magenta/10 flex items-center justify-center">
-                  <FaPhone className="text-cyber-magenta" size={20} />
+                <div className="w-12 h-12 rounded-lg bg-t-accent2/10 flex items-center justify-center">
+                  <FaPhone className="text-t-accent2" size={20} />
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm">Phone</p>
-                  <p className="text-white">(347) 987 9427</p>
+                  <p className="text-t-text">(347) 987 9427</p>
                 </div>
               </div>
 
               <div className="cyber-card p-4 rounded-lg flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-cyber-yellow/10 flex items-center justify-center">
-                  <FaMapMarkerAlt className="text-cyber-yellow" size={20} />
+                <div className="w-12 h-12 rounded-lg bg-t-accent3/10 flex items-center justify-center">
+                  <FaMapMarkerAlt className="text-t-accent3" size={20} />
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm">Location</p>
-                  <p className="text-white">New York, NY</p>
+                  <p className="text-t-text">New York, NY</p>
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function Contact() {
                 href="https://linkedin.com/in/vvarma-arjun"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg border border-cyber-cyan/30 flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan hover:shadow-glow-sm transition-all"
+                className="w-12 h-12 rounded-lg border border-t-border flex items-center justify-center text-t-muted hover:text-t-accent hover:border-t-accent transition-all"
               >
                 <FaLinkedin size={24} />
               </a>
@@ -132,13 +132,13 @@ export default function Contact() {
                 href="https://github.com/ARJUNVARMA2000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg border border-cyber-cyan/30 flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan hover:shadow-glow-sm transition-all"
+                className="w-12 h-12 rounded-lg border border-t-border flex items-center justify-center text-t-muted hover:text-t-accent hover:border-t-accent transition-all"
               >
                 <FaGithub size={24} />
               </a>
               <a
                 href="mailto:av3342@columbia.edu"
-                className="w-12 h-12 rounded-lg border border-cyber-cyan/30 flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan hover:shadow-glow-sm transition-all"
+                className="w-12 h-12 rounded-lg border border-t-border flex items-center justify-center text-t-muted hover:text-t-accent hover:border-t-accent transition-all"
               >
                 <FaEnvelope size={24} />
               </a>
@@ -148,7 +148,7 @@ export default function Contact() {
             <a
               href="/resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-cyber-magenta text-cyber-magenta rounded-lg hover:bg-cyber-magenta hover:text-cyber-black transition-all duration-300 hover:shadow-neon-magenta"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-t-accent2 text-t-accent2 rounded-lg hover:bg-t-accent2 hover:text-t-onAccent transition-all duration-300"
             >
               <FaDownload size={16} />
               Download Resume
@@ -163,7 +163,7 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <form onSubmit={handleSubmit} className="cyber-card p-6 md:p-8 rounded-lg">
-              <h3 className="font-cyber text-xl text-cyber-magenta mb-6">
+            <h3 className="font-cyber text-xl text-t-accent2 mb-6">
                 Send a Message
               </h3>
 
@@ -175,7 +175,7 @@ export default function Contact() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">
+                  <label className="block text-t-muted text-sm mb-2">
                     Name
                   </label>
                   <input
@@ -185,13 +185,13 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-cyber-black/50 border border-gray-700 rounded-lg text-white focus:border-cyber-cyan focus:outline-none focus:shadow-glow-sm transition-all"
+                    className="w-full px-4 py-3 bg-t-surface/70 border border-t-border rounded-lg text-t-text focus:border-t-accent focus:outline-none transition-all"
                     placeholder="Your name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">
+                  <label className="block text-t-muted text-sm mb-2">
                     Email
                   </label>
                   <input
@@ -201,13 +201,13 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-cyber-black/50 border border-gray-700 rounded-lg text-white focus:border-cyber-cyan focus:outline-none focus:shadow-glow-sm transition-all"
+                    className="w-full px-4 py-3 bg-t-surface/70 border border-t-border rounded-lg text-t-text focus:border-t-accent focus:outline-none transition-all"
                     placeholder="your@email.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">
+                  <label className="block text-t-muted text-sm mb-2">
                     Message
                   </label>
                   <textarea
@@ -217,7 +217,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-cyber-black/50 border border-gray-700 rounded-lg text-white focus:border-cyber-cyan focus:outline-none focus:shadow-glow-sm transition-all resize-none"
+                    className="w-full px-4 py-3 bg-t-surface/70 border border-t-border rounded-lg text-t-text focus:border-t-accent focus:outline-none transition-all resize-none"
                     placeholder="Hi Arjun, I wanted to reach out about..."
                   />
                 </div>

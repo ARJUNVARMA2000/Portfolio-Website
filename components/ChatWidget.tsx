@@ -70,9 +70,9 @@ export default function ChatWidget() {
               aria-hidden="true"
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-cyber-cyan/30 to-cyber-magenta/25 border border-cyber-cyan/30 shadow-neon-cyan flex items-center justify-center"
+              className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-t-accent/12 to-t-accent2/10 border border-t-border shadow-sm flex items-center justify-center"
             >
-              <FaRobot className="text-cyber-cyan" size={18} />
+              <FaRobot className="text-t-accent" size={18} />
               {/* Waving arm */}
               <motion.div
                 className="absolute -right-2 top-2 w-4 h-4"
@@ -85,10 +85,10 @@ export default function ChatWidget() {
                   ease: "easeInOut",
                 }}
               >
-                <div className="w-4 h-[10px] rounded-full bg-cyber-cyan/40 border border-cyber-cyan/40" />
-                <div className="absolute -right-[2px] -top-[1px] w-[10px] h-[10px] rounded-full bg-cyber-magenta/25 border border-cyber-magenta/40" />
+                <div className="w-4 h-[10px] rounded-full bg-t-accent/20 border border-t-border" />
+                <div className="absolute -right-[2px] -top-[1px] w-[10px] h-[10px] rounded-full bg-t-accent2/15 border border-t-border" />
               </motion.div>
-              <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-cyber-magenta rounded-full animate-pulse" />
+              <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-t-accent2 rounded-full animate-pulse" />
             </motion.div>
 
             {/* Speech bubble */}
@@ -96,10 +96,10 @@ export default function ChatWidget() {
               <button
                 type="button"
                 onClick={openChatFromNudge}
-                className="group max-w-[16.5rem] text-left bg-cyber-black/95 border border-cyber-cyan/30 rounded-xl px-3.5 py-2.5 shadow-2xl hover:border-cyber-cyan/60 transition-colors"
+                className="group max-w-[16.5rem] text-left bg-t-bg/95 border border-t-border rounded-xl px-3.5 py-2.5 shadow-2xl hover:border-t-accent/60 transition-colors"
                 aria-label="Open chat to learn about Arjun's experiences"
               >
-                <div className="text-sm text-white font-medium leading-snug">
+                <div className="text-sm text-t-text font-medium leading-snug">
                   Chat to learn about Arjun&apos;s experiences
                 </div>
                 <div className="text-xs text-gray-500 mt-0.5">
@@ -110,14 +110,14 @@ export default function ChatWidget() {
               {/* Bubble tail */}
               <div
                 aria-hidden="true"
-                className="absolute -right-2 bottom-3 w-4 h-4 bg-cyber-black/95 border-r border-b border-cyber-cyan/30 rotate-45"
+                className="absolute -right-2 bottom-3 w-4 h-4 bg-t-bg/95 border-r border-b border-t-border rotate-45"
               />
 
               {/* Dismiss */}
               <button
                 type="button"
                 onClick={dismissNudge}
-                className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-cyber-black border border-cyber-cyan/30 flex items-center justify-center hover:border-cyber-magenta/60 transition-colors"
+                className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-t-bg border border-t-border flex items-center justify-center hover:border-t-accent2/60 transition-colors"
                 aria-label="Dismiss chat prompt"
               >
                 <FaTimes className="text-gray-400" size={12} />
@@ -138,8 +138,8 @@ export default function ChatWidget() {
         }}
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
           isOpen
-            ? "bg-cyber-magenta shadow-neon-magenta"
-            : "bg-cyber-cyan shadow-neon-cyan"
+            ? "bg-t-accent2 shadow-md"
+            : "bg-t-accent shadow-md"
         }`}
       >
         <AnimatePresence mode="wait">
@@ -150,7 +150,7 @@ export default function ChatWidget() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
             >
-              <FaTimes className="text-cyber-black" size={20} />
+              <FaTimes className="text-t-onAccent" size={20} />
             </motion.div>
           ) : (
             <motion.div
@@ -160,8 +160,8 @@ export default function ChatWidget() {
               exit={{ scale: 0 }}
               className="relative"
             >
-              <FaRobot className="text-cyber-black" size={24} />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-cyber-magenta rounded-full animate-pulse" />
+              <FaRobot className="text-t-onAccent" size={24} />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-t-accent2 rounded-full animate-pulse" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -175,16 +175,16 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-md h-[500px] bg-cyber-black border border-cyber-cyan/30 rounded-lg shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-md h-[500px] bg-t-bg border border-t-border rounded-lg shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-cyber-cyan/10 to-cyber-magenta/10 px-4 py-3 border-b border-cyber-cyan/20">
+            <div className="bg-gradient-to-r from-t-accent/10 to-t-accent2/10 px-4 py-3 border-b border-t-border">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-cyber-cyan/20 flex items-center justify-center">
-                  <FaRobot className="text-cyber-cyan" size={20} />
+                <div className="w-10 h-10 rounded-full bg-t-accent/10 flex items-center justify-center">
+                  <FaRobot className="text-t-accent" size={20} />
                 </div>
                 <div>
-                  <h3 className="font-cyber text-sm text-white">
+                  <h3 className="font-cyber text-sm text-t-text">
                     Ask Arjun&apos;s AI
                   </h3>
                   <p className="text-xs text-gray-500">
@@ -208,24 +208,24 @@ export default function ChatWidget() {
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                       message.role === "user"
-                        ? "bg-cyber-magenta/20"
-                        : "bg-cyber-cyan/20"
+                        ? "bg-t-accent2/10"
+                        : "bg-t-accent/10"
                     }`}
                   >
                     {message.role === "user" ? (
                       <FaUser
-                        className="text-cyber-magenta"
+                        className="text-t-accent2"
                         size={14}
                       />
                     ) : (
-                      <FaRobot className="text-cyber-cyan" size={14} />
+                      <FaRobot className="text-t-accent" size={14} />
                     )}
                   </div>
                   <div
                     className={`max-w-[80%] px-4 py-2 rounded-lg text-sm ${
                       message.role === "user"
-                        ? "bg-cyber-magenta/20 text-white"
-                        : "bg-gray-800/50 text-gray-200"
+                        ? "bg-t-accent2/15 text-t-text"
+                        : "bg-t-bg2/70 text-t-text"
                     }`}
                   >
                     {message.content}
@@ -238,18 +238,18 @@ export default function ChatWidget() {
                   animate={{ opacity: 1 }}
                   className="flex gap-3"
                 >
-                  <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex items-center justify-center">
-                    <FaRobot className="text-cyber-cyan" size={14} />
+                  <div className="w-8 h-8 rounded-full bg-t-accent/10 flex items-center justify-center">
+                    <FaRobot className="text-t-accent" size={14} />
                   </div>
-                  <div className="bg-gray-800/50 px-4 py-3 rounded-lg">
+                  <div className="bg-t-bg2/70 px-4 py-3 rounded-lg">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-cyber-cyan rounded-full animate-bounce" />
+                      <span className="w-2 h-2 bg-t-accent rounded-full animate-bounce" />
                       <span
-                        className="w-2 h-2 bg-cyber-cyan rounded-full animate-bounce"
+                        className="w-2 h-2 bg-t-accent rounded-full animate-bounce"
                         style={{ animationDelay: "0.1s" }}
                       />
                       <span
-                        className="w-2 h-2 bg-cyber-cyan rounded-full animate-bounce"
+                        className="w-2 h-2 bg-t-accent rounded-full animate-bounce"
                         style={{ animationDelay: "0.2s" }}
                       />
                     </div>
@@ -262,7 +262,7 @@ export default function ChatWidget() {
             {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="p-4 border-t border-cyber-cyan/20 bg-cyber-darker/50"
+              className="p-4 border-t border-t-border bg-t-bg2/60"
             >
               <div className="flex gap-2">
                 <input
@@ -270,12 +270,12 @@ export default function ChatWidget() {
                   value={input}
                   onChange={handleInputChange}
                   placeholder="Ask about Arjun's experience..."
-                  className="flex-1 px-4 py-2 bg-cyber-black border border-gray-700 rounded-lg text-white text-sm focus:border-cyber-cyan focus:outline-none transition-colors"
+                  className="flex-1 px-4 py-2 bg-t-surface border border-t-border rounded-lg text-t-text text-sm focus:border-t-accent focus:outline-none transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="px-4 py-2 bg-cyber-cyan text-cyber-black rounded-lg hover:shadow-neon-cyan transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-t-accent text-t-onAccent rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <FaPaperPlane size={14} />
                 </button>
