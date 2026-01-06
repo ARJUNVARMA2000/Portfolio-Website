@@ -59,7 +59,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 - Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval
 
 ### Scene-AI
-- Link: https://github.com/ARJUNVARMA2000/Scene_AI
+- Link: https://github.com/ARJUNVARMA2000/Seance_AI
 
 ## TECHNICAL SKILLS
 - **Programming**: Python, SQL, C++, R
