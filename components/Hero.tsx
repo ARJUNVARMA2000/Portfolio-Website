@@ -103,8 +103,8 @@ export default function Hero() {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-secondary"></span>
           </span>
           <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-            <span className="text-accent-secondary font-medium">Open to Summer 2026</span>
-            {" "}— Data Science / ML / Quant Intern
+            <span className="text-accent-secondary font-medium">Open to Summer 2026 internships</span>
+            {" "}— Data Scientist/ML Engineer/Quant intern
           </span>
         </motion.a>
 
