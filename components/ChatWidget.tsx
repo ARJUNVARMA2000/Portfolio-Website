@@ -257,6 +257,16 @@ export default function ChatWidget() {
                           strong: ({ children }) => (
                             <strong className="font-semibold">{children}</strong>
                           ),
+                          code: ({ children }) => (
+                            <code className="px-1.5 py-0.5 rounded bg-bg border border-border text-[0.85em]">
+                              {children}
+                            </code>
+                          ),
+                          pre: ({ children }) => (
+                            <pre className="mt-2 rounded-lg bg-bg border border-border p-3 text-xs overflow-x-auto">
+                              {children}
+                            </pre>
+                          ),
                           a: ({ children, href }) => (
                             <a
                               href={href}
