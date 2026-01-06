@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { FaBolt, FaRegSun } from "react-icons/fa";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -10,30 +10,22 @@ export default function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  const isExecutive = useMemo(() => theme === "executive", [theme]);
-
   if (!mounted) return null;
+
+  const isLight = theme === "light";
 
   return (
     <button
       type="button"
-      onClick={() => setTheme(isExecutive ? "cyberpunk" : "executive")}
-      className="inline-flex items-center gap-2 rounded-lg border border-t-border bg-t-surface/60 px-3 py-2 text-xs font-medium text-t-text hover:border-t-accent/60 hover:bg-t-surface transition-colors"
-      aria-label={`Switch to ${isExecutive ? "cyberpunk" : "executive"} theme`}
-      title={`Switch to ${isExecutive ? "Cyberpunk" : "Executive"} theme`}
+      onClick={() => setTheme(isLight ? "dark" : "light")}
+      className="p-2.5 rounded-xl bg-surface border border-border hover:border-accent/50 transition-all duration-200"
+      aria-label={`Switch to ${isLight ? "dark" : "light"} theme`}
     >
-      {isExecutive ? (
-        <>
-          <FaBolt className="text-t-accent" />
-          <span>Cyberpunk</span>
-        </>
+      {isLight ? (
+        <FaMoon className="w-4 h-4 text-accent-tertiary" />
       ) : (
-        <>
-          <FaRegSun className="text-t-accent" />
-          <span>Executive</span>
-        </>
+        <FaSun className="w-4 h-4 text-accent" />
       )}
     </button>
   );
 }
-

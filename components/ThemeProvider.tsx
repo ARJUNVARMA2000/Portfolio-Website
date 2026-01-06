@@ -7,13 +7,12 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <NextThemesProvider
       attribute="data-theme"
-      defaultTheme="cyberpunk"
+      defaultTheme="dark"
       enableSystem={false}
-      themes={["cyberpunk", "executive"]}
-      storageKey="site-theme"
+      themes={["dark", "light"]}
+      storageKey="portfolio-theme"
     >
       {children}
     </NextThemesProvider>
   );
 }
-

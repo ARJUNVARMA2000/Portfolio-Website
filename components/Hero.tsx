@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
 
 const roles = [
   "Data Scientist",
@@ -15,19 +15,6 @@ export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; duration: number }>>([]);
-
-  // Generate particles on mount
-  useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 10 + 10,
-    }));
-    setParticles(newParticles);
-  }, []);
 
   // Typing effect
   useEffect(() => {
@@ -61,110 +48,88 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
-      
-      {/* Floating particles */}
+      {/* Background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-t-accent"
-            style={{
-              width: particle.size,
-              height: particle.size,
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              opacity: 0.3,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-accent-secondary/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-tertiary/5 rounded-full blur-3xl" />
       </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-t-bg via-transparent to-t-bg" />
-
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        {/* Glitch name */}
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-4"
+          transition={{ duration: 0.6 }}
+          className="mb-6"
         >
-          <span className="text-t-accent font-mono text-sm md:text-base tracking-[0.3em] uppercase">
-            Welcome to the portfolio of
+          <span className="inline-block px-4 py-2 rounded-full bg-surface border border-border text-sm text-text-secondary">
+            MS Data Science @ Columbia University
           </span>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative font-cyber text-5xl md:text-7xl lg:text-8xl font-black mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
         >
-          <span className="text-glow-cyan text-t-text">
-            ARJUN VARMA
-          </span>
+          <span className="gradient-text">Arjun Varma</span>
         </motion.h1>
 
         {/* Typing role */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="h-12 md:h-16 flex items-center justify-center mb-8"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="h-10 md:h-12 flex items-center justify-center mb-6"
         >
-          <span className="font-mono text-xl md:text-3xl text-t-accent2">
-            {"< "}
-          </span>
-          <span className="font-mono text-xl md:text-3xl text-t-text min-w-[280px] md:min-w-[400px]">
+          <span className="text-xl md:text-2xl text-text-secondary font-light">
             {displayText}
             <span className="typing-cursor">&nbsp;</span>
           </span>
-          <span className="font-mono text-xl md:text-3xl text-t-accent2">
-            {" />"}
-          </span>
         </motion.div>
+
+        {/* Availability Badge */}
+        <motion.a
+          href="#contact"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="inline-flex items-center gap-3 px-5 py-2.5 mb-8 rounded-full bg-accent-secondary/10 border border-accent-secondary/30 hover:border-accent-secondary/60 transition-all duration-300 group"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-secondary"></span>
+          </span>
+          <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+            <span className="text-accent-secondary font-medium">Open to Summer 2026</span>
+            {" "}— Data Science / ML / Quant Intern
+          </span>
+        </motion.a>
 
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-t-muted text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          MS Data Science @ Columbia University | Advanced Data Science Consultant @ ZS Associates | 
-          Building intelligent systems with ML, Deep Learning & AI
+          Advanced Data Science Consultant @ ZS Associates | Building intelligent
+          systems with ML, Deep Learning & AI for Fortune 500 healthcare clients.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
         >
-          <a
-            href="#projects"
-            className="cyber-btn group"
-          >
-            View Projects
+          <a href="#projects" className="btn-primary">
+            View My Work
           </a>
-          <a
-            href="#contact"
-            className="cyber-btn !border-[rgb(var(--t-accent2))] !text-[rgb(var(--t-accent2))] hover:!bg-[rgb(var(--t-accent2))] hover:!text-[rgb(var(--t-on-accent))] hover:shadow-md"
-          >
+          <a href="#contact" className="btn-secondary">
             Get in Touch
           </a>
         </motion.div>
@@ -173,56 +138,49 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="flex gap-6 justify-center"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex gap-4 justify-center"
         >
           <a
             href="https://github.com/ARJUNVARMA2000"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
+            className="p-3 rounded-xl bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/50 transition-all duration-200"
           >
-            <FaGithub size={28} />
+            <FaGithub size={20} />
           </a>
           <a
             href="https://linkedin.com/in/vvarma-arjun"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
+            className="p-3 rounded-xl bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/50 transition-all duration-200"
           >
-            <FaLinkedin size={28} />
+            <FaLinkedin size={20} />
           </a>
           <a
             href="mailto:av3342@columbia.edu"
-            className="text-t-muted hover:text-t-accent transition-all duration-300 hover:scale-110"
+            className="p-3 rounded-xl bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/50 transition-all duration-200"
           >
-            <FaEnvelope size={28} />
+            <FaEnvelope size={20} />
           </a>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+        transition={{ duration: 0.6, delay: 0.8 }}
         onClick={scrollToAbout}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 p-3 rounded-full border border-border text-text-muted hover:text-accent hover:border-accent/50 transition-all duration-200"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-t-accent"
         >
-          <FaChevronDown size={24} />
+          <FaArrowDown size={16} />
         </motion.div>
-      </motion.div>
-
-      {/* Corner decorations */}
-      <div className="absolute top-4 left-4 w-20 h-20 border-l-2 border-t-2 border-t-border opacity-50" />
-      <div className="absolute top-4 right-4 w-20 h-20 border-r-2 border-t-2 border-t-border opacity-50" />
-      <div className="absolute bottom-4 left-4 w-20 h-20 border-l-2 border-b-2 border-t-border opacity-50" />
-      <div className="absolute bottom-4 right-4 w-20 h-20 border-r-2 border-b-2 border-t-border opacity-50" />
+      </motion.button>
     </section>
   );
 }

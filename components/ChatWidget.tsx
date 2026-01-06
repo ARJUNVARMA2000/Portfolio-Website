@@ -9,7 +9,7 @@ export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isNudgeDismissed, setIsNudgeDismissed] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const {
     messages,
     input,
@@ -33,7 +33,6 @@ export default function ChatWidget() {
       }
     },
     onError: (e) => {
-      // eslint-disable-next-line no-console
       console.error("Chat error:", e);
     },
     initialMessages: [
@@ -41,23 +40,20 @@ export default function ChatWidget() {
         id: "welcome",
         role: "assistant",
         content:
-          "Hi! I'm Arjun's portfolio assistant—ask me anything about his experience, projects, or skills.",
+          "Hi! I'm Arjun's portfolio assistant. Ask me anything about his experience, projects, or skills.",
       },
     ],
   });
 
-  // Show the chat nudge until user dismisses it (persisted)
   useEffect(() => {
     try {
       const dismissed = localStorage.getItem("chatNudgeDismissed");
       setIsNudgeDismissed(dismissed === "1");
     } catch {
-      // Ignore (e.g., privacy mode)
       setIsNudgeDismissed(false);
     }
   }, []);
 
-  // Auto scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -66,9 +62,7 @@ export default function ChatWidget() {
     setIsNudgeDismissed(true);
     try {
       localStorage.setItem("chatNudgeDismissed", "1");
-    } catch {
-      // Ignore
-    }
+    } catch {}
   };
 
   const openChatFromNudge = () => {
@@ -78,73 +72,48 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Mascot + CTA (only when closed) */}
+      {/* Nudge bubble */}
       <AnimatePresence>
         {!isOpen && !isNudgeDismissed && (
           <motion.div
             key="chat-nudge"
-            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            initial={{ opacity: 0, y: 12, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            exit={{ opacity: 0, y: 12, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
             className="fixed bottom-6 right-24 z-50 flex items-end gap-2"
           >
             {/* Mascot */}
             <motion.div
-              aria-hidden="true"
               animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-t-accent/12 to-t-accent2/10 border border-t-border shadow-sm flex items-center justify-center"
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center"
             >
-              <FaRobot className="text-t-accent" size={18} />
-              {/* Waving arm */}
-              <motion.div
-                className="absolute -right-2 top-2 w-4 h-4"
-                style={{ transformOrigin: "15% 85%" }}
-                animate={{ rotate: [0, 18, -10, 18, 0] }}
-                transition={{
-                  duration: 1.6,
-                  repeat: Infinity,
-                  repeatDelay: 1.4,
-                  ease: "easeInOut",
-                }}
-              >
-                <div className="w-4 h-[10px] rounded-full bg-t-accent/20 border border-t-border" />
-                <div className="absolute -right-[2px] -top-[1px] w-[10px] h-[10px] rounded-full bg-t-accent2/15 border border-t-border" />
-              </motion.div>
-              <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-t-accent2 rounded-full animate-pulse" />
+              <FaRobot className="text-accent" size={16} />
             </motion.div>
 
             {/* Speech bubble */}
-            <div className="relative pointer-events-auto">
+            <div className="relative">
               <button
                 type="button"
                 onClick={openChatFromNudge}
-                className="group max-w-[16.5rem] text-left bg-t-bg/95 border border-t-border rounded-xl px-3.5 py-2.5 shadow-2xl hover:border-t-accent/60 transition-colors"
-                aria-label="Open chat to learn about Arjun's experiences"
+                className="max-w-[200px] text-left bg-surface border border-border rounded-xl px-4 py-3 shadow-lg hover:border-accent/50 transition-colors"
               >
-                <div className="text-sm text-t-text font-medium leading-snug">
-                  Chat to learn about Arjun&apos;s experiences
+                <div className="text-sm text-text font-medium">
+                  Chat with AI
                 </div>
-                <div className="text-xs text-gray-500 mt-0.5">
-                  Ask about projects, impact, and skills.
+                <div className="text-xs text-text-muted mt-0.5">
+                  Ask about Arjun&apos;s work
                 </div>
               </button>
-
-              {/* Bubble tail */}
-              <div
-                aria-hidden="true"
-                className="absolute -right-2 bottom-3 w-4 h-4 bg-t-bg/95 border-r border-b border-t-border rotate-45"
-              />
 
               {/* Dismiss */}
               <button
                 type="button"
                 onClick={dismissNudge}
-                className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-t-bg border border-t-border flex items-center justify-center hover:border-t-accent2/60 transition-colors"
-                aria-label="Dismiss chat prompt"
+                className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-surface border border-border flex items-center justify-center hover:border-accent/50 transition-colors"
               >
-                <FaTimes className="text-gray-400" size={12} />
+                <FaTimes className="text-text-muted" size={10} />
               </button>
             </div>
           </motion.div>
@@ -160,10 +129,10 @@ export default function ChatWidget() {
           if (!isOpen) dismissNudge();
           setIsOpen(!isOpen);
         }}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-lg ${
           isOpen
-            ? "bg-t-accent2 shadow-md"
-            : "bg-t-accent shadow-md"
+            ? "bg-accent-secondary hover:bg-accent-secondary/90"
+            : "bg-accent hover:bg-accent/90"
         }`}
       >
         <AnimatePresence mode="wait">
@@ -174,7 +143,7 @@ export default function ChatWidget() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
             >
-              <FaTimes className="text-t-onAccent" size={20} />
+              <FaTimes className="text-on-accent" size={18} />
             </motion.div>
           ) : (
             <motion.div
@@ -184,8 +153,8 @@ export default function ChatWidget() {
               exit={{ scale: 0 }}
               className="relative"
             >
-              <FaRobot className="text-t-onAccent" size={24} />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-t-accent2 rounded-full animate-pulse" />
+              <FaRobot className="text-on-accent" size={22} />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent-secondary rounded-full animate-pulse" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -199,19 +168,19 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-md h-[500px] bg-t-bg border border-t-border rounded-lg shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-md h-[500px] bg-bg border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-t-accent/10 to-t-accent2/10 px-4 py-3 border-b border-t-border">
+            <div className="bg-surface px-5 py-4 border-b border-border">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-t-accent/10 flex items-center justify-center">
-                  <FaRobot className="text-t-accent" size={20} />
+                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <FaRobot className="text-accent" size={18} />
                 </div>
                 <div>
-                  <h3 className="font-cyber text-sm text-t-text">
+                  <h3 className="text-sm font-semibold text-text">
                     Ask Arjun&apos;s AI
                   </h3>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-muted">
                     Powered by OpenRouter
                   </p>
                 </div>
@@ -221,20 +190,21 @@ export default function ChatWidget() {
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {error && (
-                <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-t-text">
-                  <div className="font-medium">Chat is unavailable right now.</div>
-                  <div className="text-xs text-t-muted mt-1 whitespace-pre-line">
+                <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm">
+                  <div className="font-medium text-text">Chat unavailable</div>
+                  <div className="text-xs text-text-secondary mt-1 whitespace-pre-line">
                     {error.message}
                   </div>
                   <button
                     type="button"
                     onClick={() => reload()}
-                    className="mt-2 inline-flex items-center gap-2 rounded-md border border-t-border bg-t-bg px-3 py-1.5 text-xs hover:border-t-accent/60 transition-colors"
+                    className="mt-3 px-4 py-2 rounded-lg border border-border bg-surface text-xs hover:border-accent/50 transition-colors"
                   >
                     Retry
                   </button>
                 </div>
               )}
+
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
@@ -245,92 +215,102 @@ export default function ChatWidget() {
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
                       message.role === "user"
-                        ? "bg-t-accent2/10"
-                        : "bg-t-accent/10"
+                        ? "bg-accent-secondary/10"
+                        : "bg-accent/10"
                     }`}
                   >
                     {message.role === "user" ? (
-                      <FaUser
-                        className="text-t-accent2"
-                        size={14}
-                      />
+                      <FaUser className="text-accent-secondary" size={12} />
                     ) : (
-                      <FaRobot className="text-t-accent" size={14} />
+                      <FaRobot className="text-accent" size={12} />
                     )}
                   </div>
                   <div
-                    className={`max-w-[80%] px-4 py-2 rounded-lg text-sm ${
+                    className={`max-w-[80%] px-4 py-2.5 rounded-xl text-sm ${
                       message.role === "user"
-                        ? "bg-t-accent2/15 text-t-text"
-                        : "bg-t-bg2/70 text-t-text"
+                        ? "bg-accent-secondary/10 text-text"
+                        : "bg-surface text-text"
                     }`}
                   >
                     {message.content}
                   </div>
                 </motion.div>
               ))}
+
               {isLoading && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="flex gap-3"
                 >
-                  <div className="w-8 h-8 rounded-full bg-t-accent/10 flex items-center justify-center">
-                    <FaRobot className="text-t-accent" size={14} />
+                  <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <FaRobot className="text-accent" size={12} />
                   </div>
-                  <div className="bg-t-bg2/70 px-4 py-3 rounded-lg">
+                  <div className="bg-surface px-4 py-3 rounded-xl">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-t-accent rounded-full animate-bounce" />
+                      <span className="w-2 h-2 bg-accent rounded-full animate-bounce" />
                       <span
-                        className="w-2 h-2 bg-t-accent rounded-full animate-bounce"
+                        className="w-2 h-2 bg-accent rounded-full animate-bounce"
                         style={{ animationDelay: "0.1s" }}
                       />
                       <span
-                        className="w-2 h-2 bg-t-accent rounded-full animate-bounce"
+                        className="w-2 h-2 bg-accent rounded-full animate-bounce"
                         style={{ animationDelay: "0.2s" }}
                       />
                     </div>
                   </div>
                 </motion.div>
               )}
-              
-              {/* Suggested Questions - Show only when no user messages exist */}
-              {messages.filter(m => m.role === "user").length === 0 && !isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="space-y-2 mt-4"
-                >
-                  <p className="text-xs text-gray-500 mb-2">Try asking:</p>
-                  <div className="flex flex-col gap-2">
-                    <button
-                      type="button"
-                      onClick={() => append({ role: "user", content: "What ML projects has Arjun worked on?" })}
-                      className="text-left px-4 py-2.5 bg-t-surface border border-t-border rounded-lg text-sm text-t-text hover:border-t-accent hover:bg-t-accent/5 transition-all duration-200"
-                    >
-                      What ML projects has Arjun worked on?
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => append({ role: "user", content: "Tell me about Arjun's experience at ZS Associates" })}
-                      className="text-left px-4 py-2.5 bg-t-surface border border-t-border rounded-lg text-sm text-t-text hover:border-t-accent hover:bg-t-accent/5 transition-all duration-200"
-                    >
-                      Tell me about Arjun&apos;s experience at ZS Associates
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-              
+
+              {/* Suggested questions */}
+              {messages.filter((m) => m.role === "user").length === 0 &&
+                !isLoading && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="space-y-2 mt-4"
+                  >
+                    <p className="text-xs text-text-muted mb-2">Try asking:</p>
+                    <div className="flex flex-col gap-2">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          append({
+                            role: "user",
+                            content: "What ML projects has Arjun worked on?",
+                          })
+                        }
+                        className="text-left px-4 py-3 bg-surface border border-border rounded-xl text-sm text-text hover:border-accent/50 transition-colors"
+                      >
+                        What ML projects has Arjun worked on?
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          append({
+                            role: "user",
+                            content:
+                              "Tell me about Arjun's experience at ZS Associates",
+                          })
+                        }
+                        className="text-left px-4 py-3 bg-surface border border-border rounded-xl text-sm text-text hover:border-accent/50 transition-colors"
+                      >
+                        Tell me about Arjun&apos;s experience at ZS Associates
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="p-4 border-t border-t-border bg-t-bg2/60"
+              className="p-4 border-t border-border bg-surface"
             >
               <div className="flex gap-2">
                 <input
@@ -339,12 +319,12 @@ export default function ChatWidget() {
                   onChange={handleInputChange}
                   placeholder="Ask about Arjun's experience..."
                   disabled={!!error}
-                  className="flex-1 px-4 py-2 bg-t-surface border border-t-border rounded-lg text-t-text text-sm focus:border-t-accent focus:outline-none transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 bg-bg border border-border rounded-xl text-text text-sm focus:border-accent focus:outline-none transition-colors disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={!!error || isLoading || !input.trim()}
-                  className="px-4 py-2 bg-t-accent text-t-onAccent rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2.5 bg-accent text-on-accent rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent/90"
                 >
                   <FaPaperPlane size={14} />
                 </button>

@@ -15,7 +15,7 @@ const experiences = [
       "Drove adoption by 1,000+ sales reps and HQ leaders, replacing Excel reports and cutting prep time from days to minutes",
       "Piloted a retrieval-augmented LLM to turn FDA approval documents into concise briefs for commercial teams",
     ],
-    color: "cyan",
+    color: "accent",
   },
   {
     title: "Decision Analytics Associate Consultant",
@@ -29,7 +29,7 @@ const experiences = [
       "Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical",
       "Received Client Contraste Award for outstanding client outcomes and feedback",
     ],
-    color: "magenta",
+    color: "accent-secondary",
     award: true,
   },
   {
@@ -43,119 +43,125 @@ const experiences = [
       "Drove reporting and ad-hoc analytics that surfaced care gaps and market opportunities, informing key brand strategies across multiple new launches",
       "Promoted to Associate Consultant in 4 cycles (typical: 5) via accelerated performance; received Expert Associate and Insight Illuminate Awards",
     ],
-    color: "yellow",
+    color: "accent-tertiary",
     promoted: true,
   },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-4 relative bg-t-bg2/60">
-      <div className="absolute inset-0 grid-bg opacity-20" />
-      
-      <div className="max-w-5xl mx-auto relative z-10">
+    <section id="experience" className="section section-alt px-6">
+      <div className="max-w-4xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cyber text-3xl md:text-4xl font-bold text-t-text mb-4">
-            <span className="text-t-accent">&lt;</span> Experience{" "}
-            <span className="text-t-accent">/&gt;</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Work <span className="gradient-text">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-t-accent to-t-accent2 mx-auto" />
+          <p className="text-text-secondary max-w-2xl mx-auto">
+            3+ years of building data-driven solutions at scale
+          </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-t-accent via-t-accent2 to-t-accent3" />
+          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-border" />
 
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.period}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative mb-12 md:w-1/2 ${
-                index % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"
-              }`}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative pl-8 md:pl-20 pb-12 last:pb-0"
             >
               {/* Timeline dot */}
               <div
-                className={`absolute top-6 w-4 h-4 rounded-full border-2 ${
-                  index % 2 === 0 ? "left-0 md:-right-2 md:left-auto" : "-left-2"
-                } ${
-                  exp.color === "cyan"
-                    ? "border-t-accent bg-t-accent/20 shadow-sm"
-                    : exp.color === "magenta"
-                    ? "border-t-accent2 bg-t-accent2/20 shadow-sm"
-                    : "border-t-accent3 bg-t-accent3/20 shadow-sm"
+                className={`absolute left-0 md:left-8 top-2 w-3 h-3 rounded-full -translate-x-1/2 ring-4 ring-bg-secondary ${
+                  exp.color === "accent"
+                    ? "bg-accent"
+                    : exp.color === "accent-secondary"
+                    ? "bg-accent-secondary"
+                    : "bg-accent-tertiary"
                 }`}
               />
 
               {/* Card */}
-              <div className="ml-6 md:ml-0 cyber-card p-6 rounded-lg group">
+              <div className="card p-6">
                 {/* Badges */}
-                <div className="flex flex-wrap gap-2 mb-3">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {exp.award && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-t-accent2/10 text-t-accent2 rounded border border-t-accent2/25">
+                    <span className="badge-secondary">
                       <FaAward size={10} /> Award Winner
                     </span>
                   )}
                   {exp.promoted && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-t-accent3/10 text-t-accent3 rounded border border-t-accent3/25">
+                    <span className="badge-tertiary">
                       <FaRocket size={10} /> Fast-Track Promotion
                     </span>
                   )}
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <FaBriefcase
-                    className={`mt-1 flex-shrink-0 ${
-                      exp.color === "cyan"
-                        ? "text-t-accent"
-                        : exp.color === "magenta"
-                        ? "text-t-accent2"
-                        : "text-t-accent3"
+                <div className="flex items-start gap-3 mb-4">
+                  <div
+                    className={`p-2.5 rounded-xl flex-shrink-0 ${
+                      exp.color === "accent"
+                        ? "bg-accent/10"
+                        : exp.color === "accent-secondary"
+                        ? "bg-accent-secondary/10"
+                        : "bg-accent-tertiary/10"
                     }`}
-                  />
+                  >
+                    <FaBriefcase
+                      className={
+                        exp.color === "accent"
+                          ? "text-accent"
+                          : exp.color === "accent-secondary"
+                          ? "text-accent-secondary"
+                          : "text-accent-tertiary"
+                      }
+                      size={16}
+                    />
+                  </div>
                   <div>
                     <h3
-                      className={`font-cyber text-lg font-bold ${
-                        exp.color === "cyan"
-                          ? "text-t-accent"
-                          : exp.color === "magenta"
-                          ? "text-t-accent2"
-                          : "text-t-accent3"
+                      className={`font-semibold ${
+                        exp.color === "accent"
+                          ? "text-accent"
+                          : exp.color === "accent-secondary"
+                          ? "text-accent-secondary"
+                          : "text-accent-tertiary"
                       }`}
                     >
                       {exp.title}
                     </h3>
-                    <p className="text-t-text font-medium">{exp.company}</p>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-text font-medium">{exp.company}</p>
+                    <p className="text-text-muted text-sm">
                       {exp.location} | {exp.period}
                     </p>
                   </div>
                 </div>
 
-                <ul className="mt-4 space-y-2">
+                <ul className="space-y-3">
                   {exp.highlights.map((highlight, i) => (
                     <li
                       key={i}
-                      className="text-t-muted text-sm flex items-start gap-2"
+                      className="text-text-secondary text-sm flex items-start gap-3"
                     >
                       <span
                         className={`mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                          exp.color === "cyan"
-                            ? "bg-t-accent"
-                            : exp.color === "magenta"
-                            ? "bg-t-accent2"
-                            : "bg-t-accent3"
+                          exp.color === "accent"
+                            ? "bg-accent"
+                            : exp.color === "accent-secondary"
+                            ? "bg-accent-secondary"
+                            : "bg-accent-tertiary"
                         }`}
                       />
                       {highlight}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
@@ -19,7 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -30,51 +30,59 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-t-bg/85 backdrop-blur-md border-b border-t-border"
+          ? "bg-bg/80 backdrop-blur-xl border-b border-border/50"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a
             href="#"
-            className="font-cyber text-xl font-bold text-t-accent transition-all"
+            className="text-xl font-bold tracking-tight"
           >
-            AV<span className="text-t-accent2">.</span>
+            <span className="gradient-text">AV</span>
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-t-muted hover:text-t-accent transition-colors text-sm uppercase tracking-wider font-mono"
+                className="px-4 py-2 text-sm font-medium text-text-secondary hover:text-text transition-colors rounded-lg hover:bg-surface"
               >
                 {link.label}
               </a>
             ))}
+          </div>
+
+          {/* Right side */}
+          <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <a
               href="/resume.pdf"
               download
-              className="px-4 py-2 border border-t-accent text-t-accent text-sm uppercase tracking-wider font-mono hover:bg-t-accent hover:text-t-onAccent transition-all"
+              className="btn-primary text-sm"
             >
+              <FaDownload size={12} />
               Resume
             </a>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-t-muted hover:text-t-accent"
-          >
-            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-text-secondary hover:text-text transition-colors"
+            >
+              {isMobileMenuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -85,29 +93,30 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-t-bg/95 backdrop-blur-md border-b border-t-border"
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-bg/95 backdrop-blur-xl border-b border-border"
           >
-            <div className="px-4 py-4 space-y-4">
+            <div className="px-6 py-4 space-y-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-t-muted hover:text-t-accent transition-colors text-sm uppercase tracking-wider font-mono py-2"
+                  className="block px-4 py-3 text-text-secondary hover:text-text hover:bg-surface rounded-lg transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="pt-2">
-                <ThemeToggle />
+              <div className="pt-4">
+                <a
+                  href="/resume.pdf"
+                  download
+                  className="btn-primary w-full text-sm justify-center"
+                >
+                  <FaDownload size={12} />
+                  Download Resume
+                </a>
               </div>
-              <a
-                href="/resume.pdf"
-                download
-                className="block px-4 py-2 border border-t-accent text-t-accent text-sm uppercase tracking-wider font-mono text-center hover:bg-t-accent hover:text-t-onAccent transition-all"
-              >
-                Resume
-              </a>
             </div>
           </motion.div>
         )}
