@@ -150,7 +150,7 @@ export default function Hero() {
             <FaGithub size={20} />
           </a>
           <a
-            href="https://linkedin.com/in/vvarma-arjun"
+            href="https://www.linkedin.com/in/varma-arjun/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-xl bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/50 transition-all duration-200"

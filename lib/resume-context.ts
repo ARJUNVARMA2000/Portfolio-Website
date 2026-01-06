@@ -4,7 +4,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 ## PERSONAL INFORMATION
 - Name: Arjun Varma
 - Email: av3342@columbia.edu
-- LinkedIn: linkedin.com/in/vvarma-arjun
+- LinkedIn: www.linkedin.com/in/varma-arjun/
 - GitHub: github.com/ARJUNVARMA2000
 - Location: New York, NY
 

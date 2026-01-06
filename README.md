@@ -117,7 +117,7 @@ I'm always open to discussing new opportunities, collaborations, or interesting 
 - **Email**: [av3342@columbia.edu](mailto:av3342@columbia.edu)
 - **Phone**: (347) 987 9427
 - **Location**: New York, NY
-- **LinkedIn**: [linkedin.com/in/vvarma-arjun](https://linkedin.com/in/vvarma-arjun)
+- **LinkedIn**: [linkedin.com/in/varma-arjun](https://www.linkedin.com/in/varma-arjun/)
 - **GitHub**: [github.com/ARJUNVARMA2000](https://github.com/ARJUNVARMA2000)
 
 ---

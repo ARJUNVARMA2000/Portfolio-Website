@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Data Science Portfolio",
     "Summer 2026",
   ],
-  authors: [{ name: "Arjun Varma", url: "https://linkedin.com/in/vvarma-arjun" }],
+  authors: [{ name: "Arjun Varma", url: "https://www.linkedin.com/in/varma-arjun/" }],
   creator: "Arjun Varma",
   openGraph: {
     type: "website",
