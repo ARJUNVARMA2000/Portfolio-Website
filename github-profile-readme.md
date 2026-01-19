@@ -2,8 +2,14 @@
 
 <div align="center">
 
+<!-- Dynamic Typing Effect Header -->
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=FF6B9D&center=true&vCenter=true&width=600&lines=Data+Scientist+%7C+ML+Engineer+%7C+AI+Developer;Building+Intelligent+Systems+for+Healthcare;Open+to+Summer+2026+Internships" alt="Typing SVG" />
+
 ![Status](https://img.shields.io/badge/Status-Open%20to%20Summer%202026%20Internships-brightgreen?style=for-the-badge)
 ![Location](https://img.shields.io/badge/Location-New%20York%2C%20NY-blue?style=for-the-badge)
+
+<!-- Animated SVG Banner -->
+<img src="https://raw.githubusercontent.com/ARJUNVARMA2000/ARJUNVARMA2000/main/assets/animated-wave.svg" alt="Wave animation" width="100%" height="150" />
 
 </div>
 
@@ -69,10 +75,10 @@ LLM-powered chatbot answering questions about company financials from SEC filing
 
 **Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
 
-### 🖼️ [Scene-AI](https://github.com/ARJUNVARMA2000/Seance_AI)
-AI-powered scene understanding application deployed on Railway for real-time image analysis.
+### 🖼️ [Sceance-AI](https://github.com/ARJUNVARMA2000/Seance_AI)
+A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
 
-**Tech:** Python, PyTorch, FastAPI, Railway | [Live Demo](https://scence-ai.up.railway.app)
+**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway | [Live Demo](https://scence-ai.up.railway.app)
 
 ### 🌾 Agricultural Product Classification
 RAG product-classification system for a Series-B East African agtech achieving 99% accuracy.
@@ -93,6 +99,8 @@ Chrome extension for fine-grained video playback speed control (0.1x to 16x) acr
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ARJUNVARMA2000&layout=compact&theme=radical&hide_border=true&langs_count=8)
 
 ![GitHub Streak](https://github-readme-streak-stats.demolab.com/?user=ARJUNVARMA2000&theme=radical&hide_border=true)
+
+![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ARJUNVARMA2000&theme=radical&hide_border=true&area=true&bg_color=0D1117&color=FF6B9D&line=FF6B9D&point=FF6B9D)
 
 </div>
 

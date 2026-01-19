@@ -81,44 +81,49 @@ Quality assurance was built-in using OpenEval framework to automatically score r
 • Built modular architecture that can easily extend to other document types (earnings calls, analyst reports)`,
 };
 
-const sceneAiCaseStudy = {
-  problem: `Understanding visual scenes in images and videos requires sophisticated AI that can identify objects, understand spatial relationships, and provide meaningful descriptions. While pre-trained vision models exist, deploying them for real-world use cases requires careful engineering around inference optimization, API design, and user experience.
+const sceanceAiCaseStudy = {
+  problem: `History education often feels distant and abstract. Students read about historical figures in textbooks, but rarely get to experience their personalities, perspectives, or thought processes. Traditional learning methods don't capture the authentic voices and contextual knowledge of historical figures.
 
-The goal was to create an accessible, production-ready scene understanding service that could analyze images and provide intelligent insights about their content.`,
+The goal was to create an immersive, educational experience that brings history to life through authentic AI-powered conversations with legendary figures from different eras.`,
 
-  challenge: `Building a deployable computer vision application involved several challenges:
+  challenge: `Building an authentic historical conversation system presented several unique challenges:
 
 Key challenges:
-• Model selection—balancing accuracy with inference speed and cost
-• Handling variable image sizes, formats, and quality levels
-• Building intuitive UI/UX for non-technical users to interact with AI vision capabilities
-• Ensuring reliable deployment with proper error handling and monitoring
-• Managing cold starts and response latency for interactive use cases`,
+• Creating believable personas that speak in era-appropriate language and knowledge
+• Ensuring historical figures don't know about events after their death (temporal knowledge boundaries)
+• Designing engaging UI/UX that feels like a museum experience, not just another chatbot
+• Implementing multi-figure conversations where multiple historical personalities interact naturally
+• Managing API costs and rate limits while providing smooth streaming responses
+• Handling model fallbacks gracefully when primary models hit rate limits`,
 
-  approach: `The development followed a systematic approach:
+  approach: `The development followed a user-centric, iterative approach:
 
-1. Model Evaluation: Tested multiple vision models and architectures to find the optimal balance of accuracy, speed, and cost for scene understanding tasks
+1. Historical Research: Studied documented sources to capture authentic personalities, speaking styles, and knowledge boundaries for 60+ figures
 
-2. API-First Design: Built a clean REST API layer that abstracts model complexity and provides consistent response formats
+2. Dual Conversation Modes: Built both Seance Mode (one-on-one) and Dinner Party Mode (2-5 figures) to offer different interaction experiences
 
-3. Progressive Enhancement: Started with core scene description capabilities, then iteratively added features like object detection, scene classification, and visual Q&A
+3. Smart Model Selection: Integrated OpenRouter API with intelligent fallback system—primary free models (Gemini 2.0 Flash) with premium fallbacks (GPT-4o, Claude Sonnet 4)
 
-4. Cloud-Native Deployment: Leveraged Railway's container platform for seamless deployment with automatic scaling`,
+4. Museum-Themed Design: Created elegant dark UI with gold accents, SVG portraits, and smooth animations that make conversations feel special
+
+5. Progressive Features: Added contextual suggestions, conversation history, save/resume functionality, and export options`,
 
   solution: `The production system includes:
 
-• PyTorch-based Vision Pipeline: Leveraging state-of-the-art models for scene understanding and image analysis
-• FastAPI Backend: Async request handling with proper validation and error responses
-• Railway Deployment: Containerized application with environment management and automatic restarts
-• Interactive Web Interface: Clean UI for image upload and real-time analysis results
+• Flask Backend: RESTful API with Server-Sent Events (SSE) for streaming responses and intelligent retry logic
+• OpenRouter Integration: Flexible AI model access with automatic fallback handling
+• 60+ Historical Figures: Carefully crafted personas across Ancient World, Renaissance, 19th Century, and Modern Era
+• Interactive Web Interface: Responsive museum-themed UI with figure selection, conversation history, and multi-mode support
+• Railway Deployment: Containerized Flask app with environment-based configuration
 
-The architecture prioritizes reliability with graceful degradation when models encounter edge cases.`,
+The architecture prioritizes authenticity—each figure maintains their unique voice, era-appropriate knowledge, and genuine reactions to modern concepts.`,
 
   impact: `• Successfully deployed to production on Railway with reliable uptime
-• Handles diverse image inputs from various sources and formats
-• Provides sub-second response times for most analysis requests
-• Demonstrates end-to-end ML deployment skills from model selection to production
-• Serves as a template for future computer vision projects`,
+• Features 60+ historical figures across multiple eras with authentic personalities
+• Supports both intimate one-on-one conversations and dynamic multi-figure dinner parties
+• Provides educational value for history learning, critical thinking, and creative writing
+• Demonstrates full-stack development skills from AI integration to production deployment
+• Open-source project that others can learn from and contribute to`,
 };
 
 const videoSpeedCaseStudy = {
@@ -201,23 +206,23 @@ const projects = [
     caseStudy: financialRagCaseStudy,
   },
   {
-    title: "Scene-AI",
-    subtitle: "Computer Vision & Deep Learning",
+    title: "Sceance-AI",
+    subtitle: "Conversational AI & Historical Roleplay",
     description:
-      "AI-powered scene understanding and analysis application deployed on Railway. Leverages modern ML techniques for intelligent scene recognition and processing.",
-    tech: ["Python", "PyTorch", "FastAPI", "Railway", "REST API"],
+      "A digital séance platform where you can converse with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities and knowledge.",
+    tech: ["Python", "Flask", "OpenRouter API", "JavaScript", "Railway", "SSE"],
     icon: FaBrain,
     color: "accent-secondary",
     highlights: [
-      "Production deployment on Railway",
-      "Real-time image analysis",
-      "Clean REST API design",
+      "60+ historical figures across eras",
+      "Dual conversation modes",
+      "Museum-themed UI design",
     ],
     github: "https://github.com/ARJUNVARMA2000/Seance_AI",
     demo: "https://scence-ai.up.railway.app",
     period: "2025",
     org: "Personal Project",
-    caseStudy: sceneAiCaseStudy,
+    caseStudy: sceanceAiCaseStudy,
   },
   {
     title: "Agricultural Product Classification",

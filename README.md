@@ -160,10 +160,10 @@ LLM-powered chatbot answering questions about company financials from SEC filing
 
 **Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
 
-### Scene-AI
-AI-powered scene understanding application deployed on Railway for real-time image analysis.
+### Sceance-AI
+A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
 
-**Tech:** Python, PyTorch, FastAPI, Railway
+**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway
 
 ### Agricultural Product Classification
 RAG product-classification system for a Series-B East African agtech achieving 99% accuracy.
