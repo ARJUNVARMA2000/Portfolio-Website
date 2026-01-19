@@ -27,7 +27,7 @@ const experiences = [
       "Built and productionized Positive-Unlabeled (PU) learning models at a Fortune 500 organization to systematically infer missing categorical labels in transactional data",
       "Implemented automated model drift checks and unit testing to ensure long-term reliability",
       "Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical",
-      "Received Client Contraste Award for outstanding client outcomes and feedback",
+      "Received Client Comrade Award for outstanding client outcomes and feedback",
     ],
     color: "accent-secondary",
     award: true,

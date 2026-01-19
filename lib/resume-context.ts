@@ -36,7 +36,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 - Built and productionized Positive-Unlabeled (PU) learning models for Fortune 500 organization
 - Implemented automated model drift checks and unit testing for long-term reliability
 - Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical
-- Received Client Contraste Award for outstanding performance
+- Received Client Comrade Award for outstanding performance
 
 **Decision Analytics Associate** (Feb 2022 - Jun 2024)
 - Engineered PySpark/SQL pipelines integrating multiple data sources for brand performance insights

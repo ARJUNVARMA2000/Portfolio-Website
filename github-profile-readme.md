@@ -106,7 +106,7 @@ Chrome extension for fine-grained video playback speed control (0.1x to 16x) acr
 
 ## 🏆 Achievements
 
-- 🏅 **Client Contraste Award** @ ZS Associates for outstanding client outcomes
+- 🏅 **Client Comrade Award** @ ZS Associates for outstanding client outcomes
 - 🚀 **Fast-Track Promotion** - Promoted to Associate Consultant in 4 cycles (typical: 5)
 - 🎯 **Top 10%** finish in company-wide hackathon
 - 📈 **Top 1%** Fantasy Premier League finisher for 4 consecutive years
@@ -122,7 +122,7 @@ Chrome extension for fine-grained video playback speed control (0.1x to 16x) acr
 **Decision Analytics Associate Consultant** @ ZS Associates (Jul 2024 - Jan 2025)
 - Led 5-member team on strategic initiative, saving ~50 hrs/mo and improving quality to >99%
 - Built and productionized Positive-Unlabeled (PU) learning models for Fortune 500 organization
-- Received Client Contraste Award for outstanding client outcomes
+- Received Client Comrade Award for outstanding client outcomes
 
 ## 📫 Let's Connect
 
