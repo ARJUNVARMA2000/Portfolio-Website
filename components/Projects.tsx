@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome } from "react-icons/fa";
 
 const btcCaseStudy = {
   problem: `Bile Tract Cancer (BTC) is a rare form of cancer with very few approved treatments. Our client's oncology drug was a new method of treatment that had become the standard of care for BTC, but because of its rarity, it was difficult to know which oncologists/urologists to educate.
@@ -41,6 +41,128 @@ The pipeline was productionized to process new claims refreshes automatically at
 • Approach was shared by our client at an industry conference on utilizing AI to improve patient outcomes`,
 };
 
+const financialRagCaseStudy = {
+  problem: `Financial analysts and investors spend countless hours manually sifting through SEC filings (10-K, 10-Q, 8-K) to extract key insights about company performance, risk factors, and management discussions. These documents are dense, lengthy (often 100+ pages), and written in complex legal/financial language.
+
+The challenge was to build an intelligent assistant that could answer natural language questions about company financials with accurate, source-grounded responses—eliminating hallucinations that plague standard LLM approaches.`,
+
+  challenge: `Building a reliable financial Q&A system presented several technical hurdles:
+
+Key challenges:
+• SEC filings contain complex nested structures (tables, footnotes, cross-references)
+• Financial data requires precise numerical accuracy—approximations are unacceptable
+• Context windows are limited, but relevant information may span multiple document sections
+• Need to handle both quantitative queries ("What was Q3 revenue?") and qualitative ones ("What are the main risk factors?")
+• Responses must cite sources to maintain trust and auditability`,
+
+  approach: `We implemented a Retrieval-Augmented Generation (RAG) architecture with several key innovations:
+
+1. Document Processing Pipeline: Used SEC-EDGAR APIs to fetch filings, then applied intelligent chunking that respects document structure (preserving tables, section boundaries)
+
+2. Semantic Search Layer: ChromaDB vector store with OpenAI embeddings for semantic retrieval, combined with metadata filtering (company, filing date, section type)
+
+3. Multi-stage Retrieval: Initial broad retrieval followed by reranking to surface the most relevant chunks for each query
+
+4. Prompt Engineering: Carefully designed prompts that instruct GPT-4 to only answer from retrieved context and explicitly cite sources`,
+
+  solution: `The final system architecture consisted of:
+
+• FastAPI Backend: RESTful API handling document ingestion, query processing, and response generation
+• Streamlit Frontend: Interactive chat interface with conversation history and source highlighting
+• ChromaDB: Persistent vector store with company/filing metadata for filtered retrieval
+• LangChain Orchestration: Managed the RAG pipeline, conversation memory, and chain-of-thought reasoning
+
+Quality assurance was built-in using OpenEval framework to automatically score response quality, relevance, and faithfulness to source documents.`,
+
+  impact: `• Achieved 4.5/5 quality score on OpenEval benchmark for response accuracy and relevance
+• Successfully integrated multiple years of SEC filings across different companies
+• Reduced time-to-insight from hours of manual reading to seconds of conversation
+• Demonstrated zero hallucination rate on factual financial queries through strict RAG grounding
+• Built modular architecture that can easily extend to other document types (earnings calls, analyst reports)`,
+};
+
+const sceneAiCaseStudy = {
+  problem: `Understanding visual scenes in images and videos requires sophisticated AI that can identify objects, understand spatial relationships, and provide meaningful descriptions. While pre-trained vision models exist, deploying them for real-world use cases requires careful engineering around inference optimization, API design, and user experience.
+
+The goal was to create an accessible, production-ready scene understanding service that could analyze images and provide intelligent insights about their content.`,
+
+  challenge: `Building a deployable computer vision application involved several challenges:
+
+Key challenges:
+• Model selection—balancing accuracy with inference speed and cost
+• Handling variable image sizes, formats, and quality levels
+• Building intuitive UI/UX for non-technical users to interact with AI vision capabilities
+• Ensuring reliable deployment with proper error handling and monitoring
+• Managing cold starts and response latency for interactive use cases`,
+
+  approach: `The development followed a systematic approach:
+
+1. Model Evaluation: Tested multiple vision models and architectures to find the optimal balance of accuracy, speed, and cost for scene understanding tasks
+
+2. API-First Design: Built a clean REST API layer that abstracts model complexity and provides consistent response formats
+
+3. Progressive Enhancement: Started with core scene description capabilities, then iteratively added features like object detection, scene classification, and visual Q&A
+
+4. Cloud-Native Deployment: Leveraged Railway's container platform for seamless deployment with automatic scaling`,
+
+  solution: `The production system includes:
+
+• PyTorch-based Vision Pipeline: Leveraging state-of-the-art models for scene understanding and image analysis
+• FastAPI Backend: Async request handling with proper validation and error responses
+• Railway Deployment: Containerized application with environment management and automatic restarts
+• Interactive Web Interface: Clean UI for image upload and real-time analysis results
+
+The architecture prioritizes reliability with graceful degradation when models encounter edge cases.`,
+
+  impact: `• Successfully deployed to production on Railway with reliable uptime
+• Handles diverse image inputs from various sources and formats
+• Provides sub-second response times for most analysis requests
+• Demonstrates end-to-end ML deployment skills from model selection to production
+• Serves as a template for future computer vision projects`,
+};
+
+const videoSpeedCaseStudy = {
+  problem: `Online learning has exploded, but video platforms often have limited playback speed options (typically 0.5x to 2x). Power users watching lectures, tutorials, or long-form content want finer control—speeds like 1.25x, 1.75x, or even 3x+ for review sessions.
+
+Additionally, many streaming platforms reset speed settings between videos or don't remember user preferences, creating friction for consistent viewing experiences.`,
+
+  challenge: `Building a reliable video speed controller for modern web involved several challenges:
+
+Key challenges:
+• Different sites structure their video players differently (native HTML5, custom wrappers, shadow DOM)
+• Some platforms actively reset playbackRate on video load or segment changes
+• DRM-protected content may restrict speed modifications
+• Need to work seamlessly across YouTube, Netflix, Coursera, Udemy, and arbitrary sites
+• Keyboard shortcuts must not conflict with existing site shortcuts`,
+
+  approach: `The extension was built with broad compatibility in mind:
+
+1. Content Script Injection: Inject scripts that locate all video elements on the page, including dynamically loaded ones
+
+2. MutationObserver Pattern: Watch for new video elements being added to the DOM and automatically apply speed settings
+
+3. Persistent Storage: Use Chrome's storage API to remember speed preferences per-site and globally
+
+4. Non-intrusive UI: Overlay controls that appear on hover without disrupting the viewing experience
+
+5. Keyboard Shortcuts: Configurable hotkeys for quick speed adjustments during playback`,
+
+  solution: `The Chrome extension includes:
+
+• Background Service Worker: Manages extension state and cross-tab communication
+• Content Scripts: Injected into pages to control video elements and display UI overlay
+• Options Page: Configure default speed, keyboard shortcuts, and per-site preferences
+• Speed Memory: Automatically applies preferred speed to new videos without manual intervention
+
+The implementation uses the standard HTMLMediaElement.playbackRate API with fallbacks for edge cases where sites try to override user settings.`,
+
+  impact: `• Works across major platforms including YouTube, Netflix, Udemy, Coursera, and generic HTML5 videos
+• Allows fine-grained speed control from 0.1x to 16x in customizable increments
+• Remembers preferences across sessions and sites for frictionless experience
+• Lightweight with minimal performance overhead
+• Practical tool used daily for accelerated learning and content consumption`,
+};
+
 const projects = [
   {
     title: "BTC Cancer Early Detection",
@@ -76,19 +198,26 @@ const projects = [
     github: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot",
     period: "Nov 2025 - Dec 2025",
     org: "Columbia University",
+    caseStudy: financialRagCaseStudy,
   },
   {
     title: "Scene-AI",
     subtitle: "Computer Vision & Deep Learning",
     description:
       "AI-powered scene understanding and analysis application deployed on Railway. Leverages modern ML techniques for intelligent scene recognition and processing.",
-    tech: ["Python", "PyTorch", "Railway", "REST API"],
+    tech: ["Python", "PyTorch", "FastAPI", "Railway", "REST API"],
     icon: FaBrain,
-    color: "accent-tertiary",
+    color: "accent-secondary",
+    highlights: [
+      "Production deployment on Railway",
+      "Real-time image analysis",
+      "Clean REST API design",
+    ],
     github: "https://github.com/ARJUNVARMA2000/Seance_AI",
     demo: "https://scence-ai.up.railway.app",
     period: "2025",
     org: "Personal Project",
+    caseStudy: sceneAiCaseStudy,
   },
   {
     title: "Agricultural Product Classification",
@@ -105,6 +234,24 @@ const projects = [
     ],
     period: "Aug 2025 - Oct 2025",
     org: "Columbia University",
+  },
+  {
+    title: "Video Speed Controller",
+    subtitle: "Chrome Extension",
+    description:
+      "Built a Chrome extension for fine-grained video playback speed control across all websites. Features persistent speed memory, keyboard shortcuts, and works with YouTube, Netflix, Udemy, and more.",
+    tech: ["JavaScript", "Chrome APIs", "HTML/CSS", "MutationObserver"],
+    icon: FaChrome,
+    color: "accent-secondary",
+    highlights: [
+      "Works on all major platforms",
+      "0.1x to 16x speed range",
+      "Persistent speed memory",
+    ],
+    github: "https://github.com/ARJUNVARMA2000/Video-Speed-Controller-extension",
+    period: "2025",
+    org: "Personal Project",
+    caseStudy: videoSpeedCaseStudy,
   },
 ];
 
@@ -158,9 +305,7 @@ export default function Projects() {
                         className={`p-3 rounded-xl ${
                           project.color === "accent"
                             ? "bg-accent/10"
-                            : project.color === "accent-secondary"
-                            ? "bg-accent-secondary/10"
-                            : "bg-accent-tertiary/10"
+                            : "bg-accent-secondary/10"
                         }`}
                       >
                         <Icon
@@ -168,9 +313,7 @@ export default function Projects() {
                           className={
                             project.color === "accent"
                               ? "text-accent"
-                              : project.color === "accent-secondary"
-                              ? "text-accent-secondary"
-                              : "text-accent-tertiary"
+                              : "text-accent-secondary"
                           }
                         />
                       </div>
@@ -179,9 +322,7 @@ export default function Projects() {
                           className={`font-semibold ${
                             project.color === "accent"
                               ? "text-accent"
-                              : project.color === "accent-secondary"
-                              ? "text-accent-secondary"
-                              : "text-accent-tertiary"
+                              : "text-accent-secondary"
                           }`}
                         >
                           {project.title}
@@ -235,9 +376,7 @@ export default function Projects() {
                             className={`w-1 h-1 rounded-full ${
                               project.color === "accent"
                                 ? "bg-accent"
-                                : project.color === "accent-secondary"
-                                ? "bg-accent-secondary"
-                                : "bg-accent-tertiary"
+                                : "bg-accent-secondary"
                             }`}
                           />
                           {highlight}
@@ -302,7 +441,7 @@ export default function Projects() {
               <div className="sticky top-0 bg-bg/95 backdrop-blur-sm border-b border-border px-8 py-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="badge">Case Study</span>
-                  <span className="badge-secondary">Anomaly Detection</span>
+                  <span className="badge-secondary">{selectedProject.subtitle}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-accent mb-2">
                   {selectedProject.title}
@@ -339,7 +478,7 @@ export default function Projects() {
                 {/* Approach */}
                 <div>
                   <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent-tertiary" />
+                    <span className="w-2 h-2 rounded-full bg-accent" />
                     The Approach
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">

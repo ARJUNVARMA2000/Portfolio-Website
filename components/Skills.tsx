@@ -44,7 +44,7 @@ const skillCategories = [
   },
   {
     title: "Big Data & MLOps",
-    color: "accent-tertiary",
+    color: "accent-secondary",
     skills: [
       { name: "PySpark", icon: SiApachespark },
       { name: "Databricks", icon: SiDatabricks },
@@ -118,9 +118,7 @@ export default function Skills() {
                 className={`text-sm font-semibold mb-5 text-center ${
                   category.color === "accent"
                     ? "text-accent"
-                    : category.color === "accent-secondary"
-                    ? "text-accent-secondary"
-                    : "text-accent-tertiary"
+                    : "text-accent-secondary"
                 }`}
               >
                 {category.title}
@@ -135,9 +133,7 @@ export default function Skills() {
                       className={`flex flex-col items-center gap-2 p-3 rounded-xl border border-border hover:border-opacity-50 transition-all duration-200 ${
                         category.color === "accent"
                           ? "hover:border-accent/50 hover:bg-accent/5"
-                          : category.color === "accent-secondary"
-                          ? "hover:border-accent-secondary/50 hover:bg-accent-secondary/5"
-                          : "hover:border-accent-tertiary/50 hover:bg-accent-tertiary/5"
+                          : "hover:border-accent-secondary/50 hover:bg-accent-secondary/5"
                       }`}
                     >
                       <Icon
@@ -145,9 +141,7 @@ export default function Skills() {
                         className={
                           category.color === "accent"
                             ? "text-accent"
-                            : category.color === "accent-secondary"
-                            ? "text-accent-secondary"
-                            : "text-accent-tertiary"
+                            : "text-accent-secondary"
                         }
                       />
                       <span className="text-text-secondary text-xs text-center">

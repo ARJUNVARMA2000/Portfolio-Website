@@ -9,7 +9,6 @@ import remarkGfm from "remark-gfm";
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isNudgeDismissed, setIsNudgeDismissed] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -48,89 +47,17 @@ export default function ChatWidget() {
   });
 
   useEffect(() => {
-    try {
-      const dismissed = localStorage.getItem("chatNudgeDismissed");
-      setIsNudgeDismissed(dismissed === "1");
-    } catch {
-      setIsNudgeDismissed(false);
-    }
-  }, []);
-
-  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const dismissNudge = () => {
-    setIsNudgeDismissed(true);
-    try {
-      localStorage.setItem("chatNudgeDismissed", "1");
-    } catch {}
-  };
-
-  const openChatFromNudge = () => {
-    dismissNudge();
-    setIsOpen(true);
-  };
-
   return (
     <>
-      {/* Nudge bubble */}
-      <AnimatePresence>
-        {!isOpen && !isNudgeDismissed && (
-          <motion.div
-            key="chat-nudge"
-            initial={{ opacity: 0, y: 12, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-24 z-50 flex items-end gap-2"
-          >
-            {/* Mascot */}
-            <motion.div
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center"
-            >
-              <FaRobot className="text-accent" size={16} />
-            </motion.div>
-
-            {/* Speech bubble */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={openChatFromNudge}
-                className="max-w-[200px] text-left bg-surface border border-border rounded-xl px-4 py-3 shadow-lg hover:border-accent/50 transition-colors"
-              >
-                <div className="text-sm text-text font-medium">
-                  Chat with AI
-                </div>
-                <div className="text-xs text-text-muted mt-0.5">
-                  Ask about Arjun&apos;s work
-                </div>
-              </button>
-
-              {/* Dismiss */}
-              <button
-                type="button"
-                onClick={dismissNudge}
-                className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-surface border border-border flex items-center justify-center hover:border-accent/50 transition-colors"
-              >
-                <FaTimes className="text-text-muted" size={10} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Chat button */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1.5, type: "spring" }}
-        onClick={() => {
-          if (!isOpen) dismissNudge();
-          setIsOpen(!isOpen);
-        }}
+        onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-lg ${
           isOpen
             ? "bg-accent-secondary hover:bg-accent-secondary/90"

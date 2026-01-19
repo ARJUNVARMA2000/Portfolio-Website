@@ -1,6 +1,6 @@
 "use client";
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -13,15 +13,8 @@ export default function Footer() {
               <span className="gradient-text">AV</span>
             </span>
             <span className="text-text-muted text-sm">
-              {new Date().getFullYear()} Arjun Varma. All rights reserved.
+              {new Date().getFullYear()} Arjun Varma
             </span>
-          </div>
-
-          {/* Made with love */}
-          <div className="flex items-center gap-2 text-text-muted text-sm">
-            <span>Built with</span>
-            <FaHeart className="text-accent animate-pulse" size={14} />
-            <span>using Next.js & AI</span>
           </div>
 
           {/* Social links */}

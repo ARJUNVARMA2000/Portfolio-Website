@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
+import { FaBars, FaTimes, FaDownload, FaGithub } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
@@ -39,12 +39,14 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* GitHub Link */}
           <a
-            href="#"
-            className="text-xl font-bold tracking-tight"
+            href="https://github.com/ARJUNVARMA2000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-text-secondary hover:text-accent transition-colors"
           >
-            <span className="gradient-text">AV</span>
+            <FaGithub size={20} />
           </a>
 
           {/* Desktop nav */}

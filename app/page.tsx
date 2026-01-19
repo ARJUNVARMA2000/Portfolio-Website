@@ -7,13 +7,9 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
-import Timeline from "@/components/Timeline";
-import GitHubActivity from "@/components/GitHubActivity";
-import FPLCard from "@/components/FPLCard";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
-import Loader from "@/components/Loader";
 
 // Page transition wrapper for smooth section animations
 const PageSection = ({
@@ -35,50 +31,35 @@ const PageSection = ({
 
 export default function Home() {
   return (
-    <>
-      <Loader />
-      <main className="min-h-screen bg-bg text-text">
-        <Navbar />
+    <main className="min-h-screen bg-bg text-text">
+      <Navbar />
 
-        <PageSection>
-          <Hero />
-        </PageSection>
+      <PageSection>
+        <Hero />
+      </PageSection>
 
-        <PageSection>
-          <About />
-        </PageSection>
+      <PageSection>
+        <About />
+      </PageSection>
 
-        <PageSection>
-          <Timeline />
-        </PageSection>
+      <PageSection>
+        <Experience />
+      </PageSection>
 
-        <PageSection>
-          <Experience />
-        </PageSection>
+      <PageSection>
+        <Projects />
+      </PageSection>
 
-        <PageSection>
-          <Projects />
-        </PageSection>
+      <PageSection>
+        <Skills />
+      </PageSection>
 
-        <PageSection>
-          <Skills />
-        </PageSection>
+      <PageSection>
+        <Contact />
+      </PageSection>
 
-        <PageSection>
-          <GitHubActivity />
-        </PageSection>
-
-        <PageSection>
-          <FPLCard />
-        </PageSection>
-
-        <PageSection>
-          <Contact />
-        </PageSection>
-
-        <Footer />
-        <ChatWidget />
-      </main>
-    </>
+      <Footer />
+      <ChatWidget />
+    </main>
   );
 }

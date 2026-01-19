@@ -18,7 +18,6 @@
   --text-muted: 115 115 115;
   --accent: 245 158 11;
   --accent-secondary: 20 184 166;
-  --accent-tertiary: 139 92 246;
   --on-accent: 0 0 0;
 }
 
@@ -32,7 +31,6 @@
   --text-muted: 115 115 115;
   --accent: 245 158 11;
   --accent-secondary: 20 184 166;
-  --accent-tertiary: 139 92 246;
   --on-accent: 0 0 0;
 }
 
@@ -46,7 +44,6 @@
   --text-muted: 115 115 115;
   --accent: 217 119 6;
   --accent-secondary: 13 148 136;
-  --accent-tertiary: 124 58 237;
   --on-accent: 255 255 255;
 }
 
@@ -103,7 +100,7 @@ body {
   }
 
   .gradient-text-alt {
-    background: linear-gradient(135deg, rgb(var(--accent-secondary)), rgb(var(--accent-tertiary)));
+    background: linear-gradient(135deg, rgb(var(--accent)), rgb(var(--accent-secondary)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -209,9 +206,9 @@ body {
   }
 
   .badge-tertiary {
-    background: rgb(var(--accent-tertiary) / 0.1);
-    color: rgb(var(--accent-tertiary));
-    border-color: rgb(var(--accent-tertiary) / 0.2);
+    background: rgb(var(--accent-secondary) / 0.1);
+    color: rgb(var(--accent-secondary));
+    border-color: rgb(var(--accent-secondary) / 0.2);
   }
 
   /* Tech pill for skills/tech stack */

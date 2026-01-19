@@ -43,7 +43,7 @@ const experiences = [
       "Drove reporting and ad-hoc analytics that surfaced care gaps and market opportunities, informing key brand strategies across multiple new launches",
       "Promoted to Associate Consultant in 4 cycles (typical: 5) via accelerated performance; received Expert Associate and Insight Illuminate Awards",
     ],
-    color: "accent-tertiary",
+    color: "accent-secondary",
     promoted: true,
   },
 ];
@@ -87,9 +87,7 @@ export default function Experience() {
                 className={`absolute left-0 md:left-8 top-2 w-3 h-3 rounded-full -translate-x-1/2 ring-4 ring-bg-secondary ${
                   exp.color === "accent"
                     ? "bg-accent"
-                    : exp.color === "accent-secondary"
-                    ? "bg-accent-secondary"
-                    : "bg-accent-tertiary"
+                    : "bg-accent-secondary"
                 }`}
               />
 
@@ -114,18 +112,14 @@ export default function Experience() {
                     className={`p-2.5 rounded-xl flex-shrink-0 ${
                       exp.color === "accent"
                         ? "bg-accent/10"
-                        : exp.color === "accent-secondary"
-                        ? "bg-accent-secondary/10"
-                        : "bg-accent-tertiary/10"
+                        : "bg-accent-secondary/10"
                     }`}
                   >
                     <FaBriefcase
                       className={
                         exp.color === "accent"
                           ? "text-accent"
-                          : exp.color === "accent-secondary"
-                          ? "text-accent-secondary"
-                          : "text-accent-tertiary"
+                          : "text-accent-secondary"
                       }
                       size={16}
                     />
@@ -135,9 +129,7 @@ export default function Experience() {
                       className={`font-semibold ${
                         exp.color === "accent"
                           ? "text-accent"
-                          : exp.color === "accent-secondary"
-                          ? "text-accent-secondary"
-                          : "text-accent-tertiary"
+                          : "text-accent-secondary"
                       }`}
                     >
                       {exp.title}
@@ -159,9 +151,7 @@ export default function Experience() {
                         className={`mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
                           exp.color === "accent"
                             ? "bg-accent"
-                            : exp.color === "accent-secondary"
-                            ? "bg-accent-secondary"
-                            : "bg-accent-tertiary"
+                            : "bg-accent-secondary"
                         }`}
                       />
                       {highlight}

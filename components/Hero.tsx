@@ -7,7 +7,6 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
 const roles = [
   "Data Scientist",
   "ML Engineer",
-  "Analytics Consultant",
   "AI Developer",
 ];
 
@@ -99,7 +98,6 @@ export default function Hero() {
           className="inline-flex items-center gap-3 px-5 py-2.5 mb-8 rounded-full bg-accent-secondary/10 border border-accent-secondary/30 hover:border-accent-secondary/60 transition-all duration-300 group"
         >
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-secondary"></span>
           </span>
           <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
