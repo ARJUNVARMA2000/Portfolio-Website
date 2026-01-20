@@ -3,7 +3,7 @@
 <div align="center">
 
 <!-- Dynamic Typing Effect Header -->
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=FF6B9D&center=true&vCenter=true&width=600&lines=Data+Scientist+%7C+ML+Engineer+%7C+AI+Developer;Building+Intelligent+Systems+for+Healthcare;Open+to+Summer+2026+Internships" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=FF6B9D&center=true&vCenter=true&width=900&lines=Data+Scientist+%7C+ML+Engineer+%7C+AI+Developer;Open+to+Summer+2026+Internships" alt="Typing SVG" />
 
 ![Status](https://img.shields.io/badge/Status-Open%20to%20Summer%202026%20Internships-brightgreen?style=for-the-badge)
 ![Location](https://img.shields.io/badge/Location-New%20York%2C%20NY-blue?style=for-the-badge)
