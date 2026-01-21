@@ -192,7 +192,7 @@ const projects = [
     subtitle: "LLM & Information Retrieval",
     description:
       "Built an LLM-powered RAG chatbot that answers questions about company financials from SEC filings. Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval.",
-    tech: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "GPT-4"],
+    tech: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "OpenRouter"],
     icon: FaRobot,
     color: "accent-secondary",
     highlights: [
