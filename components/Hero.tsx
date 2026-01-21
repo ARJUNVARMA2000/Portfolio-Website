@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
+import Image from "next/image";
 
 const roles = [
   "Data Scientist",
@@ -56,10 +57,51 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        {/* Profile Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="mb-8 flex justify-center"
+        >
+          <motion.div
+            animate={{
+              y: [0, -8, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="relative"
+          >
+            {/* Animated gradient ring */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent-secondary to-accent-tertiary rounded-full opacity-75 blur-sm animate-spin-slow" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent-secondary to-accent-tertiary rounded-full opacity-50" />
+
+            {/* Glow effect */}
+            <div className="absolute -inset-4 bg-accent/20 rounded-full blur-2xl animate-pulse-soft" />
+
+            {/* Image container */}
+            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-bg">
+              <Image
+                src="/images/profile.jpg"
+                alt="Arjun Varma"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-6"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-surface border border-border text-sm text-text-secondary">
@@ -70,7 +112,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
         >
           <span className="gradient-text">Arjun Varma</span>
@@ -80,7 +122,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="h-10 md:h-12 flex items-center justify-center mb-6"
         >
           <span className="text-xl md:text-2xl text-text-secondary font-light">
@@ -94,7 +136,7 @@ export default function Hero() {
           href="#contact"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
           className="inline-flex items-center gap-3 px-5 py-2.5 mb-8 rounded-full bg-accent-secondary/10 border border-accent-secondary/30 hover:border-accent-secondary/60 transition-all duration-300 group"
         >
           <span className="relative flex h-2.5 w-2.5">
@@ -110,7 +152,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="text-text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           3+ years building ML solutions for Fortune 500 healthcare clients. Passionate about turning complex data into real-world impact.

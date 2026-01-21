@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaBriefcase, FaAward, FaRocket } from "react-icons/fa";
+import { FaBriefcase } from "react-icons/fa";
 
 const experiences = [
   {
@@ -93,20 +93,6 @@ export default function Experience() {
 
               {/* Card */}
               <div className="card p-6">
-                {/* Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {exp.award && (
-                    <span className="badge-secondary">
-                      <FaAward size={10} /> Award Winner
-                    </span>
-                  )}
-                  {exp.promoted && (
-                    <span className="badge-tertiary">
-                      <FaRocket size={10} /> Fast-Track Promotion
-                    </span>
-                  )}
-                </div>
-
                 <div className="flex items-start gap-3 mb-4">
                   <div
                     className={`p-2.5 rounded-xl flex-shrink-0 ${

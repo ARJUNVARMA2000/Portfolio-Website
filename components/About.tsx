@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaMapMarkerAlt, FaAward } from "react-icons/fa";
+import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaGithub } from "react-icons/fa";
 
 const education = [
   {
@@ -117,6 +117,51 @@ export default function About() {
             </motion.div>
           ))}
         </div>
+
+        {/* GitHub Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2.5 rounded-xl bg-accent-secondary/10">
+              <FaGithub className="text-accent-secondary" size={20} />
+            </div>
+            <h3 className="text-xl font-semibold">GitHub Activity</h3>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://github.com/ARJUNVARMA2000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform hover:scale-105"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=ARJUNVARMA2000&show_icons=true&hide_border=true&hide_title=true&bg_color=00000000&text_color=888888&icon_color=6366f1&hide_rank=true&include_all_commits=true&line_height=24"
+                alt="GitHub Stats"
+                className="h-[120px]"
+              />
+            </a>
+            <a
+              href="https://github.com/ARJUNVARMA2000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform hover:scale-105"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=ARJUNVARMA2000&layout=compact&hide_border=true&hide_title=true&bg_color=00000000&text_color=888888&langs_count=6"
+                alt="Top Languages"
+                className="h-[120px]"
+              />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
