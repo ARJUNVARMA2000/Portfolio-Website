@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaGithub } from "react-icons/fa";
+import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaGithub, FaFutbol, FaTrophy } from "react-icons/fa";
 
 const education = [
   {
@@ -161,6 +161,26 @@ export default function About() {
               />
             </a>
           </div>
+
+          {/* FPL Achievement */}
+          <motion.a
+            href="https://fantasy.premierleague.com/entry/50075/history"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="mt-6 inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface border border-border hover:border-accent-tertiary/50 transition-all duration-300 group mx-auto"
+          >
+            <div className="p-1.5 rounded-lg bg-accent-tertiary/10 group-hover:bg-accent-tertiary/20 transition-colors">
+              <FaFutbol className="text-accent-tertiary" size={14} />
+            </div>
+            <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+              <FaTrophy className="inline text-yellow-500 mr-1" size={12} />
+              <span className="font-medium text-accent-tertiary">Top 1%</span> FPL finishes — 4 consecutive years
+            </span>
+          </motion.a>
         </motion.div>
       </div>
     </section>
