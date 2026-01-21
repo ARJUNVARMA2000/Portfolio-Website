@@ -9,7 +9,28 @@ import remarkGfm from "remark-gfm";
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [hintDismissed, setHintDismissed] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Show hint after a delay (staggered from game hint)
+  useEffect(() => {
+    if (hintDismissed) return;
+    const timer = setTimeout(() => {
+      setShowHint(true);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [hintDismissed]);
+
+  // Auto-hide hint after showing
+  useEffect(() => {
+    if (!showHint) return;
+    const timer = setTimeout(() => {
+      setShowHint(false);
+      setHintDismissed(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [showHint]);
 
   const {
     messages,
@@ -53,41 +74,66 @@ export default function ChatWidget() {
   return (
     <>
       {/* Chat button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1.5, type: "spring" }}
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-lg ${
-          isOpen
-            ? "bg-accent-secondary hover:bg-accent-secondary/90"
-            : "bg-accent hover:bg-accent/90"
-        }`}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
+      <div className="fixed bottom-6 right-6 z-50">
+        {/* Clippy-style hint bubble */}
+        <AnimatePresence>
+          {showHint && !isOpen && (
             <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
+              initial={{ opacity: 0, x: 10, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 10, scale: 0.8 }}
+              className="absolute bottom-full right-0 mb-3 whitespace-nowrap"
             >
-              <FaTimes className="text-on-accent" size={18} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="open"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className="relative"
-            >
-              <FaRobot className="text-on-accent" size={22} />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent-secondary rounded-full animate-pulse" />
+              <div className="relative bg-surface border border-border rounded-xl px-4 py-2 shadow-lg">
+                <p className="text-sm text-text font-medium">Got questions? Ask me!</p>
+                <p className="text-xs text-text-muted">AI assistant for my portfolio</p>
+                {/* Speech bubble arrow */}
+                <div className="absolute -bottom-2 right-6 w-4 h-4 bg-surface border-b border-r border-border rotate-45" />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.button>
+
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 1.5, type: "spring" }}
+          onClick={() => {
+            setIsOpen(!isOpen);
+            setShowHint(false);
+            setHintDismissed(true);
+          }}
+          className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-lg ${
+            isOpen
+              ? "bg-accent-secondary hover:bg-accent-secondary/90"
+              : "bg-accent hover:bg-accent/90"
+          }`}
+        >
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+              >
+                <FaTimes className="text-on-accent" size={18} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="open"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                className="relative"
+              >
+                <FaRobot className="text-on-accent" size={22} />
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent-secondary rounded-full animate-pulse" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
 
       {/* Chat window */}
       <AnimatePresence>

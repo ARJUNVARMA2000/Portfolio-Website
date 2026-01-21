@@ -81,7 +81,7 @@ Quality assurance was built-in using OpenEval framework to automatically score r
 • Built modular architecture that can easily extend to other document types (earnings calls, analyst reports)`,
 };
 
-const sceanceAiCaseStudy = {
+const seanceAiCaseStudy = {
   problem: `History education often feels distant and abstract. Students read about historical figures in textbooks, but rarely get to experience their personalities, perspectives, or thought processes. Traditional learning methods don't capture the authentic voices and contextual knowledge of historical figures.
 
 The goal was to create an immersive, educational experience that brings history to life through authentic AI-powered conversations with legendary figures from different eras.`,
@@ -222,7 +222,7 @@ const projects = [
     demo: "https://seance-ai.up.railway.app",
     period: "2025",
     org: "Personal Project",
-    caseStudy: sceanceAiCaseStudy,
+    caseStudy: seanceAiCaseStudy,
   },
   {
     title: "Agricultural Product Classification",

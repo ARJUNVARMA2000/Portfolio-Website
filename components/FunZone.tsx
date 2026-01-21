@@ -656,6 +656,27 @@ function TypingGame({ onBack }: { onBack: () => void }) {
 export default function FunZone() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentGame, setCurrentGame] = useState<GameType>("menu");
+  const [showHint, setShowHint] = useState(false);
+  const [hintDismissed, setHintDismissed] = useState(false);
+
+  // Show hint after a delay
+  useEffect(() => {
+    if (hintDismissed) return;
+    const timer = setTimeout(() => {
+      setShowHint(true);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [hintDismissed]);
+
+  // Auto-hide hint after showing
+  useEffect(() => {
+    if (!showHint) return;
+    const timer = setTimeout(() => {
+      setShowHint(false);
+      setHintDismissed(true);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [showHint]);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -692,15 +713,43 @@ export default function FunZone() {
   return (
     <>
       {/* Floating Button */}
-      <motion.button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-40 p-4 rounded-full bg-gradient-to-r from-accent to-accent-secondary text-white shadow-lg hover:shadow-accent/25 transition-shadow"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        title="Bored? Have some fun!"
-      >
-        <FaGamepad size={24} />
-      </motion.button>
+      <div className="fixed bottom-6 left-6 z-40">
+        {/* Clippy-style hint bubble */}
+        <AnimatePresence>
+          {showHint && !isOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: -10, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -10, scale: 0.8 }}
+              className="absolute bottom-full left-0 mb-3 whitespace-nowrap"
+            >
+              <div className="relative bg-surface border border-border rounded-xl px-4 py-2 shadow-lg">
+                <p className="text-sm text-text font-medium">Bored? Play some games!</p>
+                <p className="text-xs text-text-muted">Snake, Memory Match & more</p>
+                {/* Speech bubble arrow */}
+                <div className="absolute -bottom-2 left-6 w-4 h-4 bg-surface border-b border-r border-border rotate-45" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          onClick={() => {
+            setIsOpen(true);
+            setShowHint(false);
+            setHintDismissed(true);
+          }}
+          className="p-4 rounded-full bg-gradient-to-r from-accent to-accent-secondary text-white shadow-lg hover:shadow-accent/25 transition-shadow"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 1.7, type: "spring" }}
+          title="Bored? Have some fun!"
+        >
+          <FaGamepad size={24} />
+        </motion.button>
+      </div>
 
       {/* Modal */}
       <AnimatePresence>

@@ -113,8 +113,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Advanced Data Science Consultant @ ZS Associates | Building intelligent
-          systems with ML, Deep Learning & AI for Fortune 500 healthcare clients.
+          Former ZS Advanced Data Science Associate Consultant
         </motion.p>
 
         {/* CTA Buttons */}
