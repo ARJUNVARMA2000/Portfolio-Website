@@ -73,7 +73,7 @@ ML model predicting Bile Tract Cancer diagnoses from 250M patient claims, addres
 ### 💬 [Financial RAG Chatbot](https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot)
 LLM-powered chatbot answering questions about company financials from SEC filings with 4.5/5 quality score.
 
-**Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
+**Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4 | [Live Demo](https://financialrag-chatbot.streamlit.app/)
 
 ### 🖼️ [SeanceAI](https://github.com/ARJUNVARMA2000/Seance_AI)
 A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.

@@ -201,6 +201,7 @@ const projects = [
       "Semantic search with ChromaDB",
     ],
     github: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot",
+    demo: "https://financialrag-chatbot.streamlit.app/",
     period: "Nov 2025 - Dec 2025",
     org: "Columbia University",
     caseStudy: financialRagCaseStudy,

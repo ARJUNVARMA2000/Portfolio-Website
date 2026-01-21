@@ -58,6 +58,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 ### Financial RAG Chatbot - Columbia University (Nov 2025 - Dec 2025)
 - Built an LLM-powered RAG chatbot answering questions about company financials from SEC filings
 - Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval
+- Link: https://financialrag-chatbot.streamlit.app/
 
 ### SeanceAI
 - Digital séance platform for conversing with 60+ historical figures
