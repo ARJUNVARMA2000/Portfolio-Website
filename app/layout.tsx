@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     "Data Scientist",
     "Machine Learning Engineer",
     "ML Intern",
-    "Quant Intern",
     "Data Science Intern",
     "Columbia University",
     "ZS Associates",
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Arjun Varma | Data Science & ML Portfolio",
     description:
-      "MS Data Science @ Columbia | Advanced Data Science Consultant | Open to Summer 2026 Internships in Data Science, ML, and Quant roles.",
+      "MS Data Science @ Columbia | Advanced Data Science Consultant | Open to Summer 2026 Internships in Data Science and ML roles.",
     siteName: "Arjun Varma Portfolio",
     images: [
       {
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Arjun Varma | Data Science & ML Portfolio",
     description:
-      "MS Data Science @ Columbia | Open to Summer 2026 Internships in DS/ML/Quant",
+      "MS Data Science @ Columbia | Open to Summer 2026 Internships in DS/ML",
     images: ["/og-image.png"],
   },
   robots: {
