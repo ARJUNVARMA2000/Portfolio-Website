@@ -219,7 +219,7 @@ const projects = [
       "Museum-themed UI design",
     ],
     github: "https://github.com/ARJUNVARMA2000/Seance_AI",
-    demo: "https://scence-ai.up.railway.app",
+    demo: "https://sceance-ai.up.railway.app",
     period: "2025",
     org: "Personal Project",
     caseStudy: sceanceAiCaseStudy,

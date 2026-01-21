@@ -3,7 +3,7 @@
 <div align="center">
 
 <!-- Dynamic Typing Effect Header -->
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=FF6B9D&center=true&vCenter=true&width=900&lines=Data+Scientist+%7C+ML+Engineer+%7C+AI+Developer;Open+to+Summer+2026+Internships" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=FF6B9D&center=true&vCenter=true&width=900&lines=Advanced+Data+Science+Consultant+%40+ZS+Associates+%7C+Building+intelligent+systems+with+ML%2C+Deep+Learning+%26+AI+for+Fortune+500+healthcare+clients.;MS+in+Data+Science+at+Columbia+University+%7C+Ex-+Advanced+Data+Science+Associate+at+ZS+Associates" alt="Typing SVG" />
 
 ![Status](https://img.shields.io/badge/Status-Open%20to%20Summer%202026%20Internships-brightgreen?style=for-the-badge)
 ![Location](https://img.shields.io/badge/Location-New%20York%2C%20NY-blue?style=for-the-badge)
@@ -15,7 +15,7 @@
 
 ## About Me
 
-I'm a **Data Scientist** and **ML Engineer** currently pursuing my **Master's in Data Science at Columbia University** while working as an **Advanced Data Science Associate Consultant at ZS Associates**. I specialize in building intelligent systems with Machine Learning, Deep Learning, and AI for Fortune 500 healthcare clients.
+Data Scientist (MS Data Science, Columbia) with 3+ years at ZS Associates applying ML to healthcare and commercial analytics for Fortune 500 clients. Built large-scale analytics tooling for 1,000+ users and developed predictive models across 250M+ patient records for early cancer detection. Also build LLM systems such as SEC-filings RAG and retrieval pipelines. Motivated by ambiguous, high-impact problems that reward technical rigor.
 
 - 🎓 **MS Data Science** @ Columbia University (Aug 2025 - Dec 2026)
 - 💼 **Advanced Data Science Consultant** @ ZS Associates (3+ years)
@@ -78,7 +78,7 @@ LLM-powered chatbot answering questions about company financials from SEC filing
 ### 🖼️ [Sceance-AI](https://github.com/ARJUNVARMA2000/Seance_AI)
 A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
 
-**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway | [Live Demo](https://scence-ai.up.railway.app)
+**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway | [Live Demo](https://sceance-ai.up.railway.app)
 
 ### 🌾 Agricultural Product Classification
 RAG product-classification system for a Series-B East African agtech achieving 99% accuracy.
