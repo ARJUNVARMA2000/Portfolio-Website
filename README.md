@@ -160,7 +160,7 @@ LLM-powered chatbot answering questions about company financials from SEC filing
 
 **Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
 
-### Sceance-AI
+### SeanceAI
 A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
 
 **Tech:** Python, Flask, OpenRouter API, JavaScript, Railway

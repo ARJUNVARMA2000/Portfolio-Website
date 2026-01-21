@@ -75,10 +75,10 @@ LLM-powered chatbot answering questions about company financials from SEC filing
 
 **Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, GPT-4
 
-### 🖼️ [Sceance-AI](https://github.com/ARJUNVARMA2000/Seance_AI)
+### 🖼️ [SeanceAI](https://github.com/ARJUNVARMA2000/Seance_AI)
 A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
 
-**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway | [Live Demo](https://sceance-ai.up.railway.app)
+**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway | [Live Demo](https://seance-ai.up.railway.app)
 
 ### 🌾 Agricultural Product Classification
 RAG product-classification system for a Series-B East African agtech achieving 99% accuracy.

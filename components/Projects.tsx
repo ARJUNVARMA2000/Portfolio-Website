@@ -206,7 +206,7 @@ const projects = [
     caseStudy: financialRagCaseStudy,
   },
   {
-    title: "Sceance-AI",
+    title: "SeanceAI",
     subtitle: "Conversational AI & Historical Roleplay",
     description:
       "A digital séance platform where you can converse with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities and knowledge.",
@@ -219,7 +219,7 @@ const projects = [
       "Museum-themed UI design",
     ],
     github: "https://github.com/ARJUNVARMA2000/Seance_AI",
-    demo: "https://sceance-ai.up.railway.app",
+    demo: "https://seance-ai.up.railway.app",
     period: "2025",
     org: "Personal Project",
     caseStudy: sceanceAiCaseStudy,

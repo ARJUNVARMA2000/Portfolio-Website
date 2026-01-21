@@ -58,7 +58,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 - Built an LLM-powered RAG chatbot answering questions about company financials from SEC filings
 - Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval
 
-### Sceance-AI
+### SeanceAI
 - Digital séance platform for conversing with 60+ historical figures
 - Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations)
 - Authentic, era-appropriate personalities and knowledge boundaries
