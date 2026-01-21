@@ -10,6 +10,7 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import FunZone from "@/components/FunZone";
 
 // Page transition wrapper for smooth section animations
 const PageSection = ({
@@ -60,6 +61,7 @@ export default function Home() {
 
       <Footer />
       <ChatWidget />
+      <FunZone />
     </main>
   );
 }

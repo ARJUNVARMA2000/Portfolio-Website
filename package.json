@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.40",
+    "@vercel/analytics": "^1.6.1",
     "ai": "^3.3.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.8",
