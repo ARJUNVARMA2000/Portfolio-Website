@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaGithub, FaFutbol, FaTrophy } from "react-icons/fa";
+import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaFutbol, FaTrophy } from "react-icons/fa";
 import Image from "next/image";
 
 const education = [
@@ -133,60 +133,19 @@ export default function About() {
           ))}
         </div>
 
-        {/* GitHub Stats */}
+        {/* FPL Achievement */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12"
+          className="mt-12 flex justify-center"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2.5 rounded-xl bg-accent-secondary/10">
-              <FaGithub className="text-accent-secondary" size={20} />
-            </div>
-            <h3 className="text-xl font-semibold">GitHub Activity</h3>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://github.com/ARJUNVARMA2000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform hover:scale-105"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=ARJUNVARMA2000&show_icons=true&hide_border=true&hide_title=true&bg_color=00000000&text_color=888888&icon_color=6366f1&hide_rank=true&include_all_commits=true&line_height=24"
-                alt="GitHub Stats"
-                className="h-[120px]"
-              />
-            </a>
-            <a
-              href="https://github.com/ARJUNVARMA2000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform hover:scale-105"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=ARJUNVARMA2000&layout=compact&hide_border=true&hide_title=true&bg_color=00000000&text_color=888888&langs_count=6"
-                alt="Top Languages"
-                className="h-[120px]"
-              />
-            </a>
-          </div>
-
-          {/* FPL Achievement */}
-          <motion.a
+          <a
             href="https://fantasy.premierleague.com/entry/50075/history"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="mt-6 inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface border border-border hover:border-accent-tertiary/50 transition-all duration-300 group mx-auto"
+            className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface border border-border hover:border-accent-tertiary/50 transition-all duration-300 group"
           >
             <div className="p-1.5 rounded-lg bg-accent-tertiary/10 group-hover:bg-accent-tertiary/20 transition-colors">
               <FaFutbol className="text-accent-tertiary" size={14} />
@@ -195,7 +154,7 @@ export default function About() {
               <FaTrophy className="inline text-yellow-500 mr-1" size={12} />
               <span className="font-medium text-accent-tertiary">Top 1%</span> FPL finishes — 4 consecutive years
             </span>
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>
