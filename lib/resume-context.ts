@@ -7,6 +7,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 - LinkedIn: www.linkedin.com/in/varma-arjun/
 - GitHub: github.com/ARJUNVARMA2000
 - Location: New York, NY
+- **Currently seeking**: Summer 2026 internships in Data Science, ML Engineering, or Quantitative roles
 
 ## EDUCATION
 1. **Columbia University, New York, NY**
@@ -22,13 +23,13 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 
 ## WORK EXPERIENCE
 
-### ZS Associates, Pune, India
+### ZS Associates, Pune, India (3+ years total)
 
 **Advanced Data Science Associate Consultant** (Feb 2025 - Jun 2025)
-- Worked in Performance Analytics, Forecasting, and Data Science teams for Fortune 500 healthcare clients
-- Built organization-wide analytics + ML platform consolidating multiple data sources to surface real-time KPIs
+- Worked in Performance Analytics, Forecasting, and Data Science teams for Fortune 500 healthcare clients; collaborated with US-based stakeholders
+- Built organization-wide analytics + ML platform consolidating multiple data sources to surface real-time KPIs by territory and product
 - Partnered with PMs and marketing heads for a >$10B revenue oncology portfolio
-- Drove adoption by 1,000+ sales reps and HQ leaders
+- Drove adoption by 1,000+ sales reps and HQ leaders, replacing Excel reports and cutting prep time from days to minutes
 - Piloted a retrieval-augmented LLM to turn FDA approval documents into concise briefs for commercial teams
 
 **Decision Analytics Associate Consultant** (Jul 2024 - Jan 2025)
@@ -47,42 +48,58 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 ## PROJECT EXPERIENCE
 
 ### Bile Tract Cancer (BTC) Early Detection using ML - ZS Associates (Jan 2025 - May 2025)
-- Developed early detection ML model to predict monthly BTC diagnoses
+- Developed early detection ML model to predict monthly BTC diagnoses—potentially life-saving through earlier intervention
 - Addressed critical 45-day claims data delay; improved model performance using clustering techniques (K-means, Gaussian mixtures, NLP-based event clustering)
 - Presented methods/results at industry conference
+- Tech: Python, scikit-learn, PySpark, Databricks
 
 ### Agricultural Product Standardization & Risk Detection - Columbia University (Aug 2025 - Oct 2025)
 - Built AI-assisted, retrieval-augmented generation (RAG) product-classification system for a Series-B East African agtech
 - Deployed real-time REST API and dashboard for compliance and risk alerts
+- Tech: Python, FastAPI, LangChain, OpenAI API, PostgreSQL
 
 ### Financial RAG Chatbot - Columbia University (Nov 2025 - Dec 2025)
 - Built an LLM-powered RAG chatbot answering questions about company financials from SEC filings
 - Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval
-- Link: https://financialrag-chatbot.streamlit.app/
+- Tech: Python, Streamlit, FastAPI, ChromaDB, OpenRouter, LangChain
+- Live demo: https://financialrag-chatbot.streamlit.app/
 
-### SeanceAI
+### SeanceAI - Personal Project
 - Digital séance platform for conversing with 60+ historical figures
 - Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations)
 - Authentic, era-appropriate personalities and knowledge boundaries
-- Link: https://github.com/ARJUNVARMA2000/Seance_AI
+- Tech: Python, OpenAI API, Prompt Engineering
+- GitHub: https://github.com/ARJUNVARMA2000/Seance_AI
 
 ## TECHNICAL SKILLS
-- **Programming**: Python, SQL, C++, R
-- **Analytics & ML**: Machine Learning, Deep Learning, Data Engineering, Extract Transform Load
-- **Big Data & MLOps**: PySpark/Spark, Databricks, MlFlow, AWS (S3, EMR, Athena, SageMaker)
-- **Libraries**: pandas, NumPy, scikit-learn, matplotlib, BeautifulSoup, SHAP, PyTorch
-- **Tools**: Git, Jupyter/VS Code, Cursor IDE, Jira/Confluence
+- **Programming**: Python (advanced), SQL (advanced), C++, R
+- **Analytics & ML**: Machine Learning, Deep Learning, NLP, RAG systems, Data Engineering, ETL
+- **Big Data & MLOps**: PySpark/Spark, Databricks, MLflow, AWS (S3, EMR, Athena, SageMaker)
+- **LLM & AI Tools**: LangChain, OpenAI API, ChromaDB, Prompt Engineering, RAG architectures
+- **Libraries**: pandas, NumPy, scikit-learn, PyTorch, matplotlib, SHAP, BeautifulSoup
+- **Web Development**: Next.js, React, TypeScript, FastAPI, Streamlit
+- **Tools**: Git, Jupyter, VS Code, Cursor IDE, Jira/Confluence
+
+## SOFT SKILLS & LEADERSHIP
+- Led cross-functional teams of up to 5 members
+- Experience collaborating with US-based stakeholders across time zones
+- Strong communicator—presented technical findings to non-technical business leaders
+- Mentored junior team members on ML best practices
 
 ## INTERESTS
 - Fantasy Premier League: Top 1% finishes for 4 consecutive years
 - FPL Profile: https://fantasy.premierleague.com/entry/50075/history
 
-## ABOUT THE CHAT
-Feel free to ask questions like:
+## SAMPLE QUESTIONS
+Feel free to ask things like:
 - "What ML projects has Arjun worked on?"
 - "Tell me about his experience at ZS Associates"
 - "What technologies does Arjun know?"
 - "Describe the BTC detection project"
+- "Is Arjun looking for internships?"
+- "What's his experience with LLMs and RAG?"
+- "Has he led teams before?"
+- "What's his tech stack for web development?"
 `;
 
 export const SYSTEM_PROMPT = `${RESUME_CONTEXT}
