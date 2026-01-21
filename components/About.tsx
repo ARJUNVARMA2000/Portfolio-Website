@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaGithub, FaFutbol, FaTrophy } from "react-icons/fa";
+import Image from "next/image";
 
 const education = [
   {
@@ -9,6 +10,7 @@ const education = [
     location: "New York, NY",
     degree: "Master of Science in Data Science",
     period: "Aug 2025 - Dec 2026",
+    logo: "/images/columbia-logo.jpg",
     highlights: [
       "TA for Business Analytics II: Foundations of AI at Columbia Business School",
       "TA for Hollywood and Big Data at Columbia Business School",
@@ -20,6 +22,7 @@ const education = [
     location: "Vellore, India",
     degree: "B.Tech in Electronics & Communication Engineering",
     period: "Jul 2018 - May 2022",
+    logo: "/images/vit-logo.png",
     highlights: [
       "GPA: 4.0/4.0 (WES Evaluated)",
       "Special Achiever Award & Merit Scholarship",
@@ -94,13 +97,25 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               className="card p-6 group"
             >
-              <h4 className="text-lg font-semibold text-accent mb-1">
-                {edu.school}
-              </h4>
-              <p className="text-text-secondary flex items-center gap-2 text-sm mb-3">
-                <FaMapMarkerAlt size={12} className="text-text-muted" />
-                {edu.location}
-              </p>
+              <div className="flex items-start gap-4 mb-4">
+                <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-white p-1">
+                  <Image
+                    src={edu.logo}
+                    alt={`${edu.school} logo`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-lg font-semibold text-accent mb-1">
+                    {edu.school}
+                  </h4>
+                  <p className="text-text-secondary flex items-center gap-2 text-sm">
+                    <FaMapMarkerAlt size={12} className="text-text-muted" />
+                    {edu.location}
+                  </p>
+                </div>
+              </div>
               <p className="text-text font-medium mb-1">{edu.degree}</p>
               <p className="text-text-muted text-sm mb-4">{edu.period}</p>
               <ul className="space-y-2">
