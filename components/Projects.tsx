@@ -228,7 +228,7 @@ const projects = [
     title: "Agricultural Product Classification",
     subtitle: "RAG & Classification System",
     description:
-      "Built an AI-assisted, retrieval-augmented generation product-classification system for a Series-B East African agtech. Achieved 99% holdout accuracy using GPT-4.",
+      "Built an AI-powered product classification system for an East African agricultural marketplace, helping farmers categorize crops for compliance and pricing. Achieved 99% holdout accuracy using GPT-4 with RAG.",
     tech: ["Python", "GPT-4", "RAG", "REST API", "Dashboard"],
     icon: FaDatabase,
     color: "accent",
@@ -294,7 +294,14 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`card p-6 group ${project.featured ? "md:col-span-2 ring-1 ring-accent/20" : ""}`}
+                  whileHover={{
+                    scale: 1.02,
+                    rotateX: -2,
+                    rotateY: 2,
+                    transition: { duration: 0.2 }
+                  }}
+                  style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+                  className={`card p-6 group cursor-pointer hover:shadow-2xl hover:shadow-accent/10 ${project.featured ? "md:col-span-2 ring-1 ring-accent/20" : ""}`}
                 >
                   {/* Featured badge */}
                   {project.featured && (

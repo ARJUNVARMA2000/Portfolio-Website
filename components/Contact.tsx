@@ -10,9 +10,12 @@ import {
   FaMapMarkerAlt,
   FaPhone,
   FaDownload,
+  FaCopy,
 } from "react-icons/fa";
+import { useToast } from "./ToastContext";
 
 export default function Contact() {
+  const { addToast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,6 +23,11 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("av3342@columbia.edu");
+    addToast("Email copied to clipboard!", "success");
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -73,20 +81,27 @@ export default function Contact() {
 
             {/* Info cards */}
             <div className="space-y-4 mb-8">
-              <a
-                href="mailto:av3342@columbia.edu"
-                className="card p-4 flex items-center gap-4 group"
-              >
+              <div className="card p-4 flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
                   <FaEnvelope className="text-accent" size={18} />
                 </div>
-                <div>
+                <div className="flex-1">
                   <p className="text-text-muted text-sm">Email</p>
-                  <p className="text-text group-hover:text-accent transition-colors">
+                  <a
+                    href="mailto:av3342@columbia.edu"
+                    className="text-text group-hover:text-accent transition-colors"
+                  >
                     av3342@columbia.edu
-                  </p>
+                  </a>
                 </div>
-              </a>
+                <button
+                  onClick={handleCopyEmail}
+                  className="p-2 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
+                  title="Copy email"
+                >
+                  <FaCopy size={16} />
+                </button>
+              </div>
 
               <div className="card p-4 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-accent-secondary/10 flex items-center justify-center">
@@ -212,7 +227,7 @@ export default function Contact() {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-bg border border-border rounded-xl text-text focus:border-accent focus:outline-none transition-colors resize-none"
-                    placeholder="Hi Arjun, I wanted to reach out about..."
+                    placeholder="I'd like to discuss..."
                   />
                 </div>
 

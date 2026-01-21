@@ -13,11 +13,12 @@ import {
   SiPytorch,
   SiAmazon,
 } from "react-icons/si";
+import { useToast } from "./ToastContext";
 
 type GameType = "menu" | "snake" | "memory" | "reaction" | "typing";
 
 // ============ SNAKE GAME ============
-function SnakeGame({ onBack }: { onBack: () => void }) {
+function SnakeGame({ onBack, onGameEnd }: { onBack: () => void; onGameEnd: (score: number) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -98,12 +99,14 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
       // Check wall collision
       if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
         setGameOver(true);
+        onGameEnd(score);
         return;
       }
 
       // Check self collision
       if (state.snake.some((seg) => seg.x === head.x && seg.y === head.y)) {
         setGameOver(true);
+        onGameEnd(score);
         return;
       }
 
@@ -243,7 +246,7 @@ interface Card {
   matched: boolean;
 }
 
-function MemoryGame({ onBack }: { onBack: () => void }) {
+function MemoryGame({ onBack, onGameEnd }: { onBack: () => void; onGameEnd: (moves: number) => void }) {
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
@@ -292,6 +295,7 @@ function MemoryGame({ onBack }: { onBack: () => void }) {
 
         if (newCards.every((c) => c.matched)) {
           setGameWon(true);
+          onGameEnd(moves + 1);
         }
       } else {
         setTimeout(() => {
@@ -368,7 +372,7 @@ function MemoryGame({ onBack }: { onBack: () => void }) {
 }
 
 // ============ REACTION TIME GAME ============
-function ReactionGame({ onBack }: { onBack: () => void }) {
+function ReactionGame({ onBack, onGameEnd }: { onBack: () => void; onGameEnd: (time: number, isBest: boolean) => void }) {
   const [state, setState] = useState<"waiting" | "ready" | "go" | "result">(
     "waiting"
   );
@@ -397,9 +401,11 @@ function ReactionGame({ onBack }: { onBack: () => void }) {
       const time = Date.now() - startTime;
       setReactionTime(time);
       setState("result");
-      if (bestTime === null || time < bestTime) {
+      const isBest = bestTime === null || time < bestTime;
+      if (isBest) {
         setBestTime(time);
       }
+      onGameEnd(time, isBest);
     } else if (state === "result") {
       startGame();
     }
@@ -523,7 +529,7 @@ const programmingWords = [
   "default",
 ];
 
-function TypingGame({ onBack }: { onBack: () => void }) {
+function TypingGame({ onBack, onGameEnd }: { onBack: () => void; onGameEnd: (wpm: number) => void }) {
   const [words, setWords] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState("");
@@ -569,6 +575,7 @@ function TypingGame({ onBack }: { onBack: () => void }) {
         const calculatedWpm = Math.round((correctWords + (typed === words[currentIndex] ? 1 : 0)) / timeElapsed);
         setWpm(calculatedWpm);
         setGameOver(true);
+        onGameEnd(calculatedWpm);
       } else {
         setCurrentIndex((i) => i + 1);
       }
@@ -653,11 +660,48 @@ function TypingGame({ onBack }: { onBack: () => void }) {
 }
 
 // ============ MAIN FUN ZONE COMPONENT ============
-export default function FunZone() {
-  const [isOpen, setIsOpen] = useState(false);
+interface FunZoneProps {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export default function FunZone({ isOpen: controlledOpen, onOpenChange }: FunZoneProps) {
+  const { addToast } = useToast();
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setIsOpen = (open: boolean) => {
+    if (onOpenChange) {
+      onOpenChange(open);
+    } else {
+      setInternalOpen(open);
+    }
+  };
   const [currentGame, setCurrentGame] = useState<GameType>("menu");
   const [showHint, setShowHint] = useState(false);
   const [hintDismissed, setHintDismissed] = useState(false);
+
+  const handleSnakeEnd = useCallback((score: number) => {
+    if (score > 0) {
+      addToast(`Snake: Score ${score}!`, "info");
+    }
+  }, [addToast]);
+
+  const handleMemoryEnd = useCallback((moves: number) => {
+    addToast(`Memory Match: Completed in ${moves} moves!`, "success");
+  }, [addToast]);
+
+  const handleReactionEnd = useCallback((time: number, isBest: boolean) => {
+    if (time > 0) {
+      addToast(
+        isBest ? `New best: ${time}ms!` : `Reaction: ${time}ms`,
+        isBest ? "success" : "info"
+      );
+    }
+  }, [addToast]);
+
+  const handleTypingEnd = useCallback((wpm: number) => {
+    addToast(`Typing Speed: ${wpm} WPM!`, wpm > 40 ? "success" : "info");
+  }, [addToast]);
 
   // Show hint after a delay
   useEffect(() => {
@@ -809,13 +853,13 @@ export default function FunZone() {
                   ))}
                 </div>
               ) : currentGame === "snake" ? (
-                <SnakeGame onBack={() => setCurrentGame("menu")} />
+                <SnakeGame onBack={() => setCurrentGame("menu")} onGameEnd={handleSnakeEnd} />
               ) : currentGame === "memory" ? (
-                <MemoryGame onBack={() => setCurrentGame("menu")} />
+                <MemoryGame onBack={() => setCurrentGame("menu")} onGameEnd={handleMemoryEnd} />
               ) : currentGame === "reaction" ? (
-                <ReactionGame onBack={() => setCurrentGame("menu")} />
+                <ReactionGame onBack={() => setCurrentGame("menu")} onGameEnd={handleReactionEnd} />
               ) : (
-                <TypingGame onBack={() => setCurrentGame("menu")} />
+                <TypingGame onBack={() => setCurrentGame("menu")} onGameEnd={handleTypingEnd} />
               )}
             </motion.div>
           </motion.div>

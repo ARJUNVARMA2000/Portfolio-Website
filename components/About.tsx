@@ -11,6 +11,7 @@ const education = [
     period: "Aug 2025 - Dec 2026",
     highlights: [
       "TA for Business Analytics II: Foundations of AI at Columbia Business School",
+      "TA for Hollywood and Big Data at Columbia Business School",
       "Volunteer at Columbia Disability Services",
     ],
   },
@@ -55,9 +56,7 @@ export default function About() {
           className="card p-8 mb-12"
         >
           <p className="text-text-secondary text-lg leading-relaxed mb-4">
-            I&apos;m an Advanced Data Science Associate Consultant with a passion for building
-            intelligent systems that drive real business impact. Currently pursuing my
-            Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
+            Currently pursuing my Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
             from ZS Associates where I&apos;ve worked with Fortune 500 healthcare clients on
             ML platforms, predictive analytics, and LLM-powered solutions.
           </p>
@@ -65,7 +64,8 @@ export default function About() {
             I specialize in transforming complex data into actionable insights using
             Python, SQL, PySpark, and modern ML frameworks. My work spans from building
             organization-wide analytics platforms to developing early cancer detection
-            models that can potentially save lives.
+            models that can potentially save lives. I&apos;m always looking for challenging problems
+            at the intersection of data science and meaningful impact.
           </p>
         </motion.div>
 

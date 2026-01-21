@@ -1,6 +1,8 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,6 +13,10 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import FunZone from "@/components/FunZone";
+import BackToTop from "@/components/BackToTop";
+import ScrollProgress from "@/components/ScrollProgress";
+import CommandPalette from "@/components/CommandPalette";
+import { useToast } from "@/components/ToastContext";
 
 // Page transition wrapper for smooth section animations
 const PageSection = ({
@@ -31,8 +37,26 @@ const PageSection = ({
 );
 
 export default function Home() {
+  const { theme, setTheme } = useTheme();
+  const { addToast } = useToast();
+  const [funZoneOpen, setFunZoneOpen] = useState(false);
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [theme, setTheme]);
+
+  const handleOpenGames = useCallback(() => {
+    setFunZoneOpen(true);
+  }, []);
+
+  const handleCopyEmail = useCallback(() => {
+    navigator.clipboard.writeText("av3342@columbia.edu");
+    addToast("Email copied to clipboard!", "success");
+  }, [addToast]);
+
   return (
     <main className="min-h-screen bg-bg text-text">
+      <ScrollProgress />
       <Navbar />
 
       <PageSection>
@@ -61,7 +85,14 @@ export default function Home() {
 
       <Footer />
       <ChatWidget />
-      <FunZone />
+      <FunZone isOpen={funZoneOpen} onOpenChange={setFunZoneOpen} />
+      <BackToTop />
+      <CommandPalette
+        onToggleTheme={handleToggleTheme}
+        isDarkMode={theme === "dark"}
+        onOpenGames={handleOpenGames}
+        onCopyEmail={handleCopyEmail}
+      />
     </main>
   );
 }

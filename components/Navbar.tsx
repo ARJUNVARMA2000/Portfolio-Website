@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaDownload, FaGithub } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useToast } from "./ToastContext";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -14,6 +15,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { addToast } = useToast();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -25,6 +27,10 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleResumeDownload = () => {
+    addToast("Resume download started!", "info");
+  };
 
   return (
     <motion.nav
@@ -68,6 +74,7 @@ export default function Navbar() {
             <a
               href="/resume.pdf"
               download
+              onClick={handleResumeDownload}
               className="btn-primary text-sm"
             >
               <FaDownload size={12} />
@@ -113,6 +120,7 @@ export default function Navbar() {
                 <a
                   href="/resume.pdf"
                   download
+                  onClick={handleResumeDownload}
                   className="btn-primary w-full text-sm justify-center"
                 >
                   <FaDownload size={12} />

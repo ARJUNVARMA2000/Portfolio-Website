@@ -2,6 +2,8 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ReactNode } from "react";
+import { ToastProvider } from "./ToastContext";
+import ToastContainer from "./Toast";
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   return (
@@ -12,7 +14,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       themes={["dark", "light"]}
       storageKey="portfolio-theme"
     >
-      {children}
+      <ToastProvider>
+        {children}
+        <ToastContainer />
+      </ToastProvider>
     </NextThemesProvider>
   );
 }

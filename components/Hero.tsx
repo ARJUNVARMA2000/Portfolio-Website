@@ -113,7 +113,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Former ZS Advanced Data Science Associate Consultant
+          3+ years building ML solutions for Fortune 500 healthcare clients. Passionate about turning complex data into real-world impact.
         </motion.p>
 
         {/* CTA Buttons */}

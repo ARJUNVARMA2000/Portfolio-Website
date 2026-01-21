@@ -57,6 +57,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Theme transition - smooth color changes */
+html,
+html *,
+html *::before,
+html *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease;
+}
+
+/* Disable transitions for certain elements that shouldn't animate */
+html canvas,
+html video,
+html iframe,
+html [data-no-transition],
+html [data-no-transition] * {
+  transition: none !important;
+}
+
 body {
   background-color: rgb(var(--bg));
   color: rgb(var(--text));
