@@ -454,7 +454,7 @@ function ReactionGame({ onBack }: { onBack: () => void }) {
         {state === "ready" && (
           <>
             <p className="text-2xl font-bold text-red-400">Wait for green...</p>
-            <p className="text-text-muted">Don't click yet!</p>
+            <p className="text-text-muted">Do not click yet!</p>
           </>
         )}
         {state === "go" && (
