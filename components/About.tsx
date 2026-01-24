@@ -106,14 +106,20 @@ export default function About() {
             </div>
             <p className="text-text-secondary text-lg leading-relaxed mb-6">
               Currently pursuing my Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
-              from ZS Associates where I&apos;ve worked with Fortune 500 healthcare clients on
+              from ZS Associates where I worked with Fortune 500 healthcare clients on
               ML platforms, predictive analytics, and LLM-powered solutions.
             </p>
-            <p className="text-text-secondary text-lg leading-relaxed">
-              I specialize in transforming complex data into actionable insights using
-              Python, SQL, PySpark, and modern ML frameworks. My work spans from building
+            <p className="text-text-secondary text-lg leading-relaxed mb-6">
+              I specialized in transforming complex data into actionable insights using
+              Python, SQL, PySpark, and modern ML frameworks. My work spanned from building
               organization-wide analytics platforms to developing early cancer detection
               models that can potentially save lives.
+            </p>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              At Columbia, I&apos;m serving as a Teaching Assistant for Business Analytics II: Foundations of AI 
+              and Hollywood and Big Data at Columbia Business School, where I help students bridge the gap 
+              between theoretical concepts and practical applications. I also volunteer at Columbia Disability Services, 
+              contributing to creating an inclusive learning environment.
             </p>
           </motion.div>
 
