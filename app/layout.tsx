@@ -68,7 +68,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#0f0f0f" />
+        <meta name="theme-color" content="#0A0C0D" />
       </head>
       <body className="antialiased">
         <ThemeProvider>{children}</ThemeProvider>
