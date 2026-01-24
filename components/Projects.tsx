@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome, FaStar } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi";
 
 const btcCaseStudy = {
   problem: `Bile Tract Cancer (BTC) is a rare form of cancer with very few approved treatments. Our client's oncology drug was a new method of treatment that had become the standard of care for BTC, but because of its rarity, it was difficult to know which oncologists/urologists to educate.
@@ -176,7 +177,7 @@ const projects = [
       "Developed an ML model to predict monthly Bile Tract Cancer diagnoses from a pool of 250M patients. Addressed critical 45-day claims data delay and improved performance using advanced clustering techniques.",
     tech: ["XGBoost", "K-means", "NLP Clustering", "SHAP", "MLflow", "PySpark"],
     icon: FaBrain,
-    color: "accent",
+    color: "purple",
     highlights: [
       "250M patient pool analysis",
       "Advanced clustering techniques",
@@ -194,7 +195,7 @@ const projects = [
       "Built an LLM-powered RAG chatbot that answers questions about company financials from SEC filings. Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval.",
     tech: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "OpenRouter"],
     icon: FaRobot,
-    color: "accent-secondary",
+    color: "cyan",
     highlights: [
       "4.5/5 quality score via OpenEval",
       "SEC filings integration",
@@ -213,7 +214,7 @@ const projects = [
       "A digital séance platform where you can converse with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities and knowledge.",
     tech: ["Python", "Flask", "OpenRouter API", "JavaScript", "Railway", "SSE"],
     icon: FaBrain,
-    color: "accent-secondary",
+    color: "pink",
     highlights: [
       "60+ historical figures across eras",
       "Dual conversation modes",
@@ -232,7 +233,7 @@ const projects = [
       "Built an AI-powered product classification system for an East African agricultural marketplace, helping farmers categorize crops for compliance and pricing. Achieved 99% holdout accuracy using GPT-4 with RAG.",
     tech: ["Python", "GPT-4", "RAG", "REST API", "Dashboard"],
     icon: FaDatabase,
-    color: "accent",
+    color: "purple",
     highlights: [
       "99% holdout accuracy",
       "Real-time REST API",
@@ -248,7 +249,7 @@ const projects = [
       "Built a Chrome extension for fine-grained video playback speed control across all websites. Features persistent speed memory, keyboard shortcuts, and works with YouTube, Netflix, Udemy, and more.",
     tech: ["JavaScript", "Chrome APIs", "HTML/CSS", "MutationObserver"],
     icon: FaChrome,
-    color: "accent-secondary",
+    color: "cyan",
     highlights: [
       "Works on all major platforms",
       "0.1x to 16x speed range",
@@ -261,166 +262,217 @@ const projects = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
+  const colorClasses = {
+    purple: {
+      icon: "text-accent-purple",
+      border: "border-accent-purple/20 group-hover:border-accent-purple/50",
+      glow: "group-hover:shadow-glow",
+      bg: "from-accent-purple/5 via-transparent to-accent-cyan/5",
+      dot: "bg-accent-purple",
+      badge: "bg-accent-purple/10 text-accent-purple border-accent-purple/30",
+    },
+    cyan: {
+      icon: "text-accent-cyan",
+      border: "border-accent-cyan/20 group-hover:border-accent-cyan/50",
+      glow: "group-hover:shadow-glow-cyan",
+      bg: "from-accent-cyan/5 via-transparent to-accent-pink/5",
+      dot: "bg-accent-cyan",
+      badge: "bg-accent-cyan/10 text-accent-cyan border-accent-cyan/30",
+    },
+    pink: {
+      icon: "text-accent-pink",
+      border: "border-accent-pink/20 group-hover:border-accent-pink/50",
+      glow: "group-hover:shadow-glow-pink",
+      bg: "from-accent-pink/5 via-transparent to-accent-purple/5",
+      dot: "bg-accent-pink",
+      badge: "bg-accent-pink/10 text-accent-pink border-accent-pink/30",
+    },
+  };
+
   return (
     <>
-      <section id="projects" className="section px-6">
-        <div className="max-w-6xl mx-auto">
+      <section id="projects" className="section px-6 relative overflow-hidden">
+        {/* Background orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="orb orb-purple w-80 h-80 top-40 -right-40 opacity-15" />
+          <div className="orb orb-cyan w-64 h-64 bottom-20 left-10 opacity-15" />
+          <div className="orb orb-pink w-48 h-48 top-1/3 left-1/4 opacity-10" />
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Section header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="badge mb-4 inline-flex">
+              <HiSparkles className="text-accent-cyan" />
+              My Work
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Featured <span className="gradient-text">Projects</span>
             </h2>
-            <p className="text-text-secondary max-w-2xl mx-auto">
+            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
               From ML models predicting cancer to LLM-powered chatbots
             </p>
           </motion.div>
 
           {/* Projects grid */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-6"
+          >
             {projects.map((project, index) => {
               const Icon = project.icon;
+              const colors = colorClasses[project.color as keyof typeof colorClasses];
+
               return (
                 <motion.div
                   key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  variants={itemVariants}
                   whileHover={{
-                    scale: 1.02,
-                    rotateX: -2,
-                    rotateY: 2,
-                    transition: { duration: 0.2 }
+                    y: -8,
+                    transition: { duration: 0.3 }
                   }}
+                  className={`card-glow p-6 md:p-8 group cursor-pointer ${colors.border} ${colors.glow} transition-all duration-500 ${project.featured ? "md:col-span-2" : ""}`}
                   style={{ transformStyle: "preserve-3d", perspective: 1000 }}
-                  className={`card p-6 group cursor-pointer hover:shadow-2xl hover:shadow-accent/10 ${project.featured ? "md:col-span-2 ring-1 ring-accent/20" : ""}`}
                 >
-                  {/* Featured badge */}
-                  {project.featured && (
-                    <div className="mb-4">
-                      <span className="badge">Featured Case Study</span>
-                    </div>
-                  )}
+                  {/* Gradient background on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`p-3 rounded-xl ${
-                          project.color === "accent"
-                            ? "bg-accent/10"
-                            : "bg-accent-secondary/10"
-                        }`}
-                      >
-                        <Icon
-                          size={20}
-                          className={
-                            project.color === "accent"
-                              ? "text-accent"
-                              : "text-accent-secondary"
-                          }
-                        />
+                  <div className="relative z-10">
+                    {/* Featured badge */}
+                    {project.featured && (
+                      <div className="mb-4 flex items-center gap-2">
+                        <span className="badge badge-glow">
+                          <FaStar className="text-yellow-400" size={10} />
+                          Featured Case Study
+                        </span>
                       </div>
-                      <div>
-                        <h3
-                          className={`font-semibold ${
-                            project.color === "accent"
-                              ? "text-accent"
-                              : "text-accent-secondary"
-                          }`}
-                        >
-                          {project.title}
-                        </h3>
-                        <p className="text-text-muted text-xs">
-                          {project.subtitle}
-                        </p>
-                        <p className="text-text-muted text-xs mt-0.5">
-                          {project.org} | {project.period}
-                        </p>
+                    )}
+
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="flex items-center gap-4">
+                        <div className={`p-4 rounded-2xl bg-surface/50 border border-border/30 ${colors.border} transition-all duration-300`}>
+                          <Icon size={24} className={colors.icon} />
+                        </div>
+                        <div>
+                          <h3 className={`text-xl md:text-2xl font-semibold ${colors.icon} mb-1`}>
+                            {project.title}
+                          </h3>
+                          <p className="text-text-muted text-sm">
+                            {project.subtitle}
+                          </p>
+                          <p className="text-text-muted text-xs mt-1">
+                            {project.org} • {project.period}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        {project.github && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="p-2.5 rounded-xl text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-all"
+                          >
+                            <FaGithub size={18} />
+                          </motion.a>
+                        )}
+                        {project.demo && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="p-2.5 rounded-xl text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all"
+                          >
+                            <FaExternalLinkAlt size={16} />
+                          </motion.a>
+                        )}
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
-                        >
-                          <FaGithub size={18} />
-                        </a>
-                      )}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-lg text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
-                        >
-                          <FaExternalLinkAlt size={16} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
 
-                  {/* Description */}
-                  <p className="text-text-secondary text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
+                    {/* Description */}
+                    <p className="text-text-secondary mb-5 leading-relaxed">
+                      {project.description}
+                    </p>
 
-                  {/* Highlights */}
-                  {project.highlights && (
-                    <ul className="mb-4 space-y-1.5">
-                      {project.highlights.map((highlight) => (
-                        <li
-                          key={highlight}
-                          className="text-text-muted text-xs flex items-center gap-2"
-                        >
-                          <span
-                            className={`w-1 h-1 rounded-full ${
-                              project.color === "accent"
-                                ? "bg-accent"
-                                : "bg-accent-secondary"
-                            }`}
-                          />
-                          {highlight}
-                        </li>
+                    {/* Highlights */}
+                    {project.highlights && (
+                      <ul className="mb-5 space-y-2">
+                        {project.highlights.map((highlight) => (
+                          <li
+                            key={highlight}
+                            className="text-text-muted text-sm flex items-center gap-3"
+                          >
+                            <span className={`w-1.5 h-1.5 rounded-full ${colors.dot}`} />
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {/* Tech stack */}
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {project.tech.map((tech) => (
+                        <span key={tech} className="tech-pill text-xs">
+                          {tech}
+                        </span>
                       ))}
-                    </ul>
-                  )}
+                    </div>
 
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="tech-pill text-xs">
-                        {tech}
-                      </span>
-                    ))}
+                    {/* Case study button */}
+                    {project.caseStudy && (
+                      <motion.button
+                        whileHover={{ x: 4 }}
+                        onClick={() => setSelectedProject(project)}
+                        className={`inline-flex items-center gap-2 text-sm ${colors.icon} hover:opacity-80 transition-all font-medium`}
+                      >
+                        Read Full Case Study
+                        <FaChevronRight size={12} />
+                      </motion.button>
+                    )}
                   </div>
-
-                  {/* Case study button */}
-                  {project.caseStudy && (
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors group/btn"
-                    >
-                      Read Full Case Study
-                      <FaChevronRight size={12} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  )}
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -431,45 +483,45 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg/90 backdrop-blur-xl"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-bg border border-border rounded-2xl shadow-2xl"
+              exit={{ opacity: 0, scale: 0.9, y: 40 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto card-glow border border-border/30"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 p-2 rounded-lg bg-surface text-text-muted hover:text-text transition-colors z-10"
+                className="absolute top-4 right-4 p-3 rounded-xl bg-surface/80 text-text-muted hover:text-text hover:bg-surface transition-all z-10"
               >
                 <FaTimes size={18} />
               </button>
 
               {/* Header */}
-              <div className="sticky top-0 bg-bg/95 backdrop-blur-sm border-b border-border px-8 py-6">
-                <div className="flex items-center gap-2 mb-2">
+              <div className="sticky top-0 bg-bg/95 backdrop-blur-xl border-b border-border/30 px-8 py-6 z-10">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
                   <span className="badge">Case Study</span>
                   <span className="badge-secondary">{selectedProject.subtitle}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-accent mb-2">
+                <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">
                   {selectedProject.title}
                 </h2>
                 <p className="text-text-muted text-sm">
-                  {selectedProject.org} | {selectedProject.period}
+                  {selectedProject.org} • {selectedProject.period}
                 </p>
               </div>
 
               {/* Content */}
-              <div className="px-8 py-6 space-y-8">
+              <div className="px-8 py-8 space-y-10">
                 {/* Problem */}
                 <div>
-                  <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent" />
+                  <h3 className="text-xl font-semibold text-text mb-4 flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-accent-purple" />
                     The Problem
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -479,8 +531,8 @@ export default function Projects() {
 
                 {/* Challenge */}
                 <div>
-                  <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent-secondary" />
+                  <h3 className="text-xl font-semibold text-text mb-4 flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-accent-cyan" />
                     The Challenge
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -490,8 +542,8 @@ export default function Projects() {
 
                 {/* Approach */}
                 <div>
-                  <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent" />
+                  <h3 className="text-xl font-semibold text-text mb-4 flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-accent-pink" />
                     The Approach
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -501,8 +553,8 @@ export default function Projects() {
 
                 {/* Solution */}
                 <div>
-                  <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent" />
+                  <h3 className="text-xl font-semibold text-text mb-4 flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-accent-purple" />
                     The Solution
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -512,8 +564,8 @@ export default function Projects() {
 
                 {/* Impact */}
                 <div>
-                  <h3 className="text-lg font-semibold text-text mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent-secondary" />
+                  <h3 className="text-xl font-semibold text-text mb-4 flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-accent-cyan" />
                     The Impact
                   </h3>
                   <p className="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -522,8 +574,8 @@ export default function Projects() {
                 </div>
 
                 {/* Tech Stack */}
-                <div className="pt-4 border-t border-border">
-                  <h3 className="text-sm font-medium text-text-muted mb-3 uppercase tracking-wider">
+                <div className="pt-6 border-t border-border/30">
+                  <h3 className="text-sm font-medium text-text-muted mb-4 uppercase tracking-[0.2em]">
                     Technologies Used
                   </h3>
                   <div className="flex flex-wrap gap-2">

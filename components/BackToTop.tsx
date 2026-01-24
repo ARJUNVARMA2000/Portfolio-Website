@@ -30,9 +30,11 @@ export default function BackToTop() {
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          whileHover={{ scale: 1.1, y: -4 }}
+          whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/50 shadow-lg transition-colors"
+          className="fixed bottom-6 right-6 z-40 p-4 rounded-xl bg-gradient-to-br from-accent-purple to-accent-pink text-white shadow-glow hover:shadow-glow-lg transition-shadow"
           aria-label="Scroll to top"
         >
           <FaArrowUp size={18} />

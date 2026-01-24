@@ -1,7 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git branch:*)",
+      "Bash(npm install)",
+      "Bash(curl:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(start //b npm run dev -- -p 3002)",
+      "Bash(start //b npm run dev -- -p 3003)",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 8; netstat -an | Select-String ''300[123]''\")",
+      "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri http://localhost:3001 -UseBasicParsing\\).StatusCode\")",
+      "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri http://localhost:3002 -UseBasicParsing\\).StatusCode\")",
+      "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri http://localhost:3003 -UseBasicParsing\\).StatusCode\")",
+      "Bash(git checkout:*)",
+      "Bash(dir:*)",
+      "Bash(copy \"C:\\\\Users\\\\varma\\\\OneDrive\\\\Desktop\\\\Arjun Varma Resume.pdf\" \"C:\\\\Users\\\\varma\\\\vibe-code\\\\Portfolio2-v1-minimal\\\\public\\\\resume.pdf\")",
+      "Bash(powershell.exe -Command:*)",
+      "Bash(git worktree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge design-v1-minimal -m \"$\\(cat <<''EOF''\nAdopt minimal design theme as main website design\n\nMerge design-v1-minimal branch which features:\n- Clean, elegant minimal aesthetic with sage green accent\n- Two-column Hero layout with profile picture on right\n- Static role text \\(no typing animation\\)\n- Simplified animations \\(fade-in only\\)\n- Latest resume PDF\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(findstr:*)",
+      "Bash(tasklist:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

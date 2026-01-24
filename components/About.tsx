@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaFutbol, FaTrophy } from "react-icons/fa";
+import { FaGraduationCap, FaMapMarkerAlt, FaAward, FaFutbol, FaTrophy, FaCode, FaBrain } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi";
 import Image from "next/image";
 
 const education = [
@@ -16,6 +17,7 @@ const education = [
       "TA for Hollywood and Big Data at Columbia Business School",
       "Volunteer at Columbia Disability Services",
     ],
+    color: "purple",
   },
   {
     school: "Vellore Institute of Technology",
@@ -27,78 +29,141 @@ const education = [
       "GPA: 4.0/4.0 (WES Evaluated)",
       "Special Achiever Award & Merit Scholarship",
     ],
+    color: "cyan",
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
 export default function About() {
   return (
-    <section id="about" className="section px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="section px-6 relative overflow-hidden">
+      {/* Background orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="orb orb-purple w-72 h-72 top-20 -right-36 opacity-20" />
+        <div className="orb orb-cyan w-56 h-56 bottom-40 -left-28 opacity-20" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <span className="badge mb-4 inline-flex">
+            <HiSparkles className="text-accent-cyan" />
+            Get to know me
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
+          <p className="text-text-secondary text-lg max-w-2xl mx-auto">
             Passionate about transforming data into actionable insights
           </p>
         </motion.div>
 
-        {/* Bio */}
+        {/* Bento Grid Layout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="card p-8 mb-12"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6"
         >
-          <p className="text-text-secondary text-lg leading-relaxed mb-4">
-            Currently pursuing my Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
-            from ZS Associates where I&apos;ve worked with Fortune 500 healthcare clients on
-            ML platforms, predictive analytics, and LLM-powered solutions.
-          </p>
-          <p className="text-text-secondary text-lg leading-relaxed">
-            I specialize in transforming complex data into actionable insights using
-            Python, SQL, PySpark, and modern ML frameworks. My work spans from building
-            organization-wide analytics platforms to developing early cancer detection
-            models that can potentially save lives. I&apos;m always looking for challenging problems
-            at the intersection of data science and meaningful impact.
-          </p>
-        </motion.div>
-
-        {/* Education */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-2.5 rounded-xl bg-accent/10">
-              <FaGraduationCap className="text-accent" size={20} />
+          {/* Bio Card - Large */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-7 card-glow p-8"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-cyan/20 border border-accent-purple/30">
+                <FaBrain className="text-accent-purple" size={20} />
+              </div>
+              <h3 className="text-xl font-semibold">My Story</h3>
             </div>
-            <h3 className="text-xl font-semibold">Education</h3>
-          </div>
-        </motion.div>
+            <p className="text-text-secondary text-lg leading-relaxed mb-6">
+              Currently pursuing my Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
+              from ZS Associates where I&apos;ve worked with Fortune 500 healthcare clients on
+              ML platforms, predictive analytics, and LLM-powered solutions.
+            </p>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              I specialize in transforming complex data into actionable insights using
+              Python, SQL, PySpark, and modern ML frameworks. My work spans from building
+              organization-wide analytics platforms to developing early cancer detection
+              models that can potentially save lives.
+            </p>
+          </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+          {/* Quick Facts Card */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-5 card p-8"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-accent-cyan/20 to-accent-pink/20 border border-accent-cyan/30">
+                <FaCode className="text-accent-cyan" size={20} />
+              </div>
+              <h3 className="text-xl font-semibold">Quick Facts</h3>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
+                <span className="text-3xl font-bold gradient-text">3+</span>
+                <span className="text-text-secondary">Years of Industry Experience</span>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
+                <span className="text-3xl font-bold gradient-text">$10B+</span>
+                <span className="text-text-secondary">Revenue Portfolio Managed</span>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
+                <span className="text-3xl font-bold gradient-text">1000+</span>
+                <span className="text-text-secondary">Users Impacted</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Education Header */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-12 flex items-center gap-3 mt-4"
+          >
+            <div className="p-3 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-cyan/20 border border-accent-purple/30">
+              <FaGraduationCap className="text-accent-purple" size={22} />
+            </div>
+            <h3 className="text-2xl font-semibold">Education</h3>
+          </motion.div>
+
+          {/* Education Cards */}
           {education.map((edu, index) => (
             <motion.div
               key={edu.school}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className="card p-6 group"
+              variants={itemVariants}
+              className="lg:col-span-6 card-glow p-6 group"
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-white p-1">
+              <div className="flex items-start gap-4 mb-5">
+                <div className="relative w-14 h-14 flex-shrink-0 rounded-xl overflow-hidden bg-white/90 p-1.5 border border-border/30 group-hover:shadow-glow-sm transition-shadow">
                   <Image
                     src={edu.logo}
                     alt={`${edu.school} logo`}
@@ -107,7 +172,9 @@ export default function About() {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-lg font-semibold text-accent mb-1">
+                  <h4 className={`text-lg font-semibold mb-1 ${
+                    edu.color === "purple" ? "text-accent-purple" : "text-accent-cyan"
+                  }`}>
                     {edu.school}
                   </h4>
                   <p className="text-text-secondary flex items-center gap-2 text-sm">
@@ -116,45 +183,50 @@ export default function About() {
                   </p>
                 </div>
               </div>
-              <p className="text-text font-medium mb-1">{edu.degree}</p>
-              <p className="text-text-muted text-sm mb-4">{edu.period}</p>
-              <ul className="space-y-2">
+
+              <div className="mb-4">
+                <p className="text-text font-medium">{edu.degree}</p>
+                <p className="text-text-muted text-sm">{edu.period}</p>
+              </div>
+
+              <ul className="space-y-2.5">
                 {edu.highlights.map((highlight) => (
                   <li
                     key={highlight}
-                    className="text-text-secondary text-sm flex items-start gap-2"
+                    className="text-text-secondary text-sm flex items-start gap-3"
                   >
-                    <FaAward className="text-accent-secondary mt-0.5 flex-shrink-0" size={12} />
+                    <FaAward className={`mt-0.5 flex-shrink-0 ${
+                      edu.color === "purple" ? "text-accent-purple" : "text-accent-cyan"
+                    }`} size={12} />
                     {highlight}
                   </li>
                 ))}
               </ul>
             </motion.div>
           ))}
-        </div>
 
-        {/* FPL Achievement */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 flex justify-center"
-        >
-          <a
-            href="https://fantasy.premierleague.com/entry/50075/history"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface border border-border hover:border-accent-tertiary/50 transition-all duration-300 group"
+          {/* FPL Achievement Card */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-12 flex justify-center"
           >
-            <div className="p-1.5 rounded-lg bg-accent-tertiary/10 group-hover:bg-accent-tertiary/20 transition-colors">
-              <FaFutbol className="text-accent-tertiary" size={14} />
-            </div>
-            <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-              <FaTrophy className="inline text-yellow-500 mr-1" size={12} />
-              <span className="font-medium text-accent-tertiary">Top 1%</span> FPL finishes — 4 consecutive years
-            </span>
-          </a>
+            <a
+              href="https://fantasy.premierleague.com/entry/50075/history"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-surface/50 backdrop-blur-sm border border-border/30 hover:border-accent-pink/50 hover:shadow-glow-pink transition-all duration-300 group"
+            >
+              <div className="p-3 rounded-xl bg-accent-pink/10 group-hover:bg-accent-pink/20 transition-colors">
+                <FaFutbol className="text-accent-pink" size={18} />
+              </div>
+              <div>
+                <span className="text-text-secondary group-hover:text-text transition-colors">
+                  <FaTrophy className="inline text-yellow-500 mr-2" size={14} />
+                  <span className="font-semibold text-accent-pink">Top 1%</span> FPL finishes — 4 consecutive years
+                </span>
+              </div>
+            </a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
