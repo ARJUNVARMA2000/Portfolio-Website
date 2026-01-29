@@ -256,6 +256,7 @@ const projects = [
       "Persistent speed memory",
     ],
     github: "https://github.com/ARJUNVARMA2000/Video-Speed-Controller-extension",
+    demo: "https://chromewebstore.google.com/detail/video-speed-controller-pr/mahfenfglifhcipcpobblpgdaefigpee",
     period: "2025",
     org: "Personal Project",
     caseStudy: videoSpeedCaseStudy,
