@@ -150,25 +150,25 @@ npm start
 
 ## Featured Projects
 
-### BTC Cancer Early Detection
-ML model predicting Bile Tract Cancer diagnoses from 250M patient claims, addressing 45-day data lag with advanced clustering techniques.
+### Biliary Tract Cancer (BTC) Early Detection
+Early detection model across 250M patient claims, enabling ~45-day earlier identification compared to standard diagnosis lag. Hybrid feature pipeline combining clinical risk factors, K-means/GMM segmentation, and Transformer-based NLP clustering.
 
-**Tech:** XGBoost, K-means, NLP Clustering, SHAP, MLflow, PySpark
+**Tech:** Python, scikit-learn, PySpark, K-means, GMM, NLP Clustering
 
 ### Financial RAG Chatbot
-LLM-powered chatbot answering questions about company financials from SEC filings with 4.5/5 quality score.
+LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations. Multi-model evaluation pipeline using Claude Opus as a judge.
 
-**Tech:** Python, LangChain, ChromaDB, FastAPI, Streamlit, OpenRouter | [Live Demo](https://financialrag-chatbot.streamlit.app/)
+**Tech:** Python, FastAPI, ChromaDB, Streamlit | [Live Demo](https://financialrag-chatbot.streamlit.app/)
 
 ### SeanceAI
-A digital séance platform for conversing with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities.
+AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses. Era-appropriate prompt engineering and "Dinner Party" mode for multi-figure conversations.
 
-**Tech:** Python, Flask, OpenRouter API, JavaScript, Railway
+**Tech:** Python, Flask, OpenRouter API
 
-### Agricultural Product Classification
-RAG product-classification system for a Series-B East African agtech achieving 99% accuracy.
+### Agricultural Product Standardization & Risk Detection
+Internship/Co-op at SunCulture (Series B Agtech). RAG-augmented classification system categorizing 7M+ farmer transactions across 500+ product categories for creditworthiness assessment. 99% accuracy on 10K holdout set, reducing manual review by 95%.
 
-**Tech:** Python, GPT-4, RAG, REST API
+**Tech:** Python, RAG, REST API
 
 ---
 
