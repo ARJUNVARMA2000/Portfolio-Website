@@ -112,11 +112,11 @@ export default function About() {
             </p>
             <p className="text-text-secondary text-lg leading-relaxed mb-6">
               My coursework spans Agentic AI, Applied Machine Learning, Analytics in Action,
-              and Natural Language Processing — I&apos;m drawn to the areas where engineering
+              and Natural Language Processing. I&apos;m drawn to the areas where engineering
               meets real-world problem solving.
             </p>
             <p className="text-text-secondary text-lg leading-relaxed">
-              I&apos;m looking for roles where I can make a genuine impact — environments that
+              I&apos;m looking for roles where I can make a genuine impact, environments that
               challenge me, push my thinking, and let me build things that matter.
             </p>
           </motion.div>
