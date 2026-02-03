@@ -174,7 +174,7 @@ export default function CommandPalette({
       // Projects
       {
         id: "project-btc",
-        label: "BTC Cancer Early Detection",
+        label: "Biliary Tract Cancer Early Detection",
         icon: <FaBrain size={16} />,
         category: "projects",
         action: () => {
@@ -207,7 +207,7 @@ export default function CommandPalette({
       },
       {
         id: "project-agri",
-        label: "Agricultural Classification",
+        label: "Agricultural Standardization & Risk Detection",
         icon: <FaDatabase size={16} />,
         category: "projects",
         action: () => {

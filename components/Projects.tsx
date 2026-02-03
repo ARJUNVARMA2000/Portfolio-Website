@@ -40,7 +40,7 @@ The pipeline was productionized to process new claims refreshes automatically at
 • Clinician-acceptable precision with interpretable feature effects
 • Positive feedback from Marketing teams on usefulness
 • Client decided to fund similar implementations across other Tumors/Brands
-• Approach was shared by our client at an industry conference on utilizing AI to improve patient outcomes`,
+• Methodology presented at PMSA 2025 conference; model adopted for territory-level resource planning`,
 };
 
 const financialRagCaseStudy = {
@@ -76,11 +76,11 @@ Key challenges:
 
 Quality assurance was built-in using OpenEval framework to automatically score response quality, relevance, and faithfulness to source documents.`,
 
-  impact: `• Achieved 4.5/5 quality score on OpenEval benchmark for response accuracy and relevance
+  impact: `• Built a multi-model evaluation pipeline using Claude Opus as a judge for response accuracy and relevance
 • Successfully integrated multiple years of SEC filings across different companies
 • Reduced time-to-insight from hours of manual reading to seconds of conversation
-• Demonstrated low hallucination rate on factual financial queries through strict RAG grounding
-• Built modular architecture that can easily extend to other document types (earnings calls, analyst reports)`,
+• Implemented automatic ticker and period parsing for streamlined query handling
+• Deployed live demo on Streamlit Cloud with persistent conversation history`,
 };
 
 const seanceAiCaseStudy = {
@@ -190,17 +190,17 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "BTC Cancer Early Detection",
-    subtitle: "Anomaly Detection & Predictive Analytics",
+    title: "Biliary Tract Cancer (BTC) Early Detection",
+    subtitle: "Predictive Analytics & NLP",
     description:
-      "Developed an ML model to predict monthly Bile Tract Cancer diagnoses from a pool of 250M patients. Addressed critical 45-day claims data delay and improved performance using advanced clustering techniques.",
-    tech: ["XGBoost", "K-means", "NLP Clustering", "SHAP", "MLflow", "PySpark"],
+      "Developed an early detection model across 250M patient claims, enabling ~45-day earlier identification compared to standard diagnosis lag. Engineered a hybrid feature pipeline combining clinical risk factors, K-means and GMM segmentation, and Transformer-based NLP clustering on diagnosis narratives.",
+    tech: ["Python", "scikit-learn", "PySpark", "K-means", "GMM", "NLP Clustering"],
     icon: FaBrain,
     color: "purple",
     highlights: [
-      "250M patient pool analysis",
-      "Advanced clustering techniques",
-      "Industry conference presentation",
+      "250M patient claims analyzed",
+      "Hybrid clinical + NLP feature pipeline",
+      "Presented at PMSA 2025; adopted for territory planning",
     ],
     period: "Jan 2025 - May 2025",
     org: "ZS Associates",
@@ -211,14 +211,14 @@ const projects: Project[] = [
     title: "Financial RAG Chatbot",
     subtitle: "LLM & Information Retrieval",
     description:
-      "Built an LLM-powered RAG chatbot that answers questions about company financials from SEC filings. Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval.",
-    tech: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "OpenRouter"],
+      "Built an LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations. Implemented semantic retrieval with ChromaDB and text-embedding-3-large plus automatic ticker and period parsing.",
+    tech: ["Python", "FastAPI", "ChromaDB", "Streamlit"],
     icon: FaRobot,
     color: "cyan",
     highlights: [
-      "4.5/5 quality score via OpenEval",
-      "SEC filings integration",
-      "Semantic search with ChromaDB",
+      "Line-level source citations",
+      "Claude Opus evaluation pipeline",
+      "Live demo on Streamlit Cloud",
     ],
     github: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot",
     demo: "https://financialrag-chatbot.streamlit.app/",
@@ -228,16 +228,16 @@ const projects: Project[] = [
   },
   {
     title: "SeanceAI",
-    subtitle: "Conversational AI & Historical Roleplay",
+    subtitle: "Conversational AI & Multi-Model LLM",
     description:
-      "A digital séance platform where you can converse with 60+ historical figures. Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations) with authentic, era-appropriate personalities and knowledge.",
-    tech: ["Python", "Flask", "OpenRouter API", "JavaScript", "Railway", "SSE"],
+      "Built an AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses. Implemented era-appropriate prompt engineering and \"Dinner Party\" mode for multi-figure conversations; deployed on Railway.",
+    tech: ["Python", "Flask", "OpenRouter API"],
     icon: FaBrain,
     color: "pink",
     highlights: [
-      "60+ historical figures across eras",
-      "Dual conversation modes",
-      "Museum-themed UI design",
+      "60+ historical figures",
+      "Multi-model LLM support & streaming",
+      "Deployed on Railway",
     ],
     github: "https://github.com/ARJUNVARMA2000/Seance_AI",
     demo: "https://seance-ai.up.railway.app",
@@ -246,20 +246,20 @@ const projects: Project[] = [
     caseStudy: seanceAiCaseStudy,
   },
   {
-    title: "Agricultural Product Classification",
+    title: "Agricultural Product Standardization & Risk Detection",
     subtitle: "RAG & Classification System",
     description:
-      "Built an AI-powered product classification system for SunCulture, an East African agricultural marketplace, helping farmers categorize crops for compliance and pricing. Achieved 99% holdout accuracy using GPT-4 with RAG.",
-    tech: ["Python", "GPT-4", "RAG", "REST API", "Dashboard"],
+      "Built a RAG-augmented classification system at SunCulture (Series B Agtech) categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa. Achieved 99% accuracy on a 10,000-item holdout set using hybrid rule-based and LLM-assisted classification, reducing manual review volume by 95% and accelerating loan decisioning.",
+    tech: ["Python", "RAG", "REST API"],
     icon: FaDatabase,
     color: "purple",
     highlights: [
-      "99% holdout accuracy",
-      "Real-time REST API",
-      "Compliance & risk alerts",
+      "7M+ farmer transactions classified",
+      "99% accuracy on 10K holdout set",
+      "95% reduction in manual review",
     ],
     period: "Aug 2025 - Oct 2025",
-    org: "SunCulture",
+    org: "SunCulture (Internship/Co-op)",
     orgUrl: "https://sunculture.io/",
     orgLogo: "/images/sunculture-logo.png",
   },

@@ -47,28 +47,28 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 
 ## PROJECT EXPERIENCE
 
-### Bile Tract Cancer (BTC) Early Detection using ML - ZS Associates (Jan 2025 - May 2025)
-- Developed early detection ML model to predict monthly BTC diagnoses—potentially life-saving through earlier intervention
-- Addressed critical 45-day claims data delay; improved model performance using clustering techniques (K-means, Gaussian mixtures, NLP-based event clustering)
-- Presented methods/results at industry conference
-- Tech: Python, scikit-learn, PySpark, Databricks
-
-### Agricultural Product Standardization & Risk Detection - Columbia University (Aug 2025 - Oct 2025)
-- Built AI-assisted, retrieval-augmented generation (RAG) product-classification system for a Series-B East African agtech
-- Deployed real-time REST API and dashboard for compliance and risk alerts
-- Tech: Python, FastAPI, LangChain, OpenAI API, PostgreSQL
+### Biliary Tract Cancer (BTC) Early Detection using ML - ZS Associates (Jan 2025 - May 2025)
+- Developed an early detection model across 250M patient claims, enabling ~45-day earlier identification compared to standard diagnosis lag
+- Engineered a hybrid feature pipeline combining clinical risk factors, K-means and GMM segmentation, and Transformer-based NLP clustering on diagnosis narratives
+- Presented methodology at PMSA 2025 conference; model adopted for territory-level resource planning
+- Tech: Python, scikit-learn, PySpark
 
 ### Financial RAG Chatbot - Columbia University (Nov 2025 - Dec 2025)
-- Built an LLM-powered RAG chatbot answering questions about company financials from SEC filings
-- Implemented Streamlit UI + FastAPI backend with ChromaDB semantic retrieval
-- Tech: Python, Streamlit, FastAPI, ChromaDB, OpenRouter, LangChain
+- Built an LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations
+- Implemented semantic retrieval with ChromaDB and text-embedding-3-large plus automatic ticker and period parsing
+- Built a multi-model evaluation pipeline using Claude Opus as a judge and deployed a live demo on Streamlit Cloud
+- Tech: Python, FastAPI, ChromaDB, Streamlit
 - Live demo: https://financialrag-chatbot.streamlit.app/
 
-### SeanceAI - Personal Project
-- Digital séance platform for conversing with 60+ historical figures
-- Features Seance Mode (one-on-one) and Dinner Party Mode (multi-figure conversations)
-- Authentic, era-appropriate personalities and knowledge boundaries
-- Tech: Python, OpenAI API, Prompt Engineering
+### Agricultural Product Standardization & Risk Detection - SunCulture Internship/Co-op (Aug 2025 - Oct 2025)
+- Built a RAG-augmented classification system at SunCulture (Series B Agtech) categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa
+- Achieved 99% accuracy on a 10,000-item holdout set using hybrid rule-based and LLM-assisted classification, reducing manual review volume by 95% and accelerating loan decisioning
+- Tech: Python, RAG, REST API
+
+### Multi-Agent Historical Dialogue System - Personal Project
+- Built an AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses
+- Implemented era-appropriate prompt engineering and "Dinner Party" mode for multi-figure conversations; deployed on Railway
+- Tech: Python, Flask, OpenRouter API
 - GitHub: https://github.com/ARJUNVARMA2000/Seance_AI
 
 ## TECHNICAL SKILLS
