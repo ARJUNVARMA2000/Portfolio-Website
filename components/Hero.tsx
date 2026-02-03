@@ -128,15 +128,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="card p-6"
             >
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center">
-                  <p className="text-3xl font-bold gradient-text">3+</p>
-                  <p className="text-text-muted text-sm">Years Experience</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold gradient-text">10+</p>
-                  <p className="text-text-muted text-sm">ML Projects</p>
-                </div>
+              <div className="text-center">
+                <p className="text-3xl font-bold gradient-text">3+</p>
+                <p className="text-text-muted text-sm">Years Experience</p>
               </div>
             </motion.div>
 

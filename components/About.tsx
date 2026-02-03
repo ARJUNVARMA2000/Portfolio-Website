@@ -105,21 +105,19 @@ export default function About() {
               <h3 className="text-xl font-semibold">My Story</h3>
             </div>
             <p className="text-text-secondary text-lg leading-relaxed mb-6">
-              Currently pursuing my Master&apos;s in Data Science at Columbia University, I bring 3+ years of experience
-              from ZS Associates where I worked with Fortune 500 healthcare clients on
-              ML platforms, predictive analytics, and LLM-powered solutions.
+              Currently pursuing my Master&apos;s in Data Science at Columbia University, with 3+ years of
+              prior experience at ZS Associates building ML platforms and analytics solutions for
+              Fortune 500 healthcare clients. I also TA at Columbia Business School, teaching
+              AI foundations and data-driven decision-making.
             </p>
             <p className="text-text-secondary text-lg leading-relaxed mb-6">
-              I specialized in transforming complex data into actionable insights using
-              Python, SQL, PySpark, and modern ML frameworks. My work spanned from building
-              organization-wide analytics platforms to developing early cancer detection
-              models that can potentially save lives.
+              My coursework spans Agentic AI, Applied Machine Learning, Analytics in Action,
+              and Natural Language Processing — I&apos;m drawn to the areas where engineering
+              meets real-world problem solving.
             </p>
             <p className="text-text-secondary text-lg leading-relaxed">
-              At Columbia, I&apos;m serving as a Teaching Assistant for Business Analytics II: Foundations of AI 
-              and Hollywood and Big Data at Columbia Business School, where I help students bridge the gap 
-              between theoretical concepts and practical applications. I also volunteer at Columbia Disability Services, 
-              contributing to creating an inclusive learning environment.
+              I&apos;m looking for roles where I can make a genuine impact — environments that
+              challenge me, push my thinking, and let me build things that matter.
             </p>
           </motion.div>
 
@@ -138,10 +136,6 @@ export default function About() {
               <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
                 <span className="text-3xl font-bold gradient-text">3+</span>
                 <span className="text-text-secondary">Years of Industry Experience</span>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
-                <span className="text-3xl font-bold gradient-text">$10B+</span>
-                <span className="text-text-secondary">Revenue Portfolio Managed</span>
               </div>
               <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-border/30">
                 <span className="text-3xl font-bold gradient-text">1000+</span>

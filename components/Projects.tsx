@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome, FaStar } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
+import Image from "next/image";
 
 const btcCaseStudy = {
   problem: `Bile Tract Cancer (BTC) is a rare form of cancer with very few approved treatments. Our client's oncology drug was a new method of treatment that had become the standard of care for BTC, but because of its rarity, it was difficult to know which oncologists/urologists to educate.
@@ -78,7 +79,7 @@ Quality assurance was built-in using OpenEval framework to automatically score r
   impact: `• Achieved 4.5/5 quality score on OpenEval benchmark for response accuracy and relevance
 • Successfully integrated multiple years of SEC filings across different companies
 • Reduced time-to-insight from hours of manual reading to seconds of conversation
-• Demonstrated zero hallucination rate on factual financial queries through strict RAG grounding
+• Demonstrated low hallucination rate on factual financial queries through strict RAG grounding
 • Built modular architecture that can easily extend to other document types (earnings calls, analyst reports)`,
 };
 
@@ -169,7 +170,25 @@ The implementation uses the standard HTMLMediaElement.playbackRate API with fall
 • Practical tool used daily for accelerated learning and content consumption`,
 };
 
-const projects = [
+interface Project {
+  title: string;
+  subtitle: string;
+  description: string;
+  tech: string[];
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  color: string;
+  highlights: string[];
+  period: string;
+  org: string;
+  featured?: boolean;
+  caseStudy?: { problem: string; challenge: string; approach: string; solution: string; impact: string };
+  github?: string;
+  demo?: string;
+  orgUrl?: string;
+  orgLogo?: string;
+}
+
+const projects: Project[] = [
   {
     title: "BTC Cancer Early Detection",
     subtitle: "Anomaly Detection & Predictive Analytics",
@@ -230,7 +249,7 @@ const projects = [
     title: "Agricultural Product Classification",
     subtitle: "RAG & Classification System",
     description:
-      "Built an AI-powered product classification system for an East African agricultural marketplace, helping farmers categorize crops for compliance and pricing. Achieved 99% holdout accuracy using GPT-4 with RAG.",
+      "Built an AI-powered product classification system for SunCulture, an East African agricultural marketplace, helping farmers categorize crops for compliance and pricing. Achieved 99% holdout accuracy using GPT-4 with RAG.",
     tech: ["Python", "GPT-4", "RAG", "REST API", "Dashboard"],
     icon: FaDatabase,
     color: "purple",
@@ -240,7 +259,9 @@ const projects = [
       "Compliance & risk alerts",
     ],
     period: "Aug 2025 - Oct 2025",
-    org: "Columbia University",
+    org: "SunCulture",
+    orgUrl: "https://sunculture.io/",
+    orgLogo: "/images/sunculture-logo.png",
   },
   {
     title: "Video Speed Controller",
@@ -396,8 +417,18 @@ export default function Projects() {
                           <p className="text-text-muted text-sm">
                             {project.subtitle}
                           </p>
-                          <p className="text-text-muted text-xs mt-1">
-                            {project.org} • {project.period}
+                          <p className="text-text-muted text-xs mt-1 flex items-center gap-1.5">
+                            {project.orgLogo && (
+                              <span className="relative w-4 h-4 inline-block flex-shrink-0">
+                                <Image src={project.orgLogo} alt={project.org} fill className="object-contain" />
+                              </span>
+                            )}
+                            {project.orgUrl ? (
+                              <a href={project.orgUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:text-accent-cyan transition-colors underline underline-offset-2">{project.org}</a>
+                            ) : (
+                              <span>{project.org}</span>
+                            )}
+                            <span>•</span> {project.period}
                           </p>
                         </div>
                       </div>
@@ -512,8 +543,18 @@ export default function Projects() {
                 <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">
                   {selectedProject.title}
                 </h2>
-                <p className="text-text-muted text-sm">
-                  {selectedProject.org} • {selectedProject.period}
+                <p className="text-text-muted text-sm flex items-center gap-1.5">
+                  {selectedProject.orgLogo && (
+                    <span className="relative w-5 h-5 inline-block flex-shrink-0">
+                      <Image src={selectedProject.orgLogo} alt={selectedProject.org} fill className="object-contain" />
+                    </span>
+                  )}
+                  {selectedProject.orgUrl ? (
+                    <a href={selectedProject.orgUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent-cyan transition-colors underline underline-offset-2">{selectedProject.org}</a>
+                  ) : (
+                    <span>{selectedProject.org}</span>
+                  )}
+                  <span>•</span> {selectedProject.period}
                 </p>
               </div>
 
