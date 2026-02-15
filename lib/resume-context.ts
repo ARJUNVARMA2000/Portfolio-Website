@@ -58,7 +58,7 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 - Implemented semantic retrieval with ChromaDB and text-embedding-3-large plus automatic ticker and period parsing
 - Built a multi-model evaluation pipeline using Claude Opus as a judge and deployed a live demo on Streamlit Cloud
 - Tech: Python, FastAPI, ChromaDB, Streamlit
-- Live demo: https://financialrag-chatbot.streamlit.app/
+- Live demo: https://finrag-frontend-7pj7nolpla-uc.a.run.app/
 
 ### Agricultural Product Standardization & Risk Detection - SunCulture Internship/Co-op (Aug 2025 - Oct 2025)
 - Built a RAG-augmented classification system at SunCulture (Series B Agtech) categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa

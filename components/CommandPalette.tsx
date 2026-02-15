@@ -189,7 +189,7 @@ export default function CommandPalette({
         icon: <FaRobot size={16} />,
         category: "projects",
         action: () => {
-          window.open("https://financialrag-chatbot.streamlit.app/", "_blank");
+          window.open("https://finrag-frontend-7pj7nolpla-uc.a.run.app/", "_blank");
           setIsOpen(false);
         },
         keywords: ["llm", "ai", "chatbot"],

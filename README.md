@@ -158,7 +158,7 @@ Early detection model across 250M patient claims, enabling ~45-day earlier ident
 ### Financial RAG Chatbot
 LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations. Multi-model evaluation pipeline using Claude Opus as a judge.
 
-**Tech:** Python, FastAPI, ChromaDB, Streamlit | [Live Demo](https://financialrag-chatbot.streamlit.app/)
+**Tech:** Python, FastAPI, ChromaDB, Streamlit | [Live Demo](https://finrag-frontend-7pj7nolpla-uc.a.run.app/)
 
 ### SeanceAI
 AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses. Era-appropriate prompt engineering and "Dinner Party" mode for multi-figure conversations.
