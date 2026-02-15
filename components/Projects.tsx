@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome, FaStar } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase, FaTimes, FaChevronRight, FaChrome, FaStar, FaTwitter, FaBook } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import Image from "next/image";
 
@@ -170,6 +170,90 @@ The implementation uses the standard HTMLMediaElement.playbackRate API with fall
 • Practical tool used daily for accelerated learning and content consumption`,
 };
 
+const tweetBotCaseStudy = {
+  problem: `Social media engagement on X/Twitter requires quick, thoughtful responses that maintain your authentic voice. Crafting the perfect reply, quote tweet, or thread takes time and mental energy—especially when you want to contribute meaningfully to conversations at scale.
+
+The goal was to build an AI assistant that integrates directly into the Twitter experience, providing context-aware suggestions that match your personal style.`,
+
+  challenge: `Building a seamless Twitter AI assistant presented several challenges:
+
+Key challenges:
+• Twitter/X's DOM structure is complex and frequently changes, making reliable element detection difficult
+• Extracting full context (tweet text, author, thread history, images) requires sophisticated DOM traversal
+• Suggestions need to feel authentic and match the user's voice, not generic AI output
+• Streaming responses must be smooth and non-disruptive to the browsing experience
+• Chrome Extension Manifest V3 restrictions limit background processing capabilities`,
+
+  approach: `The extension was built with deep Twitter integration in mind:
+
+1. DOM Injection: Content scripts that inject AI buttons directly into every tweet's action bar, blending seamlessly with native UI
+
+2. Context Extraction: Sophisticated tweet parser that captures text, author, thread context, and even image content for multimodal understanding
+
+3. Voice Learning: Tracks which suggestions users select over time to learn and adapt to their personal writing style
+
+4. Multi-Model Support: Integration with Claude Opus, Sonnet, and Haiku via OpenRouter for different quality/speed tradeoffs`,
+
+  solution: `The Chrome extension includes:
+
+• Service Worker Backend: Handles API calls, streaming, prompt building, and selection history tracking
+• Content Scripts: Orchestrate DOM injection, tweet extraction, and popup UI rendering
+• Tone Control System: Five rhetorical modes (witty, professional, casual, provocative, informative) with tagged strategy labels
+• Thread Mode: Generate coherent multi-tweet threads on any topic
+• Settings Dashboard: Model selection, usage tracking with cost estimates, and export/import functionality
+
+Each suggestion comes with a rhetorical strategy tag (e.g., [contrarian take], [empathy hook]) so users understand the approach behind each option.`,
+
+  impact: `• Generates 3 distinct suggestions per request with different rhetorical angles
+• Supports replies, quote tweets, original tweets, and multi-tweet threads
+• Image understanding for context-aware responses to visual content
+• Voice learning system that improves suggestions over time
+• Real-time streaming for instant feedback
+• Full privacy—API key and history stored locally, no external data collection`,
+};
+
+const citationCheckerCaseStudy = {
+  problem: `Academic citation formatting is one of the most tedious and error-prone aspects of scholarly writing. Students and researchers must navigate complex rules across APA 7th, MLA 9th, and Chicago 17th editions—each with hundreds of specific formatting requirements for different source types.
+
+The goal was to build a specialized chatbot that could identify specific formatting violations in citations and reference lists, providing rule-based evidence without rewriting the user's text.`,
+
+  challenge: `Building a reliable citation checker presented unique domain challenges:
+
+Key challenges:
+• Each citation style has hundreds of rules with subtle differences (comma placement, italicization, date formats)
+• The bot must identify specific violations with rule IDs, not just suggest generic corrections
+• Must stay narrowly scoped—redirect off-topic questions about grammar, research quality, or page layout
+• Requires safety backstops for crisis language detection
+• Evaluation is complex—need both deterministic checks and model-as-judge approaches`,
+
+  approach: `The development followed a rigorous, evaluation-driven approach:
+
+1. Domain Scoping: Carefully defined the narrow domain boundary—citation and reference formatting only—with explicit redirect logic for out-of-scope queries
+
+2. Rule Engineering: Encoded formatting rules for all three major styles with specific rule IDs for traceable violation reporting
+
+3. Vertex AI Integration: Leveraged Gemini 2.0 Flash Lite for fast, cost-effective responses with domain-specific prompting
+
+4. Comprehensive Evaluation: Built a multi-layered eval harness combining deterministic checks, golden-reference comparisons, and rubric-based model-as-judge scoring`,
+
+  solution: `The production system includes:
+
+• FastAPI Backend: RESTful API handling citation analysis with session management
+• Vertex AI Integration: Gemini 2.0 Flash Lite model with carefully engineered citation-domain prompts
+• Web Interface: Clean UI with style selector (APA/MLA/Chicago) for paste-and-check workflow
+• Evaluation Suite: Pytest-based harness with three test types—deterministic rule detection, golden-reference model-as-judge, and rubric-based model-as-judge scoring
+• Cloud Run Deployment: Containerized deployment on GCP with public access
+
+The architecture prioritizes precision—each violation is cited with specific rule IDs and quoted evidence from the user's text.`,
+
+  impact: `• Supports all three major citation styles: APA 7th, MLA 9th, Chicago 17th
+• Identifies specific violations with rule IDs and quoted evidence
+• Successfully deployed on GCP Cloud Run with public access
+• Comprehensive eval suite with 30+ test cases across three evaluation methods
+• Maintains narrow domain focus with graceful handling of out-of-scope queries
+• Built with safety backstops for sensitive content detection`,
+};
+
 interface Project {
   title: string;
   subtitle: string;
@@ -281,6 +365,43 @@ const projects: Project[] = [
     period: "2025",
     org: "Personal Project",
     caseStudy: videoSpeedCaseStudy,
+  },
+  {
+    title: "Tweet Bot",
+    subtitle: "AI Chrome Extension",
+    description:
+      "AI-powered Chrome extension that generates tweet replies, quote tweets, and threads using Claude via OpenRouter. Features tone control, image understanding, voice learning that adapts to your style, and real-time streaming responses.",
+    tech: ["JavaScript", "Chrome APIs", "CSS", "OpenRouter API"],
+    icon: FaTwitter,
+    color: "cyan",
+    highlights: [
+      "3 distinct suggestions with rhetorical strategy tags",
+      "Voice learning adapts to your style",
+      "Multi-model support (Opus, Sonnet, Haiku)",
+    ],
+    github: "https://github.com/ARJUNVARMA2000/tweet-bot",
+    period: "2026",
+    org: "Personal Project",
+    caseStudy: tweetBotCaseStudy,
+  },
+  {
+    title: "Citation Format Checker",
+    subtitle: "Domain Q&A Chatbot",
+    description:
+      "Academic citation format checker chatbot supporting APA 7th, MLA 9th, and Chicago 17th editions. Powered by Vertex AI (Gemini 2.0 Flash Lite) and FastAPI, it identifies specific formatting violations with rule IDs and quoted evidence. Deployed on GCP Cloud Run.",
+    tech: ["Python", "FastAPI", "Vertex AI", "Google Cloud Run", "Docker"],
+    icon: FaBook,
+    color: "pink",
+    highlights: [
+      "Supports APA 7th, MLA 9th, Chicago 17th",
+      "Rule-ID based violation detection",
+      "30+ eval test cases across 3 methods",
+    ],
+    github: "https://github.com/ARJUNVARMA2000/citation-format-checker",
+    demo: "https://citation-bot-7pj7nolpla-uc.a.run.app",
+    period: "2026",
+    org: "Columbia University",
+    caseStudy: citationCheckerCaseStudy,
   },
 ];
 

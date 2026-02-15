@@ -165,6 +165,26 @@ RAG product-classification system for a Series-B East African agtech achieving 9
 
 </td>
 </tr>
+<tr>
+<td width="50%">
+
+**[Tweet Bot](https://github.com/ARJUNVARMA2000/tweet-bot)**
+
+AI-powered Chrome extension for tweet replies, quotes, and threads using Claude via OpenRouter. Features voice learning and multi-model support.
+
+`JavaScript` `Chrome APIs` `OpenRouter API`
+
+</td>
+<td width="50%">
+
+**[Citation Format Checker](https://github.com/ARJUNVARMA2000/citation-format-checker)** · [Demo](https://citation-bot-7pj7nolpla-uc.a.run.app)
+
+Academic citation checker chatbot (APA 7th, MLA 9th, Chicago 17th) powered by Vertex AI with rule-ID violation detection.
+
+`Python` `FastAPI` `Vertex AI` `Google Cloud Run`
+
+</td>
+</tr>
 </table>
 
 ---
