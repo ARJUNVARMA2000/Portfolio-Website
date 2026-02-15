@@ -11,10 +11,8 @@ const experiences = [
     location: "Pune, India",
     period: "Feb 2025 - Jun 2025",
     highlights: [
-      "Worked in Performance Analytics, Forecasting, and Data Science teams for Fortune 500 healthcare clients; collaborated with US-based stakeholders",
-      "Built and deployed an organization-wide analytics + ML platform consolidating multiple data sources to surface real-time KPIs by territory and product; partnered with PMs and marketing heads for a >$10B revenue oncology portfolio",
-      "Drove adoption by 1,000+ sales reps and HQ leaders, replacing Excel reports and cutting prep time from days to minutes",
-      "Piloted a retrieval-augmented LLM to turn FDA approval documents into concise briefs for commercial teams",
+      "Built and deployed an org-wide analytics and ML platform (Spark/SQL, dashboards) that unified 5+ data sources into territory and product KPIs used by 100+ stakeholders supporting a $10B oncology portfolio",
+      "Cut weekly reporting time from days to minutes, replacing Excel workflows with automated pipelines and self-serve dashboards",
     ],
     color: "purple",
     icon: FaRocket,
@@ -25,15 +23,13 @@ const experiences = [
     location: "Pune, India",
     period: "Jul 2024 - Jan 2025",
     highlights: [
-      "Led a 5-member team on a strategic initiative to overhaul legacy business rules and modernize processes, saving ~50 hrs/mo and improving first-pass quality to >99%",
-      "Built and productionized Positive-Unlabeled (PU) learning models at a Fortune 500 organization to systematically infer missing categorical labels in transactional data",
-      "Implemented automated model drift checks and unit testing to ensure long-term reliability",
-      "Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical",
-      "Received Client Comrade Award for outstanding client outcomes and feedback",
+      "Led a 5-member team to modernize legacy business rules; saved ~50 hrs/mo and improved first-pass quality to >99%",
+      "Built and deployed Positive-Unlabeled learning models to infer missing categorical labels in medical transaction data, increasing customer-journey analytics coverage from ~40% to ~95% with consistent performance across tumor types and territories",
+      "Implemented drift monitoring (feature + prediction drift) and CI unit tests for production pipelines, reducing silent failures",
+      "Placed in the top ~10% in a company-wide hackathon and earned selection for a lateral transfer into the Data Science vertical",
     ],
     color: "cyan",
     icon: FaStar,
-    award: true,
   },
   {
     title: "Decision Analytics Associate",
@@ -41,10 +37,10 @@ const experiences = [
     location: "Pune, India",
     period: "Feb 2022 - Jun 2024",
     highlights: [
-      "Engineered PySpark/SQL pipelines integrating multiple data sources to deliver brand performance insights across multiple products",
-      "Defined patient-cohort inclusion/exclusion rules robust to missing/miscoded fields; yielded consistent, audit-ready analytics",
-      "Drove reporting and ad-hoc analytics that surfaced care gaps and market opportunities, informing key brand strategies across multiple new launches",
-      "Promoted to Associate Consultant in 4 cycles (typical: 5) via accelerated performance; received Expert Associate and Insight Illuminate Awards",
+      "Engineered PySpark/SQL ETL pipelines integrating multiple healthcare data sources covering millions of patients for $4B+ oncology drug performance analytics",
+      "Defined patient cohort inclusion and exclusion logic robust to missing and miscoded fields, enabling audit-ready reporting",
+      "Delivered ad hoc analyses identifying care gaps and market opportunities to inform brand strategy across multiple launches",
+      "Promoted to Associate Consultant in 4 cycles (typical: 5) and received Expert Associate and Insight Illuminator awards",
     ],
     color: "pink",
     icon: FaBriefcase,
@@ -175,11 +171,6 @@ export default function Experience() {
                           <h3 className={`text-lg md:text-xl font-semibold ${colorClasses.icon}`}>
                             {exp.title}
                           </h3>
-                          {exp.award && (
-                            <span className={`text-xs px-2 py-1 rounded-full border ${colorClasses.badge}`}>
-                              Award Winner
-                            </span>
-                          )}
                           {exp.promoted && (
                             <span className={`text-xs px-2 py-1 rounded-full border ${colorClasses.badge}`}>
                               Fast Track

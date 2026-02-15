@@ -296,7 +296,7 @@ const projects: Project[] = [
     subtitle: "LLM & Information Retrieval",
     description:
       "Built an LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations. Implemented semantic retrieval with ChromaDB and text-embedding-3-large plus automatic ticker and period parsing.",
-    tech: ["Python", "FastAPI", "ChromaDB", "Streamlit"],
+    tech: ["Python", "FastAPI", "ChromaDB", "Streamlit", "GCP"],
     icon: FaRobot,
     color: "cyan",
     highlights: [

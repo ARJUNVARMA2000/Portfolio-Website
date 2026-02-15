@@ -70,22 +70,27 @@ const skillCategories = [
 ];
 
 const additionalSkills = [
-  "Deep Learning",
-  "Data Engineering",
-  "ETL Pipelines",
+  "Classification",
+  "Regression",
+  "NLP",
+  "Clustering",
+  "Model Evaluation",
+  "LLMs/RAG",
+  "Prompt Engineering",
+  "ETL/ELT",
   "SHAP",
-  "BeautifulSoup",
   "matplotlib",
+  "BeautifulSoup",
   "S3",
   "EMR",
   "Athena",
   "SageMaker",
+  "Linux",
+  "CI/CD",
   "Jira",
   "Confluence",
-  "LangChain",
-  "ChromaDB",
-  "RAG",
-  "LLMs",
+  "Claude Code",
+  "Cursor IDE",
 ];
 
 const containerVariants = {

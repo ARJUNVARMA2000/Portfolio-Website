@@ -13,9 +13,8 @@ const education = [
     period: "Aug 2025 - Dec 2026",
     logo: "/images/columbia-logo.jpg",
     highlights: [
-      "TA for Business Analytics II: Foundations of AI at Columbia Business School",
-      "TA for Hollywood and Big Data at Columbia Business School",
-      "Volunteer at Columbia Disability Services",
+      "Coursework: Applied Machine Learning, Agentic AI for Analytics, Statistical Inference and Modeling, Probability and Statistics",
+      "Teaching Assistant, Columbia Business School: Business Analytics II (Foundations of AI) and Hollywood and Big Data",
     ],
     color: "purple",
   },
@@ -26,8 +25,7 @@ const education = [
     period: "Jul 2018 - May 2022",
     logo: "/images/vit-logo.png",
     highlights: [
-      "GPA: 4.0/4.0 (WES Evaluated)",
-      "Special Achiever Award & Merit Scholarship",
+      "Special Achiever Award | Merit Scholarship",
     ],
     color: "cyan",
   },
@@ -111,9 +109,9 @@ export default function About() {
               AI foundations and data-driven decision-making.
             </p>
             <p className="text-text-secondary text-lg leading-relaxed mb-6">
-              My coursework spans Agentic AI, Applied Machine Learning, Analytics in Action,
-              and Natural Language Processing. I&apos;m drawn to the areas where engineering
-              meets real-world problem solving.
+              My coursework spans Applied Machine Learning, Agentic AI for Analytics,
+              Statistical Inference and Modeling, and Probability and Statistics. I&apos;m drawn
+              to the areas where engineering meets real-world problem solving.
             </p>
             <p className="text-text-secondary text-lg leading-relaxed">
               I&apos;m looking for roles where I can make a genuine impact, environments that

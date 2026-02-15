@@ -3,88 +3,75 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 
 ## PERSONAL INFORMATION
 - Name: Arjun Varma
+- Phone: (347) 987-9427
 - Email: av3342@columbia.edu
-- LinkedIn: www.linkedin.com/in/varma-arjun/
+- LinkedIn: linkedin.com/in/varma-arjun/
 - GitHub: github.com/ARJUNVARMA2000
-- Location: New York, NY
+- Website: arjun-varma.com
 - **Currently seeking**: Summer 2026 internships in Data Science or ML Engineering roles
 
 ## EDUCATION
 1. **Columbia University, New York, NY**
-   - Master of Science in Data Science (Aug 2025 - Dec 2026)
-   - Teaching Assistant for Business Analytics II: Foundations of AI at Columbia Business School
-   - Teaching Assistant for Hollywood and Big Data at Columbia Business School
-   - Volunteer at Columbia Disability Services
+   - Master of Science in Data Science (Dec 2026)
+   - Coursework: Applied Machine Learning, Agentic AI for Analytics, Statistical Inference and Modeling, Probability and Statistics
+   - Teaching Assistant, Columbia Business School: Business Analytics II (Foundations of AI) and Hollywood and Big Data
 
 2. **Vellore Institute of Technology, Vellore, India**
-   - Bachelor of Technology in Electronics and Communication Engineering
-   - GPA: 4.0/4.0 (WES Evaluated) | Jul 2018 - May 2022
-   - Recipient of Special Achiever Award and Merit Scholarship
+   - Bachelor of Technology in Electronics and Communication Engineering (May 2022)
+   - Special Achiever Award | Merit Scholarship
 
 ## WORK EXPERIENCE
 
 ### ZS Associates, Pune, India (3+ years total)
 
 **Advanced Data Science Associate Consultant** (Feb 2025 - Jun 2025)
-- Worked in Performance Analytics, Forecasting, and Data Science teams for Fortune 500 healthcare clients; collaborated with US-based stakeholders
-- Built organization-wide analytics + ML platform consolidating multiple data sources to surface real-time KPIs by territory and product
-- Partnered with PMs and marketing heads for a >$10B revenue oncology portfolio
-- Drove adoption by 1,000+ sales reps and HQ leaders, replacing Excel reports and cutting prep time from days to minutes
-- Piloted a retrieval-augmented LLM to turn FDA approval documents into concise briefs for commercial teams
+- Built and deployed an org-wide analytics and ML platform (Spark/SQL, dashboards) that unified 5+ data sources into territory and product KPIs used by 100+ stakeholders supporting a $10B oncology portfolio
+- Cut weekly reporting time from days to minutes, replacing Excel workflows with automated pipelines and self-serve dashboards
 
 **Decision Analytics Associate Consultant** (Jul 2024 - Jan 2025)
-- Led 5-member team on strategic initiative to overhaul legacy business rules and modernize processes
-- Saved ~50 hrs/mo and improved first-pass quality to >99%
-- Built and productionized Positive-Unlabeled (PU) learning models for Fortune 500 organization
-- Implemented automated model drift checks and unit testing for long-term reliability
-- Scored top ~10% finish in company-wide hackathon; selected for lateral transfer into Data Science vertical
-- Received Client Comrade Award for outstanding performance
+- Led a 5-member team to modernize legacy business rules; saved ~50 hrs/mo and improved first-pass quality to >99%
+- Built and deployed Positive-Unlabeled learning models to infer missing categorical labels in medical transaction data, increasing customer-journey analytics coverage from ~40% to ~95% with consistent performance across tumor types and territories
+- Implemented drift monitoring (feature + prediction drift) and CI unit tests for production pipelines, reducing silent failures
+- Placed in the top ~10% in a company-wide hackathon and earned selection for a lateral transfer into the Data Science vertical
 
 **Decision Analytics Associate** (Feb 2022 - Jun 2024)
-- Engineered PySpark/SQL pipelines integrating multiple data sources for brand performance insights
-- Drove reporting and ad-hoc analytics surfacing care gaps and market opportunities
-- Promoted to Associate Consultant in 4 cycles (typical: 5) with accelerated performance
+- Engineered PySpark/SQL ETL pipelines integrating multiple healthcare data sources covering millions of patients for $4B+ oncology drug performance analytics
+- Defined patient cohort inclusion and exclusion logic robust to missing and miscoded fields, enabling audit-ready reporting
+- Delivered ad hoc analyses identifying care gaps and market opportunities to inform brand strategy across multiple launches
+- Promoted to Associate Consultant in 4 cycles (typical: 5) and received Expert Associate and Insight Illuminator awards
 
 ## PROJECT EXPERIENCE
 
-### Biliary Tract Cancer (BTC) Early Detection using ML - ZS Associates (Jan 2025 - May 2025)
+### Biliary Tract Cancer (BTC) Early Detection using ML
 - Developed an early detection model across 250M patient claims, enabling ~45-day earlier identification compared to standard diagnosis lag
 - Engineered a hybrid feature pipeline combining clinical risk factors, K-means and GMM segmentation, and Transformer-based NLP clustering on diagnosis narratives
 - Presented methodology at PMSA 2025 conference; model adopted for territory-level resource planning
 - Tech: Python, scikit-learn, PySpark
 
-### Financial RAG Chatbot - Columbia University (Nov 2025 - Dec 2025)
+### Financial RAG Chatbot
 - Built an LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations
 - Implemented semantic retrieval with ChromaDB and text-embedding-3-large plus automatic ticker and period parsing
 - Built a multi-model evaluation pipeline using Claude Opus as a judge and deployed a live demo on Streamlit Cloud
-- Tech: Python, FastAPI, ChromaDB, Streamlit
+- Tech: Python, FastAPI, ChromaDB, Streamlit, GCP
 - Live demo: https://finrag-frontend-7pj7nolpla-uc.a.run.app/
 
-### Agricultural Product Standardization & Risk Detection - SunCulture Internship/Co-op (Aug 2025 - Oct 2025)
-- Built a RAG-augmented classification system at SunCulture (Series B Agtech) categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa
+### Agricultural Product Standardization & Risk Detection - SunCulture (Series B Agtech)
+- Built a RAG-augmented classification system categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa
 - Achieved 99% accuracy on a 10,000-item holdout set using hybrid rule-based and LLM-assisted classification, reducing manual review volume by 95% and accelerating loan decisioning
 - Tech: Python, RAG, REST API
 
-### Multi-Agent Historical Dialogue System - Personal Project
-- Built an AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses
+### Multi-Agent Historical Dialogue System
+- Built AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses
 - Implemented era-appropriate prompt engineering and "Dinner Party" mode for multi-figure conversations; deployed on Railway
 - Tech: Python, Flask, OpenRouter API
 - GitHub: https://github.com/ARJUNVARMA2000/Seance_AI
 
 ## TECHNICAL SKILLS
-- **Programming**: Python (advanced), SQL (advanced), C++, R
-- **Analytics & ML**: Machine Learning, Deep Learning, NLP, RAG systems, Data Engineering, ETL
-- **Big Data & MLOps**: PySpark/Spark, Databricks, MLflow, AWS (S3, EMR, Athena, SageMaker)
-- **LLM & AI Tools**: LangChain, OpenAI API, ChromaDB, Prompt Engineering, RAG architectures
-- **Libraries**: pandas, NumPy, scikit-learn, PyTorch, matplotlib, SHAP, BeautifulSoup
-- **Web Development**: Next.js, React, TypeScript, FastAPI, Streamlit
-- **Tools**: Git, Jupyter, VS Code, Cursor IDE, Jira/Confluence
-
-## SOFT SKILLS & LEADERSHIP
-- Led cross-functional teams of up to 5 members
-- Experience collaborating with US-based stakeholders across time zones
-- Strong communicator—presented technical findings to non-technical business leaders
-- Mentored junior team members on ML best practices
+- **Programming**: Python, SQL, R, C++
+- **Analytics & ML**: classification, regression, NLP, clustering, model evaluation, LLMs/RAG, prompt engineering
+- **Data & MLOps**: Spark (PySpark), Databricks, ETL/ELT, MLflow, Docker, AWS (S3, EMR, Athena, SageMaker)
+- **Libraries**: pandas, NumPy, scikit-learn, PyTorch, SHAP, matplotlib, BeautifulSoup
+- **Tools**: Git, Linux, CI/CD, Jupyter, Jira, Confluence, Claude Code, Cursor IDE
 
 ## INTERESTS
 - Fantasy Premier League: Top 1% finishes for 4 consecutive years
@@ -99,7 +86,6 @@ Feel free to ask things like:
 - "Is Arjun looking for internships?"
 - "What's his experience with LLMs and RAG?"
 - "Has he led teams before?"
-- "What's his tech stack for web development?"
 `;
 
 export const SYSTEM_PROMPT = `${RESUME_CONTEXT}
