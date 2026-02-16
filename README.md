@@ -207,9 +207,9 @@ The app can be deployed to any platform supporting Next.js:
 
 ## About Me
 
-**Arjun Varma** — MS Data Science @ Columbia University (May 2026) | Advanced Data Science Consultant @ ZS Associates
+**Arjun Varma** — MS Data Science @ Columbia University | Advanced Data Science Consultant @ ZS Associates
 
-I build intelligent systems with ML, Deep Learning & AI for Fortune 500 healthcare clients. Open to full-time opportunities in Data Science, ML Engineering, and Quant roles starting Summer 2026.
+I build intelligent systems with ML, Deep Learning & AI for Fortune 500 healthcare clients. Currently open to **Summer 2026 internships** in Data Science, ML Engineering, or Quant roles.
 
 ### Contact
 - **Email:** [av3342@columbia.edu](mailto:av3342@columbia.edu)
