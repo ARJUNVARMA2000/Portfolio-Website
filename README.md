@@ -4,9 +4,9 @@ A modern, responsive portfolio website built with Next.js 14, featuring an AI-po
 
 **[Live Demo](https://arjunvarma.com)** · **[LinkedIn](https://www.linkedin.com/in/varma-arjun/)** · **[GitHub](https://github.com/ARJUNVARMA2000)**
 
-![Portfolio Preview](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=flat-square&logo=typescript)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat-square&logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat-square&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
@@ -207,9 +207,9 @@ The app can be deployed to any platform supporting Next.js:
 
 ## About Me
 
-**Arjun Varma** — MS Data Science @ Columbia University | Advanced Data Science Consultant @ ZS Associates
+**Arjun Varma** — MS Data Science @ Columbia University (May 2026) | Advanced Data Science Consultant @ ZS Associates
 
-I build intelligent systems with ML, Deep Learning & AI for Fortune 500 healthcare clients. Currently open to **Summer 2026 internships** in Data Science, ML Engineering, or Quant roles.
+I build intelligent systems with ML, Deep Learning & AI for Fortune 500 healthcare clients. Open to full-time opportunities in Data Science, ML Engineering, and Quant roles starting Summer 2026.
 
 ### Contact
 - **Email:** [av3342@columbia.edu](mailto:av3342@columbia.edu)
