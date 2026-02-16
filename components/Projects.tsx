@@ -158,24 +158,27 @@ export default function Projects() {
                           <Icon size={24} className={colors.icon} />
                         </div>
                         <div>
-                          <h3 className={`text-xl md:text-2xl font-semibold ${colors.icon} mb-1`}>
+                          <h3 className={`text-xl md:text-2xl font-semibold ${colors.icon} mb-1 [font-variant-ligatures:none]`}>
                             {project.title}
                           </h3>
                           <p className="text-text-muted text-sm">
                             {project.subtitle}
                           </p>
-                          <p className="text-text-muted text-xs mt-1 flex items-center gap-1.5">
+                          <p className="text-text-muted text-xs mt-2 flex items-center gap-1.5 flex-wrap">
                             {project.orgLogo && (
                               <span className="relative w-4 h-4 inline-block flex-shrink-0">
                                 <Image src={project.orgLogo} alt={project.org} fill className="object-contain" />
                               </span>
                             )}
-                            {project.orgUrl ? (
-                              <a href={project.orgUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:text-accent-cyan transition-colors underline underline-offset-2">{project.org}</a>
-                            ) : (
-                              <span>{project.org}</span>
-                            )}
-                            <span>•</span> {project.period}
+                            <span className="inline-flex items-center gap-1.5">
+                              {project.orgUrl ? (
+                                <a href={project.orgUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:text-accent-cyan transition-colors underline underline-offset-2">{project.org}</a>
+                              ) : (
+                                <span>{project.org}</span>
+                              )}
+                              <span aria-hidden>•</span>
+                              {project.period}
+                            </span>
                           </p>
                         </div>
                       </div>
@@ -309,21 +312,24 @@ export default function Projects() {
                   <span className="badge">Case Study</span>
                   <span className="badge-secondary">{selectedProject.subtitle}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">
+                <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2 [font-variant-ligatures:none]">
                   {selectedProject.title}
                 </h2>
-                <p className="text-text-muted text-sm flex items-center gap-1.5">
+                <p className="text-text-muted text-sm flex items-center gap-1.5 flex-wrap">
                   {selectedProject.orgLogo && (
                     <span className="relative w-5 h-5 inline-block flex-shrink-0">
                       <Image src={selectedProject.orgLogo} alt={selectedProject.org} fill className="object-contain" />
                     </span>
                   )}
-                  {selectedProject.orgUrl ? (
-                    <a href={selectedProject.orgUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent-cyan transition-colors underline underline-offset-2">{selectedProject.org}</a>
-                  ) : (
-                    <span>{selectedProject.org}</span>
-                  )}
-                  <span>•</span> {selectedProject.period}
+                  <span className="inline-flex items-center gap-1.5">
+                    {selectedProject.orgUrl ? (
+                      <a href={selectedProject.orgUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent-cyan transition-colors underline underline-offset-2">{selectedProject.org}</a>
+                    ) : (
+                      <span>{selectedProject.org}</span>
+                    )}
+                    <span aria-hidden>•</span>
+                    {selectedProject.period}
+                  </span>
                 </p>
               </div>
 
