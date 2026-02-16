@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaGithub, FaExternalLinkAlt, FaBrain, FaRobot, FaDatabase,
-  FaTimes, FaChevronRight, FaChrome, FaStar, FaTwitter, FaBook,
+  FaGithub, FaBrain, FaRobot, FaDatabase,
+  FaTimes, FaChevronRight, FaChrome, FaStar, FaTwitter, FaBook, FaPlay,
   FaCode, FaLaptopCode, FaMicrochip, FaServer, FaGamepad,
   FaMobileAlt, FaCloud, FaChartLine, FaLock, FaCog, FaFlask,
   FaNetworkWired, FaPython, FaReact, FaDocker, FaAws,
@@ -192,18 +192,6 @@ export default function Projects() {
                             <FaGithub size={18} />
                           </motion.a>
                         )}
-                        {project.demo && (
-                          <motion.a
-                            whileHover={{ scale: 1.1 }}
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="p-2.5 rounded-xl text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all"
-                          >
-                            <FaExternalLinkAlt size={16} />
-                          </motion.a>
-                        )}
                       </div>
                     </div>
 
@@ -244,11 +232,16 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          whileHover={{ x: 4 }}
-                          className={`inline-flex items-center gap-2 text-sm ${colors.icon} hover:opacity-80 transition-all font-medium`}
+                          whileHover={{ scale: 1.04 }}
+                          whileTap={{ scale: 0.97 }}
+                          className={`inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full ${colors.badge} transition-all`}
                         >
+                          <span className="relative flex h-2 w-2">
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colors.dot} opacity-75`} />
+                            <span className={`relative inline-flex rounded-full h-2 w-2 ${colors.dot}`} />
+                          </span>
                           Live Demo
-                          <FaExternalLinkAlt size={12} />
+                          <FaPlay size={10} />
                         </motion.a>
                       )}
                       {project.caseStudy && (
