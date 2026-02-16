@@ -456,6 +456,7 @@ export const projects: ProjectData[] = [
       "Single service: FastAPI + React on Railway",
     ],
     github: "https://github.com/ARJUNVARMA2000/ClassPulse",
+    demo: "https://themepulse-production.up.railway.app/",
     period: "2026",
     org: "Personal Project",
     caseStudy: classPulseCaseStudy,
