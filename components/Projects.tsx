@@ -236,17 +236,32 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* Case study button */}
-                    {project.caseStudy && (
-                      <motion.button
-                        whileHover={{ x: 4 }}
-                        onClick={() => setSelectedProject(project)}
-                        className={`inline-flex items-center gap-2 text-sm ${colors.icon} hover:opacity-80 transition-all font-medium`}
-                      >
-                        Read Full Case Study
-                        <FaChevronRight size={12} />
-                      </motion.button>
-                    )}
+                    {/* Links: Live Demo + Case Study */}
+                    <div className="flex flex-wrap items-center gap-4">
+                      {project.demo && (
+                        <motion.a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          whileHover={{ x: 4 }}
+                          className={`inline-flex items-center gap-2 text-sm ${colors.icon} hover:opacity-80 transition-all font-medium`}
+                        >
+                          Live Demo
+                          <FaExternalLinkAlt size={12} />
+                        </motion.a>
+                      )}
+                      {project.caseStudy && (
+                        <motion.button
+                          whileHover={{ x: 4 }}
+                          onClick={() => setSelectedProject(project)}
+                          className={`inline-flex items-center gap-2 text-sm ${colors.icon} hover:opacity-80 transition-all font-medium`}
+                        >
+                          Read Full Case Study
+                          <FaChevronRight size={12} />
+                        </motion.button>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );
