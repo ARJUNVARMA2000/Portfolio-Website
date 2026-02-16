@@ -369,8 +369,8 @@ export const projects: ProjectData[] = [
     caseStudy: seanceAiCaseStudy,
   },
   {
-    title: "Agricultural Product Standardization & Risk Detection",
-    subtitle: "RAG & Classification System",
+    title: "Agricultural Product Standardization and Risk Detection",
+    subtitle: "RAG and Classification System",
     description:
       "Built a RAG-augmented classification system at SunCulture (Series B Agtech) categorizing 7M+ farmer transactions across 500+ product categories to support creditworthiness assessment for microloans in East Africa. Achieved 99% accuracy on a 10,000-item holdout set using hybrid rule-based and LLM-assisted classification, reducing manual review volume by 95% and accelerating loan decisioning.",
     tech: ["Python", "RAG", "REST API"],
