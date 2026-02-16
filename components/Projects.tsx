@@ -192,6 +192,20 @@ export default function Projects() {
                             <FaGithub size={18} />
                           </motion.a>
                         )}
+                        {!project.github && !project.demo && project.orgUrl && project.orgLogo && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.orgUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="p-2 rounded-xl hover:bg-accent-cyan/10 transition-all"
+                          >
+                            <span className="relative w-6 h-6 block">
+                              <Image src={project.orgLogo} alt={project.org} fill className="object-contain" />
+                            </span>
+                          </motion.a>
+                        )}
                       </div>
                     </div>
 
