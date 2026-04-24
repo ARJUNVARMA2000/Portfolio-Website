@@ -24,15 +24,13 @@ export default function FieldNotesPage() {
       if (isMobile) {
         inner.style.transform = "none";
         inner.style.width = "100%";
-        stage.style.display = "block";
-        stage.style.minHeight = "";
+        stage.style.height = "auto";
       } else {
-        stage.style.display = "grid";
         inner.style.width = "1440px";
         const scale = Math.min(1, vw / 1440);
         inner.style.transform = `scale(${scale})`;
-        const rect = inner.getBoundingClientRect();
-        stage.style.minHeight = rect.height + "px";
+        const visualHeight = inner.offsetHeight * scale;
+        stage.style.height = visualHeight + "px";
       }
     };
     fit();
@@ -50,11 +48,11 @@ export default function FieldNotesPage() {
       ref={stageRef}
       id="fn-stage"
       style={{
-        position: "fixed",
-        inset: 0,
-        display: "grid",
-        placeItems: "start center",
-        overflow: "auto",
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        overflow: "hidden",
         background: "#e6e2d8",
       }}
     >
@@ -63,6 +61,7 @@ export default function FieldNotesPage() {
         id="fn-stage-inner"
         style={{
           width: 1440,
+          flexShrink: 0,
           transformOrigin: "top center",
         }}
       >
