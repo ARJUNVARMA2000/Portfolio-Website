@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Familjen+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600&family=Kalam:wght@400;700&display=swap');
+
+html:has(#fn-stage),
+html:has(#fn-stage) body {
+  margin: 0;
+  padding: 0;
+  background: #e6e2d8;
+  font-family: "Familjen Grotesk", system-ui, sans-serif;
+}
+
+#fn-stage,
+#fn-stage *,
+#fn-stage *::before,
+#fn-stage *::after {
+  box-sizing: border-box;
+}
+
+#fn-stage a {
+  color: inherit;
+}
+
+#fn-stage button {
+  font: inherit;
+}
+
+@keyframes fnpulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (max-width: 899px) {
+  #fn-stage {
+    overflow-x: hidden;
+  }
+  #fn-stage * {
+    min-width: 0;
+    max-width: 100%;
+  }
+  #fn-stage svg,
+  #fn-stage iframe,
+  #fn-stage pre {
+    max-width: 100%;
+    height: auto;
+  }
+}

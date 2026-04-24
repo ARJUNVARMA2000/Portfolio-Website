@@ -102,6 +102,13 @@ export default function Navbar() {
           {/* Right side */}
           <div className="hidden md:flex items-center gap-3">
             <a
+              href="/field-notes"
+              className="px-3 py-1.5 rounded-full text-xs font-medium text-text-secondary hover:text-accent-pink border border-border/50 hover:border-accent-pink/40 transition-all duration-300"
+              title="View portfolio as a field notebook"
+            >
+              Field Notes ↗
+            </a>
+            <a
               href="https://github.com/ARJUNVARMA2000"
               target="_blank"
               rel="noopener noreferrer"
