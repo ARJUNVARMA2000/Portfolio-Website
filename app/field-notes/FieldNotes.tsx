@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, type CSSProperties } from "react";
+import React, { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
@@ -701,6 +701,8 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
   const primary = rest.filter((p) => !p.secondary);
   const secondary = rest.filter((p) => p.secondary);
   const primaryEnd = primary.length + 1; // e.g. Airbnb=01, primary 02..06
+  const [activeTitle, setActiveTitle] = useState<string | null>(null);
+  const activeProject = activeTitle ? rest.find((p) => p.title === activeTitle) : null;
   return (
     <section style={{ padding: mobile ? "32px 20px 24px" : `40px ${padR} 30px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 22, flexWrap: "wrap" }}>
@@ -721,7 +723,13 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
 
       <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)", gap: mobile ? 18 : 26 }}>
         {primary.map((p, i) => (
-          <LogCard key={p.title} p={p} n={i + 2} mobile={mobile} />
+          <LogCard
+            key={p.title}
+            p={p}
+            n={i + 2}
+            mobile={mobile}
+            onOpenCase={p.caseStudy ? () => setActiveTitle(p.title) : undefined}
+          />
         ))}
       </div>
 
@@ -752,26 +760,45 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
             }}
           >
             {secondary.map((p, i) => (
-              <LogCard key={p.title} p={p} n={primaryEnd + 1 + i} mobile={mobile} />
+              <LogCard
+                key={p.title}
+                p={p}
+                n={primaryEnd + 1 + i}
+                mobile={mobile}
+                onOpenCase={p.caseStudy ? () => setActiveTitle(p.title) : undefined}
+              />
             ))}
           </div>
         </details>
+      )}
+
+      {activeProject && activeProject.caseStudy && (
+        <CaseStudyPanel project={activeProject} mobile={mobile} onClose={() => setActiveTitle(null)} />
       )}
     </section>
   );
 }
 
-function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mobile: boolean }) {
+function LogCard({
+  p,
+  n,
+  mobile,
+  onOpenCase,
+}: {
+  p: (typeof PROJECTS)[number];
+  n: number;
+  mobile: boolean;
+  onOpenCase?: () => void;
+}) {
   const [hover, setHover] = useState(false);
-  const [open, setOpen] = useState(false);
-  const hasCase = !!p.caseStudy;
+  const hasCase = !!onOpenCase;
   const stop = (e: React.MouseEvent) => e.stopPropagation();
 
   return (
     <article
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => hasCase && setOpen((v) => !v)}
+      onClick={() => onOpenCase?.()}
       data-cursor={hasCase ? "grow" : undefined}
       style={{
         padding: mobile ? "16px 18px" : "20px 22px",
@@ -779,7 +806,7 @@ function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mo
         border: `1.5px solid ${RULE}`,
         position: "relative",
         transition: "transform .25s",
-        transform: hover && !open ? "translateY(-3px)" : "none",
+        transform: hover ? "translateY(-3px)" : "none",
         cursor: hasCase ? "pointer" : "default",
       }}
     >
@@ -895,17 +922,24 @@ function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mo
               color: ACCENT,
             }}
           >
-            {open ? "close ↑" : "read the case study ↓"}
+            read the case study →
           </span>
         )}
       </div>
-
-      {hasCase && open && <CaseStudyDrawer cs={p.caseStudy!} />}
     </article>
   );
 }
 
-function CaseStudyDrawer({ cs }: { cs: NonNullable<(typeof PROJECTS)[number]["caseStudy"]> }) {
+function CaseStudyPanel({
+  project,
+  mobile,
+  onClose,
+}: {
+  project: (typeof PROJECTS)[number];
+  mobile: boolean;
+  onClose: () => void;
+}) {
+  const cs = project.caseStudy!;
   const sections: Array<{ label: string; body: string; note: string }> = [
     { label: "Problem", body: cs.problem, note: "the why" },
     { label: "Challenge", body: cs.challenge, note: "what made it hard" },
@@ -913,20 +947,157 @@ function CaseStudyDrawer({ cs }: { cs: NonNullable<(typeof PROJECTS)[number]["ca
     { label: "Solution", body: cs.solution, note: "what shipped" },
     { label: "Impact", body: cs.impact, note: "what it moved" },
   ];
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
   return (
     <div
+      onClick={onClose}
       style={{
-        marginTop: 18,
-        paddingTop: 16,
-        borderTop: `1px dashed ${RULE}`,
+        position: "fixed",
+        inset: 0,
+        zIndex: 60,
+        background: "rgba(27, 26, 22, .42)",
+        backdropFilter: "blur(2px)",
         display: "flex",
-        flexDirection: "column",
-        gap: 16,
+        justifyContent: "flex-end",
+        animation: "fn-fade-in .18s ease-out",
       }}
     >
-      {sections.map((s) => (
-        <CaseSection key={s.label} label={s.label} body={s.body} note={s.note} />
-      ))}
+      <aside
+        role="dialog"
+        aria-label={`${project.title} — case study`}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: mobile ? "100%" : "clamp(440px, 52vw, 680px)",
+          height: "100%",
+          background: PAPER,
+          boxShadow: "-20px 0 60px rgba(0,0,0,.22)",
+          overflowY: "auto",
+          padding: mobile ? "24px 22px 48px" : "36px 44px 56px",
+          position: "relative",
+          borderLeft: `1.5px solid ${RULE}`,
+          animation: "fn-slide-in .28s cubic-bezier(.2,.8,.2,1)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 16,
+            marginBottom: 18,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontFamily: mono,
+                fontSize: 10.5,
+                letterSpacing: ".22em",
+                color: ACCENT,
+                textTransform: "uppercase",
+                marginBottom: 6,
+              }}
+            >
+              [ case study ] — {project.kicker} · {project.year}
+            </div>
+            <h3
+              style={{
+                fontFamily: serif,
+                fontSize: mobile ? 28 : 36,
+                lineHeight: 1.05,
+                letterSpacing: "-.02em",
+                fontWeight: 500,
+                margin: 0,
+              }}
+            >
+              {project.title}
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close case study"
+            style={{
+              flexShrink: 0,
+              background: "transparent",
+              border: `1.4px solid ${RULE}`,
+              padding: "6px 12px",
+              cursor: "pointer",
+              fontFamily: mono,
+              fontSize: 12,
+              letterSpacing: ".1em",
+              textTransform: "uppercase",
+              color: INK,
+            }}
+          >
+            close ✕
+          </button>
+        </div>
+
+        <p style={{ fontFamily: serif, fontSize: 15.5, lineHeight: 1.6, color: INK, marginBottom: 22 }}>
+          {project.summary}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 22,
+            paddingTop: 18,
+            borderTop: `1px dashed ${RULE}`,
+          }}
+        >
+          {sections.map((s) => (
+            <CaseSection key={s.label} label={s.label} body={s.body} note={s.note} />
+          ))}
+        </div>
+
+        <div
+          style={{
+            marginTop: 26,
+            paddingTop: 18,
+            borderTop: `1px dashed ${RULE}`,
+            display: "flex",
+            gap: 16,
+            alignItems: "center",
+            fontFamily: sans,
+            fontSize: 12,
+            letterSpacing: ".1em",
+            textTransform: "uppercase",
+            flexWrap: "wrap",
+          }}
+        >
+          {project.href && (
+            <a href={project.href} target="_blank" rel="noopener noreferrer" style={{ color: ACCENT, textDecoration: "none", borderBottom: `1.5px solid ${ACCENT}` }}>
+              live →
+            </a>
+          )}
+          {project.repo && (
+            <a href={project.repo} target="_blank" rel="noopener noreferrer" style={{ color: INK, textDecoration: "none", borderBottom: `1.5px solid ${INK}` }}>
+              source →
+            </a>
+          )}
+          <span style={{ marginLeft: "auto", fontFamily: mono, fontSize: 11, color: MUTED, letterSpacing: ".14em" }}>
+            esc to close
+          </span>
+        </div>
+      </aside>
     </div>
   );
 }
