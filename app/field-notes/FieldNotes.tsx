@@ -4,8 +4,12 @@ import React, { useRef, useState, type CSSProperties } from "react";
 import {
   AskTerminal,
   Cursor,
+  LivePreview,
+  MultiAgentDiagram,
   NoteBtn,
   Scramble,
+  SiteModal,
+  TraceLog,
   useAskTerminal,
 } from "./parts";
 import { EXPERIENCE, PROJECTS, SKILLS, type Experience } from "./data";
@@ -31,6 +35,7 @@ const paperBG: CSSProperties = {
 export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [askOpen, setAskOpen] = useAskTerminal();
+  const [siteModal, setSiteModal] = useState(false);
 
   return (
     <div
@@ -326,6 +331,8 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         </div>
       </section>
 
+      <AirbnbAgentFeature onFullscreen={() => setSiteModal(true)} mobile={mobile} />
+
       <ProjectLog mobile={mobile} />
 
       <Trajectory mobile={mobile} />
@@ -390,14 +397,275 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         }}
       />
 
+      <SiteModal
+        open={siteModal}
+        onClose={() => setSiteModal(false)}
+        url="https://airbnb-frontend-686529012610.us-east1.run.app/"
+        title="Airbnb Data Analyst Agent — live"
+        accent={ACCENT}
+        mono={mono}
+      />
     </div>
+  );
+}
+
+/* ─── Airbnb Agent — Featured ────────────────────────── */
+
+function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void; mobile: boolean }) {
+  const SAMPLE_QS = [
+    "Do superhosts get better review scores than other hosts?",
+    "Which Brooklyn neighborhoods saw the biggest price shift 2019→2023?",
+    "What’s the cheapest private room within 1mi of Union Square?",
+    "How does price correlate with review volume for entire homes?",
+  ];
+  const [active, setActive] = useState(0);
+
+  return (
+    <section style={{ padding: mobile ? "32px 20px 32px" : "44px 64px 44px 120px", borderBottom: `1px dashed ${RULE}` }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 18, flexWrap: "wrap" }}>
+        <span
+          style={{
+            fontFamily: mono,
+            fontSize: 10.5,
+            letterSpacing: ".22em",
+            color: ACCENT,
+            textTransform: "uppercase",
+          }}
+        >
+          [ Exp. 01 — featured ]
+        </span>
+        <span
+          style={{
+            fontFamily: mono,
+            fontSize: 10.5,
+            color: "#14a058",
+            border: `1.2px solid #14a058`,
+            padding: "2px 8px",
+            letterSpacing: ".14em",
+            textTransform: "uppercase",
+          }}
+        >
+          live demo
+        </span>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1.25fr 1fr", gap: mobile ? 24 : 36 }}>
+        {/* LEFT */}
+        <div>
+          <h3
+            style={{
+              fontFamily: serif,
+              fontSize: mobile ? 34 : 60,
+              lineHeight: 0.98,
+              letterSpacing: "-.02em",
+              fontWeight: 500,
+              margin: 0,
+            }}
+          >
+            <Scramble trigger="hover" speed={55}>A drop-in data analyst for any database.</Scramble>
+          </h3>
+          <div
+            style={{
+              fontFamily: sans,
+              fontSize: 13,
+              color: MUTED,
+              letterSpacing: ".14em",
+              textTransform: "uppercase",
+              marginTop: 8,
+            }}
+          >
+            Agentic AI · Columbia · 2026
+          </div>
+          <p
+            style={{
+              fontFamily: serif,
+              fontSize: 19,
+              lineHeight: 1.55,
+              color: INK,
+              marginTop: 16,
+              maxWidth: "50ch",
+            }}
+          >
+            Ask a question in English. A multi-agent system plans the work, writes SQL, validates the result,
+            renders a chart, and narrates the answer with citations back to the source rows. Built on the NYC
+            Airbnb corpus, designed to plug into any warehouse.
+          </p>
+
+          <figure
+            style={{
+              margin: "22px 0 0",
+              padding: 18,
+              background: "rgba(255,255,255,.45)",
+              border: `1.5px solid ${RULE}`,
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: hand,
+                fontSize: 22,
+                color: ACCENT,
+                position: "absolute",
+                top: -14,
+                left: 18,
+                background: PAPER,
+                padding: "0 8px",
+              }}
+            >
+              fig. A — multi-agent architecture
+            </div>
+            <MultiAgentDiagram ink={INK} accent={ACCENT} muted={MUTED} hand={hand} mono={mono} />
+            <figcaption style={{ fontFamily: hand, fontSize: 18, color: INK, marginTop: 4 }}>
+              five agents, typed message bus, every step auditable.
+            </figcaption>
+          </figure>
+
+          <div style={{ marginTop: 22, display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 14 : 20 }}>
+            <div style={{ padding: "14px 16px", background: "rgba(255,255,255,.35)", border: `1.2px solid ${RULE}` }}>
+              <div style={{ fontFamily: hand, fontSize: 22, color: ACCENT, lineHeight: 1 }}>
+                tools &amp; contracts
+              </div>
+              <ul
+                style={{
+                  listStyle: "none",
+                  margin: "10px 0 0",
+                  padding: 0,
+                  fontFamily: mono,
+                  fontSize: 11.5,
+                  lineHeight: 1.85,
+                  color: INK,
+                }}
+              >
+                <li><span style={{ color: ACCENT }}>db.schema</span>() → Table[]</li>
+                <li><span style={{ color: ACCENT }}>db.query</span>(sql) → DataFrame</li>
+                <li><span style={{ color: ACCENT }}>df.describe</span>(df) → Stats</li>
+                <li><span style={{ color: ACCENT }}>plot.auto</span>(df, intent) → PNG</li>
+                <li><span style={{ color: ACCENT }}>web.search</span>(q) → Link[]</li>
+              </ul>
+            </div>
+            <div style={{ padding: "14px 16px", background: "rgba(255,255,255,.35)", border: `1.2px solid ${RULE}` }}>
+              <div style={{ fontFamily: hand, fontSize: 22, color: ACCENT, lineHeight: 1 }}>guards &amp; evals</div>
+              <ul
+                style={{
+                  listStyle: "none",
+                  margin: "10px 0 0",
+                  padding: 0,
+                  fontFamily: mono,
+                  fontSize: 11.5,
+                  lineHeight: 1.85,
+                  color: INK,
+                }}
+              >
+                <li>→ SQL dry-run + row-count sanity</li>
+                <li>→ null / type audit pre-plot</li>
+                <li>→ self-critique on mismatched intents</li>
+                <li>→ retry on tool error (×3, backoff)</li>
+                <li>→ golden Q/A regression suite</li>
+              </ul>
+            </div>
+          </div>
+
+          <figure style={{ margin: "22px 0 0" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
+              <div style={{ fontFamily: hand, fontSize: 22, color: ACCENT }}>fig. B — sample trace</div>
+              <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />
+            </div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
+              {SAMPLE_QS.map((q, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  data-cursor="grow"
+                  style={{
+                    fontFamily: sans,
+                    fontSize: 12,
+                    padding: "4px 10px",
+                    cursor: "pointer",
+                    background: i === active ? ACCENT : "transparent",
+                    color: i === active ? PAPER : INK,
+                    border: `1.2px solid ${i === active ? ACCENT : INK}`,
+                  }}
+                >
+                  Q{i + 1}
+                </button>
+              ))}
+              <span style={{ fontFamily: hand, fontSize: 18, color: MUTED, marginLeft: 4 }}>
+                ↳ try a question
+              </span>
+            </div>
+            <TraceLog q={SAMPLE_QS[active]} idx={active} accent={ACCENT} rule={RULE} mono={mono} />
+          </figure>
+        </div>
+
+        {/* RIGHT */}
+        <div>
+          <LivePreview
+            onFullscreen={onFullscreen}
+            url="https://airbnb-frontend-686529012610.us-east1.run.app/"
+            accent={ACCENT}
+            paper={PAPER}
+            rule={RULE}
+            mono={mono}
+            hand={hand}
+          />
+
+          <div
+            style={{
+              marginTop: 18,
+              padding: "14px 16px",
+              background: "rgba(255,255,255,.35)",
+              border: `1.2px solid ${RULE}`,
+            }}
+          >
+            <div style={{ fontFamily: hand, fontSize: 24, color: ACCENT, lineHeight: 1 }}>at a glance</div>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: "10px 0 0",
+                padding: 0,
+                fontFamily: serif,
+                fontSize: 15,
+                lineHeight: 1.7,
+                color: INK,
+              }}
+            >
+              {[
+                "five specialized agents on a typed message bus",
+                "planner decomposes → SQL agent writes → validator audits",
+                "chart agent renders, narrator cites every number",
+                "pluggable warehouse adapters: DuckDB · Postgres · Snowflake",
+                "regression evals + per-query latency / cost breakdown",
+              ].map((b) => (
+                <li key={b}>
+                  <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <NoteBtn onClick={onFullscreen} accent={ACCENT} ink={INK}>
+              open fullscreen ⤢
+            </NoteBtn>
+            <NoteBtn
+              href="https://github.com/Agentic-AI-Project-Columbia/airbnb-data-analyst-agent"
+              accent={ACCENT}
+              ink={INK}
+            >
+              source →
+            </NoteBtn>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 /* ─── Project log ──────────────────────────────────────── */
 
 function ProjectLog({ mobile }: { mobile: boolean }) {
-  const ps = PROJECTS;
+  const ps = PROJECTS.slice(1);
   return (
     <section style={{ padding: mobile ? "32px 20px 24px" : "40px 64px 30px 120px", borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 22, flexWrap: "wrap" }}>
@@ -410,15 +678,15 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
             textTransform: "uppercase",
           }}
         >
-          [ Log — experiments 01—{String(ps.length).padStart(2, "0")} ]
+          [ Log — experiments 02—09 ]
         </div>
         {!mobile && <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />}
-        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>{ps.length} in the book</div>
+        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>{ps.length} more in the book</div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)", gap: mobile ? 18 : 26 }}>
         {ps.map((p, i) => (
-          <LogCard key={p.title} p={p} n={i + 1} mobile={mobile} />
+          <LogCard key={p.title} p={p} n={i + 2} mobile={mobile} />
         ))}
       </div>
     </section>
