@@ -154,9 +154,50 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
             <span style={{ color: ACCENT }}> obsessive about the loop</span>.
           </div>
 
+          {/* hiring stripe — highest-value signal, promoted */}
           <div
             style={{
-              marginTop: 24,
+              marginTop: 22,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: mobile ? 10 : 16,
+              padding: mobile ? "10px 14px" : "12px 18px",
+              borderTop: `2px solid ${ACCENT}`,
+              borderBottom: `2px solid ${ACCENT}`,
+              background: "rgba(180, 83, 31, .07)",
+              flexWrap: "wrap",
+              maxWidth: 620,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: mono,
+                fontSize: mobile ? 10 : 11,
+                letterSpacing: ".22em",
+                color: ACCENT,
+                textTransform: "uppercase",
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+              }}
+            >
+              [ available · jan ’27 ]
+            </span>
+            <span
+              style={{
+                fontFamily: serif,
+                fontSize: mobile ? 16 : 19,
+                color: INK,
+                fontStyle: "italic",
+                lineHeight: 1.35,
+              }}
+            >
+              full-time DS / MLE roles — <strong style={{ fontStyle: "normal" }}>let’s talk.</strong>
+            </span>
+          </div>
+
+          <div
+            style={{
+              marginTop: 20,
               padding: "16px 20px",
               background: "rgba(255,255,255,.45)",
               border: `1.5px solid ${RULE}`,
@@ -202,25 +243,11 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
             </ul>
           </div>
 
-          <div style={{ display: "flex", gap: 14, marginTop: 22, fontFamily: sans, fontSize: 13, flexWrap: "wrap" }}>
-            <NoteBtn href="/resume.pdf" accent={ACCENT} ink={INK}>
-              resume →
-            </NoteBtn>
-            <NoteBtn href="mailto:av3342@columbia.edu" accent={ACCENT} ink={INK}>
-              email →
-            </NoteBtn>
-            <NoteBtn href="https://www.linkedin.com/in/varma-arjun/" accent={ACCENT} ink={INK}>
-              linkedin →
-            </NoteBtn>
-            <NoteBtn href="https://github.com/ARJUNVARMA2000" accent={ACCENT} ink={INK}>
-              github →
-            </NoteBtn>
-          </div>
           <button
             type="button"
             onClick={() => setAskOpen(true)}
             style={{
-              marginTop: 12,
+              marginTop: 22,
               background: "transparent",
               border: "none",
               padding: 0,
@@ -230,10 +257,41 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
               color: MUTED,
               letterSpacing: ".06em",
               textAlign: "left",
+              display: "block",
             }}
           >
             press <kbd style={{ padding: "1px 6px", border: `1px solid ${RULE}`, borderRadius: 3, fontFamily: mono, fontSize: 11 }}>⌘K</kbd> to ask me anything →
           </button>
+
+          {/* demoted quick-links — practical but subordinate to hiring stripe */}
+          <div
+            style={{
+              marginTop: 10,
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              fontFamily: mono,
+              fontSize: 12,
+              color: MUTED,
+              flexWrap: "wrap",
+            }}
+          >
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ color: INK, textDecoration: "underline", textDecorationColor: "rgba(0,0,0,.25)", textUnderlineOffset: 3 }}>
+              resume
+            </a>
+            <span style={{ color: RULE }}>·</span>
+            <a href="mailto:av3342@columbia.edu" style={{ color: INK, textDecoration: "underline", textDecorationColor: "rgba(0,0,0,.25)", textUnderlineOffset: 3 }}>
+              email
+            </a>
+            <span style={{ color: RULE }}>·</span>
+            <a href="https://www.linkedin.com/in/varma-arjun/" target="_blank" rel="noopener noreferrer" style={{ color: INK, textDecoration: "underline", textDecorationColor: "rgba(0,0,0,.25)", textUnderlineOffset: 3 }}>
+              linkedin
+            </a>
+            <span style={{ color: RULE }}>·</span>
+            <a href="https://github.com/ARJUNVARMA2000" target="_blank" rel="noopener noreferrer" style={{ color: INK, textDecoration: "underline", textDecorationColor: "rgba(0,0,0,.25)", textUnderlineOffset: 3 }}>
+              github
+            </a>
+          </div>
         </div>
 
         {/* polaroid */}
@@ -281,24 +339,6 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
             <div style={{ fontFamily: hand, fontSize: 22, color: INK, marginTop: 10, textAlign: "center" }}>
               Morningside — Spring ’26
             </div>
-          </div>
-
-          <div
-            style={{
-              marginTop: 22,
-              fontFamily: hand,
-              fontSize: 22,
-              color: ACCENT,
-              transform: "rotate(-1.5deg)",
-              lineHeight: 1.25,
-              maxWidth: 260,
-            }}
-          >
-            <span style={{ fontSize: 26 }}>p.s.</span> also hunting for <u>full-time DS / MLE</u> roles
-            starting <strong>Jan ’27</strong> —
-            <span style={{ display: "block", fontSize: 19, color: INK, marginTop: 2 }}>
-              let’s talk ↓
-            </span>
           </div>
         </div>
       </section>
