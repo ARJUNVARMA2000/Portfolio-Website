@@ -275,7 +275,7 @@ export function NoteBtn({
       {href ? (
         <a
           href={href}
-          target={href.startsWith("http") ? "_blank" : undefined}
+          target={href.startsWith("http") || href.endsWith(".pdf") ? "_blank" : undefined}
           rel="noopener noreferrer"
           style={common}
           onMouseEnter={onEnter}
@@ -422,10 +422,10 @@ export function AskTerminal({
         </div>
         <div ref={scrollRef} style={{ padding: 16, overflowY: "auto", lineHeight: 1.55, fontSize: 14 }}>
           <div style={{ marginBottom: 10, color: theme.muted, whiteSpace: "pre-wrap" }}>
-            arjun@portfolio ~ % ask &ldquo;anything about me&rdquo;
+            arjun@portfolio ~ % ask “anything about me”
           </div>
           <div style={{ marginBottom: 14, color: theme.muted, whiteSpace: "pre-wrap" }}>
-            try: &ldquo;what did you do at zs?&rdquo; · &ldquo;how do you use llms?&rdquo; · &ldquo;biggest shipped impact?&rdquo;
+            try: “what did you do at zs?” · “how do you use llms?” · “biggest shipped impact?”
           </div>
           {messages.map((m) => (
             <div key={m.id} style={{ marginBottom: 10, whiteSpace: "pre-wrap" }}>

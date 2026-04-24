@@ -62,6 +62,7 @@ export type Project = {
   repo?: string;
   tag?: string;
   caseStudy?: CaseStudy;
+  secondary?: boolean;
 };
 
 const btcCaseStudy: CaseStudy = {
@@ -349,6 +350,7 @@ export const PROJECTS: Project[] = [
     tech: ["Chrome MV3", "OpenRouter", "Claude Opus/Sonnet/Haiku"],
     repo: "https://github.com/ARJUNVARMA2000/tweet-bot",
     caseStudy: tweetBotCaseStudy,
+    secondary: true,
   },
   {
     title: "Citation Format Checker",
@@ -360,6 +362,7 @@ export const PROJECTS: Project[] = [
     href: "https://citation-bot-7pj7nolpla-uc.a.run.app",
     repo: "https://github.com/ARJUNVARMA2000/citation-format-checker",
     caseStudy: citationCheckerCaseStudy,
+    secondary: true,
   },
   {
     title: "SeanceAI",
@@ -382,6 +385,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/ARJUNVARMA2000/Video-Speed-Controller-extension",
     href: "https://chromewebstore.google.com/detail/video-speed-controller-pr/mahfenfglifhcipcpobblpgdaefigpee",
     caseStudy: videoSpeedCaseStudy,
+    secondary: true,
   },
 ];
 

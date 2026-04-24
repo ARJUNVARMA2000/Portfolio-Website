@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arjun-varma.com"),
   title: "Arjun Varma — Field Notes",
   description:
-    "Field Notes of Arjun Varma — data scientist, ML engineer, obsessive about the loop. Incoming Data Science Intern at Novo Nordisk (Summer '26). MS Data Science @ Columbia. Seeking full-time DS/MLE roles starting Jan '27.",
+    "Field Notes of Arjun Varma — data scientist, ML engineer, obsessive about the loop. Incoming Data Science Intern at Novo Nordisk (Summer \u201926). MS Data Science @ Columbia. Seeking full-time DS/MLE roles starting Jan \u201927.",
   keywords: [
     "Arjun Varma",
     "Data Scientist",
@@ -30,23 +29,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Arjun Varma — Field Notes",
     description:
-      "data scientist, ML engineer, obsessive about the loop. Novo Nordisk Summer '26 incoming · Columbia MS · seeking full-time Jan '27.",
+      "data scientist, ML engineer, obsessive about the loop. Novo Nordisk Summer \u201926 incoming · Columbia MS · seeking full-time Jan \u201927.",
     siteName: "Arjun Varma — Field Notes",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Arjun Varma — Field Notes · Data Scientist & ML Engineer",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Arjun Varma — Field Notes",
     description:
-      "data scientist, ML engineer, obsessive about the loop. Columbia MS · Novo Nordisk '26 · open to full-time Jan '27.",
-    images: ["/og-image.png"],
+      "data scientist, ML engineer, obsessive about the loop. Columbia MS · Novo Nordisk \u201926 · open to full-time Jan \u201927.",
   },
   robots: {
     index: true,
@@ -73,7 +63,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0A0C0D" />
       </head>
       <body className="antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
         <Analytics />
       </body>
     </html>

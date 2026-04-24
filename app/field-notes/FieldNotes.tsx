@@ -1,18 +1,21 @@
 "use client";
 
 import React, { useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import {
-  AskTerminal,
   Cursor,
   LivePreview,
   MultiAgentDiagram,
   NoteBtn,
   Scramble,
-  SiteModal,
   TraceLog,
   useAskTerminal,
 } from "./parts";
 import { EXPERIENCE, PROJECTS, SKILLS, type Experience } from "./data";
+
+const AskTerminal = dynamic(() => import("./parts").then((m) => ({ default: m.AskTerminal })), { ssr: false });
+const SiteModal = dynamic(() => import("./parts").then((m) => ({ default: m.SiteModal })), { ssr: false });
 
 const PAPER = "#f6efe0";
 const INK = "#1b1a16";
@@ -121,7 +124,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
               marginBottom: 4,
             }}
           >
-            ~ hi, I&apos;m —
+            ~ hi, I’m —
           </div>
           <h1
             style={{
@@ -198,19 +201,37 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
           </div>
 
           <div style={{ display: "flex", gap: 14, marginTop: 22, fontFamily: sans, fontSize: 13, flexWrap: "wrap" }}>
-            <NoteBtn onClick={() => setAskOpen(true)} accent={ACCENT} ink={INK}>
-              ~/ask me anything
+            <NoteBtn href="/resume.pdf" accent={ACCENT} ink={INK}>
+              resume →
             </NoteBtn>
             <NoteBtn href="mailto:av3342@columbia.edu" accent={ACCENT} ink={INK}>
               email →
             </NoteBtn>
-            <NoteBtn href="https://github.com/ARJUNVARMA2000" accent={ACCENT} ink={INK}>
-              github →
-            </NoteBtn>
             <NoteBtn href="https://www.linkedin.com/in/varma-arjun/" accent={ACCENT} ink={INK}>
               linkedin →
             </NoteBtn>
+            <NoteBtn href="https://github.com/ARJUNVARMA2000" accent={ACCENT} ink={INK}>
+              github →
+            </NoteBtn>
           </div>
+          <button
+            type="button"
+            onClick={() => setAskOpen(true)}
+            style={{
+              marginTop: 12,
+              background: "transparent",
+              border: "none",
+              padding: 0,
+              cursor: "pointer",
+              fontFamily: mono,
+              fontSize: 12,
+              color: MUTED,
+              letterSpacing: ".06em",
+              textAlign: "left",
+            }}
+          >
+            press <kbd style={{ padding: "1px 6px", border: `1px solid ${RULE}`, borderRadius: 3, fontFamily: mono, fontSize: 11 }}>⌘K</kbd> to ask me anything →
+          </button>
         </div>
 
         {/* polaroid */}
@@ -238,12 +259,16 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
                 border: "1px solid rgba(0,0,0,.08)",
               }}
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/profile.jpg"
               alt="Arjun"
+              width={260}
+              height={273}
+              priority
+              sizes="260px"
               style={{
                 width: "100%",
+                height: "auto",
                 aspectRatio: "1/1.05",
                 objectFit: "cover",
                 objectPosition: "center top",
@@ -252,7 +277,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
               }}
             />
             <div style={{ fontFamily: hand, fontSize: 22, color: INK, marginTop: 10, textAlign: "center" }}>
-              Morningside — Spring &apos;26
+              Morningside — Spring ’26
             </div>
           </div>
 
@@ -270,7 +295,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
             <span style={{ fontSize: 26 }}>p.s.</span> also hunting for <u>full-time DS / MLE</u> roles
             starting <strong>Jan ’27</strong> —
             <span style={{ display: "block", fontSize: 19, color: INK, marginTop: 2 }}>
-              let&apos;s talk ↓
+              let’s talk ↓
             </span>
           </div>
         </div>
@@ -300,7 +325,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
           <p style={{ fontFamily: serif, fontSize: mobile ? 18 : 22, lineHeight: 1.5, color: INK }}>
             Three-plus years working with data taught me one thing: the model is easy; the
             <em> loop</em> is the product. Pipelines, evals, drift, citations — the stuff that
-            isn&apos;t pretty on a slide is what keeps systems alive in production. Now I&apos;m
+            isn’t pretty on a slide is what keeps systems alive in production. Now I’m
             building agents that plan, query, and cite their own homework.
             <sup style={{ color: ACCENT }}>[1]</sup>
           </p>
@@ -314,7 +339,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
               lineHeight: 1.3,
             }}
           >
-            &ldquo;measure the thing that matters, not the thing that&apos;s easy.&rdquo;
+            “measure the thing that matters, not the thing that’s easy.”
             <div
               style={{
                 fontFamily: sans,
@@ -341,8 +366,6 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
 
       <Toolbox mobile={mobile} />
 
-      <ContactForm mobile={mobile} />
-
       {/* footer */}
       <footer
         style={{
@@ -357,7 +380,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
       >
         <div>
           <div style={{ fontFamily: hand, fontSize: mobile ? 32 : 40, color: ACCENT, lineHeight: 1 }}>
-            let&apos;s build something.
+            let’s build something.
           </div>
           <div style={{ fontFamily: serif, fontSize: 16, color: INK, marginTop: 4 }}>
             av3342@columbia.edu
@@ -384,27 +407,31 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         </div>
       </footer>
 
-      <AskTerminal
-        open={askOpen}
-        onClose={() => setAskOpen(false)}
-        theme={{
-          bg: "#1b1a16",
-          fg: "#f6efe0",
-          muted: "#9a9284",
-          accent: ACCENT,
-          border: "#3a3328",
-          mono,
-        }}
-      />
+      {askOpen && (
+        <AskTerminal
+          open={askOpen}
+          onClose={() => setAskOpen(false)}
+          theme={{
+            bg: "#1b1a16",
+            fg: "#f6efe0",
+            muted: "#9a9284",
+            accent: ACCENT,
+            border: "#3a3328",
+            mono,
+          }}
+        />
+      )}
 
-      <SiteModal
-        open={siteModal}
-        onClose={() => setSiteModal(false)}
-        url="https://airbnb-frontend-686529012610.us-east1.run.app/"
-        title="Airbnb Data Analyst Agent — live"
-        accent={ACCENT}
-        mono={mono}
-      />
+      {siteModal && (
+        <SiteModal
+          open={siteModal}
+          onClose={() => setSiteModal(false)}
+          url="https://airbnb-frontend-686529012610.us-east1.run.app/"
+          title="Airbnb Data Analyst Agent — live"
+          accent={ACCENT}
+          mono={mono}
+        />
+      )}
     </div>
   );
 }
@@ -665,7 +692,10 @@ function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void
 /* ─── Project log ──────────────────────────────────────── */
 
 function ProjectLog({ mobile }: { mobile: boolean }) {
-  const ps = PROJECTS.slice(1);
+  const rest = PROJECTS.slice(1);
+  const primary = rest.filter((p) => !p.secondary);
+  const secondary = rest.filter((p) => p.secondary);
+  const primaryEnd = primary.length + 1; // e.g. Airbnb=01, primary 02..06
   return (
     <section style={{ padding: mobile ? "32px 20px 24px" : "40px 64px 30px 120px", borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 22, flexWrap: "wrap" }}>
@@ -678,17 +708,50 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
             textTransform: "uppercase",
           }}
         >
-          [ Log — experiments 02—09 ]
+          [ Log — experiments 02—{String(primaryEnd).padStart(2, "0")} ]
         </div>
         {!mobile && <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />}
-        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>{ps.length} more in the book</div>
+        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>{rest.length} more in the book</div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)", gap: mobile ? 18 : 26 }}>
-        {ps.map((p, i) => (
+        {primary.map((p, i) => (
           <LogCard key={p.title} p={p} n={i + 2} mobile={mobile} />
         ))}
       </div>
+
+      {secondary.length > 0 && (
+        <details style={{ marginTop: mobile ? 24 : 32 }}>
+          <summary
+            style={{
+              cursor: "pointer",
+              listStyle: "none",
+              fontFamily: mono,
+              fontSize: 11,
+              letterSpacing: ".2em",
+              color: ACCENT,
+              textTransform: "uppercase",
+              padding: "10px 0",
+              borderTop: `1px dashed ${RULE}`,
+              borderBottom: `1px dashed ${RULE}`,
+            }}
+          >
+            + More experiments ({secondary.length}) — side quests &amp; utilities
+          </summary>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)",
+              gap: mobile ? 18 : 26,
+              marginTop: 22,
+            }}
+          >
+            {secondary.map((p, i) => (
+              <LogCard key={p.title} p={p} n={primaryEnd + 1 + i} mobile={mobile} />
+            ))}
+          </div>
+        </details>
+      )}
     </section>
   );
 }
@@ -1166,200 +1229,6 @@ function Schooling({ mobile }: { mobile: boolean }) {
             </ul>
           </article>
         ))}
-      </div>
-    </section>
-  );
-}
-
-/* ─── Contact form ────────────────────────────────────── */
-
-function ContactForm({ mobile }: { mobile: boolean }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Field Notes — message from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:av3342@columbia.edu?subject=${subject}&body=${body}`;
-    setSent(true);
-    setTimeout(() => setSent(false), 5000);
-  };
-
-  const inputStyle: CSSProperties = {
-    width: "100%",
-    padding: "10px 12px",
-    fontFamily: mono,
-    fontSize: 13,
-    color: INK,
-    background: "rgba(255,255,255,.55)",
-    border: `1.5px solid ${RULE}`,
-    outline: "none",
-  };
-
-  const labelStyle: CSSProperties = {
-    display: "block",
-    fontFamily: hand,
-    fontSize: 20,
-    color: ACCENT,
-    marginBottom: 4,
-  };
-
-  return (
-    <section
-      style={{
-        padding: mobile ? "32px 20px 32px" : "40px 64px 44px 120px",
-        borderTop: `1px dashed ${RULE}`,
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 18, flexWrap: "wrap" }}>
-        <div
-          style={{
-            fontFamily: mono,
-            fontSize: 10.5,
-            letterSpacing: ".22em",
-            color: ACCENT,
-            textTransform: "uppercase",
-          }}
-        >
-          [ Tear-out — leave a note ]
-        </div>
-        {!mobile && <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />}
-        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>reach out ↓</div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1.2fr", gap: mobile ? 20 : 36 }}>
-        <div>
-          <p
-            style={{
-              fontFamily: serif,
-              fontSize: mobile ? 16 : 18,
-              lineHeight: 1.55,
-              color: INK,
-              margin: 0,
-              maxWidth: "38ch",
-            }}
-          >
-            Recruiting, collaborating, or just curious about the loop?
-            Send a note — I read everything.
-          </p>
-          <ul
-            style={{
-              listStyle: "none",
-              margin: "18px 0 0",
-              padding: 0,
-              fontFamily: serif,
-              fontSize: 15,
-              lineHeight: 1.8,
-              color: INK,
-            }}
-          >
-            <li>
-              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
-              <strong>email:</strong> av3342@columbia.edu
-            </li>
-            <li>
-              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
-              <strong>based in:</strong> New York, NY
-            </li>
-          </ul>
-          <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <NoteBtn href="/resume.pdf" accent={ACCENT} ink={INK}>
-              download resume ↓
-            </NoteBtn>
-            <NoteBtn href="https://www.linkedin.com/in/varma-arjun/" accent={ACCENT} ink={INK}>
-              linkedin →
-            </NoteBtn>
-          </div>
-        </div>
-
-        <form
-          onSubmit={onSubmit}
-          style={{
-            padding: mobile ? 18 : 22,
-            background: "rgba(255,255,255,.45)",
-            border: `1.5px solid ${RULE}`,
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: hand,
-              fontSize: 22,
-              color: ACCENT,
-              position: "absolute",
-              top: -14,
-              left: 18,
-              background: PAPER,
-              padding: "0 8px",
-            }}
-          >
-            fig. C — the postcard
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 12 }}>
-            <div>
-              <label style={labelStyle}>name</label>
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={inputStyle}
-                placeholder="your name"
-              />
-            </div>
-            <div>
-              <label style={labelStyle}>email</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={inputStyle}
-                placeholder="you@example.com"
-              />
-            </div>
-          </div>
-          <div style={{ marginTop: 12 }}>
-            <label style={labelStyle}>message</label>
-            <textarea
-              required
-              rows={5}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              style={{ ...inputStyle, resize: "vertical", fontFamily: serif, fontSize: 15 }}
-              placeholder="what's on your mind?"
-            />
-          </div>
-          <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-            <button
-              type="submit"
-              data-cursor="grow"
-              style={{
-                fontFamily: mono,
-                fontSize: 12,
-                letterSpacing: ".14em",
-                textTransform: "uppercase",
-                padding: "10px 18px",
-                cursor: "pointer",
-                background: ACCENT,
-                color: PAPER,
-                border: `1.5px solid ${ACCENT}`,
-              }}
-            >
-              send note →
-            </button>
-            {sent && (
-              <span style={{ fontFamily: hand, fontSize: 20, color: "#14a058" }}>
-                mail client opened — thank you!
-              </span>
-            )}
-          </div>
-        </form>
       </div>
     </section>
   );
