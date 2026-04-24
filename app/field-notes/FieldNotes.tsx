@@ -698,17 +698,24 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
 
 function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mobile: boolean }) {
   const [hover, setHover] = useState(false);
+  const [open, setOpen] = useState(false);
+  const hasCase = !!p.caseStudy;
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+
   return (
     <article
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={() => hasCase && setOpen((v) => !v)}
+      data-cursor={hasCase ? "grow" : undefined}
       style={{
         padding: mobile ? "16px 18px" : "20px 22px",
         background: "rgba(255,255,255,.4)",
         border: `1.5px solid ${RULE}`,
         position: "relative",
         transition: "transform .25s",
-        transform: hover ? "translateY(-3px)" : "none",
+        transform: hover && !open ? "translateY(-3px)" : "none",
+        cursor: hasCase ? "pointer" : "default",
       }}
     >
       <div
@@ -780,10 +787,12 @@ function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mo
           marginTop: 14,
           display: "flex",
           gap: 14,
+          alignItems: "center",
           fontFamily: sans,
           fontSize: 12,
           letterSpacing: ".1em",
           textTransform: "uppercase",
+          flexWrap: "wrap",
         }}
       >
         {p.href && (
@@ -791,6 +800,7 @@ function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mo
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={stop}
             data-cursor="grow"
             style={{ color: ACCENT, textDecoration: "none", borderBottom: `1.5px solid ${ACCENT}` }}
           >
@@ -802,14 +812,104 @@ function LogCard({ p, n, mobile }: { p: (typeof PROJECTS)[number]; n: number; mo
             href={p.repo}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={stop}
             data-cursor="grow"
             style={{ color: INK, textDecoration: "none", borderBottom: `1.5px solid ${INK}` }}
           >
             source →
           </a>
         )}
+        {hasCase && (
+          <span
+            style={{
+              marginLeft: "auto",
+              fontFamily: hand,
+              fontSize: 18,
+              letterSpacing: 0,
+              textTransform: "none",
+              color: ACCENT,
+            }}
+          >
+            {open ? "close ↑" : "read the case study ↓"}
+          </span>
+        )}
       </div>
+
+      {hasCase && open && <CaseStudyDrawer cs={p.caseStudy!} />}
     </article>
+  );
+}
+
+function CaseStudyDrawer({ cs }: { cs: NonNullable<(typeof PROJECTS)[number]["caseStudy"]> }) {
+  const sections: Array<{ label: string; body: string; note: string }> = [
+    { label: "Problem", body: cs.problem, note: "the why" },
+    { label: "Challenge", body: cs.challenge, note: "what made it hard" },
+    { label: "Approach", body: cs.approach, note: "how I framed it" },
+    { label: "Solution", body: cs.solution, note: "what shipped" },
+    { label: "Impact", body: cs.impact, note: "what it moved" },
+  ];
+  return (
+    <div
+      style={{
+        marginTop: 18,
+        paddingTop: 16,
+        borderTop: `1px dashed ${RULE}`,
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+      }}
+    >
+      {sections.map((s) => (
+        <CaseSection key={s.label} label={s.label} body={s.body} note={s.note} />
+      ))}
+    </div>
+  );
+}
+
+function CaseSection({ label, body, note }: { label: string; body: string; note: string }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 12, alignItems: "start" }}>
+      <div>
+        <div
+          style={{
+            fontFamily: mono,
+            fontSize: 10,
+            letterSpacing: ".22em",
+            textTransform: "uppercase",
+            color: ACCENT,
+            borderBottom: `1.2px solid ${ACCENT}`,
+            paddingBottom: 3,
+            display: "inline-block",
+          }}
+        >
+          {label}
+        </div>
+        <div
+          style={{
+            marginTop: 6,
+            fontFamily: hand,
+            fontSize: 16,
+            lineHeight: 1.1,
+            color: MUTED,
+            transform: "rotate(-1.5deg)",
+            transformOrigin: "top left",
+          }}
+        >
+          — {note}
+        </div>
+      </div>
+      <div
+        style={{
+          fontFamily: serif,
+          fontSize: 14.5,
+          lineHeight: 1.6,
+          color: INK,
+          whiteSpace: "pre-wrap",
+        }}
+      >
+        {body}
+      </div>
+    </div>
   );
 }
 
