@@ -27,6 +27,11 @@ const sans = `"Familjen Grotesk", "Inter", system-ui, sans-serif`;
 const hand = `"Caveat", "Kalam", "Patrick Hand", cursive`;
 const mono = `"JetBrains Mono", ui-monospace, Menlo, monospace`;
 
+// fluid side-padding — matches design intent of 120px left / 64px right at ≥1440,
+// shrinks gracefully down to 900 without rasterized scale().
+const padL = `clamp(40px, 8vw, 120px)`;
+const padR = `clamp(28px, 4vw, 64px)`;
+
 const paperBG: CSSProperties = {
   backgroundImage: `linear-gradient(to right, ${GRID} 1px, transparent 1px),
        linear-gradient(to bottom, ${GRID} 1px, transparent 1px)`,
@@ -71,7 +76,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
       {/* header */}
       <header
         style={{
-          padding: mobile ? "20px 20px 14px" : "28px 56px 16px 120px",
+          padding: mobile ? "20px 20px 14px" : `28px clamp(24px, 3.5vw, 56px) 16px ${padL}`,
           borderBottom: `1.5px solid ${RULE}`,
           display: "flex",
           justifyContent: "space-between",
@@ -105,7 +110,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
       {/* hero */}
       <section
         style={{
-          padding: mobile ? "28px 20px 20px" : "44px 64px 24px 120px",
+          padding: mobile ? "28px 20px 20px" : `44px ${padR} 24px ${padL}`,
           display: "grid",
           gridTemplateColumns: mobile ? "1fr" : "2.3fr 1fr",
           gap: mobile ? 24 : 36,
@@ -126,7 +131,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
           <h1
             style={{
               fontFamily: serif,
-              fontSize: mobile ? 64 : 140,
+              fontSize: mobile ? 64 : "clamp(84px, 10vw, 140px)",
               lineHeight: 0.9,
               letterSpacing: "-.035em",
               fontWeight: 500,
@@ -301,7 +306,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
       {/* thesis */}
       <section
         style={{
-          padding: mobile ? "24px 20px 30px" : "24px 64px 40px 120px",
+          padding: mobile ? "24px 20px 30px" : `24px ${padR} 40px ${padL}`,
           borderTop: `1px dashed ${RULE}`,
           borderBottom: `1px dashed ${RULE}`,
         }}
@@ -366,7 +371,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
       {/* footer */}
       <footer
         style={{
-          padding: mobile ? "28px 20px 32px" : "36px 64px 48px 120px",
+          padding: mobile ? "28px 20px 32px" : `36px ${padR} 48px ${padL}`,
           borderTop: `1.5px solid ${RULE}`,
           display: "flex",
           flexDirection: mobile ? "column" : "row",
@@ -435,7 +440,7 @@ function AirbnbAgentFeature({ mobile }: { mobile: boolean }) {
   const [active, setActive] = useState(0);
 
   return (
-    <section style={{ padding: mobile ? "32px 20px 32px" : "44px 64px 44px 120px", borderBottom: `1px dashed ${RULE}` }}>
+    <section style={{ padding: mobile ? "32px 20px 32px" : `44px ${padR} 44px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 18, flexWrap: "wrap" }}>
         <span
           style={{
@@ -456,7 +461,7 @@ function AirbnbAgentFeature({ mobile }: { mobile: boolean }) {
           <h3
             style={{
               fontFamily: serif,
-              fontSize: mobile ? 34 : 60,
+              fontSize: mobile ? 34 : "clamp(40px, 4.5vw, 60px)",
               lineHeight: 0.98,
               letterSpacing: "-.02em",
               fontWeight: 500,
@@ -657,7 +662,7 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
   const secondary = rest.filter((p) => p.secondary);
   const primaryEnd = primary.length + 1; // e.g. Airbnb=01, primary 02..06
   return (
-    <section style={{ padding: mobile ? "32px 20px 24px" : "40px 64px 30px 120px", borderBottom: `1px dashed ${RULE}` }}>
+    <section style={{ padding: mobile ? "32px 20px 24px" : `40px ${padR} 30px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 22, flexWrap: "wrap" }}>
         <div
           style={{
@@ -950,7 +955,7 @@ function Trajectory({ mobile }: { mobile: boolean }) {
   const items: Experience[] = [novo, ...EXPERIENCE];
 
   return (
-    <section style={{ padding: mobile ? "32px 20px 28px" : "40px 64px 40px 120px", borderBottom: `1px dashed ${RULE}` }}>
+    <section style={{ padding: mobile ? "32px 20px 28px" : `40px ${padR} 40px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
       <div
         style={{
           fontFamily: mono,
@@ -966,7 +971,7 @@ function Trajectory({ mobile }: { mobile: boolean }) {
       <h3
         style={{
           fontFamily: serif,
-          fontSize: mobile ? 32 : 48,
+          fontSize: mobile ? 32 : "clamp(36px, 3.5vw, 48px)",
           lineHeight: 1.05,
           letterSpacing: "-.02em",
           fontWeight: 500,
@@ -1107,7 +1112,7 @@ function Schooling({ mobile }: { mobile: boolean }) {
   ];
 
   return (
-    <section style={{ padding: mobile ? "32px 20px 28px" : "40px 64px 34px 120px", borderBottom: `1px dashed ${RULE}` }}>
+    <section style={{ padding: mobile ? "32px 20px 28px" : `40px ${padR} 34px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 18, flexWrap: "wrap" }}>
         <div
           style={{
@@ -1199,7 +1204,7 @@ function Schooling({ mobile }: { mobile: boolean }) {
 function Toolbox({ mobile }: { mobile: boolean }) {
   const categories = Object.entries(SKILLS);
   return (
-    <section style={{ padding: mobile ? "32px 20px 32px" : "40px 64px 40px 120px" }}>
+    <section style={{ padding: mobile ? "32px 20px 32px" : `40px ${padR} 40px ${padL}` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
         <div
           style={{
