@@ -5,7 +5,6 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
   Cursor,
-  LivePreview,
   MultiAgentDiagram,
   NoteBtn,
   Scramble,
@@ -15,7 +14,6 @@ import {
 import { EXPERIENCE, PROJECTS, SKILLS, type Experience } from "./data";
 
 const AskTerminal = dynamic(() => import("./parts").then((m) => ({ default: m.AskTerminal })), { ssr: false });
-const SiteModal = dynamic(() => import("./parts").then((m) => ({ default: m.SiteModal })), { ssr: false });
 
 const PAPER = "#f6efe0";
 const INK = "#1b1a16";
@@ -38,7 +36,6 @@ const paperBG: CSSProperties = {
 export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [askOpen, setAskOpen] = useAskTerminal();
-  const [siteModal, setSiteModal] = useState(false);
 
   return (
     <div
@@ -356,7 +353,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         </div>
       </section>
 
-      <AirbnbAgentFeature onFullscreen={() => setSiteModal(true)} mobile={mobile} />
+      <AirbnbAgentFeature mobile={mobile} />
 
       <ProjectLog mobile={mobile} />
 
@@ -422,23 +419,13 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         />
       )}
 
-      {siteModal && (
-        <SiteModal
-          open={siteModal}
-          onClose={() => setSiteModal(false)}
-          url="https://airbnb-frontend-686529012610.us-east1.run.app/"
-          title="Airbnb Data Analyst Agent — live"
-          accent={ACCENT}
-          mono={mono}
-        />
-      )}
     </div>
   );
 }
 
 /* ─── Airbnb Agent — Featured ────────────────────────── */
 
-function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void; mobile: boolean }) {
+function AirbnbAgentFeature({ mobile }: { mobile: boolean }) {
   const SAMPLE_QS = [
     "Do superhosts get better review scores than other hosts?",
     "Which Brooklyn neighborhoods saw the biggest price shift 2019→2023?",
@@ -460,19 +447,6 @@ function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void
           }}
         >
           [ Exp. 01 — featured ]
-        </span>
-        <span
-          style={{
-            fontFamily: mono,
-            fontSize: 10.5,
-            color: "#14a058",
-            border: `1.2px solid #14a058`,
-            padding: "2px 8px",
-            letterSpacing: ".14em",
-            textTransform: "uppercase",
-          }}
-        >
-          live demo
         </span>
       </div>
 
@@ -626,19 +600,8 @@ function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void
 
         {/* RIGHT */}
         <div>
-          <LivePreview
-            onFullscreen={onFullscreen}
-            url="https://airbnb-frontend-686529012610.us-east1.run.app/"
-            accent={ACCENT}
-            paper={PAPER}
-            rule={RULE}
-            mono={mono}
-            hand={hand}
-          />
-
           <div
             style={{
-              marginTop: 18,
               padding: "14px 16px",
               background: "rgba(255,255,255,.35)",
               border: `1.2px solid ${RULE}`,
@@ -672,9 +635,6 @@ function AirbnbAgentFeature({ onFullscreen, mobile }: { onFullscreen: () => void
           </div>
 
           <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <NoteBtn onClick={onFullscreen} accent={ACCENT} ink={INK}>
-              open fullscreen ⤢
-            </NoteBtn>
             <NoteBtn
               href="https://github.com/Agentic-AI-Project-Columbia/airbnb-data-analyst-agent"
               accent={ACCENT}
