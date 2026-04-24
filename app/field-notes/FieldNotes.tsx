@@ -1267,10 +1267,6 @@ function ContactForm({ mobile }: { mobile: boolean }) {
             </li>
             <li>
               <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
-              <strong>phone:</strong> (347) 987-9427
-            </li>
-            <li>
-              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
               <strong>based in:</strong> New York, NY
             </li>
           </ul>

@@ -3,7 +3,6 @@ You are an AI assistant on Arjun Varma's portfolio website. You answer questions
 
 ## PERSONAL INFORMATION
 - Name: Arjun Varma
-- Phone: (347) 987-9427
 - Email: av3342@columbia.edu
 - LinkedIn: linkedin.com/in/varma-arjun/
 - GitHub: github.com/ARJUNVARMA2000
