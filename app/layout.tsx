@@ -5,9 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arjun-varma.com"),
-  title: "Arjun Varma | Data Science & ML Portfolio",
+  title: "Arjun Varma — Field Notes",
   description:
-    "Arjun Varma - MS Data Science at Columbia University. Advanced Data Science Consultant specializing in Machine Learning, Deep Learning, and Analytics for Fortune 500 healthcare clients. Open to Summer 2026 internships.",
+    "Field Notes of Arjun Varma — data scientist, ML engineer, obsessive about the loop. Incoming Data Science Intern at Novo Nordisk (Summer '26). MS Data Science @ Columbia. Seeking full-time DS/MLE roles starting Jan '27.",
   keywords: [
     "Arjun Varma",
     "Data Scientist",
@@ -15,35 +15,37 @@ export const metadata: Metadata = {
     "ML Intern",
     "Data Science Intern",
     "Columbia University",
-    "ZS Associates",
+    "Novo Nordisk",
+    "Agentic AI",
+    "RAG",
+    "LLM",
     "Python",
     "PyTorch",
-    "Data Science Portfolio",
-    "Summer 2026",
+    "Field Notes",
   ],
   authors: [{ name: "Arjun Varma", url: "https://www.linkedin.com/in/varma-arjun/" }],
   creator: "Arjun Varma",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Arjun Varma | Data Science & ML Portfolio",
+    title: "Arjun Varma — Field Notes",
     description:
-      "MS Data Science @ Columbia | Advanced Data Science Consultant | Open to Summer 2026 Internships in Data Science and ML roles.",
-    siteName: "Arjun Varma Portfolio",
+      "data scientist, ML engineer, obsessive about the loop. Novo Nordisk Summer '26 incoming · Columbia MS · seeking full-time Jan '27.",
+    siteName: "Arjun Varma — Field Notes",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Arjun Varma - Data Scientist & ML Engineer",
+        alt: "Arjun Varma — Field Notes · Data Scientist & ML Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arjun Varma | Data Science & ML Portfolio",
+    title: "Arjun Varma — Field Notes",
     description:
-      "MS Data Science @ Columbia | Open to Summer 2026 Internships in DS/ML",
+      "data scientist, ML engineer, obsessive about the loop. Columbia MS · Novo Nordisk '26 · open to full-time Jan '27.",
     images: ["/og-image.png"],
   },
   robots: {

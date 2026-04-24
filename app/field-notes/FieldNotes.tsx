@@ -337,7 +337,11 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
 
       <Trajectory mobile={mobile} />
 
+      <Schooling mobile={mobile} />
+
       <Toolbox mobile={mobile} />
+
+      <ContactForm mobile={mobile} />
 
       {/* footer */}
       <footer
@@ -952,6 +956,317 @@ function Trajectory({ mobile }: { mobile: boolean }) {
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── Schooling ───────────────────────────────────────── */
+
+function Schooling({ mobile }: { mobile: boolean }) {
+  const schools = [
+    {
+      name: "Columbia University",
+      loc: "New York, NY",
+      degree: "M.S. Data Science",
+      period: "Aug 2025 — Dec 2026",
+      notes: [
+        "TA: Business Analytics II, Hollywood &amp; Big Data",
+        "Coursework: Applied ML, Agentic AI for Analytics, Statistical Inference, Probability &amp; Stats",
+      ],
+    },
+    {
+      name: "Vellore Institute of Technology",
+      loc: "Vellore, India",
+      degree: "B.Tech — Electronics &amp; Communication Engineering",
+      period: "Jul 2018 — May 2022",
+      notes: [
+        "Special Achiever Award · Merit Scholarship",
+      ],
+    },
+  ];
+
+  return (
+    <section style={{ padding: mobile ? "32px 20px 28px" : "40px 64px 34px 120px", borderBottom: `1px dashed ${RULE}` }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 18, flexWrap: "wrap" }}>
+        <div
+          style={{
+            fontFamily: mono,
+            fontSize: 10.5,
+            letterSpacing: ".22em",
+            color: ACCENT,
+            textTransform: "uppercase",
+          }}
+        >
+          [ Schooling — margin notes ]
+        </div>
+        {!mobile && <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />}
+        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>where I read the fine print</div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 18 : 26 }}>
+        {schools.map((s) => (
+          <article
+            key={s.name}
+            style={{
+              padding: mobile ? "16px 18px" : "20px 22px",
+              background: "rgba(255,255,255,.4)",
+              border: `1.5px solid ${RULE}`,
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: mono,
+                fontSize: 10.5,
+                color: MUTED,
+                letterSpacing: ".14em",
+                textTransform: "uppercase",
+                marginBottom: 6,
+              }}
+            >
+              {s.period} · {s.loc}
+            </div>
+            <h4
+              style={{
+                fontFamily: serif,
+                fontSize: 24,
+                lineHeight: 1.15,
+                letterSpacing: "-.01em",
+                fontWeight: 500,
+                margin: 0,
+              }}
+            >
+              {s.name}
+            </h4>
+            <div
+              style={{
+                fontFamily: hand,
+                fontSize: 22,
+                color: ACCENT,
+                marginTop: 4,
+              }}
+              dangerouslySetInnerHTML={{ __html: s.degree }}
+            />
+            <ul style={{ listStyle: "none", margin: "10px 0 0", padding: 0 }}>
+              {s.notes.map((n, i) => (
+                <li
+                  key={i}
+                  style={{
+                    fontFamily: serif,
+                    fontSize: 14.5,
+                    lineHeight: 1.55,
+                    color: INK,
+                    marginBottom: 6,
+                    display: "flex",
+                    gap: 10,
+                  }}
+                >
+                  <span style={{ fontFamily: hand, color: ACCENT, fontSize: 18 }}>→</span>
+                  <span dangerouslySetInnerHTML={{ __html: n }} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── Contact form ────────────────────────────────────── */
+
+function ContactForm({ mobile }: { mobile: boolean }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Field Notes — message from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:av3342@columbia.edu?subject=${subject}&body=${body}`;
+    setSent(true);
+    setTimeout(() => setSent(false), 5000);
+  };
+
+  const inputStyle: CSSProperties = {
+    width: "100%",
+    padding: "10px 12px",
+    fontFamily: mono,
+    fontSize: 13,
+    color: INK,
+    background: "rgba(255,255,255,.55)",
+    border: `1.5px solid ${RULE}`,
+    outline: "none",
+  };
+
+  const labelStyle: CSSProperties = {
+    display: "block",
+    fontFamily: hand,
+    fontSize: 20,
+    color: ACCENT,
+    marginBottom: 4,
+  };
+
+  return (
+    <section
+      style={{
+        padding: mobile ? "32px 20px 32px" : "40px 64px 44px 120px",
+        borderTop: `1px dashed ${RULE}`,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 18, flexWrap: "wrap" }}>
+        <div
+          style={{
+            fontFamily: mono,
+            fontSize: 10.5,
+            letterSpacing: ".22em",
+            color: ACCENT,
+            textTransform: "uppercase",
+          }}
+        >
+          [ Tear-out — leave a note ]
+        </div>
+        {!mobile && <div style={{ flex: 1, borderTop: `1px dashed ${RULE}`, transform: "translateY(-4px)" }} />}
+        <div style={{ fontFamily: hand, fontSize: 22, color: INK }}>reach out ↓</div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1.2fr", gap: mobile ? 20 : 36 }}>
+        <div>
+          <p
+            style={{
+              fontFamily: serif,
+              fontSize: mobile ? 16 : 18,
+              lineHeight: 1.55,
+              color: INK,
+              margin: 0,
+              maxWidth: "38ch",
+            }}
+          >
+            Recruiting, collaborating, or just curious about the loop?
+            Send a note — I read everything.
+          </p>
+          <ul
+            style={{
+              listStyle: "none",
+              margin: "18px 0 0",
+              padding: 0,
+              fontFamily: serif,
+              fontSize: 15,
+              lineHeight: 1.8,
+              color: INK,
+            }}
+          >
+            <li>
+              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
+              <strong>email:</strong> av3342@columbia.edu
+            </li>
+            <li>
+              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
+              <strong>phone:</strong> (347) 987-9427
+            </li>
+            <li>
+              <span style={{ fontFamily: hand, color: ACCENT, fontSize: 20, marginRight: 6 }}>→</span>
+              <strong>based in:</strong> New York, NY
+            </li>
+          </ul>
+          <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <NoteBtn href="/resume.pdf" accent={ACCENT} ink={INK}>
+              download resume ↓
+            </NoteBtn>
+            <NoteBtn href="https://www.linkedin.com/in/varma-arjun/" accent={ACCENT} ink={INK}>
+              linkedin →
+            </NoteBtn>
+          </div>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          style={{
+            padding: mobile ? 18 : 22,
+            background: "rgba(255,255,255,.45)",
+            border: `1.5px solid ${RULE}`,
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: hand,
+              fontSize: 22,
+              color: ACCENT,
+              position: "absolute",
+              top: -14,
+              left: 18,
+              background: PAPER,
+              padding: "0 8px",
+            }}
+          >
+            fig. C — the postcard
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 12 }}>
+            <div>
+              <label style={labelStyle}>name</label>
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                style={inputStyle}
+                placeholder="your name"
+              />
+            </div>
+            <div>
+              <label style={labelStyle}>email</label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={inputStyle}
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+          <div style={{ marginTop: 12 }}>
+            <label style={labelStyle}>message</label>
+            <textarea
+              required
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              style={{ ...inputStyle, resize: "vertical", fontFamily: serif, fontSize: 15 }}
+              placeholder="what's on your mind?"
+            />
+          </div>
+          <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+            <button
+              type="submit"
+              data-cursor="grow"
+              style={{
+                fontFamily: mono,
+                fontSize: 12,
+                letterSpacing: ".14em",
+                textTransform: "uppercase",
+                padding: "10px 18px",
+                cursor: "pointer",
+                background: ACCENT,
+                color: PAPER,
+                border: `1.5px solid ${ACCENT}`,
+              }}
+            >
+              send note →
+            </button>
+            {sent && (
+              <span style={{ fontFamily: hand, fontSize: 20, color: "#14a058" }}>
+                mail client opened — thank you!
+              </span>
+            )}
+          </div>
+        </form>
       </div>
     </section>
   );
