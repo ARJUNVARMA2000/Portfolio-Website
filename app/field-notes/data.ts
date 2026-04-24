@@ -59,6 +59,7 @@ export type Project = {
   summary: string;
   tech: string[];
   href?: string;
+  hrefLabel?: string;
   repo?: string;
   tag?: string;
   caseStudy?: CaseStudy;
@@ -334,6 +335,8 @@ export const PROJECTS: Project[] = [
     summary:
       "RAG-augmented classifier categorizing 7M+ farmer transactions across 500+ categories to drive creditworthiness for microloans. Hybrid rule + LLM pipeline reached 99% accuracy on a 10K holdout and cut manual review by 95%.",
     tech: ["Python", "RAG", "REST"],
+    href: "https://sunculture.io/",
+    hrefLabel: "sunculture.io",
     caseStudy: sunCultureCaseStudy,
     impactStats: [
       { value: "99%", label: "accuracy · 10K holdout" },

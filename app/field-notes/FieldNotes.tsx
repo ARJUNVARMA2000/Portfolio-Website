@@ -935,7 +935,7 @@ function LogCard({
             data-cursor="grow"
             style={{ color: ACCENT, textDecoration: "none", borderBottom: `1.5px solid ${ACCENT}` }}
           >
-            live demo →
+            {p.hrefLabel ?? "live demo"} →
           </a>
         )}
         {p.repo && (
@@ -1124,7 +1124,7 @@ function CaseStudyPanel({
         >
           {project.href && (
             <a href={project.href} target="_blank" rel="noopener noreferrer" style={{ color: ACCENT, textDecoration: "none", borderBottom: `1.5px solid ${ACCENT}` }}>
-              live demo →
+              {project.hrefLabel ?? "live demo"} →
             </a>
           )}
           {project.repo && (
