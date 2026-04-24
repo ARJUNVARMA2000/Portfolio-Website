@@ -102,9 +102,6 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 14, alignItems: "center", fontFamily: mono, fontSize: mobile ? 10 : 12 }}>
-          <span style={{ color: MUTED }}>updated 2026-04-23</span>
-        </div>
       </header>
 
       {/* hero */}
@@ -369,7 +366,6 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
             <em> loop</em> is the product. Pipelines, evals, drift, citations — the stuff that
             isn’t pretty on a slide is what keeps systems alive in production. Now I’m
             building agents that plan, query, and cite their own homework.
-            <sup style={{ color: ACCENT }}>[1]</sup>
           </p>
           <aside
             style={{
@@ -429,23 +425,7 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
           </div>
         </div>
         <div style={{ fontFamily: mono, fontSize: 11, color: MUTED, textAlign: mobile ? "left" : "right", lineHeight: 1.7 }}>
-          <div>end of notebook entry — page 12 of ∞</div>
-          {!mobile && (
-            <div>
-              press{" "}
-              <kbd
-                style={{
-                  padding: "1px 6px",
-                  border: `1px solid ${RULE}`,
-                  borderRadius: 3,
-                  fontFamily: mono,
-                }}
-              >
-                ⌘K
-              </kbd>{" "}
-              to ask
-            </div>
-          )}
+          end of notebook entry — page 12 of ∞
         </div>
       </footer>
 
