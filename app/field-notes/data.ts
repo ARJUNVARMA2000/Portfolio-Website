@@ -63,6 +63,7 @@ export type Project = {
   tag?: string;
   caseStudy?: CaseStudy;
   secondary?: boolean;
+  impactStats?: Array<{ value: string; label: string }>;
 };
 
 const btcCaseStudy: CaseStudy = {
@@ -309,6 +310,11 @@ export const PROJECTS: Project[] = [
     tech: ["PySpark", "XGBoost", "SHAP", "NLP clustering", "MLflow"],
     tag: "production",
     caseStudy: btcCaseStudy,
+    impactStats: [
+      { value: "~45d", label: "earlier than diagnosis lag" },
+      { value: "250M", label: "patient-claims scored / mo" },
+      { value: "PMSA ’25", label: "presented · funded across tumors" },
+    ],
   },
   {
     title: "Financial RAG Chatbot",
@@ -329,6 +335,11 @@ export const PROJECTS: Project[] = [
       "RAG-augmented classifier categorizing 7M+ farmer transactions across 500+ categories to drive creditworthiness for microloans. Hybrid rule + LLM pipeline reached 99% accuracy on a 10K holdout and cut manual review by 95%.",
     tech: ["Python", "RAG", "REST"],
     caseStudy: sunCultureCaseStudy,
+    impactStats: [
+      { value: "99%", label: "accuracy · 10K holdout" },
+      { value: "−95%", label: "manual-review volume" },
+      { value: "7M+", label: "txns · 500+ categories" },
+    ],
   },
   {
     title: "ClassPulse",

@@ -836,6 +836,50 @@ function LogCard({
         {p.summary}
       </p>
 
+      {p.impactStats && p.impactStats.length > 0 && (
+        <div
+          style={{
+            marginTop: 14,
+            paddingTop: 12,
+            paddingBottom: 12,
+            borderTop: `1.2px dashed ${RULE}`,
+            borderBottom: `1.2px dashed ${RULE}`,
+            display: "flex",
+            gap: mobile ? 14 : 22,
+            flexWrap: "wrap",
+          }}
+        >
+          {p.impactStats.map((s) => (
+            <div key={s.label} style={{ minWidth: 0 }}>
+              <div
+                style={{
+                  fontFamily: serif,
+                  fontSize: 22,
+                  lineHeight: 1,
+                  color: ACCENT,
+                  fontWeight: 500,
+                  letterSpacing: "-.01em",
+                }}
+              >
+                {s.value}
+              </div>
+              <div
+                style={{
+                  fontFamily: mono,
+                  fontSize: 10,
+                  letterSpacing: ".1em",
+                  textTransform: "uppercase",
+                  color: MUTED,
+                  marginTop: 4,
+                }}
+              >
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div style={{ marginTop: 14, display: "flex", gap: 8, flexWrap: "wrap" }}>
         {p.tech.map((t) => (
           <span
