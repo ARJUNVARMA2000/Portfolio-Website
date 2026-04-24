@@ -425,7 +425,7 @@ export function AskTerminal({
             arjun@portfolio ~ % ask “anything about me”
           </div>
           <div style={{ marginBottom: 14, color: theme.muted, whiteSpace: "pre-wrap" }}>
-            try: “what did you do at zs?” · “how do you use llms?” · “biggest shipped impact?”
+            try: “show me the agent projects” · “what did you do at zs?” · “biggest shipped impact?”
           </div>
           {messages.map((m) => (
             <div key={m.id} style={{ marginBottom: 10, whiteSpace: "pre-wrap" }}>
@@ -445,7 +445,7 @@ export function AskTerminal({
           )}
           {error && (
             <div style={{ marginBottom: 10, color: "#ff6b6b" }}>
-              connection failed. try again.
+              chat is temporarily unavailable. use resume, email, linkedin, or github above.
             </div>
           )}
         </div>

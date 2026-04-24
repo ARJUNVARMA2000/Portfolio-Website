@@ -47,6 +47,63 @@ function GitHubIcon({ size = 14 }: { size?: number }) {
   );
 }
 
+function CompactNav({ mobile }: { mobile: boolean }) {
+  const links = [
+    { label: "Work", href: "#work" },
+    { label: "Experience", href: "#experience" },
+    { label: "Skills", href: "#skills" },
+    { label: "Resume", href: "/resume.pdf", external: true },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  return (
+    <nav
+      aria-label="Portfolio sections"
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 40,
+        padding: mobile ? "8px 20px" : `10px ${padR} 10px ${padL}`,
+        borderBottom: `1.5px solid ${RULE}`,
+        background: "rgba(246, 239, 224, .92)",
+        backdropFilter: "blur(10px)",
+        overflowX: "auto",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: mobile ? 12 : 18,
+          alignItems: "center",
+          fontFamily: mono,
+          fontSize: mobile ? 10.5 : 11.5,
+          letterSpacing: ".16em",
+          textTransform: "uppercase",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            data-cursor="grow"
+            style={{
+              color: link.label === "Resume" ? ACCENT : INK,
+              textDecoration: "none",
+              borderBottom: `1px solid ${link.label === "Resume" ? ACCENT : "transparent"}`,
+              padding: "2px 0",
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
 const paperBG: CSSProperties = {
   backgroundImage: `linear-gradient(to right, ${GRID} 1px, transparent 1px),
        linear-gradient(to bottom, ${GRID} 1px, transparent 1px)`,
@@ -118,6 +175,8 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
         </div>
 
       </header>
+
+      <CompactNav mobile={mobile} />
 
       {/* hero */}
       <section
@@ -421,9 +480,11 @@ export default function FieldNotes({ mobile = false }: { mobile?: boolean }) {
 
       {/* footer */}
       <footer
+        id="contact"
         style={{
           padding: mobile ? "28px 20px 32px" : `36px ${padR} 48px ${padL}`,
           borderTop: `1.5px solid ${RULE}`,
+          scrollMarginTop: 64,
           display: "flex",
           flexDirection: mobile ? "column" : "row",
           justifyContent: "space-between",
@@ -475,7 +536,7 @@ function AirbnbAgentFeature({ mobile }: { mobile: boolean }) {
   const [active, setActive] = useState(0);
 
   return (
-    <section style={{ padding: mobile ? "32px 20px 32px" : `44px ${padR} 44px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
+    <section id="work" style={{ padding: mobile ? "32px 20px 32px" : `44px ${padR} 44px ${padL}`, borderBottom: `1px dashed ${RULE}`, scrollMarginTop: 64 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 18, flexWrap: "wrap" }}>
         <span
           style={{
@@ -744,7 +805,7 @@ function ProjectLog({ mobile }: { mobile: boolean }) {
               borderBottom: `1px dashed ${RULE}`,
             }}
           >
-            + More experiments ({secondary.length}) — side quests &amp; utilities
+            + More experiments ({secondary.length}) — shipped tools &amp; applied systems
           </summary>
           <div
             style={{
@@ -787,14 +848,12 @@ function LogCard({
 }) {
   const [hover, setHover] = useState(false);
   const hasCase = !!onOpenCase;
-  const stop = (e: React.MouseEvent) => e.stopPropagation();
+  const stop = (e: React.MouseEvent<HTMLElement>) => e.stopPropagation();
 
   return (
     <article
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => onOpenCase?.()}
-      data-cursor={hasCase ? "grow" : undefined}
       style={{
         padding: mobile ? "16px 18px" : "20px 22px",
         background: "rgba(255,255,255,.4)",
@@ -802,7 +861,7 @@ function LogCard({
         position: "relative",
         transition: "transform .25s",
         transform: hover ? "translateY(-3px)" : "none",
-        cursor: hasCase ? "pointer" : "default",
+        cursor: "default",
       }}
     >
       <div
@@ -951,7 +1010,10 @@ function LogCard({
           </a>
         )}
         {hasCase && (
-          <span
+          <button
+            type="button"
+            onClick={onOpenCase}
+            data-cursor="grow"
             style={{
               marginLeft: "auto",
               fontFamily: hand,
@@ -959,10 +1021,15 @@ function LogCard({
               letterSpacing: 0,
               textTransform: "none",
               color: ACCENT,
+              background: "transparent",
+              border: "none",
+              borderBottom: `1.5px solid ${ACCENT}`,
+              padding: 0,
+              cursor: "pointer",
             }}
           >
             read the case study →
-          </span>
+          </button>
         )}
       </div>
     </article>
@@ -1205,7 +1272,7 @@ function Trajectory({ mobile }: { mobile: boolean }) {
   const items: Experience[] = [novo, ...EXPERIENCE];
 
   return (
-    <section style={{ padding: mobile ? "32px 20px 28px" : `40px ${padR} 40px ${padL}`, borderBottom: `1px dashed ${RULE}` }}>
+    <section id="experience" style={{ padding: mobile ? "32px 20px 28px" : `40px ${padR} 40px ${padL}`, borderBottom: `1px dashed ${RULE}`, scrollMarginTop: 64 }}>
       <div
         style={{
           fontFamily: mono,
@@ -1346,14 +1413,14 @@ function Schooling({ mobile }: { mobile: boolean }) {
       degree: "M.S. Data Science",
       period: "Aug 2025 — Dec 2026",
       notes: [
-        "TA: Business Analytics II, Hollywood &amp; Big Data",
-        "Coursework: Applied ML, Agentic AI for Analytics, Statistical Inference, Probability &amp; Stats",
+        "TA: Business Analytics II, Hollywood & Big Data",
+        "Coursework: Applied ML, Agentic AI for Analytics, Statistical Inference, Probability & Stats",
       ],
     },
     {
       name: "Vellore Institute of Technology",
       loc: "Vellore, India",
-      degree: "B.Tech — Electronics &amp; Communication Engineering",
+      degree: "B.Tech — Electronics & Communication Engineering",
       period: "Jul 2018 — May 2022",
       notes: [
         "Special Achiever Award · Merit Scholarship",
@@ -1421,8 +1488,9 @@ function Schooling({ mobile }: { mobile: boolean }) {
                 color: ACCENT,
                 marginTop: 4,
               }}
-              dangerouslySetInnerHTML={{ __html: s.degree }}
-            />
+            >
+              {s.degree}
+            </div>
             <ul style={{ listStyle: "none", margin: "10px 0 0", padding: 0 }}>
               {s.notes.map((n, i) => (
                 <li
@@ -1438,7 +1506,7 @@ function Schooling({ mobile }: { mobile: boolean }) {
                   }}
                 >
                   <span style={{ fontFamily: hand, color: ACCENT, fontSize: 18 }}>→</span>
-                  <span dangerouslySetInnerHTML={{ __html: n }} />
+                  <span>{n}</span>
                 </li>
               ))}
             </ul>
@@ -1454,7 +1522,7 @@ function Schooling({ mobile }: { mobile: boolean }) {
 function Toolbox({ mobile }: { mobile: boolean }) {
   const categories = Object.entries(SKILLS);
   return (
-    <section style={{ padding: mobile ? "32px 20px 32px" : `40px ${padR} 40px ${padL}` }}>
+    <section id="skills" style={{ padding: mobile ? "32px 20px 32px" : `40px ${padR} 40px ${padL}`, scrollMarginTop: 64 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
         <div
           style={{
