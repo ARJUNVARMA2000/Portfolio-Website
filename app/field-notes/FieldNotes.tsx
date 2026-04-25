@@ -737,7 +737,7 @@ function AirbnbAgentFeature({ mobile }: { mobile: boolean }) {
 
           <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
             <NoteBtn
-              href="https://github.com/Agentic-AI-Project-Columbia/airbnb-data-analyst-agent"
+              href="https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent"
               accent={ACCENT}
               ink={INK}
             >

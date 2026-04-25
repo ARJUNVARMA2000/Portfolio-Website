@@ -299,7 +299,7 @@ export const PROJECTS: Project[] = [
     summary:
       "LLM-powered agent that takes a natural-language question about Airbnb listings and plans, writes, and executes multi-step SQL + pandas + chart generation — returning a narrated, cited answer.",
     tech: ["Agents", "Tool use", "SQL", "pandas", "Evals"],
-    href: "https://github.com/Agentic-AI-Project-Columbia/airbnb-data-analyst-agent",
+    href: "https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent",
     tag: "latest",
   },
   {
