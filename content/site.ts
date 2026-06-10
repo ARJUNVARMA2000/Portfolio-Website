@@ -13,36 +13,6 @@ export const SITE = {
   availability: "Available full-time · January 2027",
 } as const;
 
-export type ProofStat = {
-  value: string;
-  label: string;
-  footnote: string;
-};
-
-/** Hero proof bar — every number carries a provenance footnote. */
-export const PROOF: ProofStat[] = [
-  {
-    value: "250M",
-    label: "patient-claims scored / month",
-    footnote: "BTC early-detection model at ZS — in production, monthly refresh.",
-  },
-  {
-    value: "~45d",
-    label: "earlier cancer detection",
-    footnote: "vs. the standard 45-day claims-lag baseline; presented at PMSA 2025.",
-  },
-  {
-    value: "99%",
-    label: "classification accuracy",
-    footnote: "SunCulture transaction classifier — 10,000-item hand-labeled holdout.",
-  },
-  {
-    value: "6",
-    label: "live deployed AI systems",
-    footnote: "Cloud Run ×3 · Railway ×2 · Chrome Web Store ×1.",
-  },
-];
-
 export type Education = {
   school: string;
   degree: string;

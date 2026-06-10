@@ -4,7 +4,7 @@ import { Section } from "@/components/section";
 
 export function About() {
   return (
-    <Section id="about" index="05" label="ABOUT">
+    <Section id="about" index="04" label="ABOUT">
       <blockquote className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.4rem)] italic leading-[1.2] tracking-[-0.015em]">
         &ldquo;Measure the thing that matters, not the thing that&rsquo;s easy.&rdquo;
       </blockquote>

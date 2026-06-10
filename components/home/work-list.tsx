@@ -4,7 +4,7 @@ import { Section } from "@/components/section";
 
 export function WorkList() {
   return (
-    <Section id="work" index="02" label="SELECTED WORK — four systems, told properly">
+    <Section id="work" index="01" label="SELECTED WORK — four systems, told properly">
       <div>
         {CASE_STUDIES.map((cs, i) => (
           <article

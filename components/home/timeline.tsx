@@ -3,7 +3,7 @@ import { Section } from "@/components/section";
 
 export function Timeline() {
   return (
-    <Section id="experience" index="04" label="EXPERIENCE">
+    <Section id="experience" index="03" label="EXPERIENCE">
       <div className="space-y-0">
         {EXPERIENCE.map((exp) => (
           <div

@@ -3,7 +3,7 @@ import { Section } from "@/components/section";
 
 export function ProjectIndex() {
   return (
-    <Section id="projects" index="03" label="MORE SHIPPED WORK — live links, no slides">
+    <Section id="projects" index="02" label="MORE SHIPPED WORK — live links, no slides">
       <div>
         {PROJECT_INDEX.map((p) => (
           <div

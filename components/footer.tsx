@@ -5,7 +5,7 @@ export function Footer() {
     <footer id="contact" className="border-t border-line">
       <div className="mx-auto max-w-wrap px-5 py-[clamp(56px,8vh,96px)] sm:px-8">
         <div className="mono-label mb-8 flex items-baseline gap-3">
-          <span className="text-accent">06</span>
+          <span className="text-accent">05</span>
           <span>/ CONTACT</span>
         </div>
         <p className="max-w-prose font-serif text-[clamp(1.5rem,3.4vw,2.2rem)] leading-tight tracking-[-0.01em]">

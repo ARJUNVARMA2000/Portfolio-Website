@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { PROOF, SITE } from "@/content/site";
-import { Stat, FootnoteList } from "@/components/stat";
+import { SITE } from "@/content/site";
 
 const CONTACT = [
   { label: "Email", href: `mailto:${SITE.email}` },
@@ -68,24 +67,6 @@ export function Hero() {
             <span>NYC</span>
           </figcaption>
         </figure>
-      </div>
-
-      {/* proof bar */}
-      <div className="reveal reveal-5 relative mt-16 border-y border-line py-8">
-        <span aria-hidden className="absolute -left-1 -top-2.5 font-mono text-xs text-muted">+</span>
-        <span aria-hidden className="absolute -right-1 -top-2.5 font-mono text-xs text-muted">+</span>
-        <span aria-hidden className="absolute -bottom-2.5 -left-1 font-mono text-xs text-muted">+</span>
-        <span aria-hidden className="absolute -bottom-2.5 -right-1 font-mono text-xs text-muted">+</span>
-        <div className="mono-label mb-7 flex items-baseline gap-3">
-          <span className="text-accent">01</span>
-          <span>/ PROOF — every number cites its source</span>
-        </div>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
-          {PROOF.map((p, i) => (
-            <Stat key={p.label} value={p.value} label={p.label} fn={i + 1} />
-          ))}
-        </div>
-        <FootnoteList items={PROOF.map((p) => p.footnote)} className="mt-8 border-t border-line pt-4" />
       </div>
     </section>
   );
