@@ -1,0 +1,403 @@
+export type Metric = {
+  value: string;
+  label: string;
+  provenance: string;
+};
+
+export type FigureKind = "multi-agent" | "trace-replay";
+
+export type CaseSection = {
+  id: "context" | "constraint" | "approach" | "system" | "evidence" | "impact";
+  title: string;
+  body: string; // markdown
+  figure?: { kind: FigureKind; caption: string };
+  aside?: string;
+};
+
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  org: string;
+  role: string;
+  period: string;
+  status: "production" | "live" | "shipped";
+  metrics: Metric[];
+  tech: string[];
+  links: { label: string; href: string }[];
+  sections: CaseSection[];
+};
+
+export const CASE_STUDIES: CaseStudy[] = [
+  {
+    slug: "airbnb-data-analyst-agent",
+    title: "Airbnb Data Analyst Agent",
+    subtitle:
+      "Five specialized agents that plan, write, validate, chart, and narrate SQL analytics — every number cited back to source rows.",
+    org: "Columbia · Agentic AI for Analytics",
+    role: "Designed & built solo",
+    period: "2026",
+    status: "live",
+    metrics: [
+      {
+        value: "5",
+        label: "agents on a typed message bus",
+        provenance: "planner · SQL · validator · chart · narrator — every step inspectable and replayable",
+      },
+      {
+        value: "×3",
+        label: "retry budget, exponential backoff",
+        provenance: "validator-triggered on tool errors and intent mismatch",
+      },
+      {
+        value: "100%",
+        label: "numbers cited to source rows",
+        provenance: "narrator contract — uncited claims don't ship",
+      },
+    ],
+    tech: ["FastAPI", "LangChain", "DuckDB / Postgres / Snowflake", "OpenAI function calling", "matplotlib", "pytest"],
+    links: [
+      { label: "Live demo", href: "https://airbnb-frontend-686529012610.us-east1.run.app/" },
+      { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent" },
+    ],
+    sections: [
+      {
+        id: "context",
+        title: "The problem",
+        body: `Analysts spend hours translating business questions into SQL, pulling data, checking it, and reformatting the answer into something a stakeholder can consume. Most LLM "text-to-SQL" demos hallucinate schema, fail silently on bad queries, or skip the last-mile steps that actually matter: a chart, a citation, a sanity check.
+
+The goal: a system that behaves like a junior analyst with guardrails — it decomposes the question, writes SQL that actually runs, validates the result before showing it, plots the data, and cites the rows it used.`,
+      },
+      {
+        id: "constraint",
+        title: "The constraints",
+        body: `- Text-to-SQL models hallucinate column names, misuse joins, and produce queries that run but return the wrong answer
+- Single-prompt approaches have no way to recover from tool errors or mid-query course corrections
+- Charts need semantic intent ("show trend over time"), not just "make a chart of this dataframe"
+- Auditability is table stakes in any real analytics context — every number shown must trace back to source rows
+- Latency and cost must stay bounded even as the agent retries and self-critiques`,
+      },
+      {
+        id: "approach",
+        title: "The loop",
+        body: `Instead of one prompt doing everything badly, five specialized agents each own one contract:
+
+1. **Planner** — decomposes the natural-language question into a plan of sub-queries and tool calls
+2. **SQL Agent** — writes SQL against the live warehouse schema, with access to \`db.schema()\` and \`db.query(sql)\`
+3. **Validator** — dry-runs the SQL first, audits row counts, nulls, and types; self-critiques when the result doesn't match the planner's stated intent; retries on tool error (×3, exponential backoff)
+4. **Chart Agent** — calls \`plot.auto(df, intent)\` to render the right visualization for the question, not just *a* visualization
+5. **Narrator** — composes the final answer, citing every number back to specific source rows
+
+All five communicate over a typed message bus, so every intermediate step is inspectable and replayable — the trace below is rendered from exactly that bus.`,
+        figure: {
+          kind: "multi-agent",
+          caption:
+            "The five-agent pipeline. Each box is a separate agent with its own contract; the message bus carries {plan, sql, df, chart, answer, error}.",
+        },
+      },
+      {
+        id: "system",
+        title: "The build",
+        body: `Every capability is a typed tool with an explicit contract — the agents can only act through these:
+
+| Tool | Signature |
+|---|---|
+| \`db.schema()\` | \`→ Table[]\` |
+| \`db.query(sql)\` | \`→ DataFrame\` |
+| \`df.describe(df)\` | \`→ Stats\` |
+| \`plot.auto(df, intent)\` | \`→ PNG\` |
+| \`web.search(q)\` | \`→ Link[]\` |
+
+The warehouse layer is pluggable: DuckDB for the live demo (NYC Airbnb data), with Postgres and Snowflake adapters behind the same interface. FastAPI serves the API; the whole system is exercised by a pytest eval harness on every commit.`,
+      },
+      {
+        id: "evidence",
+        title: "Evidence",
+        body: `Guardrails are only real if you can watch them fire. Below are recorded runs from the system — step through them. The first run includes a hallucinated column name, the database error it caused, and the validator catching and fixing it.
+
+What keeps the system honest in production:
+
+- **SQL dry-run + row-count sanity check** before any query result is trusted
+- **Null / type audit** before any chart is rendered
+- **Self-critique** when the SQL result doesn't match the planner's stated intent
+- **Golden Q/A regression suite** — every commit runs canonical questions and checks the answers
+- **Per-query latency and cost breakdown**, so behavior stays measurable as prompts evolve`,
+        figure: {
+          kind: "trace-replay",
+          caption:
+            "Recorded runs from the live system, replayed from the message bus. Use the controls to step through — including the failed query and its retry.",
+        },
+      },
+      {
+        id: "impact",
+        title: "Impact",
+        body: `- Handles multi-step analytics questions end-to-end with auditable traces
+- Every answer is grounded — users can drill into the exact rows the agent cited
+- Regression evals plus per-query latency/cost tracking keep production behavior measurable
+- Designed to plug into any warehouse with a SQL-compatible adapter`,
+      },
+    ],
+  },
+  {
+    slug: "btc-early-detection",
+    title: "Biliary Tract Cancer Early Detection",
+    subtitle:
+      "A production model that flags likely BTC patients ~45 days before claims data confirms them — scoring 250M patient-claims every month.",
+    org: "ZS Associates — Fortune-500 oncology client",
+    role: "Advanced Data Science Associate Consultant",
+    period: "2024 — 2025",
+    status: "production",
+    metrics: [
+      {
+        value: "~45d",
+        label: "earlier identification",
+        provenance: "vs. the standard 45-day claims-lag baseline, leakage-masked backtest",
+      },
+      {
+        value: "250M",
+        label: "patient-claims scored / month",
+        provenance: "automated monthly refresh, in production",
+      },
+      {
+        value: "PMSA '25",
+        label: "methodology presented",
+        provenance: "client funded replication across other tumors and brands",
+      },
+    ],
+    tech: ["PySpark", "XGBoost", "SHAP", "K-means / GMM", "NLP clustering", "MLflow"],
+    links: [],
+    sections: [
+      {
+        id: "context",
+        title: "The problem",
+        body: `Biliary tract cancer (BTC) is a rare cancer with very few approved treatments. The client's oncology drug — a new standard of care for BTC — had to be given as the *first* treatment after diagnosis; switching later was not an option. But because BTC is rare and presents with non-specific symptoms, patients are routinely misdiagnosed first, and once BTC is correctly identified, treatment starts almost immediately.
+
+That left a brutally narrow window: to matter at all, the right oncologists had to be educated *before* the diagnosis showed up anywhere in the data.`,
+      },
+      {
+        id: "constraint",
+        title: "The constraints",
+        body: `The medical and pharmacy claims data available had a consistent **45-day delay** from real-world events. By the time a patient appeared in the data, treatment had usually already started. On top of the lag:
+
+- Severe class imbalance — BTC is extremely rare
+- Noisy, incomplete claims capture (~50% of real-world claims)
+- High risk of temporal leakage if future information contaminated earlier predictions
+- Tens of millions of rows across hundreds of thousands of patients, refreshed monthly`,
+      },
+      {
+        id: "approach",
+        title: "The loop",
+        body: `We framed it as a **time-indexed prediction task**: for each patient-month, estimate the probability of a BTC diagnosis in the next 30 days.
+
+To reduce ~250M patient records per month to a modelable subset, three filters worked in sequence:
+
+1. Direct rule-based filtering on diagnosis and procedure flags
+2. K-means and Gaussian-mixture clustering over patient utilization patterns
+3. NLP-based event clustering of claim sequences, to find patients whose journeys *resembled* known BTC trajectories even without the telltale codes
+
+The critical discipline: we **masked the most recent 45 days** of data before every index date, so the model trained and validated under exactly the information conditions it would face live. No leakage, no flattering backtest.`,
+      },
+      {
+        id: "system",
+        title: "The build",
+        body: `XGBoost with class-weighted loss handled the imbalance. Features covered diagnosis codes, procedures, drug regimens, provider patterns, and utilization metrics.
+
+Two things made it survivable in production rather than a slide-deck model:
+
+- **SHAP explanations** on every score, so non-technical stakeholders (and skeptical clinicians) could see *why* a patient was flagged
+- **MLflow versioning and drift monitoring**, with the pipeline productionized to process each monthly claims refresh automatically and expose outputs through summary tables and dashboards used directly by field teams`,
+      },
+      {
+        id: "evidence",
+        title: "Evidence",
+        body: `The ~45-day advantage is measured against the claims-lag baseline under the masked-data protocol — the model never saw information it wouldn't have had in production.
+
+- Substantial lift in early BTC identification versus the heuristic rules it replaced
+- Clinician-acceptable precision, with interpretable per-patient feature effects via SHAP
+- Feature and prediction drift monitored across monthly refreshes — silent failure was a design concern, not an afterthought`,
+      },
+      {
+        id: "impact",
+        title: "Impact",
+        body: `- Field teams used model outputs for territory-level resource planning
+- Positive feedback from marketing teams on practical usefulness
+- The client funded replication of the approach across other tumors and brands
+- Methodology presented at **PMSA 2025**`,
+      },
+    ],
+  },
+  {
+    slug: "sunculture-transaction-intelligence",
+    title: "SunCulture Transaction Intelligence",
+    subtitle:
+      "A hybrid rules + LLM + retrieval pipeline that standardized 7M+ farmer transactions into the credit signal behind microloans.",
+    org: "SunCulture — Series-B agtech, East Africa",
+    role: "Data science & ML",
+    period: "2025",
+    status: "production",
+    metrics: [
+      {
+        value: "99%",
+        label: "classification accuracy",
+        provenance: "10,000-item hand-labeled holdout set",
+      },
+      {
+        value: "−95%",
+        label: "manual-review volume",
+        provenance: "confidence-gated human-in-the-loop routing",
+      },
+      {
+        value: "7M+",
+        label: "transactions standardized",
+        provenance: "500+ category targets, free-text descriptions",
+      },
+    ],
+    tech: ["Python", "RAG", "LLM classification", "REST"],
+    links: [{ label: "sunculture.io", href: "https://sunculture.io/" }],
+    sections: [
+      {
+        id: "context",
+        title: "The problem",
+        body: `SunCulture sells solar-powered irrigation to smallholder farmers across East Africa, financed through microloans. To underwrite those loans, the credit team needed a clean view of each farmer's cash flow — but the raw transaction data was a mess: free-text descriptions, inconsistent merchant names, regional abbreviations, and **500+ category targets** ranging from "seeds" to "motorbike repair."
+
+The pipeline's job: classify transactions reliably enough that the output could feed a creditworthiness model that decides real loans.`,
+      },
+      {
+        id: "constraint",
+        title: "The constraints",
+        body: `- 7M+ transactions with noisy free-text descriptions and regional abbreviations
+- A 500+ category space — pure rules could never cover the tail; pure LLM was too expensive at volume
+- Ground truth was scarce: the hand-labeled gold set was small relative to the category space
+- A latency budget — new transactions had to score fast enough to inform loan decisions
+- A 95%+ accuracy bar for the credit team to trust the signal at all`,
+      },
+      {
+        id: "approach",
+        title: "The loop",
+        body: `A three-tier hybrid, each tier handling what it's cheapest and best at:
+
+1. **Rule engine (fast path)** — exact merchant matches and known prefixes resolve the high-confidence majority at near-zero cost
+2. **LLM + retrieval (long tail)** — for uncertain transactions, retrieve the nearest labeled examples from the corpus and condition the model on them, RAG-style
+3. **Confidence-gated human review** — only predictions below a confidence threshold route to a person
+
+The loop that kept it improving: errors from each batch were hand-labeled and folded back into the retrieval corpus, so the long-tail tier got sharper with every cycle.`,
+      },
+      {
+        id: "system",
+        title: "The build",
+        body: `A Python REST service classifies individual transactions or batch files:
+
+- **Rule layer** covers the majority of common transactions with near-zero marginal cost
+- **LLM + retrieval layer** handles novel or ambiguous descriptions
+- **Confidence gating** routes only the genuinely uncertain subset to manual review
+- Output integrates directly with the credit-scoring model feeding loan decisioning`,
+      },
+      {
+        id: "evidence",
+        title: "Evidence",
+        body: `The 99% figure comes from a **10,000-item hand-labeled holdout** — not training accuracy, not a cherry-picked subset.
+
+- Accuracy was tracked per tier, so the cheap rule path couldn't quietly degrade behind the blended number
+- The iterative eval loop (hand-label errors → fold into retrieval corpus) meant the system improved on exactly the cases it got wrong
+- Confidence calibration determined the human-review threshold — the −95% review reduction is a direct consequence of the gate, not a separate claim`,
+      },
+      {
+        id: "impact",
+        title: "Impact",
+        body: `- 99% accuracy on the holdout, clearing the credit team's 95% trust bar
+- 95% reduction in manual review volume
+- A cleaner cash-flow signal feeding microloan underwriting
+- Faster loan decisions for smallholder farmers across East Africa`,
+      },
+    ],
+  },
+  {
+    slug: "financial-rag-chatbot",
+    title: "Financial RAG Chatbot",
+    subtitle:
+      "SEC-filing Q&A with line-level citations — multi-stage retrieval over ChromaDB, evaluated with Claude as judge, live on Cloud Run.",
+    org: "Columbia",
+    role: "Designed & built solo",
+    period: "2025",
+    status: "live",
+    metrics: [
+      {
+        value: "hrs→s",
+        label: "time-to-insight",
+        provenance: "manual review of 100+ page filings vs. one conversational query",
+      },
+      {
+        value: "100%",
+        label: "answers grounded in retrieved context",
+        provenance: "generator restricted to retrieved chunks; every claim must cite its source",
+      },
+      {
+        value: "3",
+        label: "eval dimensions, LLM-as-judge",
+        provenance: "accuracy · relevance · faithfulness — scored with Claude Opus",
+      },
+    ],
+    tech: ["FastAPI", "ChromaDB", "LangChain", "text-embedding-3-large", "Streamlit", "GCP Cloud Run"],
+    links: [
+      { label: "Live demo", href: "https://finrag-frontend-7pj7nolpla-uc.a.run.app/" },
+      { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot" },
+    ],
+    sections: [
+      {
+        id: "context",
+        title: "The problem",
+        body: `Analysts and investors spend hours sifting through SEC filings — 10-Ks, 10-Qs, 8-Ks — to extract insight about performance, risk factors, and management commentary. The documents are dense, often 100+ pages, and written in complex legal-financial language.
+
+The goal: an assistant that answers natural-language questions about company financials with **source-grounded** responses — eliminating the hallucinations that make standard LLM answers worthless in a financial context.`,
+      },
+      {
+        id: "constraint",
+        title: "The constraints",
+        body: `- SEC filings have complex nested structure — tables, footnotes, cross-references — that naive chunking destroys
+- Financial data demands exact numbers; approximations are unacceptable
+- Relevant information spans multiple document sections, but context windows are finite
+- The system must handle both quantitative queries ("What was Q3 revenue?") and qualitative ones ("What are the main risk factors?")
+- Every response must cite its sources, or it can't be trusted or audited`,
+      },
+      {
+        id: "approach",
+        title: "The loop",
+        body: `A RAG architecture where the retrieval layer does the heavy lifting:
+
+1. **Structure-aware ingestion** — SEC-EDGAR APIs fetch filings; chunking respects document structure, preserving tables and section boundaries instead of splitting mid-table
+2. **Semantic search** — ChromaDB vector store with \`text-embedding-3-large\`, combined with metadata filtering on company, filing date, and section type
+3. **Multi-stage retrieval** — broad initial retrieval, then reranking to surface the most relevant chunks per query
+4. **Constrained generation** — the generator may only answer from retrieved context, and must cite; automatic ticker and period parsing routes queries to the right filings`,
+      },
+      {
+        id: "system",
+        title: "The build",
+        body: `- **FastAPI backend** — document ingestion, query processing, response generation
+- **ChromaDB** — persistent vector store with company/filing metadata for filtered retrieval
+- **LangChain orchestration** — the RAG pipeline, conversation memory, chain-of-thought reasoning
+- **Streamlit frontend** — chat interface with conversation history and source highlighting
+- **Cloud Run deployment** — live, with persistent conversation history`,
+      },
+      {
+        id: "evidence",
+        title: "Evidence",
+        body: `Trust in a RAG system is an eval problem, so evaluation is part of the build, not a postscript:
+
+- A **multi-model evaluation pipeline uses Claude Opus as judge**, scoring responses on accuracy, relevance, and faithfulness to the source documents
+- Answers carry **line-level citations** back into the filing, so any number can be checked against the original in one click
+- The corpus spans multiple years of filings across companies, exercising retrieval across heterogeneous document structures`,
+      },
+      {
+        id: "impact",
+        title: "Impact",
+        body: `- Time-to-insight cut from hours of manual reading to seconds of conversation
+- Automatic ticker and period parsing makes queries frictionless
+- Deployed live on Cloud Run with persistent conversation history`,
+      },
+    ],
+  },
+];
+
+export function getCaseStudy(slug: string): CaseStudy | undefined {
+  return CASE_STUDIES.find((cs) => cs.slug === slug);
+}

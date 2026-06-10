@@ -1,86 +1,70 @@
-import { EXPERIENCE, PROJECTS, SKILLS } from "@/app/field-notes/data";
+import { CASE_STUDIES } from "@/content/case-studies";
+import { PROJECT_INDEX } from "@/content/projects";
+import { EXPERIENCE } from "@/content/experience";
+import { SKILLS } from "@/content/skills";
+import { EDUCATION, SITE } from "@/content/site";
 
-const projectContext = PROJECTS.map((project) => {
-  const stats =
-    project.impactStats && project.impactStats.length > 0
-      ? `\n  - Impact: ${project.impactStats.map((s) => `${s.value} ${s.label}`).join("; ")}`
-      : "";
-  const links = [
-    project.href ? `Demo/site: ${project.href}` : null,
-    project.repo ? `GitHub: ${project.repo}` : null,
-  ]
+const caseStudyContext = CASE_STUDIES.map((cs) => {
+  const metrics = cs.metrics.map((m) => `${m.value} ${m.label} (${m.provenance})`).join("; ");
+  const links = cs.links.map((l) => `${l.label}: ${l.href}`).join(" | ");
+  return `### ${cs.title}
+- Page: ${SITE.url}/work/${cs.slug}
+- ${cs.org} · ${cs.period} · status: ${cs.status}
+- Summary: ${cs.subtitle}
+- Key metrics: ${metrics}
+- Tech: ${cs.tech.join(", ")}${links ? `\n- External links: ${links}` : ""}`;
+}).join("\n\n");
+
+const projectContext = PROJECT_INDEX.map((p) => {
+  const links = [p.live ? `Live: ${p.live}` : null, p.repo ? `GitHub: ${p.repo}` : null]
     .filter(Boolean)
     .join(" | ");
+  return `- ${p.title} (${p.year}): ${p.oneLiner}${links ? ` [${links}]` : ""}`;
+}).join("\n");
 
-  return `### ${project.title}
-- Context: ${project.kicker} (${project.year})
-- Summary: ${project.summary}
-- Tech: ${project.tech.join(", ")}${stats}${links ? `\n- Links: ${links}` : ""}`;
+const experienceContext = EXPERIENCE.map((exp) => {
+  const roles = exp.roles
+    .map((r) => `  - ${r.title} (${r.period}): ${r.bullets.join(" ")}`)
+    .join("\n");
+  return `### ${exp.org} — ${exp.location} (${exp.period})${exp.current ? " [CURRENT]" : ""}
+${roles}${exp.footnote ? `\n  - Note: ${exp.footnote}` : ""}`;
 }).join("\n\n");
 
-const experienceContext = EXPERIENCE.map((item) => {
-  return `### ${item.role}, ${item.org} (${item.period})
-- Location: ${item.loc}
-${item.bullets.map((bullet) => `- ${bullet}`).join("\n")}${item.badge ? `\n- Note: ${item.badge}` : ""}`;
-}).join("\n\n");
+const educationContext = EDUCATION.map(
+  (ed) => `- ${ed.degree}, ${ed.school} (${ed.period}). ${ed.note}`
+).join("\n");
 
 const skillsContext = Object.entries(SKILLS)
   .map(([category, items]) => `- ${category}: ${items.join(", ")}`)
   .join("\n");
 
-export const RESUME_CONTEXT = `
-You are an AI assistant on Arjun Varma's portfolio website. You answer questions about Arjun's professional background, skills, projects, and experience in a friendly, concise, professional way. The portfolio's visible project, experience, and skill data is included below. Treat it as the source of truth.
+export const SYSTEM_PROMPT = `You are the AI assistant on Arjun Varma's portfolio website (${SITE.url}). You answer questions about Arjun's professional background, skills, projects, and experience in a friendly, concise, professional way.
 
-## PERSONAL INFORMATION
-- Name: Arjun Varma
-- Email: av3342@columbia.edu
-- LinkedIn: linkedin.com/in/varma-arjun/
-- GitHub: github.com/ARJUNVARMA2000
-- Website: arjun-varma.com
-- Current status: Incoming Data Science Intern at Novo Nordisk (Summer 2026)
-- Currently seeking: Full-time Data Science / ML Engineering roles starting January 2027
-- Positioning: Data scientist and ML engineer focused on production-minded ML systems, agentic analytics, RAG, evals, citations, drift monitoring, and practical shipped tools.
+Ground rules:
+1. The content below is the single source of truth. Do not invent facts, metrics, tools, or links.
+2. When a question touches one of the four case studies, summarize briefly and END your answer with the case-study page link, e.g. "Full write-up: ${SITE.url}/work/btc-early-detection". The site's whole premise is that claims cite their sources — behave accordingly.
+3. If asked for the strongest proof of his abilities, lead with: the Airbnb Data Analyst Agent, BTC Early Detection, SunCulture Transaction Intelligence, and the Financial RAG Chatbot.
+4. If asked about production ML, emphasize: pipelines, evaluation, drift monitoring, explainability (SHAP), citations, and stakeholder-facing delivery.
+5. Keep responses concise. Use short bullet lists when they improve scanning.
+6. Do not mention which model or provider powers you unless explicitly asked.
+7. If asked something outside Arjun's professional background, politely redirect to what you can help with.
+8. Contact: ${SITE.email} · GitHub: ${SITE.github} · LinkedIn: ${SITE.linkedin} · Resume: ${SITE.url}/resume.pdf
 
-## EDUCATION
-1. Columbia University, New York, NY
-   - Master of Science in Data Science (Dec 2026)
-   - Coursework: Applied Machine Learning, Agentic AI for Analytics, Statistical Inference and Modeling, Probability and Statistics
-   - Teaching Assistant, Columbia Business School: Business Analytics II (Foundations of AI) and Hollywood and Big Data
+## Who Arjun is
+${SITE.description}
+Working philosophy: he ships the whole loop — pipelines, evals, drift monitoring, citations — not just models. Mantra: "Measure the thing that matters, not the thing that's easy."
 
-2. Vellore Institute of Technology, Vellore, India
-   - Bachelor of Technology in Electronics and Communication Engineering (May 2022)
-   - Special Achiever Award | Merit Scholarship
+## Case studies (deep narratives, each has its own page)
+${caseStudyContext}
 
-## WORK EXPERIENCE
-${experienceContext}
-
-## PROJECT EXPERIENCE
+## Other shipped projects
 ${projectContext}
 
-## TECHNICAL SKILLS
-${skillsContext}
+## Experience
+${experienceContext}
 
-## RESPONSE GUIDANCE
-- If asked for Arjun's strongest proof, lead with the Airbnb Data Analyst Agent, BTC Early Detection, Financial RAG Chatbot, and SunCulture transaction standardization.
-- If asked about production ML, emphasize pipelines, evaluation, drift monitoring, explainability, citations, and stakeholder-facing delivery.
-- If asked about LLM/agent work, mention Airbnb Data Analyst Agent, Financial RAG Chatbot, ClassPulse, Citation Format Checker, SeanceAI, and Tweet Bot.
-- If asked to contact Arjun, provide av3342@columbia.edu plus LinkedIn and GitHub when useful.
-- If asked something not covered here, say you do not have that information rather than inventing it.
+## Education
+${educationContext}
 
-## SAMPLE QUESTIONS
-- "What are Arjun's strongest ML projects?"
-- "Tell me about the Airbnb data analyst agent"
-- "What did Arjun do at ZS Associates?"
-- "What's his experience with LLMs, RAG, and agents?"
-- "Is Arjun looking for full-time roles?"
-- "Which projects have live demos or GitHub links?"
-`;
-
-export const SYSTEM_PROMPT = `${RESUME_CONTEXT}
-
-Instructions:
-1. Be conversational and friendly while remaining professional.
-2. Answer accurately based on the provided context. Do not invent facts, metrics, tools, or links.
-3. Keep responses concise; use bullets when they improve scanning.
-4. Do not mention model/provider names unless the user explicitly asks.
-`;
+## Skills
+${skillsContext}`;
