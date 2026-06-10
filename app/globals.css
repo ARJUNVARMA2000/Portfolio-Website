@@ -2,16 +2,223 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --ink: #15171a;
+  --muted: #62686e;
+  --line: #e3e3dc;
+  --accent: #d9480f;
+  --accent-soft: rgba(217, 72, 15, 0.08);
+  --term-bg: #101214;
+  --term-fg: #e8e6e1;
+  --term-line: #26292d;
+  --term-muted: #8a9097;
+}
+
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 body {
   min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-feature-settings: "ss01" on;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Shared primitives ─────────────────────────────────── */
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.link-quiet {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.link-quiet:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Hero load sequence ────────────────────────────────── */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.reveal-1 { animation-delay: 0.05s; }
+.reveal-2 { animation-delay: 0.15s; }
+.reveal-3 { animation-delay: 0.25s; }
+.reveal-4 { animation-delay: 0.38s; }
+.reveal-5 { animation-delay: 0.5s; }
+
+/* ── Case-study prose (react-markdown output) ──────────── */
+
+.cs-prose {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.cs-prose p {
+  margin: 0 0 1.1em;
+}
+
+.cs-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.cs-prose strong {
+  font-weight: 600;
+}
+
+.cs-prose a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+}
+
+.cs-prose ul,
+.cs-prose ol {
+  margin: 0 0 1.1em;
+  padding-left: 1.1em;
+}
+
+.cs-prose li {
+  margin-bottom: 0.45em;
+  padding-left: 0.25em;
+}
+
+.cs-prose ul li::marker {
+  content: "— ";
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.cs-prose ol li::marker {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.cs-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+.cs-prose pre {
+  background: var(--term-bg);
+  color: var(--term-fg);
+  border: 1px solid var(--term-line);
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0 0 1.1em;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.cs-prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.cs-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.1em;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.cs-prose th {
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.6875rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--ink);
+  padding: 6px 12px 6px 0;
+}
+
+.cs-prose td {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 12px 8px 0;
+  vertical-align: top;
+}
+
+.cs-prose blockquote {
+  border-left: 2px solid var(--accent);
+  margin: 0 0 1.1em;
+  padding: 0.2em 0 0.2em 1em;
+  color: var(--muted);
+}
+
+/* ── Motion kill-switch ────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
 }
