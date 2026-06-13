@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { DrawRule } from "@/components/motion/draw-rule";
+import { ScrambleLabel } from "@/components/motion/scramble";
 
 type SectionProps = {
   id?: string;
@@ -8,14 +10,15 @@ type SectionProps = {
   className?: string;
 };
 
-/** Full-width section opened by a hairline rule and a mono index label. */
+/** Full-width section opened by a self-drawing hairline rule and a decoding mono index label. */
 export function Section({ id, index, label, children, className = "" }: SectionProps) {
   return (
-    <section id={id} className={`border-t border-line ${className}`}>
+    <section id={id} className={`relative ${className}`}>
+      <DrawRule className="absolute left-0 top-0" />
       <div className="mx-auto max-w-wrap px-5 py-[clamp(56px,8vh,104px)] sm:px-8">
         <div className="mono-label mb-10 flex items-baseline gap-3">
           <span className="text-accent">{index}</span>
-          <span>/ {label}</span>
+          <ScrambleLabel text={`/ ${label}`} />
         </div>
         {children}
       </div>

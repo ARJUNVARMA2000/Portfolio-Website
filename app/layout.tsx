@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ChatMount } from "@/components/chat/chat-mount";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -88,10 +89,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#fafaf7" />
       </head>
       <body className="bg-bg font-sans text-ink antialiased">
-        <Nav />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <Nav />
+          {children}
+          <Footer />
+        </SmoothScroll>
         <ChatMount />
+        <div aria-hidden className="grain" />
         <Analytics />
       </body>
     </html>

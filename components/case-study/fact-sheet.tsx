@@ -1,8 +1,9 @@
 import type { CaseStudy } from "@/content/case-studies";
+import { Reveal } from "@/components/motion/reveal";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-1 border-t border-line py-3 sm:flex-row sm:gap-0">
+    <div data-row className="flex flex-col gap-1 border-t border-line py-3 sm:flex-row sm:gap-0">
       <dt className="mono-label w-28 shrink-0">{label}</dt>
       <dd className="font-mono text-[13px] leading-relaxed text-ink">{children}</dd>
     </div>
@@ -11,7 +12,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 
 export function FactSheet({ cs }: { cs: CaseStudy }) {
   return (
-    <dl className="border-b border-line">
+    <Reveal as="dl" childSelector="[data-row]" stagger={0.06} className="border-b border-line">
       <Row label="Org">{cs.org}</Row>
       <Row label="Role">{cs.role}</Row>
       <Row label="Period">{cs.period}</Row>
@@ -38,6 +39,6 @@ export function FactSheet({ cs }: { cs: CaseStudy }) {
           </span>
         </Row>
       )}
-    </dl>
+    </Reveal>
   );
 }
