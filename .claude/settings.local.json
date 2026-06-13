@@ -26,7 +26,17 @@
       "Bash(findstr:*)",
       "Bash(tasklist:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:sunculture.io)",
+      "Bash(npx next build)",
+      "Bash(git pull:*)",
+      "WebFetch(domain:studentresearch.engineering.columbia.edu)",
+      "WebSearch",
+      "WebFetch(domain:www.cs.columbia.edu)",
+      "Bash(python3 -c \" import json, sys repos = json.load\\(sys.stdin\\) for r in repos: print\\(f'{r[\\\\\"name\\\\\"]:40} | updated: {r[\\\\\"updated_at\\\\\"][:10]} | created: {r[\\\\\"created_at\\\\\"][:10]} | stars: {r[\\\\\"stargazers_count\\\\\"]} | {r[\\\\\"description\\\\\"] or \\\\\"No description\\\\\"}'\\) \")",
+      "Bash(python -c ':*)",
+      "Bash(python3 -c ':*)",
+      "WebFetch(domain:api.anthropic.com)"
     ]
   }
 }

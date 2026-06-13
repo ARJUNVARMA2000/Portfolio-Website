@@ -36,3 +36,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# claude code machine-local state (skills junction is recreated by `npx skills`)
+.claude/worktrees/
+.claude/skills/
