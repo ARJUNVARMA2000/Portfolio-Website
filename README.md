@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with Next.js 14, featuring an AI-powered chatbot, real-time GitHub activity, animated UI components, and dark/light theme support.
 
-**[Live Demo](https://arjunvarma.com)** · **[LinkedIn](https://www.linkedin.com/in/varma-arjun/)** · **[GitHub](https://github.com/ARJUNVARMA2000)**
+**[Live Demo](https://arjun-varma.com)** · **[LinkedIn](https://www.linkedin.com/in/varma-arjun/)** · **[GitHub](https://github.com/ARJUNVARMA2000)**
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
