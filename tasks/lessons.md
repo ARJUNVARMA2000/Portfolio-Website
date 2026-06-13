@@ -6,6 +6,15 @@
 - PERMANENT: No metric proof bar / stat strip in the hero, ever — even with provenance footnotes, even if a plan draft includes one. Cut twice (original site, 2026-06 rebuild). The hero sticks to identity and credentials (Novo Nordisk, Columbia, ZS); metrics live inside case studies where they have context.
 - When the user asks for a "fundamental redesign," a well-executed conventional pattern is not enough. Before presenting a plan, separate table-stakes from genuinely distinctive mechanisms and name them explicitly — the user challenged "Would this really be unique?" and the honest answer was no until signature mechanisms (replayable agent traces, provenance footnotes) were made first-class.
 
+## GSAP transform traps nested z-index (2026-06-13)
+- Symptom: a stretched-link overlay (`absolute inset-0 z-10`) covering a work row swallowed a nested `#trace` link that had `relative z-20` — the overlay painted on top despite the lower z-index. Only happened with motion ON.
+- Cause: `Reveal` (`gsap.from([data-line], {y, autoAlpha})`) leaves an inline `transform` on each animated `<p data-line>` after it finishes. A non-`none` transform creates a **stacking context**, so the child link's `z-20` was scoped *inside* the `<p>`, and the `<p>` itself sat at `z-auto` < the overlay's `z-10`.
+- Rule: when elevating an interactive child above a stretched-link overlay, put the `z-index` on the element GSAP transforms (the `[data-line]` parent that becomes the stacking-context boundary), not on a deeper descendant. Add `isolate` to the row container so all the z-juggling stays contained per row. Reduced-motion hides the bug (no transform → no trap), so always test with motion on.
+
+## Verifying GSAP+Lenis pages in the preview (2026-06-13)
+- This repo's Lenis runs in wrapper-transform mode and the GSAP ticker keeps `requestAnimationFrame` perpetually busy. Result: `preview_screenshot` times out (renderer never reports stable) and, mid-scroll, `getBoundingClientRect` (native-scroll-relative) disagrees with `elementFromPoint` (composited-transform-relative), so hit-tests return `body`/`null`.
+- Technique that works: (1) scroll **once** to the target, (2) wait ~2s for Lenis to converge — do **not** re-scroll before reading, (3) override `window.requestAnimationFrame = () => 0` to pin the composited frame. Now screenshots succeed and `elementFromPoint`/`elementsFromPoint` are reliable. (Supersedes the earlier note that screenshots were simply "blocked" — they're recoverable this way.)
+
 ## Copy register (2026-06-12)
 - User called the hero/about writeup "cringe" — self-aggrandizing copy ("Fortune-500", "shipping production ML", self-quote epigraph, cute phrasings like "cite their own homework").
 - Rule: portfolio copy states facts in the register of top personal sites (Rauno, leerob, Eugene Yan): name + what you do + where, plain verbs, no intensifiers, no self-evaluation. Let employer names and the work itself carry the weight. Never quote the user back at themselves as an epigraph.
