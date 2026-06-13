@@ -7,7 +7,7 @@
 
 <br/>
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-arjunvarma.com-A78BFA?style=for-the-badge&logo=googlechrome&logoColor=white)](https://arjunvarma.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-arjun--varma.com-A78BFA?style=for-the-badge&logo=googlechrome&logoColor=white)](https://arjun-varma.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-varma--arjun-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/varma-arjun/)
 [![Email](https://img.shields.io/badge/Email-av3342%40columbia.edu-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:av3342@columbia.edu)
 
@@ -249,7 +249,7 @@ Academic citation checker chatbot (APA 7th, MLA 9th, Chicago 17th) powered by Ve
 
 <br/>
 
-[![Portfolio](https://img.shields.io/badge/arjunvarma.com-Visit%20Portfolio-A78BFA?style=for-the-badge)](https://arjunvarma.com)
+[![Portfolio](https://img.shields.io/badge/arjun--varma.com-Visit%20Portfolio-A78BFA?style=for-the-badge)](https://arjun-varma.com)
 
 <br/>
 
