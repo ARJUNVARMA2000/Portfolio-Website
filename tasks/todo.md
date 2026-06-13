@@ -66,3 +66,16 @@ Survey of admired portfolios (Rauno Freiberg, Emil Kowalski, Lee Robinson, Eugen
 - [x] About: replaced self-quote epigraph with plain statement ("I work on the part of machine learning that starts after the demo."); ScrubQuote → ScrubStatement (blockquote → p, animation unchanged)
 - [x] About paragraph: cut "cite their own homework" / "aren't pretty on a slide" cuteness
 - [x] Verified in preview: new copy renders in hero + about, no dev overlay, animations intact
+
+## 2026-06-13 — Work entries legible as case studies
+
+Problem: visitors couldn't tell the work rows open full case studies. Click targets were only the title text and a small bottom "Read the case study →" link; every other affordance (wash, color, arrow) was hover-only, so on mobile/first-scan nothing signalled it. Scope confined to `components/home/work-list.tsx` (no CSS/content changes).
+
+- [x] Whole-row click target: transparent stretched `<Link absolute inset-0 z-10>` with `aria-label="Read case study: {title}"`; removed the nested title `<Link>` (title is now plain `<h3>`, hover color moved onto the heading)
+- [x] Persistent `CASE STUDY ↗` mono tag per row (`.mono-label`, muted at rest → accent on `group-hover`), pinned right via a `flex justify-between` header so it never overlaps the title
+- [x] Retired the redundant bottom "Read the case study →" CTA; kept the Airbnb-only `#trace` "replay a recorded run" link
+- [x] Fixed z-index stacking trap: GSAP leaves a `transform` on `<p data-line>`, trapping the trace link's `z-20`; moved `relative z-20` onto the `<p>` and added `isolate` to the `<article>` (see lessons.md)
+
+### Review
+- Verified via preview DOM evals + screenshots (desktop 730px, mobile 375px): all 4 rows show `CASE STUDY ↗` at rest in muted `#62686e`; overlay covers the full row (`elementFromPoint` over subtitle/metrics/title → overlay anchor → `/work/<slug>`); Airbnb trace link is topmost at its location (stack: `a#trace` → `p z20` → `a(overlay) z10`) so it's not swallowed; mobile tag visible with ~24px gap to the wrapped title, ghost numeral hidden.
+- Dev server compiled clean (no errors). Signature elements preserved (ghost numerals, trace replay, metrics/provenance).
