@@ -16,6 +16,7 @@ export const PROJECT_INDEX: IndexProject[] = [
       "GAFFER — a team-strength model for the 2026 World Cup: Elo + a Dixon-Coles goal model + Transfermarkt squad value, run through 50,000 Monte Carlo simulations for live title odds that update as the games are played.",
     tech: ["Python", "NumPy", "Next.js", "Firebase"],
     live: "https://gaffer-wc26.web.app",
+    repo: "https://github.com/ARJUNVARMA2000/wc-2026-gaffer",
   },
   {
     title: "ClassPulse",
