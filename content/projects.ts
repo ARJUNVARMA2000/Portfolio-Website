@@ -10,6 +10,14 @@ export type IndexProject = {
 /** Compact index — these ship as one row each; the deep narratives live in case-studies.ts. */
 export const PROJECT_INDEX: IndexProject[] = [
   {
+    title: "World Cup 2026 Forecast",
+    year: "2026",
+    oneLiner:
+      "GAFFER — a team-strength model for the 2026 World Cup: Elo + a Dixon-Coles goal model + Transfermarkt squad value, run through 50,000 Monte Carlo simulations for live title odds that update as the games are played.",
+    tech: ["Python", "NumPy", "Next.js", "Firebase"],
+    live: "https://gaffer-wc26.web.app",
+  },
+  {
     title: "ClassPulse",
     year: "2026",
     oneLiner:
