@@ -95,7 +95,7 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await slider.press("ArrowRight");
     await expect(slider).toHaveValue("57");
     await expect(slider).toHaveAttribute("aria-valuetext", /45 days.*30 days/i);
-    await expect(btc.getByText("index date", { exact: true }).locator("..")).toHaveAttribute("style", /left: 57%/);
+    await expect(btc.getByTestId("btc-index-marker")).toHaveAttribute("style", /left: 57%/);
   });
 
   test("preserves internal routes and external ClaimReady actions", async ({ page, request, baseURL }) => {

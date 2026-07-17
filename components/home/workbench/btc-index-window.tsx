@@ -37,7 +37,11 @@ export function BtcIndexWindow() {
             <div className="absolute inset-y-0 border-t-4 border-muted bg-muted/[0.06] transition-[left] duration-200 motion-reduce:transition-none" style={{ left: `${indexPosition}%`, width: `${TARGET_WIDTH}%` }}>
               <span className="absolute inset-x-1 top-4 text-center font-mono text-[9px] uppercase tracking-[0.08em] text-muted">next 30 days</span>
             </div>
-            <div className="absolute -bottom-3 -top-3 w-px bg-accent transition-[left] duration-200 motion-reduce:transition-none" style={{ left: `${indexPosition}%` }}>
+            <div
+              data-testid="btc-index-marker"
+              className="absolute -bottom-3 -top-3 w-px bg-accent transition-[left] duration-200 motion-reduce:transition-none"
+              style={{ left: `${indexPosition}%` }}
+            >
               <span className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-accent px-2 py-1 font-mono text-[8px] uppercase tracking-[0.1em] text-bg">
                 index date
               </span>
