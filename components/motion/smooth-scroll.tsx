@@ -32,13 +32,22 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
     const instance = new Lenis({ autoRaf: false, duration: 1.1 });
     instance.on("scroll", ScrollTrigger.update);
-    const tick = (time: number) => instance.raf(time * 1000);
+    let active = !document.hidden;
+    const tick = (time: number) => {
+      if (active) instance.raf(time * 1000);
+    };
+    const onVisibilityChange = () => {
+      active = !document.hidden;
+      if (active) ScrollTrigger.refresh();
+    };
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
+    document.addEventListener("visibilitychange", onVisibilityChange);
     setLenis(instance);
 
     return () => {
       gsap.ticker.remove(tick);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       instance.destroy();
       setLenis(null);
     };

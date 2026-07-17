@@ -26,7 +26,8 @@ export function Footer() {
       <DrawRule className="absolute left-0 top-0" />
 
       {/* availability ticker — velocity-reactive */}
-      <Marquee speed={50} className="border-b border-line">
+      <span className="sr-only">Available January 2027. Let&apos;s talk.</span>
+      <Marquee speed={50} ariaHidden className="border-b border-line">
         {Array.from({ length: 6 }, (_, i) => (
           <MarqueePhrase key={i} />
         ))}

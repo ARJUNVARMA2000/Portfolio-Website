@@ -4,6 +4,10 @@ import remarkGfm from "remark-gfm";
 import type { CaseStudy, CaseSection } from "@/content/case-studies";
 import { MultiAgentDiagram } from "@/components/diagrams/multi-agent-diagram";
 import { TraceReplay } from "@/components/diagrams/trace-replay";
+import { ForecastAnatomy } from "@/components/diagrams/forecast-anatomy";
+import { DeuceScreens } from "@/components/diagrams/deuce-screens";
+import { RiskTimeline } from "@/components/diagrams/risk-timeline";
+import { CitationStack } from "@/components/diagrams/citation-stack";
 import { DrawRule } from "@/components/motion/draw-rule";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitReveal } from "@/components/motion/split-reveal";
@@ -15,15 +19,23 @@ import { Pager } from "./pager";
 function Figure({ section }: { section: CaseSection }) {
   if (!section.figure) return null;
   const { kind, caption } = section.figure;
+
+  const visual = {
+    "multi-agent": (
+      <div className="border border-line bg-surface p-4 sm:p-8">
+        <MultiAgentDiagram />
+      </div>
+    ),
+    "trace-replay": <TraceReplay />,
+    "forecast-anatomy": <ForecastAnatomy />,
+    "deuce-screens": <DeuceScreens />,
+    "risk-timeline": <RiskTimeline />,
+    "citation-stack": <CitationStack />,
+  }[kind];
+
   return (
     <figure className="mx-auto mt-10 max-w-figure">
-      {kind === "multi-agent" ? (
-        <div className="border border-line bg-surface p-4 sm:p-8">
-          <MultiAgentDiagram />
-        </div>
-      ) : (
-        <TraceReplay />
-      )}
+      {visual}
       <figcaption className="mt-3 font-mono text-[11px] leading-relaxed text-muted">
         <ScrambleLabel text={caption} duration={1.1} />
       </figcaption>
@@ -68,7 +80,7 @@ export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
       {/* narrative */}
       <div className="mx-auto max-w-wrap px-5 sm:px-8">
         {cs.sections.map((section, i) => (
-          <section key={section.id} className="relative py-12 first-of-type:mt-14 sm:py-16">
+          <section id={section.id} key={section.id} className="relative scroll-mt-20 py-12 first-of-type:mt-14 sm:py-16">
             <DrawRule className="absolute left-0 top-0" />
             <div className="mono-label mb-8 flex items-baseline gap-3">
               <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>

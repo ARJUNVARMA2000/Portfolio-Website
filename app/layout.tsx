@@ -34,7 +34,8 @@ export const metadata: Metadata = {
     template: "%s — Arjun Varma",
   },
   description:
-    "Data Science Intern at Novo Nordisk (Commercial Data Science — Rare Disease & Wegovy/Ozempic). M.S. Data Science at Columbia. 3+ years of production ML in healthcare. Available for full-time DS/MLE roles from January 2027.",
+    "Data Scientist and ML Engineer building forecasting, decision-support, and agentic systems. Data Science Intern at Novo Nordisk and M.S. Data Science candidate at Columbia.",
+  alternates: { canonical: "/" },
   keywords: [
     "Arjun Varma",
     "Data Scientist",
@@ -55,14 +56,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Arjun Varma — Data Scientist & ML Engineer",
     description:
-      "Production ML and agentic systems — pipelines, evals, citations. Novo Nordisk · Columbia MS · 3+ yrs production ML. Available full-time Jan 2027.",
+      "Forecasting, decision-support, and agentic systems — from reliable data and evaluation through deployed products.",
     siteName: "Arjun Varma",
+    url: "https://arjun-varma.com",
   },
   twitter: {
     card: "summary_large_image",
     title: "Arjun Varma — Data Scientist & ML Engineer",
     description:
-      "Production ML and agentic systems — pipelines, evals, citations. Novo Nordisk · Columbia MS · available full-time Jan 2027.",
+      "Forecasting, decision-support, and agentic systems — from reliable data and evaluation through deployed products.",
   },
   robots: {
     index: true,

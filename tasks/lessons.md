@@ -1,5 +1,7 @@
 # Lessons
 
+- Treat the public resume, structured site content, chat context, project URLs, and repository README as one release surface. A portfolio refresh is incomplete if any one of them still describes an older project roster, employer, deployment URL, or site architecture.
+
 - No slogan-y taglines as headlines ("The model is easy; the loop is the product" was rejected as cheesy). Prefer the name set large plus plain, falsifiable claims. Aphorisms are acceptable only as attributed quotes (the desk mantra), never as positioning copy.
 
 - Do not over-specialize this portfolio as healthcare/pharma. Keep the top-level story generic DS/MLE and let domain-specific proof appear inside relevant projects.

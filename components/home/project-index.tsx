@@ -5,7 +5,7 @@ import { ScrambleLabel } from "@/components/motion/scramble";
 
 export function ProjectIndex() {
   return (
-    <Section id="projects" index="02" label="MORE SHIPPED WORK — live links, no slides">
+    <Section id="projects" index="02" label="MORE SHIPPED WORK">
       <Reveal childSelector="[data-row]" stagger={0.07} start="top 85%">
         {PROJECT_INDEX.map((p) => (
           <div

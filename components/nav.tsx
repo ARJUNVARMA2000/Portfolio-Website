@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/content/site";
 import { Magnetic } from "@/components/motion/magnetic";
@@ -15,8 +15,20 @@ const LINKS = [
 
 export function Nav() {
   const ref = useRef<HTMLElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isCaseStudy = pathname?.startsWith("/work") ?? false;
+
+  useEffect(() => setMobileOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileOpen]);
 
   useGSAP(
     () => {
@@ -65,7 +77,7 @@ export function Nav() {
 
   return (
     <header ref={ref} className="nav-shell sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
-      <nav className="mx-auto flex h-14 max-w-wrap items-center justify-between px-5 sm:px-8">
+      <nav className="relative mx-auto flex h-14 max-w-wrap items-center justify-between px-5 sm:px-8">
         <Link
           data-nav-item
           href="/"
@@ -74,6 +86,16 @@ export function Nav() {
           Arjun&nbsp;Varma
         </Link>
         <div className="flex items-center gap-5 sm:gap-7">
+          <button
+            data-nav-item
+            type="button"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-sections"
+            onClick={() => setMobileOpen((value) => !value)}
+            className="mono-label u-line !text-ink sm:hidden"
+          >
+            Sections
+          </button>
           {LINKS.map((l) => (
             <Link
               key={l.label}
@@ -100,10 +122,28 @@ export function Nav() {
               onClick={() => window.dispatchEvent(new Event("open-ask"))}
               className="mono-label border border-ink px-2.5 py-1.5 !text-ink transition-colors hover:border-accent hover:bg-accent hover:!text-bg"
             >
-              ask&nbsp;⌘K
+              <span>ask</span><span className="hidden sm:inline">&nbsp;⌘K</span>
             </button>
           </Magnetic>
         </div>
+        {mobileOpen && (
+          <div
+            id="mobile-sections"
+            className="absolute left-5 right-5 top-[calc(100%+1px)] border border-line bg-bg p-2 shadow-xl sm:hidden"
+          >
+            {LINKS.map((link, index) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-between border-b border-line px-3 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink last:border-b-0"
+              >
+                <span>{link.label}</span>
+                <span className="text-accent">0{index + 1}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </nav>
       {isCaseStudy && (
         <div data-progress aria-hidden className="absolute bottom-0 left-0 h-[2px] w-full bg-accent" />

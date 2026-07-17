@@ -1,227 +1,77 @@
 # Arjun Varma — Portfolio
 
-A modern, responsive portfolio website built with Next.js 14, featuring an AI-powered chatbot, real-time GitHub activity, animated UI components, and dark/light theme support.
+The source for [arjun-varma.com](https://arjun-varma.com): an editorial portfolio for my data science, machine learning, forecasting, and agentic-systems work.
 
-**[Live Demo](https://arjun-varma.com)** · **[LinkedIn](https://www.linkedin.com/in/varma-arjun/)** · **[GitHub](https://github.com/ARJUNVARMA2000)**
+[Live site](https://arjun-varma.com) · [LinkedIn](https://www.linkedin.com/in/varma-arjun/) · [GitHub](https://github.com/ARJUNVARMA2000)
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat-square&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+## What is here
 
----
+- Evidence-led case studies with stated metric provenance
+- DEUCE tennis forecasting across ATP and WTA, including model evaluation and product views
+- Production healthcare ML work from ZS Associates and current pre-launch / next-best-engagement work at Novo Nordisk
+- A compact index of other shipped products, including GAFFER and ClaimReady
+- An optional portfolio chat that answers from the same structured content used by the site
+- Responsive navigation, reduced-motion support, project-specific social cards, and structured metadata
 
-## Features
+## Featured case studies
 
-### AI-Powered Chat Assistant
-- **Conversational AI** that answers questions about my experience, projects, and skills
-- Powered by OpenRouter with GPT-4o-mini (configurable)
-- RAG-style context injection with resume information
-- Suggested questions and markdown-rendered responses
+1. [DEUCE Tennis Forecast](https://arjun-varma.com/work/deuce-tennis-forecast) — surface-aware Elo, point-level modeling, calibrated XGBoost, and Monte Carlo tournament simulation
+2. [Airbnb Data Analyst Agent](https://arjun-varma.com/work/airbnb-data-analyst-agent) — five specialized agents for planned, validated, cited SQL analysis
+3. [Biliary Tract Cancer Early Detection](https://arjun-varma.com/work/btc-early-detection) — leakage-safe early identification over large-scale claims data
+4. [Financial RAG Chatbot](https://arjun-varma.com/work/financial-rag-chatbot) — SEC-filing question answering with line-level citations and evaluation
 
-### Interactive Sections
-- **Hero** — Animated typing effect cycling through roles (Data Scientist, ML Engineer, AI Developer)
-- **Timeline** — Visual journey through education and career milestones
-- **Experience** — Detailed work history at ZS Associates with achievements
-- **Projects** — Featured case studies with expandable modals covering problem, approach, solution, and impact
-- **Skills** — Technical skill showcase with categorized groupings
-- **GitHub Activity** — Real-time feed of recent commits and repositories via GitHub API
-- **FPL Card** — Fantasy Premier League stats (Top 1% finisher for 4 consecutive years)
-- **Contact** — Direct email and social links
+## Stack
 
-### Technical Highlights
-- **Dark/Light Mode** — System-aware theme with manual toggle (next-themes)
-- **Smooth Animations** — Framer Motion for page transitions, scroll reveals, and micro-interactions
-- **Responsive Design** — Mobile-first layout that works beautifully on all devices
-- **Edge Runtime** — Chat API runs on Edge for low-latency responses
-- **SEO Optimized** — Proper meta tags and semantic HTML structure
+- Next.js 14 and TypeScript
+- Tailwind CSS
+- GSAP, ScrollTrigger, and Lenis
+- Vercel AI SDK with an OpenRouter-compatible chat endpoint
+- Vercel Analytics
 
----
+## Run locally
 
-## Tech Stack
-
-| Category | Technologies |
-|----------|-------------|
-| **Framework** | Next.js 14 (App Router) |
-| **Language** | TypeScript |
-| **Styling** | Tailwind CSS |
-| **Animations** | Framer Motion |
-| **AI/Chat** | Vercel AI SDK, OpenRouter API |
-| **Markdown** | react-markdown, remark-gfm |
-| **Icons** | react-icons |
-| **Theming** | next-themes |
-| **Deployment** | Vercel |
-
----
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or pnpm
-
-### Installation
+Requirements: Node.js 18+ and npm.
 
 ```bash
-# Clone the repository
-git clone https://github.com/ARJUNVARMA2000/portfolio.git
-cd portfolio
-
-# Install dependencies
 npm install
-
-# Set up environment variables
 cp .env.example .env.local
+npm run dev
 ```
 
-### Environment Variables
+Open `http://localhost:3000`.
 
-Create a `.env.local` file with the following:
+The portfolio works without chat credentials. To enable chat, set:
 
 ```env
-# Required for AI Chat functionality
-OPENROUTER_API_KEY=your_openrouter_api_key
-
-# Optional: Override default model (defaults to openai/gpt-4o-mini)
+OPENROUTER_API_KEY=your_key
 OPENROUTER_MODEL=openai/gpt-4o-mini
-
-# Optional: For OpenRouter attribution
-OR_SITE_URL=https://your-domain.com
+OR_SITE_URL=http://localhost:3000
 OR_APP_NAME=Arjun Varma Portfolio
 ```
 
-Get your OpenRouter API key at [openrouter.ai](https://openrouter.ai/).
+## Content and structure
 
-### Development
-
-```bash
-# Start development server
-npm run dev
-
-# Open http://localhost:3000
+```text
+app/                         routes, metadata, API, and social images
+components/home/             homepage sections
+components/case-study/       case-study layout and metric provenance
+components/diagrams/         evidence and system visuals
+components/motion/           reusable motion primitives
+content/                     structured site, experience, and project data
+lib/resume-context.ts        generated chat context and response rules
+public/resume.pdf            public resume
 ```
 
-### Production Build
+Most updates should begin in `content/`. The homepage, case-study routes, sitemap, and chat context consume those shared records.
+
+## Checks
 
 ```bash
-# Build for production
+npm run lint
 npm run build
-
-# Start production server
-npm start
+npm audit --omit=dev
 ```
-
----
-
-## Project Structure
-
-```
-├── app/
-│   ├── api/
-│   │   └── chat/
-│   │       └── route.ts      # AI chat endpoint (Edge)
-│   ├── globals.css           # Tailwind + custom styles
-│   ├── layout.tsx            # Root layout with theme provider
-│   └── page.tsx              # Main page with all sections
-├── components/
-│   ├── About.tsx             # About me section
-│   ├── ChatWidget.tsx        # AI chat floating widget
-│   ├── Contact.tsx           # Contact form/links
-│   ├── Experience.tsx        # Work experience cards
-│   ├── Footer.tsx            # Site footer
-│   ├── FPLCard.tsx           # Fantasy Premier League stats
-│   ├── GitHubActivity.tsx    # Live GitHub feed
-│   ├── Hero.tsx              # Hero section with typing effect
-│   ├── Loader.tsx            # Initial page loader
-│   ├── Navbar.tsx            # Navigation bar
-│   ├── Projects.tsx          # Project cards with case study modals
-│   ├── Skills.tsx            # Technical skills grid
-│   ├── ThemeProvider.tsx     # Dark/light theme context
-│   ├── ThemeToggle.tsx       # Theme switch button
-│   └── Timeline.tsx          # Visual timeline component
-├── lib/
-│   ├── resume-context.ts     # AI chat system prompt & context
-│   └── utils.ts              # Utility functions
-└── public/
-    └── resume.pdf            # Downloadable resume
-```
-
----
-
-## Featured Projects
-
-### Biliary Tract Cancer (BTC) Early Detection
-Early detection model across 250M patient claims, enabling ~45-day earlier identification compared to standard diagnosis lag. Hybrid feature pipeline combining clinical risk factors, K-means/GMM segmentation, and Transformer-based NLP clustering.
-
-**Tech:** Python, scikit-learn, PySpark, K-means, GMM, NLP Clustering
-
-### Financial RAG Chatbot
-LLM-powered RAG chatbot answering company financial questions from SEC filings with line-level citations. Multi-model evaluation pipeline using Claude Opus as a judge.
-
-**Tech:** Python, FastAPI, ChromaDB, Streamlit | [Live Demo](https://finrag-frontend-7pj7nolpla-uc.a.run.app/)
-
-### SeanceAI
-AI chatbot enabling conversations with 60+ historical figures using multi-model LLM support and streaming responses. Era-appropriate prompt engineering and "Dinner Party" mode for multi-figure conversations.
-
-**Tech:** Python, Flask, OpenRouter API
-
-### Agricultural Product Standardization & Risk Detection
-Internship/Co-op at SunCulture (Series B Agtech). RAG-augmented classification system categorizing 7M+ farmer transactions across 500+ product categories for creditworthiness assessment. 99% accuracy on 10K holdout set, reducing manual review by 95%.
-
-**Tech:** Python, RAG, REST API
-
----
-
-## Customization
-
-### Updating Content
-- **Resume/About:** Edit `lib/resume-context.ts` and component files
-- **Projects:** Modify the `projects` array in `components/Projects.tsx`
-- **Experience:** Update `components/Experience.tsx`
-- **Skills:** Edit `components/Skills.tsx`
-
-### Styling
-- **Colors:** Modify CSS variables in `app/globals.css`
-- **Theme:** Adjust Tailwind config in `tailwind.config.ts`
-
----
 
 ## Deployment
 
-### Vercel (Recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ARJUNVARMA2000/portfolio)
-
-1. Import your repository to Vercel
-2. Add environment variables (`OPENROUTER_API_KEY`)
-3. Deploy
-
-### Other Platforms
-The app can be deployed to any platform supporting Next.js:
-- Netlify
-- Railway
-- AWS Amplify
-- Self-hosted with `npm run build && npm start`
-
----
-
-## About Me
-
-**Arjun Varma** — MS Data Science @ Columbia University | Advanced Data Science Consultant @ ZS Associates
-
-I build intelligent systems with ML, Deep Learning & AI for Fortune 500 healthcare clients. Currently open to **Summer 2026 internships** in Data Science, ML Engineering, or Quant roles.
-
-### Contact
-- **Email:** [av3342@columbia.edu](mailto:av3342@columbia.edu)
-- **LinkedIn:** [linkedin.com/in/varma-arjun](https://www.linkedin.com/in/varma-arjun/)
-- **GitHub:** [github.com/ARJUNVARMA2000](https://github.com/ARJUNVARMA2000)
-
----
-
-## License
-
-MIT License — feel free to use this as a template for your own portfolio.
-
----
-
-Built with Next.js, Tailwind CSS, and Framer Motion
+The site is configured for Vercel. Add the chat environment variables in the project settings if the chat should be enabled in production; the rest of the site is statically generated.

@@ -16,15 +16,16 @@ export type Experience = {
 export const EXPERIENCE: Experience[] = [
   {
     org: "Novo Nordisk",
-    location: "New York",
-    period: "Summer 2026",
+    location: "Plainsboro, NJ",
+    period: "Jun 2026 — Aug 2026",
     current: true,
     roles: [
       {
         title: "Data Science Intern — Commercial Data Science",
-        period: "Summer 2026",
+        period: "Jun 2026 — Aug 2026",
         bullets: [
-          "Commercial Data Science team, working across the Rare Disease and Wegovy/Ozempic portfolios.",
+          "Building next-best-engagement models and an LLM layer that turns HCP-level model drivers into tailored field guidance across access, efficacy, competitor prescribing, and GLP-1 adoption.",
+          "Supporting pre-launch analytics for investigational denecimig (Mim8), informing HCP targeting and field readiness.",
         ],
       },
     ],

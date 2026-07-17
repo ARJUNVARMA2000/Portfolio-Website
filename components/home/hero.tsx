@@ -141,8 +141,8 @@ export function Hero() {
             data-hero-lede
             className="mt-6 max-w-[44ch] font-sans text-[clamp(1.125rem,2.4vw,1.375rem)] leading-snug text-ink"
           >
-            I build production ML and agentic systems — pipelines, evals, and answers that
-            cite their sources.
+            I build forecasting, decision-support, and agentic systems — from data pipelines
+            and model evaluation through deployed products.
           </p>
 
           <p
@@ -150,7 +150,7 @@ export function Hero() {
             className="mt-5 max-w-[58ch] font-sans text-[1rem] leading-relaxed text-muted"
           >
             Data science intern at <strong className="font-medium text-ink">Novo Nordisk</strong>,
-            working on the rare-disease and Wegovy/Ozempic portfolios. M.S. in Data Science at{" "}
+            working on next-best engagement and pre-launch analytics. M.S. in Data Science at{" "}
             <strong className="font-medium text-ink">Columbia</strong>. Before that, three years at
             ZS building ML for healthcare clients.
           </p>

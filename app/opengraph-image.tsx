@@ -21,12 +21,7 @@ async function loadGoogleFont(family: string, weight: number) {
   return fetch(fontUrl).then((r) => r.arrayBuffer());
 }
 
-const STATS = [
-  { value: "250M", label: "claims scored / mo" },
-  { value: "~45d", label: "earlier detection" },
-  { value: "99%", label: "accuracy, 10K holdout" },
-  { value: "6", label: "live AI systems" },
-];
+const CURRENT_WORK = ["DEUCE", "GAFFER", "AIRBNB ANALYST AGENT", "FINANCIAL RAG"];
 
 export default async function OpengraphImage() {
   const [fraunces, mono] = await Promise.all([
@@ -85,7 +80,7 @@ export default async function OpengraphImage() {
               letterSpacing: "0.06em",
             }}
           >
-            production ML · agentic systems · evals that cite their sources
+            forecasting · decision support · agentic systems
           </div>
         </div>
 
@@ -97,24 +92,14 @@ export default async function OpengraphImage() {
             paddingTop: 28,
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {STATS.map((s) => (
-              <div key={s.label} style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", fontFamily: "Mono", fontSize: 44, color: INK }}>{s.value}</div>
-                <div
-                  style={{
-                    display: "flex",
-                    fontFamily: "Mono",
-                    fontSize: 15,
-                    color: MUTED,
-                    marginTop: 8,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {s.label}
-                </div>
-              </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+            <span style={{ fontFamily: "Mono", fontSize: 14, color: ACCENT, letterSpacing: "0.12em" }}>
+              CURRENT WORK
+            </span>
+            {CURRENT_WORK.map((project) => (
+              <span key={project} style={{ fontFamily: "Mono", fontSize: 15, color: INK, letterSpacing: "0.05em" }}>
+                {project}
+              </span>
             ))}
           </div>
           <div

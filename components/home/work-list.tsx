@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CASE_STUDIES } from "@/content/case-studies";
+import { FEATURED_CASE_STUDIES } from "@/content/case-studies";
 import { Section } from "@/components/section";
 import { Parallax } from "@/components/motion/parallax";
 import { DrawRule } from "@/components/motion/draw-rule";
@@ -9,9 +9,9 @@ import { Counter } from "@/components/motion/counter";
 
 export function WorkList() {
   return (
-    <Section id="work" index="01" label="SELECTED WORK — four systems, told properly">
+    <Section id="work" index="01" label="SELECTED WORK">
       <div>
-        {CASE_STUDIES.map((cs, i) => (
+        {FEATURED_CASE_STUDIES.map((cs, i) => (
           <article key={cs.slug} className="group relative isolate overflow-hidden last:border-b last:border-line">
             <DrawRule className="relative z-10" />
 

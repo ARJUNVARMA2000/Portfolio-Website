@@ -69,9 +69,9 @@ export function About() {
         I work on the part of machine learning that starts after the demo.
       </ScrubStatement>
       <Reveal as="p" className="mt-6 max-w-[58ch] font-sans text-[0.9375rem] leading-relaxed text-muted">
-        Pipelines, evals, drift, citations — the work that keeps a model trustworthy after it
-        ships. That&rsquo;s where I&rsquo;ve spent most of my time. Right now I&rsquo;m building
-        agents that plan, query, and cite their sources.
+        My work spans forecasting, healthcare analytics, and agent workflows. Across them, the
+        recurring problems are the same: reliable data, honest evaluation, useful interfaces,
+        and enough monitoring to know when a system stops working.
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2">

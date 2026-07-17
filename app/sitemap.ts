@@ -6,13 +6,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: SITE.url,
-      lastModified: new Date(),
+      lastModified: new Date(SITE.lastUpdated),
       changeFrequency: "monthly",
       priority: 1,
     },
     ...CASE_STUDIES.map((cs) => ({
       url: `${SITE.url}/work/${cs.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(SITE.lastUpdated),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),

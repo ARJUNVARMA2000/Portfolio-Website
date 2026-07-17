@@ -4,7 +4,13 @@ export type Metric = {
   provenance: string;
 };
 
-export type FigureKind = "multi-agent" | "trace-replay";
+export type FigureKind =
+  | "multi-agent"
+  | "trace-replay"
+  | "forecast-anatomy"
+  | "deuce-screens"
+  | "risk-timeline"
+  | "citation-stack";
 
 export type CaseSection = {
   id: "context" | "constraint" | "approach" | "system" | "evidence" | "impact";
@@ -29,6 +35,102 @@ export type CaseStudy = {
 };
 
 export const CASE_STUDIES: CaseStudy[] = [
+  {
+    slug: "deuce-tennis-forecast",
+    title: "DEUCE Tennis Forecast",
+    subtitle:
+      "An ATP and WTA forecasting system that combines surface-aware Elo, point-level performance, player context, calibration, and Monte Carlo simulation.",
+    org: "Personal",
+    role: "Designed & built solo",
+    period: "2026",
+    status: "live",
+    metrics: [
+      {
+        value: "88,275",
+        label: "matches in walk-forward evaluation",
+        provenance: "45,762 ATP and 42,513 WTA matches, evaluated chronologically",
+      },
+      {
+        value: "0.1947",
+        label: "ATP Brier score",
+        provenance: "seed-bagged, Platt-calibrated XGBoost combiner",
+      },
+      {
+        value: "318",
+        label: "automated tests",
+        provenance: "222 pytest and 96 Vitest tests across data, model, API, and interface layers",
+      },
+    ],
+    tech: ["Python", "XGBoost", "Elo", "Markov models", "Monte Carlo", "FastAPI", "React", "Firebase"],
+    links: [
+      { label: "Live forecast", href: "https://deuce-forecast.web.app/" },
+      { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/tennis-elo" },
+    ],
+    sections: [
+      {
+        id: "context",
+        title: "The problem",
+        body: `A tennis forecast needs to answer more than who ranks higher. Surface, serve and return quality, recent workload, opponent style, and draw structure all change the probability of an outcome. Most public tools expose a rating or a pick; they do not show how the evidence combines or how uncertainty propagates through an entire tournament.
+
+DEUCE turns those signals into calibrated match probabilities, tournament simulations, rankings, and player-level explanations for both ATP and WTA tours.`,
+      },
+      {
+        id: "constraint",
+        title: "The constraints",
+        body: `- Tennis data arrives from several sources with different identifiers, schemas, and refresh schedules
+- The same player can perform very differently across hard, clay, and grass courts
+- Match history is chronological, so random train/test splits would leak future form into the past
+- A useful probability must be calibrated, not merely rank the likely winner correctly
+- Live forecasts need dependable refreshes, stale-data detection, and graceful fallbacks when a source fails`,
+      },
+      {
+        id: "approach",
+        title: "From signals to a probability",
+        body: `The forecast is an ensemble of complementary views of a match:
+
+1. **Surface-aware Elo** tracks player strength by court type, with cross-surface transfer when evidence is sparse
+2. **Serve and return modeling** estimates point-winning probabilities after adjusting for opponent quality
+3. **A point-to-match Markov model** converts point probabilities into games, sets, and match outcomes
+4. **Context and style features** add rest, fatigue, head-to-head history, home advantage, and matchup tendencies
+5. **Seed-bagged XGBoost** combines the signals, followed by Platt calibration so a 70% forecast behaves like one over time
+
+The interface shows the resulting probability alongside the factors that moved it, rather than presenting a black-box pick.`,
+        figure: {
+          kind: "forecast-anatomy",
+          caption: "The forecast stack: distinct tennis signals are combined, calibrated, and then simulated through a draw.",
+        },
+      },
+      {
+        id: "system",
+        title: "The product",
+        body: `A scheduled pipeline refreshes match data hourly and retrains daily. Source-freshness sentinels catch silent upstream failures before they become confident-looking forecasts. The product spans 14 views across both tours: upcoming matches, tournament draws, rankings, player profiles, form, style, and model diagnostics.
+
+Monte Carlo simulation carries match probabilities through a tournament bracket, producing round-by-round advancement and title odds rather than a collection of disconnected picks.`,
+        figure: {
+          kind: "deuce-screens",
+          caption: "Three views from the live product: current forecasts, model rankings, and player-style analysis.",
+        },
+      },
+      {
+        id: "evidence",
+        title: "Evidence",
+        body: `The evaluation is walk-forward: every prediction is generated using only information available before that match. It covers **45,762 ATP and 42,513 WTA matches**.
+
+- The calibrated combiner reaches a **0.1947 ATP Brier score** and **0.2015 WTA Brier score**
+- A published bookmaker benchmark is roughly 0.196; on DEUCE's own odds-matched subset, the closing line still leads 0.201 to 0.203 — an important boundary on the claim
+- **318 automated tests** cover ingestion, modeling, API behavior, and the interface
+- Model pages expose calibration and evaluation rather than reducing quality to win rate alone`,
+      },
+      {
+        id: "impact",
+        title: "What shipped",
+        body: `- One public product for ATP and WTA forecasts, rankings, player analysis, and tournament simulation
+- A reproducible modeling pipeline with chronological evaluation and explicit calibration
+- Hourly data refreshes, daily retraining, and freshness monitoring
+- Transparent comparisons that show where the model is strong and where the market remains stronger`,
+      },
+    ],
+  },
   {
     slug: "airbnb-data-analyst-agent",
     title: "Airbnb Data Analyst Agent",
@@ -215,6 +317,10 @@ Two things made it survivable in production rather than a slide-deck model:
 - Substantial lift in early BTC identification versus the heuristic rules it replaced
 - Clinician-acceptable precision, with interpretable per-patient feature effects via SHAP
 - Feature and prediction drift monitored across monthly refreshes — silent failure was a design concern, not an afterthought`,
+        figure: {
+          kind: "risk-timeline",
+          caption: "The leakage-safe evaluation: the latest 45 days are hidden at every index date before predicting the next 30-day window.",
+        },
       },
       {
         id: "impact",
@@ -386,6 +492,10 @@ The goal: an assistant that answers natural-language questions about company fin
 - A **multi-model evaluation pipeline uses Claude Opus as judge**, scoring responses on accuracy, relevance, and faithfulness to the source documents
 - Answers carry **line-level citations** back into the filing, so any number can be checked against the original in one click
 - The corpus spans multiple years of filings across companies, exercising retrieval across heterogeneous document structures`,
+        figure: {
+          kind: "citation-stack",
+          caption: "A grounded-answer contract: the response is assembled only from retrieved filing passages and retains a line-level trail back to each source.",
+        },
       },
       {
         id: "impact",
@@ -397,6 +507,17 @@ The goal: an assistant that answers natural-language questions about company fin
     ],
   },
 ];
+
+const FEATURED_SLUGS = [
+  "deuce-tennis-forecast",
+  "airbnb-data-analyst-agent",
+  "btc-early-detection",
+  "financial-rag-chatbot",
+] as const;
+
+export const FEATURED_CASE_STUDIES = FEATURED_SLUGS.map((slug) =>
+  CASE_STUDIES.find((cs) => cs.slug === slug)
+).filter((cs): cs is CaseStudy => Boolean(cs));
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return CASE_STUDIES.find((cs) => cs.slug === slug);

@@ -9,8 +9,9 @@ export const SITE = {
   location: "New York",
   title: "Arjun Varma — Data Scientist & ML Engineer",
   description:
-    "Data Science Intern at Novo Nordisk (Commercial Data Science — Rare Disease & Wegovy/Ozempic). M.S. Data Science at Columbia. 3+ years of production ML in healthcare. Available for full-time DS/MLE roles from January 2027.",
+    "Data Scientist and ML Engineer building forecasting, decision-support, and agentic systems. Data Science Intern at Novo Nordisk and M.S. Data Science candidate at Columbia. Available for full-time roles from January 2027.",
   availability: "Available full-time · January 2027",
+  lastUpdated: "2026-07-17",
 } as const;
 
 export type Education = {

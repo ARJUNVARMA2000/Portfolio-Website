@@ -79,3 +79,37 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 ### Review
 - Verified via preview DOM evals + screenshots (desktop 730px, mobile 375px): all 4 rows show `CASE STUDY ↗` at rest in muted `#62686e`; overlay covers the full row (`elementFromPoint` over subtitle/metrics/title → overlay anchor → `/work/<slug>`); Airbnb trace link is topmost at its location (stack: `a#trace` → `p z20` → `a(overlay) z10`) so it's not swallowed; mobile tag visible with ~24px gap to the wrapped title, ghost numeral hidden.
 - Dev server compiled clean (no errors). Signature elements preserved (ghost numerals, trace replay, metrics/provenance).
+
+## 2026-07-17 - Portfolio audit against current resume and projects
+
+- [x] Inspect the live desktop and mobile experience, navigation, links, and interactive features.
+- [x] Compare site content with the current resume, GitHub projects, and updated deployment URLs.
+- [x] Review local architecture, performance, accessibility, SEO, and content freshness.
+- [x] Produce a prioritized improvement brief without changing the production site.
+
+### Review
+
+- Existing editorial visual system is distinctive and worth preserving; mobile has no horizontal overflow and all published project/demo links return HTTP 200.
+- Highest-impact content gaps: the hosted resume predates Novo Nordisk and DEUCE, DEUCE and ClaimReady are absent, and the Novo section does not reflect the current LLM-enabled field-guidance and pre-launch work.
+- Recommended selected-work order: DEUCE, Airbnb Data Analyst Agent, BTC Early Detection, and Financial RAG; retain GAFFER at the top of the shipped-project index and move SunCulture into experience/archive treatment.
+- Accessibility findings: homepage jumps from h1 to h3, mobile hides all section navigation, the chat dialog lacks a visible close control/focus management, and the footer marquee exposes repeated availability text to assistive technology.
+- Technical findings: production build passes at 165 kB first-load JS; the always-mounted chat and global GSAP plugin bundle are optimization candidates. `npm audit --omit=dev` reports 14 production advisories (1 critical, 1 high), led by Next.js 14.2.5; patching to at least 14.2.35 is the immediate low-risk security step.
+
+## 2026-07-17 - Implement portfolio refresh
+
+- [x] Replace the public resume with the verified current PDF.
+- [x] Refresh hero, Novo Nordisk, education, availability, and project-index content.
+- [x] Add DEUCE as the lead case study, add ClaimReady, and keep SunCulture available as an archived case study.
+- [x] Add evidence-first visuals for DEUCE, BTC, and Financial RAG while preserving the existing editorial system.
+- [x] Fix mobile navigation, heading hierarchy, chat-dialog accessibility, and marquee screen-reader duplication.
+- [x] Harden and lazy-load the public chat; pause continuous motion when hidden or offscreen.
+- [x] Patch production dependencies and add canonical metadata, structured data, stable sitemap dates, and project-specific social cards.
+- [x] Run format/type/build/audit checks plus desktop/mobile behavioral and link verification.
+
+### Review
+
+- Public resume replaced and visually verified as a single clean page; its DEUCE GitHub and live-site annotations resolve to the current destinations.
+- Homepage now leads with DEUCE, followed by Airbnb, BTC, and Financial RAG. ClaimReady was added to the shipped index and the repository README now describes the current site.
+- Added DEUCE product screenshots plus forecast, leakage-window, and citation-flow visuals without changing the editorial design language.
+- Desktop and 375px mobile checks passed with no horizontal overflow. Mobile sections, chat open/close, focus restoration, body scroll lock, labels, and heading hierarchy were exercised in the browser.
+- `npm run lint` and `npm run build` pass. All ten published project/demo links returned HTTP 200. The safe dependency patch removed the critical audit finding; the remaining production high advisory requires a breaking Next.js major upgrade and is intentionally not forced into this portfolio refresh.

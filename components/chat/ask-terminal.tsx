@@ -39,12 +39,19 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
   const inputRef = useRef<HTMLInputElement | null>(null);
   const backdropRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // Phase machine so the exit animation can play before the DOM goes away.
   const [phase, setPhase] = useState<Phase>(open ? "open" : "closed");
-  if (open && phase !== "open") setPhase("open");
-  if (!open && phase === "open") setPhase("closing");
   const visible = phase !== "closed";
+
+  useEffect(() => {
+    if (open) {
+      setPhase("open");
+    } else {
+      setPhase((current) => (current === "open" ? "closing" : current));
+    }
+  }, [open]);
 
   useGSAP(
     () => {
@@ -90,7 +97,17 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
   );
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 80);
+    if (!open) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusTimer = window.setTimeout(() => inputRef.current?.focus(), 80);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = previousOverflow;
+      previousFocusRef.current?.focus();
+    };
   }, [open]);
 
   useEffect(() => {
@@ -100,7 +117,28 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusable = Array.from(
+        panelRef.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -115,7 +153,7 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Ask about Arjun"
+      aria-labelledby="ask-terminal-title"
     >
       <div
         ref={panelRef}
@@ -125,10 +163,17 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
         {/* header */}
         <div className="flex items-center gap-2 border-b border-term-line px-3.5 py-2.5 text-[10px] uppercase tracking-[0.16em] text-term-muted">
           <span className="h-2 w-2 rounded-full bg-accent" />
-          <span data-term-title className="ml-1">
+          <span id="ask-terminal-title" data-term-title className="ml-1">
             arjun@portfolio — ask
           </span>
-          <span className="ml-auto normal-case tracking-normal">esc to close</span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-auto border border-term-line px-2 py-1 normal-case tracking-normal transition-colors hover:border-accent hover:text-term-fg"
+            aria-label="Close portfolio chat"
+          >
+            close <span aria-hidden>×</span>
+          </button>
         </div>
 
         {/* transcript */}
@@ -178,7 +223,9 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
         <form onSubmit={handleSubmit} className="flex items-center gap-2.5 border-t border-term-line px-3.5 py-2.5">
           <span className="text-accent">❯</span>
           {input.length === 0 && <span aria-hidden className="caret-blink -mr-1" />}
+          <label htmlFor="ask-terminal-input" className="sr-only">Ask a question about Arjun Varma</label>
           <input
+            id="ask-terminal-input"
             ref={inputRef}
             value={input}
             onChange={handleInputChange}

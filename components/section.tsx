@@ -16,10 +16,10 @@ export function Section({ id, index, label, children, className = "" }: SectionP
     <section id={id} className={`relative ${className}`}>
       <DrawRule className="absolute left-0 top-0" />
       <div className="mx-auto max-w-wrap px-5 py-[clamp(56px,8vh,104px)] sm:px-8">
-        <div className="mono-label mb-10 flex items-baseline gap-3">
+        <h2 className="mono-label mb-10 flex items-baseline gap-3">
           <span className="text-accent">{index}</span>
           <ScrambleLabel text={`/ ${label}`} />
-        </div>
+        </h2>
         {children}
       </div>
     </section>

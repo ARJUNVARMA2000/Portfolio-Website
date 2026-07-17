@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { useLenis } from "./smooth-scroll";
 
 type MarqueeProps = {
@@ -10,6 +10,7 @@ type MarqueeProps = {
   reverse?: boolean;
   className?: string;
   trackClassName?: string;
+  ariaHidden?: boolean;
   children: ReactNode;
 };
 
@@ -22,6 +23,7 @@ export function Marquee({
   reverse = false,
   className = "",
   trackClassName = "",
+  ariaHidden = false,
   children,
 }: MarqueeProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -42,9 +44,16 @@ export function Marquee({
           ? gsap.fromTo(
               track,
               { xPercent: -50 },
-              { xPercent: 0, duration: dur, ease: "none", repeat: -1 }
+              { xPercent: 0, duration: dur, ease: "none", repeat: -1, paused: true }
             )
-          : gsap.to(track, { xPercent: -50, duration: dur, ease: "none", repeat: -1 });
+          : gsap.to(track, { xPercent: -50, duration: dur, ease: "none", repeat: -1, paused: true });
+
+        const visibility = ScrollTrigger.create({
+          trigger: wrap,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: (self) => (self.isActive ? tween.play() : tween.pause()),
+        });
 
         const ts = gsap.quickTo(tween, "timeScale", { duration: 0.4, ease: "power2.out" });
         const onTick = () => {
@@ -52,14 +61,17 @@ export function Marquee({
           ts(gsap.utils.clamp(-4, 4, 1 + v * 0.05));
         };
         gsap.ticker.add(onTick);
-        return () => gsap.ticker.remove(onTick);
+        return () => {
+          gsap.ticker.remove(onTick);
+          visibility.kill();
+        };
       });
     },
     { scope: ref, dependencies: [lenis, speed, reverse], revertOnUpdate: true }
   );
 
   return (
-    <div ref={ref} className={`overflow-hidden ${className}`}>
+    <div ref={ref} aria-hidden={ariaHidden || undefined} className={`overflow-hidden ${className}`}>
       <div
         data-marquee-track
         className={`flex w-max items-center whitespace-nowrap motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:whitespace-normal ${trackClassName}`}

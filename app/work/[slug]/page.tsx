@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CASE_STUDIES, getCaseStudy } from "@/content/case-studies";
 import { CaseStudyArticle } from "@/components/case-study/article";
+import { SITE } from "@/content/site";
 
 type Props = { params: { slug: string } };
 
@@ -15,10 +16,12 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: cs.title,
     description: cs.subtitle,
+    alternates: { canonical: `/work/${cs.slug}` },
     openGraph: {
       type: "article",
       title: `${cs.title} — Arjun Varma`,
       description: cs.subtitle,
+      url: `${SITE.url}/work/${cs.slug}`,
     },
   };
 }
@@ -26,5 +29,25 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function CaseStudyPage({ params }: Props) {
   const cs = getCaseStudy(params.slug);
   if (!cs) notFound();
-  return <CaseStudyArticle cs={cs} />;
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: cs.title,
+    description: cs.subtitle,
+    url: `${SITE.url}/work/${cs.slug}`,
+    author: { "@type": "Person", name: SITE.name, url: SITE.url },
+    dateCreated: cs.period,
+    programmingLanguage: cs.tech,
+    codeRepository: cs.links.find((link) => link.label === "GitHub")?.href,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, "\\u003c") }}
+      />
+      <CaseStudyArticle cs={cs} />
+    </>
+  );
 }
