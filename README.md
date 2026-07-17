@@ -9,7 +9,8 @@ The source for [arjun-varma.com](https://arjun-varma.com): an editorial portfoli
 - Evidence-led case studies with stated metric provenance
 - DEUCE tennis forecasting across ATP and WTA, including model evaluation and product views
 - Production healthcare ML work from ZS Associates and current pre-launch / next-best-engagement work at Novo Nordisk
-- A compact index of other shipped products, including GAFFER and ClaimReady
+- An interactive evidence workbench for DEUCE, the Airbnb Data Analyst Agent, ClaimReady, and BTC early detection
+- A compact index of other shipped products, including GAFFER and ClassPulse
 - An optional portfolio chat that answers from the same structured content used by the site
 - Responsive navigation, reduced-motion support, project-specific social cards, and structured metadata
 

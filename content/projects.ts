@@ -22,7 +22,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     title: "ClaimReady",
     year: "2026",
     oneLiner:
-      "Four-agent workflow that turns contracts, invoices, emails, and screenshots into structured NYC small-claims packets with multimodal extraction, legal retrieval, and typed handoffs.",
+      "Planner-led workflow with four specialists that turns contracts, invoices, emails, and screenshots into structured NYC small-claims packets with multimodal extraction, legal retrieval, and typed handoffs.",
     tech: ["OpenAI Agents SDK", "FastAPI", "Next.js", "GCP"],
     live: "https://claimready-frontend-7pj7nolpla-ue.a.run.app",
     repo: "https://github.com/Agentic-AI-Project-Columbia/claimready",

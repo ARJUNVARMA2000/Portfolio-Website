@@ -4,10 +4,12 @@ import { Reveal } from "@/components/motion/reveal";
 import { ScrambleLabel } from "@/components/motion/scramble";
 
 export function ProjectIndex() {
+  const secondaryProjects = PROJECT_INDEX.filter((project) => project.title !== "ClaimReady");
+
   return (
     <Section id="projects" index="02" label="MORE SHIPPED WORK">
       <Reveal childSelector="[data-row]" stagger={0.07} start="top 85%">
-        {PROJECT_INDEX.map((p) => (
+        {secondaryProjects.map((p) => (
           <div
             key={p.title}
             data-row

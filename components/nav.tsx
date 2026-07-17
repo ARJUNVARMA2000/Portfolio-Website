@@ -85,7 +85,7 @@ export function Nav() {
         >
           Arjun&nbsp;Varma
         </Link>
-        <div className="flex items-center gap-5 sm:gap-7">
+        <div className="flex items-center gap-2 sm:gap-7">
           <button
             data-nav-item
             type="button"

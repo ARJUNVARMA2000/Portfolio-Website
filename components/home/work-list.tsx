@@ -1,104 +1,71 @@
-import Link from "next/link";
 import { FEATURED_CASE_STUDIES } from "@/content/case-studies";
+import { PROJECT_INDEX } from "@/content/projects";
+import { TRACE_RUNS } from "@/content/traces";
 import { Section } from "@/components/section";
-import { Parallax } from "@/components/motion/parallax";
-import { DrawRule } from "@/components/motion/draw-rule";
-import { SplitReveal } from "@/components/motion/split-reveal";
-import { Reveal } from "@/components/motion/reveal";
-import { Counter } from "@/components/motion/counter";
+import { EvidenceWorkbench, type WorkbenchStudy } from "@/components/home/evidence-workbench";
+import { FeaturedWorkRow } from "@/components/home/featured-work-row";
+
+const WORKBENCH_ORDER = [
+  "deuce-tennis-forecast",
+  "airbnb-data-analyst-agent",
+  "claimready",
+  "btc-early-detection",
+] as const;
+
+const TRACE_PREVIEW_STEPS = [0, 1, 2, 3, 4, 8]
+  .map((index) => TRACE_RUNS[0]?.steps[index])
+  .filter((step): step is NonNullable<typeof step> => Boolean(step));
 
 export function WorkList() {
+  const claimReady = PROJECT_INDEX.find((project) => project.title === "ClaimReady");
+  const workbenchStudies = WORKBENCH_ORDER.flatMap((slug): WorkbenchStudy[] => {
+    if (slug === "claimready") {
+      if (!claimReady?.live) return [];
+      return [
+        {
+          slug,
+          title: claimReady.title,
+          subtitle: claimReady.oneLiner,
+          metrics: [
+            { value: "4", label: "specialist agents", provenance: "ClaimReady repository architecture" },
+            { value: "6", label: "legal-corpus documents", provenance: "Curated legal corpus documented in the repository" },
+            { value: "4", label: "packet documents", provenance: "Documented generated packet contents" },
+          ],
+          tech: claimReady.tech,
+          href: claimReady.live,
+          hrefLabel: "open live demo",
+          external: true,
+          secondaryLink: claimReady.repo
+            ? { href: claimReady.repo, label: "source", external: true }
+            : undefined,
+        },
+      ];
+    }
+
+    const study = FEATURED_CASE_STUDIES.find((candidate) => candidate.slug === slug);
+    if (!study) return [];
+    return [
+      {
+        ...study,
+        secondaryLink:
+          study.slug === "airbnb-data-analyst-agent"
+            ? { href: `/work/${study.slug}#trace`, label: "full trace" }
+            : undefined,
+      },
+    ];
+  });
+  const financialRag = FEATURED_CASE_STUDIES.find(
+    (study) => study.slug === "financial-rag-chatbot"
+  );
+
   return (
-    <Section id="work" index="01" label="SELECTED WORK">
-      <div>
-        {FEATURED_CASE_STUDIES.map((cs, i) => (
-          <article key={cs.slug} className="group relative isolate overflow-hidden last:border-b last:border-line">
-            <DrawRule className="relative z-10" />
-
-            {/* accent wash wipes up on hover */}
-            <div
-              aria-hidden
-              className="absolute inset-0 origin-bottom scale-y-0 bg-accent-soft transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-y-100"
-            />
-
-            {/* giant ghost numeral, drifting against the scroll */}
-            <Parallax
-              speed={0.12}
-              className="pointer-events-none absolute -right-2 top-1/2 hidden -translate-y-1/2 md:block"
-            >
-              <span aria-hidden className="ghost-num block">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </Parallax>
-
-            {/* whole-row click target — the entire entry opens its case study */}
-            <Link
-              href={`/work/${cs.slug}`}
-              aria-label={`Read case study: ${cs.title}`}
-              className="absolute inset-0 z-10"
-            />
-
-            <div className="relative grid grid-cols-1 gap-x-8 gap-y-3 py-9 sm:grid-cols-[56px_1fr]">
-              <div className="font-mono text-[13px] tabular-nums text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <div className="flex items-start justify-between gap-x-6">
-                <div className="min-w-0 md:max-w-[75%]">
-                  <SplitReveal
-                    as="h3"
-                    type="lines"
-                    className="font-serif text-[clamp(1.35rem,2.8vw,1.8rem)] tracking-[-0.015em] text-ink transition-[color,transform] duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:translate-x-3 group-hover:text-accent"
-                  >
-                    {cs.title}
-                  </SplitReveal>
-
-                  <Reveal childSelector="[data-line]" stagger={0.08} start="top 92%">
-                    <p data-line className="mt-2.5 max-w-[62ch] font-sans text-[0.9375rem] leading-relaxed text-muted">
-                      {cs.subtitle}
-                    </p>
-                    <p data-line className="mt-3.5 flex flex-wrap gap-x-2 font-mono text-[12px] tabular-nums text-ink">
-                      {cs.metrics.map((m, mi) => (
-                        <span key={m.label}>
-                          <Counter value={m.value} className="text-accent" /> {m.label}
-                          {mi < cs.metrics.length - 1 && <span className="ml-2 text-line">·</span>}
-                        </span>
-                      ))}
-                    </p>
-                    <p data-line className="mono-label mt-2.5">
-                      {cs.tech.join(" · ")}
-                    </p>
-                    {cs.slug === "airbnb-data-analyst-agent" && (
-                      <p data-line className="relative z-20 mt-4">
-                        <Link
-                          href={`/work/${cs.slug}#trace`}
-                          className="font-mono text-[12px] text-muted no-underline hover:text-accent"
-                        >
-                          <span
-                            aria-hidden
-                            className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent align-middle motion-reduce:animate-none"
-                          />
-                          replay a recorded run
-                        </Link>
-                      </p>
-                    )}
-                  </Reveal>
-                </div>
-
-                {/* persistent affordance — visible at rest, warms to accent on row hover */}
-                <span
-                  aria-hidden
-                  className="mono-label mt-1.5 shrink-0 whitespace-nowrap text-muted transition-colors duration-300 group-hover:text-accent"
-                >
-                  case study{" "}
-                  <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    ↗
-                  </span>
-                </span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+    <Section id="work" index="01" label="EVIDENCE WORKBENCH">
+      <EvidenceWorkbench studies={workbenchStudies} traceSteps={TRACE_PREVIEW_STEPS} />
+      {financialRag && (
+        <div className="mt-12">
+          <FeaturedWorkRow cs={financialRag} index={workbenchStudies.length} />
+        </div>
+      )}
     </Section>
   );
 }
