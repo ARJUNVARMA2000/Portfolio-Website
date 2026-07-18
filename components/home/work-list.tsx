@@ -32,21 +32,27 @@ export function WorkList() {
             { value: "4", label: "packet documents", provenance: "Documented generated packet contents" },
           ],
           tech: claimReady.tech,
-          href: claimReady.live,
-          hrefLabel: "open live demo",
-          external: true,
-          secondaryLink: claimReady.repo
-            ? { href: claimReady.repo, label: "source", external: true }
-            : undefined,
+          liveHref: claimReady.live,
+          githubHref: claimReady.repo,
         },
       ];
     }
 
     const study = FEATURED_CASE_STUDIES.find((candidate) => candidate.slug === slug);
     if (!study) return [];
+    const liveHref = study.links.find((link) => link.label.toLowerCase().startsWith("live"))?.href;
+    const githubHref = study.links.find((link) => link.label === "GitHub")?.href;
     return [
       {
         ...study,
+        liveHref,
+        githubHref,
+        caseStudyHref: `/work/${study.slug}`,
+        statusNote: study.availabilityNote,
+        unavailableNote:
+          !liveHref && !githubHref
+            ? "Private production system · public website and source are unavailable"
+            : undefined,
         secondaryLink:
           study.slug === "airbnb-data-analyst-agent"
             ? { href: `/work/${study.slug}#trace`, label: "full trace" }

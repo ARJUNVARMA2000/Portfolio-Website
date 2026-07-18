@@ -31,6 +31,7 @@ export type CaseStudy = {
   metrics: Metric[];
   tech: string[];
   links: { label: string; href: string }[];
+  availabilityNote?: string;
   sections: CaseSection[];
 };
 
@@ -66,6 +67,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: "Live forecast", href: "https://deuce-forecast.web.app/" },
       { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/tennis-elo" },
     ],
+    availabilityNote: "Maintained product · data refreshes hourly · model retrains daily",
     sections: [
       {
         id: "context",

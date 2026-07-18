@@ -28,7 +28,9 @@ test.describe("Evidence Workbench deployment contracts", () => {
       const request = response.request();
       const importantAsset = ["document", "script", "stylesheet", "font"].includes(request.resourceType());
       const responseUrl = new URL(response.url());
-      const localVercelStub = !process.env.PLAYWRIGHT_BASE_URL && responseUrl.pathname.startsWith("/_vercel/");
+      const localVercelStub =
+        ["127.0.0.1", "localhost"].includes(responseUrl.hostname) &&
+        responseUrl.pathname.startsWith("/_vercel/");
       if (
         importantAsset &&
         !localVercelStub &&
@@ -98,7 +100,7 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(btc.getByTestId("btc-index-marker")).toHaveAttribute("style", /left: 57%/);
   });
 
-  test("preserves internal routes and external ClaimReady actions", async ({ page, request, baseURL }) => {
+  test("preserves case studies and exposes prominent public project destinations", async ({ page, request, baseURL }) => {
     await openWorkbench(page);
 
     const internalRoutes = [
@@ -116,20 +118,77 @@ test.describe("Evidence Workbench deployment contracts", () => {
 
     await expect(page.locator('#work a[href="/work/airbnb-data-analyst-agent#trace"]')).toHaveCount(1);
 
-    const claimReady = articleFor(page, "ClaimReady");
-    const live = claimReady.getByRole("link", { name: /open live demo/i });
-    const source = claimReady.getByRole("link", { name: /source/i });
-    await expect(live).toHaveAttribute("href", "https://claimready-frontend-7pj7nolpla-ue.a.run.app");
-    await expect(source).toHaveAttribute("href", "https://github.com/Agentic-AI-Project-Columbia/claimready");
-    await expect(live).toHaveAttribute("target", "_blank");
-    await expect(source).toHaveAttribute("target", "_blank");
-    await expect(live).toHaveAttribute("rel", /noreferrer/);
+    const publicDestinations = [
+      {
+        title: "DEUCE Tennis Forecast" as const,
+        live: "https://deuce-forecast.web.app/",
+        github: "https://github.com/ARJUNVARMA2000/tennis-elo",
+      },
+      {
+        title: "Airbnb Data Analyst Agent" as const,
+        live: "https://airbnb-frontend-686529012610.us-east1.run.app/",
+        github: "https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent",
+      },
+      {
+        title: "ClaimReady" as const,
+        live: "https://claimready-frontend-7pj7nolpla-ue.a.run.app",
+        github: "https://github.com/Agentic-AI-Project-Columbia/claimready",
+      },
+      {
+        title: "Financial RAG Chatbot" as const,
+        live: "https://finrag-frontend-7pj7nolpla-uc.a.run.app/",
+        github: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot",
+      },
+    ];
+
+    for (const destination of publicDestinations) {
+      const article = articleFor(page, destination.title);
+      await article.scrollIntoViewIfNeeded();
+      const live = article.getByRole("link", { name: /live website/i });
+      const github = article.getByRole("link", { name: /github/i });
+      await expect(live).toHaveAttribute("href", destination.live);
+      await expect(github).toHaveAttribute("href", destination.github);
+      await expect(live).toHaveAttribute("target", "_blank");
+      await expect(github).toHaveAttribute("target", "_blank");
+      await expect(live).toHaveAttribute("rel", /noopener/);
+      await expect(github).toHaveAttribute("rel", /noreferrer/);
+    }
+
+    const deuce = articleFor(page, "DEUCE Tennis Forecast");
+    await expect(deuce).toContainText("Maintained product · data refreshes hourly · model retrains daily");
+
+    const btc = articleFor(page, "Biliary Tract Cancer Early Detection");
+    await expect(btc).toContainText("Private production system · public website and source are unavailable");
+    await expect(btc.getByRole("link", { name: /live website|github/i })).toHaveCount(0);
 
     const financialRag = articleFor(page, "Financial RAG Chatbot");
     await expect(financialRag.getByRole("link", { name: "Read case study: Financial RAG Chatbot" })).toHaveAttribute(
       "href",
       "/work/financial-rag-chatbot"
     );
+
+    const shippedRows = page.locator("#projects [data-row]");
+    await expect(shippedRows).toHaveCount(4);
+    for (const row of await shippedRows.all()) {
+      await row.scrollIntoViewIfNeeded();
+      await expect(row.getByRole("link", { name: /live website/i })).toHaveCount(1);
+      await expect(row.getByRole("link", { name: /github/i })).toHaveCount(1);
+    }
+  });
+
+  test("keeps live and GitHub actions prominent on case-study pages", async ({ page }) => {
+    await page.goto("/work/deuce-tennis-forecast", { waitUntil: "domcontentloaded" });
+
+    const article = page.locator("article");
+    await expect(article.getByRole("link", { name: /live website/i }).first()).toHaveAttribute(
+      "href",
+      "https://deuce-forecast.web.app/"
+    );
+    await expect(article.getByRole("link", { name: /github/i }).first()).toHaveAttribute(
+      "href",
+      "https://github.com/ARJUNVARMA2000/tennis-elo"
+    );
+    await expect(article).toContainText("Maintained product · data refreshes hourly · model retrains daily");
   });
 
   test("uses sticky desktop stages and stacked mobile stages without overflow", async ({ page }, testInfo) => {

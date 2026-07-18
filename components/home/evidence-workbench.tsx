@@ -5,12 +5,15 @@ import { DeuceSignalInspector } from "@/components/home/workbench/deuce-signal-i
 import { AirbnbTraceInspector } from "@/components/home/workbench/airbnb-trace-inspector";
 import { BtcIndexWindow } from "@/components/home/workbench/btc-index-window";
 import { ClaimReadyHandoffInspector } from "@/components/home/workbench/claimready-handoff-inspector";
+import { ProjectActions } from "@/components/project-actions";
 
 export type WorkbenchStudy = Pick<CaseStudy, "title" | "subtitle" | "metrics" | "tech"> & {
   slug: string;
-  href?: string;
-  hrefLabel?: string;
-  external?: boolean;
+  liveHref?: string;
+  githubHref?: string;
+  caseStudyHref?: string;
+  statusNote?: string;
+  unavailableNote?: string;
   secondaryLink?: {
     href: string;
     label: string;
@@ -104,21 +107,20 @@ export function EvidenceWorkbench({
                     {study.tech.join(" · ")}
                   </p>
 
-                  <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
-                    <Link
-                      href={study.href ?? `/work/${study.slug}`}
-                      target={study.external ? "_blank" : undefined}
-                      rel={study.external ? "noreferrer" : undefined}
-                      className="inline-flex min-h-11 items-center border border-ink px-4 font-mono text-[10px] uppercase tracking-[0.12em] text-ink no-underline transition-colors hover:border-accent hover:bg-accent hover:text-bg"
-                    >
-                      {study.hrefLabel ?? "open case study"}&nbsp;↗
-                    </Link>
+                  <div className="mt-7">
+                    <ProjectActions
+                      liveHref={study.liveHref}
+                      githubHref={study.githubHref}
+                      caseStudyHref={study.caseStudyHref}
+                      statusNote={study.statusNote}
+                      unavailableNote={study.unavailableNote}
+                    />
                     {study.secondaryLink && (
                       <Link
                         href={study.secondaryLink.href}
                         target={study.secondaryLink.external ? "_blank" : undefined}
                         rel={study.secondaryLink.external ? "noreferrer" : undefined}
-                        className="inline-flex min-h-11 items-center font-mono text-[10px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent"
+                        className="mt-3 inline-flex min-h-10 items-center font-mono text-[9px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent"
                       >
                         {study.secondaryLink.label}&nbsp;→
                       </Link>
