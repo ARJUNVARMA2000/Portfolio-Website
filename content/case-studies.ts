@@ -339,7 +339,7 @@ Two things made it survivable in production rather than a slide-deck model:
     title: "SunCulture Transaction Intelligence",
     subtitle:
       "A hybrid rules + LLM + retrieval pipeline that standardized 7M+ farmer transactions into the credit signal behind microloans.",
-    org: "SunCulture — Series-B agtech, East Africa",
+    org: "SunCulture — Series-B agtech startup, East Africa",
     role: "Data science & ML",
     period: "2025",
     status: "production",
@@ -366,7 +366,7 @@ Two things made it survivable in production rather than a slide-deck model:
       {
         id: "context",
         title: "The problem",
-        body: `SunCulture sells solar-powered irrigation to smallholder farmers across East Africa, financed through microloans. To underwrite those loans, the credit team needed a clean view of each farmer's cash flow — but the raw transaction data was a mess: free-text descriptions, inconsistent merchant names, regional abbreviations, and **500+ category targets** ranging from "seeds" to "motorbike repair."
+        body: `SunCulture is a Series-B agtech startup selling solar-powered irrigation to smallholder farmers across East Africa, financed through microloans. To underwrite those loans, the credit team needed a clean view of each farmer's cash flow — but the raw transaction data was a mess: free-text descriptions, inconsistent merchant names, regional abbreviations, and **500+ category targets** ranging from "seeds" to "motorbike repair."
 
 The pipeline's job: classify transactions reliably enough that the output could feed a creditworthiness model that decides real loans.`,
       },
@@ -445,7 +445,7 @@ The loop that kept it improving: errors from each batch were hand-labeled and fo
         provenance: "evidence ledger opens the cited PDF page and highlights the matching passage",
       },
     ],
-    tech: ["FastAPI", "ChromaDB", "Sentence Transformers", "Vertex AI", "Streamlit", "GCP Cloud Run"],
+    tech: ["Next.js", "React", "TypeScript", "FastAPI", "ChromaDB", "Vertex AI", "GCP Cloud Run"],
     links: [
       { label: "Live demo", href: "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app" },
       { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/filing-intelligence-rag" },
@@ -483,8 +483,8 @@ The goal: a research workspace that answers natural-language questions with **so
         body: `- **FastAPI backend** — validated query contracts, provider boundaries, retrieval, citation selection, and source delivery
 - **ChromaDB + Sentence Transformers** — versioned local embeddings with deterministic company and period filters
 - **Vertex AI generation** — bounded production inference behind Google-authenticated frontend-to-backend calls
-- **Streamlit workspace** — analyst-oriented scope controls, evidence ledger, and responsive conversation history
-- **PDF evidence viewer** — page targeting, exact-text highlighting, and a native fallback for scanned or reformatted documents
+- **Next.js + React workspace** — typed scope controls, a same-origin backend-for-frontend, evidence inspector, and responsive research history
+- **PDF evidence viewer** — product-consistent cited-page layout, byte-range rendering, robust text highlighting, and a native fallback for scanned or reformatted documents
 - **Cloud Run deployment** — isolated frontend and API services with readiness, smoke, and freshness checks`,
       },
       {
