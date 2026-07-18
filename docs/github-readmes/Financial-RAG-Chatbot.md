@@ -1,8 +1,8 @@
-# Financial RAG Chatbot
+# Filing Intelligence RAG
 
-LLM-powered RAG chatbot that answers company financial questions from SEC filings with line-level citations. No hallucinations, no "I think Q3 revenue was…" — every claim cites the source paragraph.
+Evidence-first financial research across filings, earnings decks, and transcripts with page-level citations and highlighted PDF verification.
 
-- **Live demo:** https://finrag-frontend-7pj7nolpla-uc.a.run.app/
+- **Live demo:** https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app
 - **Portfolio:** https://arjun-varma.com/
 - **Built at:** Columbia University · Nov 2025 – Dec 2025
 
@@ -66,8 +66,8 @@ Python · FastAPI · ChromaDB · text-embedding-3-large · LangChain · Streamli
 ## Run Locally
 
 ```bash
-git clone https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot.git
-cd Financial-RAG-Chatbot
+git clone https://github.com/ARJUNVARMA2000/filing-intelligence-rag.git
+cd filing-intelligence-rag
 cp .env.example .env   # add OPENAI_API_KEY, ANTHROPIC_API_KEY
 pip install -r requirements.txt
 # ingest filings

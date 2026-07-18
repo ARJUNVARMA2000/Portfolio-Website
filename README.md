@@ -9,7 +9,7 @@ The source for [arjun-varma.com](https://arjun-varma.com): an editorial portfoli
 - Evidence-led case studies with stated metric provenance
 - DEUCE tennis forecasting across ATP and WTA, including model evaluation and product views
 - Production healthcare ML work from ZS Associates and current pre-launch / next-best-engagement work at Novo Nordisk
-- An interactive evidence workbench for DEUCE, the Airbnb Data Analyst Agent, ClaimReady, and BTC early detection
+- Interactive project figures for DEUCE, the Airbnb Data Analyst Agent, ClaimReady, and BTC early detection
 - A compact index of other shipped products, including GAFFER and ClassPulse
 - An optional portfolio chat that answers from the same structured content used by the site
 - Responsive navigation, reduced-motion support, project-specific social cards, and structured metadata
@@ -19,7 +19,7 @@ The source for [arjun-varma.com](https://arjun-varma.com): an editorial portfoli
 1. [DEUCE Tennis Forecast](https://arjun-varma.com/work/deuce-tennis-forecast) — surface-aware Elo, point-level modeling, calibrated XGBoost, and Monte Carlo tournament simulation
 2. [Airbnb Data Analyst Agent](https://arjun-varma.com/work/airbnb-data-analyst-agent) — five specialized agents for planned, validated, cited SQL analysis
 3. [Biliary Tract Cancer Early Detection](https://arjun-varma.com/work/btc-early-detection) — leakage-safe early identification over large-scale claims data
-4. [Financial RAG Chatbot](https://arjun-varma.com/work/financial-rag-chatbot) — SEC-filing question answering with line-level citations and evaluation
+4. [Filing Intelligence RAG](https://arjun-varma.com/work/filing-intelligence-rag) — evidence-first financial research with page-level citations and highlighted PDF verification
 
 ## Stack
 

@@ -9,7 +9,7 @@ Portfolio → [arjun-varma.com](https://arjun-varma.com/)
 | Project | What it is | Stack |
 |---|---|---|
 | [Airbnb Data Analyst Agent](https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent) | Multi-step agent that plans → writes → executes SQL + pandas + charts for Airbnb questions with narrated citations. | Agents · Tool use · SQL · pandas · Evals |
-| [Financial RAG Chatbot](https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot) | Line-level citations over SEC 10-Ks. ChromaDB + text-embedding-3-large. Claude Opus as eval judge. | FastAPI · ChromaDB · LangChain · GCP |
+| [Filing Intelligence RAG](https://github.com/ARJUNVARMA2000/filing-intelligence-rag) · [Live demo](https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app) | Evidence-first research across filings, earnings decks, and transcripts with page-level citations and highlighted PDF verification. | FastAPI · ChromaDB · Sentence Transformers · Vertex AI · Streamlit · Cloud Run |
 | [ClassPulse](https://github.com/ARJUNVARMA2000/ClassPulse) | Live classroom theme extraction via SSE. 5-model OpenRouter fallback. | FastAPI · React · OpenRouter · Railway |
 | [Citation Format Checker](https://github.com/ARJUNVARMA2000/citation-format-checker) | APA 7 / MLA 9 / Chicago 17 violation detector with rule IDs + quoted evidence. | Vertex AI · Gemini 2.0 Flash Lite · pytest · Cloud Run |
 | [Tweet Bot](https://github.com/ARJUNVARMA2000/tweet-bot) | Chrome MV3 extension. Rhetorical-strategy-tagged tweet suggestions; voice-learning from selections. | Chrome MV3 · Claude via OpenRouter |

@@ -13,9 +13,9 @@ export function BtcIndexWindow() {
     <div className="flex min-h-[410px] flex-col bg-surface p-4 sm:p-5">
       <div className="flex items-start justify-between gap-5 border-b border-line pb-4">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">temporal integrity</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">evaluation window</p>
           <p className="mt-1 max-w-[45ch] text-sm leading-relaxed text-ink">
-            Move the index date. The evaluation window always hides the latest 45 days before predicting the next 30.
+            Drag the index date. The model sees history only up to 45 days before it, then is scored on the next 30.
           </p>
         </div>
         <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent">

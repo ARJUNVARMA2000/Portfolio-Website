@@ -3,7 +3,6 @@ import { PROJECT_INDEX } from "@/content/projects";
 import { TRACE_RUNS } from "@/content/traces";
 import { Section } from "@/components/section";
 import { EvidenceWorkbench, type WorkbenchStudy } from "@/components/home/evidence-workbench";
-import { FeaturedWorkRow } from "@/components/home/featured-work-row";
 
 const WORKBENCH_ORDER = [
   "deuce-tennis-forecast",
@@ -12,7 +11,7 @@ const WORKBENCH_ORDER = [
   "btc-early-detection",
 ] as const;
 
-const TRACE_PREVIEW_STEPS = [0, 1, 2, 3, 4, 8]
+const TRACE_PREVIEW_STEPS = [0, 1, 2, 3, 4, 5, 8]
   .map((index) => TRACE_RUNS[0]?.steps[index])
   .filter((step): step is NonNullable<typeof step> => Boolean(step));
 
@@ -60,18 +59,9 @@ export function WorkList() {
       },
     ];
   });
-  const financialRag = FEATURED_CASE_STUDIES.find(
-    (study) => study.slug === "financial-rag-chatbot"
-  );
-
   return (
-    <Section id="work" index="01" label="EVIDENCE WORKBENCH">
+    <Section id="work" index="01" label="SELECTED PROJECTS">
       <EvidenceWorkbench studies={workbenchStudies} traceSteps={TRACE_PREVIEW_STEPS} />
-      {financialRag && (
-        <div className="mt-12">
-          <FeaturedWorkRow cs={financialRag} index={workbenchStudies.length} />
-        </div>
-      )}
     </Section>
   );
 }

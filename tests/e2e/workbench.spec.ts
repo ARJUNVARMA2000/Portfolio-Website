@@ -7,7 +7,7 @@ const WORKBENCH_TITLES = [
   "Biliary Tract Cancer Early Detection",
 ] as const;
 
-function articleFor(page: Page, title: (typeof WORKBENCH_TITLES)[number] | "Financial RAG Chatbot") {
+function articleFor(page: Page, title: (typeof WORKBENCH_TITLES)[number] | "Filing Intelligence RAG") {
   return page.locator("#work article").filter({
     has: page.getByRole("heading", { level: 3, name: title, exact: true }),
   });
@@ -16,7 +16,7 @@ function articleFor(page: Page, title: (typeof WORKBENCH_TITLES)[number] | "Fina
 async function openWorkbench(page: Page) {
   const response = await page.goto("/#work", { waitUntil: "domcontentloaded" });
   expect(response?.status()).toBe(200);
-  await expect(page.getByRole("heading", { level: 2, name: /EVIDENCE WORKBENCH/ })).toBeAttached({ timeout: 15_000 });
+  await expect(page.getByRole("heading", { level: 2, name: /SELECTED PROJECTS/ })).toBeAttached({ timeout: 15_000 });
 }
 
 test.describe("Evidence Workbench deployment contracts", () => {
@@ -51,9 +51,10 @@ test.describe("Evidence Workbench deployment contracts", () => {
       await expect(articleFor(page, title)).toHaveCount(1);
     }
 
-    const financialRag = articleFor(page, "Financial RAG Chatbot");
-    await expect(financialRag).toHaveCount(1);
-    await expect(financialRag.locator('figure[aria-labelledby^="workbench-"]')).toHaveCount(0);
+    await expect(articleFor(page, "Filing Intelligence RAG")).toHaveCount(0);
+    await expect(
+      page.locator("#projects [data-row]").filter({ hasText: "Filing Intelligence RAG" })
+    ).toHaveCount(1);
     await expect(page.locator("#projects").getByText("ClaimReady", { exact: true })).toHaveCount(0);
 
     expect(runtimeErrors).toEqual([]);
@@ -70,7 +71,7 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(deuce.locator("output")).toContainText("Player-style features capture matchup effects");
 
     const airbnb = articleFor(page, "Airbnb Data Analyst Agent");
-    await expect(airbnb.locator("ol button")).toHaveCount(6);
+    await expect(airbnb.locator("ol button")).toHaveCount(7);
     await airbnb.getByRole("button", { name: "db tool failure", exact: true }).click();
     await expect(airbnb.locator("output")).toContainText('column "superhost_flag" does not exist');
     await airbnb.getByRole("button", { name: "validator validator retry", exact: true }).click();
@@ -79,7 +80,7 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(airbnb.locator("output")).toContainText("Superhosts average 4.89 vs 4.61");
     await airbnb.getByRole("button", { name: "Restart recorded sequence" }).click();
     await airbnb.getByRole("button", { name: "play", exact: true }).click();
-    await expect(airbnb).toContainText("step 2/6", { timeout: 3_000 });
+    await expect(airbnb).toContainText("step 2/7", { timeout: 3_000 });
     await airbnb.getByRole("button", { name: "pause", exact: true }).click();
 
     const claimReady = articleFor(page, "ClaimReady");
@@ -87,7 +88,7 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await jurisdiction.click();
     await expect(jurisdiction).toHaveAttribute("aria-pressed", "true");
     await expect(claimReady.locator("output")).toContainText("monetary cap, limitations period, venue, and damages");
-    await expect(claimReady).toContainText("jurisdiction_check");
+    await expect(claimReady).toContainText("jurisdiction check");
     await claimReady.getByRole("button", { name: /Drafter/ }).click();
     await expect(claimReady.locator("output")).toContainText("PDF renderer");
 
@@ -103,15 +104,15 @@ test.describe("Evidence Workbench deployment contracts", () => {
   test("preserves case studies and exposes prominent public project destinations", async ({ page, request, baseURL }) => {
     await openWorkbench(page);
 
-    const internalRoutes = [
-      "/work/deuce-tennis-forecast",
-      "/work/airbnb-data-analyst-agent",
-      "/work/btc-early-detection",
-      "/work/financial-rag-chatbot",
+    const internalRoutes: Array<[scope: string, route: string]> = [
+      ["#work", "/work/deuce-tennis-forecast"],
+      ["#work", "/work/airbnb-data-analyst-agent"],
+      ["#work", "/work/btc-early-detection"],
+      ["#projects", "/work/filing-intelligence-rag"],
     ];
 
-    for (const route of internalRoutes) {
-      await expect(page.locator(`#work a[href="${route}"]`)).toHaveCount(1);
+    for (const [scope, route] of internalRoutes) {
+      await expect(page.locator(`${scope} a[href="${route}"]`)).toHaveCount(1);
       const response = await request.get(new URL(route, baseURL).toString());
       expect(response.status(), `${route} should resolve`).toBe(200);
     }
@@ -133,11 +134,6 @@ test.describe("Evidence Workbench deployment contracts", () => {
         title: "ClaimReady" as const,
         live: "https://claimready-frontend-7pj7nolpla-ue.a.run.app",
         github: "https://github.com/Agentic-AI-Project-Columbia/claimready",
-      },
-      {
-        title: "Financial RAG Chatbot" as const,
-        live: "https://finrag-frontend-7pj7nolpla-uc.a.run.app/",
-        github: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot",
       },
     ];
 
@@ -161,14 +157,23 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(btc).toContainText("Private production system · public website and source are unavailable");
     await expect(btc.getByRole("link", { name: /live website|github/i })).toHaveCount(0);
 
-    const financialRag = articleFor(page, "Financial RAG Chatbot");
-    await expect(financialRag.getByRole("link", { name: "Read case study: Financial RAG Chatbot" })).toHaveAttribute(
+    const financialRagRow = page.locator("#projects [data-row]").filter({ hasText: "Filing Intelligence RAG" });
+    await financialRagRow.scrollIntoViewIfNeeded();
+    await expect(financialRagRow.getByRole("link", { name: /live website/i })).toHaveAttribute(
       "href",
-      "/work/financial-rag-chatbot"
+      "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app"
+    );
+    await expect(financialRagRow.getByRole("link", { name: /github/i })).toHaveAttribute(
+      "href",
+      "https://github.com/ARJUNVARMA2000/filing-intelligence-rag"
+    );
+    await expect(financialRagRow.getByRole("link", { name: /case study/i })).toHaveAttribute(
+      "href",
+      "/work/filing-intelligence-rag"
     );
 
     const shippedRows = page.locator("#projects [data-row]");
-    await expect(shippedRows).toHaveCount(4);
+    await expect(shippedRows).toHaveCount(5);
     for (const row of await shippedRows.all()) {
       await row.scrollIntoViewIfNeeded();
       await expect(row.getByRole("link", { name: /live website/i })).toHaveCount(1);

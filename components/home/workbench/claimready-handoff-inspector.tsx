@@ -17,7 +17,7 @@ const STAGES = [
     source: "NY DOS SODA API",
     detail:
       "Checks the defendant against New York's live corporation registry and adds the legal entity and service address to the shared record.",
-    fields: ["defendant.dos_*"],
+    fields: ["legal entity", "service address"],
   },
   {
     agent: "Jurisdiction Checker",
@@ -25,7 +25,7 @@ const STAGES = [
     source: "6-document corpus · rule engine",
     detail:
       "Retrieves the relevant statutes and runs deterministic checks for the monetary cap, limitations period, venue, and damages.",
-    fields: ["jurisdiction_check", "damages"],
+    fields: ["jurisdiction check", "damages"],
   },
   {
     agent: "Drafter",
@@ -33,7 +33,7 @@ const STAGES = [
     source: "merged CaseFacts",
     detail:
       "Finalizes the typed record, flags missing fields, and hands the validated facts to the PDF renderer for packet assembly.",
-    fields: ["CaseFacts", "missing-field notes"],
+    fields: ["final CaseFacts", "missing-field notes"],
   },
 ] as const;
 
@@ -47,9 +47,9 @@ export function ClaimReadyHandoffInspector() {
     <div className="flex min-h-[440px] flex-col bg-surface p-4 sm:p-5">
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-4">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">typed handoff ledger</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">specialist pipeline</p>
           <p className="mt-1 max-w-[45ch] text-sm leading-relaxed text-ink">
-            Inspect each specialist handoff around the shared case record.
+            Four specialists build one shared case record. Select a stage to see what it adds.
           </p>
         </div>
         <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent">
@@ -98,10 +98,10 @@ export function ClaimReadyHandoffInspector() {
           <output aria-live="polite" className="relative block">
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
-                handoff {String(selected + 1).padStart(2, "0")}
+                stage {String(selected + 1).padStart(2, "0")}
               </span>
               <span className="h-px min-w-6 flex-1 bg-accent" />
-              <span className="font-mono text-[8px] uppercase tracking-[0.1em] text-muted">typed output</span>
+              <span className="font-mono text-[8px] uppercase tracking-[0.1em] text-muted">adds to CaseFacts</span>
             </div>
             <h4 className="mt-4 font-serif text-2xl leading-tight text-ink">{stage.agent}</h4>
             <p className="mt-2 text-sm leading-relaxed text-muted">{stage.detail}</p>
@@ -113,7 +113,7 @@ export function ClaimReadyHandoffInspector() {
 
           <div className="relative mt-auto pt-6">
             <span className="mb-2 block font-mono text-[8px] uppercase tracking-[0.1em] text-muted">
-              handoff payload
+              fields added
             </span>
             <div className="flex flex-wrap gap-1.5">
               {stage.fields.map((field) => (
