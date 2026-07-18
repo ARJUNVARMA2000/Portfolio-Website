@@ -8,6 +8,8 @@ type ProjectActionsProps = {
   statusNote?: string;
   unavailableNote?: string;
   compact?: boolean;
+  /** Reverse visual order at sm+ so the primary action pins to the right edge in right-aligned rows. */
+  reverse?: boolean;
   className?: string;
 };
 
@@ -24,6 +26,7 @@ export function ProjectActions({
   statusNote,
   unavailableNote,
   compact = false,
+  reverse = false,
   className = "",
 }: ProjectActionsProps) {
   const size = compact ? "min-h-10 px-3 text-[9px]" : "min-h-11 px-4 text-[10px]";
@@ -31,7 +34,7 @@ export function ProjectActions({
 
   return (
     <div className={className} data-project-actions>
-      <div className="flex flex-wrap items-center gap-2.5">
+      <div className={`flex flex-wrap items-center gap-2.5 ${reverse ? "sm:flex-row-reverse" : ""}`}>
         {liveHref && (
           <a
             href={liveHref}
@@ -57,7 +60,7 @@ export function ProjectActions({
         {caseStudyHref && (
           <Link
             href={caseStudyHref}
-            className={`${base} border-line bg-transparent text-muted hover:border-ink hover:text-ink`}
+            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent`}
           >
             Case study <span aria-hidden>→</span>
           </Link>
@@ -66,7 +69,7 @@ export function ProjectActions({
           <a
             href={companyHref}
             {...externalLinkProps}
-            className={`${base} border-line bg-transparent text-muted hover:border-ink hover:text-ink`}
+            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent`}
           >
             Company website <span aria-hidden>↗</span>
           </a>

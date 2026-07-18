@@ -29,6 +29,7 @@ export function ProjectIndex() {
               githubHref={p.repo}
               caseStudyHref={p.caseStudy}
               compact
+              reverse
               className="sm:justify-self-end"
             />
           </div>
