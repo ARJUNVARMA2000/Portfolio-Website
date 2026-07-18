@@ -137,11 +137,11 @@ ML model predicting Bile Tract Cancer diagnoses from 250M patient claims, addres
 </td>
 <td width="50%">
 
-**[Financial RAG Chatbot](https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot)** · [Demo](https://finrag-frontend-7pj7nolpla-uc.a.run.app/)
+**[Filing Intelligence RAG](https://github.com/ARJUNVARMA2000/filing-intelligence-rag)** · [Demo](https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app)
 
-LLM-powered chatbot answering questions about company financials from SEC filings with 4.5/5 quality score.
+Evidence-first financial research across filings, earnings decks, and transcripts with page-level citations and highlighted PDF verification.
 
-`LangChain` `ChromaDB` `FastAPI` `Streamlit` `OpenRouter`
+`FastAPI` `ChromaDB` `Sentence Transformers` `Vertex AI` `Streamlit` `Cloud Run`
 
 </td>
 </tr>

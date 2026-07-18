@@ -12,6 +12,11 @@ const nextConfig = {
         destination: "/#work",
         permanent: false,
       },
+      {
+        source: "/work/financial-rag-chatbot",
+        destination: "/work/filing-intelligence-rag",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

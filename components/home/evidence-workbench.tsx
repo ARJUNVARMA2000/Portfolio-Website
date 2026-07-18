@@ -24,8 +24,8 @@ type PreviewStep = Pick<TraceStep, "agent" | "text" | "code" | "status" | "laten
 
 const INSTRUMENT_META = {
   "deuce-tennis-forecast": {
-    label: "forecast signal path",
-    status: "inspectable",
+    label: "forecast signals",
+    status: "interactive",
     caption: "Inspect how four match-evidence families enter a calibrated forecast and tournament simulation.",
   },
   "airbnb-data-analyst-agent": {
@@ -34,13 +34,13 @@ const INSTRUMENT_META = {
     caption: "Replay a real failed query, database error, validator intervention, retry, and cited answer.",
   },
   claimready: {
-    label: "typed agent handoffs",
-    status: "pipeline map",
-    caption: "Inspect four specialist handoffs around one shared CaseFacts record before backend packet assembly.",
+    label: "specialist pipeline",
+    status: "interactive",
+    caption: "Inspect four specialist stages around one shared CaseFacts record before packet assembly.",
   },
   "btc-early-detection": {
-    label: "leakage-safe window",
-    status: "index scrub",
+    label: "evaluation window",
+    status: "interactive",
     caption: "Move the evaluation index while preserving the 45-day mask and following 30-day target.",
   },
 } as const;
@@ -62,13 +62,9 @@ export function EvidenceWorkbench({
 }) {
   return (
     <div>
-      <div className="mb-6 grid gap-4 border-y border-line py-5 sm:grid-cols-[1fr_auto] sm:items-end">
+      <div className="mb-6 border-y border-line py-5">
         <p className="max-w-[58ch] text-[0.9375rem] leading-relaxed text-muted">
-          Use the controls to inspect the evaluation, handoffs, and safeguards behind four selected systems.
-          On larger screens, each instrument stays in place while its project moves through the reading frame.
-        </p>
-        <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted">
-          scroll to change project · interact to inspect
+          Four projects, each with an interactive figure built from its real evaluation and architecture.
         </p>
       </div>
 
@@ -87,7 +83,7 @@ export function EvidenceWorkbench({
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-[12px] tabular-nums text-accent">{itemNumber}</span>
                     <span className="h-px w-10 bg-line" />
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted">selected system</span>
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted">selected project</span>
                   </div>
                   <h3 id={titleId} className="mt-6 font-serif text-[clamp(1.8rem,3vw,2.45rem)] leading-[1.04] tracking-[-0.02em] text-ink">
                     {study.title}
@@ -135,9 +131,7 @@ export function EvidenceWorkbench({
                 >
                   <div className="border border-ink bg-surface shadow-[6px_6px_0_var(--line)]">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-ink bg-bg px-3.5 py-2.5">
-                      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink">evidence.workbench</span>
-                      <span className="text-line">/</span>
-                      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">{meta.label}</span>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink">{meta.label}</span>
                       <span className="ml-auto font-mono text-[9px] tabular-nums text-muted">{itemNumber} / {String(studies.length).padStart(2, "0")}</span>
                       <span className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-accent">
                         <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />

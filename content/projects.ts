@@ -5,10 +5,21 @@ export type IndexProject = {
   tech: string[];
   live: string;
   repo: string;
+  caseStudy?: string;
 };
 
 /** Compact index — these ship as one row each; the deep narratives live in case-studies.ts. */
 export const PROJECT_INDEX: IndexProject[] = [
+  {
+    title: "Filing Intelligence RAG",
+    year: "2026",
+    oneLiner:
+      "Evidence-first research across filings, earnings decks, and transcripts with quarter-aware retrieval, source-linked answers, and highlighted PDF verification.",
+    tech: ["FastAPI", "ChromaDB", "Vertex AI", "Streamlit", "GCP Cloud Run"],
+    live: "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app",
+    repo: "https://github.com/ARJUNVARMA2000/filing-intelligence-rag",
+    caseStudy: "/work/filing-intelligence-rag",
+  },
   {
     title: "World Cup 2026 Forecast",
     year: "2026",

@@ -69,7 +69,17 @@ export function AirbnbTraceInspector({ steps }: { steps: PreviewStep[] }) {
                   <span className="min-w-0">
                     <span className="block font-mono text-[10px] uppercase tracking-[0.12em]">{step.agent}</span>
                     <span className="block font-mono text-[8px] uppercase tracking-[0.08em] text-term-muted">
-                      {step.status === "fail" ? "tool failure" : step.status === "retry" ? "validator retry" : step.final ? "cited answer" : "message"}
+                      {step.status === "fail"
+                        ? "tool failure"
+                        : step.status === "retry"
+                          ? "validator retry"
+                          : step.final
+                            ? "cited answer"
+                            : step.agent === "sql"
+                              ? "corrected query"
+                              : step.agent === "db"
+                                ? "result rows"
+                                : "message"}
                     </span>
                   </span>
                 </button>

@@ -27,6 +27,7 @@ export function ProjectIndex() {
             <ProjectActions
               liveHref={p.live}
               githubHref={p.repo}
+              caseStudyHref={p.caseStudy}
               compact
               className="sm:justify-self-end"
             />

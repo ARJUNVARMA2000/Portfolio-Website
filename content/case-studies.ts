@@ -420,80 +420,82 @@ The loop that kept it improving: errors from each batch were hand-labeled and fo
     ],
   },
   {
-    slug: "financial-rag-chatbot",
-    title: "Financial RAG Chatbot",
+    slug: "filing-intelligence-rag",
+    title: "Filing Intelligence RAG",
     subtitle:
-      "SEC-filing Q&A with line-level citations — multi-stage retrieval over ChromaDB, evaluated with Claude as judge, live on Cloud Run.",
-    org: "Columbia",
-    role: "Designed & built solo",
-    period: "2025",
+      "Evidence-first financial research across filings, earnings decks, and transcripts, with page-level source verification and highlighted PDF citations.",
+    org: "Independent project",
+    role: "Product and RAG engineering",
+    period: "2026",
     status: "live",
     metrics: [
       {
-        value: "hrs→s",
-        label: "time-to-insight",
-        provenance: "manual review of 100+ page filings vs. one conversational query",
+        value: "4,967",
+        label: "indexed source chunks",
+        provenance: "deployed production index manifest and readiness smoke test",
       },
       {
-        value: "100%",
-        label: "answers grounded in retrieved context",
-        provenance: "generator restricted to retrieved chunks; every claim must cite its source",
+        value: "15",
+        label: "ticker corpus",
+        provenance: "deployed data coverage endpoint and packaged production corpus",
       },
       {
-        value: "3",
-        label: "eval dimensions, LLM-as-judge",
-        provenance: "accuracy · relevance · faithfulness — scored with Claude Opus",
+        value: "1 click",
+        label: "source verification",
+        provenance: "evidence ledger opens the cited PDF page and highlights the matching passage",
       },
     ],
-    tech: ["FastAPI", "ChromaDB", "LangChain", "text-embedding-3-large", "Streamlit", "GCP Cloud Run"],
+    tech: ["FastAPI", "ChromaDB", "Sentence Transformers", "Vertex AI", "Streamlit", "GCP Cloud Run"],
     links: [
-      { label: "Live demo", href: "https://finrag-frontend-7pj7nolpla-uc.a.run.app/" },
-      { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/Financial-RAG-Chatbot" },
+      { label: "Live demo", href: "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app" },
+      { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/filing-intelligence-rag" },
     ],
     sections: [
       {
         id: "context",
         title: "The problem",
-        body: `Analysts and investors spend hours sifting through SEC filings — 10-Ks, 10-Qs, 8-Ks — to extract insight about performance, risk factors, and management commentary. The documents are dense, often 100+ pages, and written in complex legal-financial language.
+        body: `Analysts and investors spend hours moving between filings, earnings decks, and call transcripts to extract performance, risk, and management commentary. The documents are dense, structurally inconsistent, and difficult to compare across companies and reporting periods.
 
-The goal: an assistant that answers natural-language questions about company financials with **source-grounded** responses — eliminating the hallucinations that make standard LLM answers worthless in a financial context.`,
+The goal: a research workspace that answers natural-language questions with **source-grounded** responses and makes every conclusion easy to verify against the original page.`,
       },
       {
         id: "constraint",
         title: "The constraints",
-        body: `- SEC filings have complex nested structure — tables, footnotes, cross-references — that naive chunking destroys
+        body: `- Financial documents have complex nested structure — tables, footnotes, cross-references — that naive chunking destroys
 - Financial data demands exact numbers; approximations are unacceptable
-- Relevant information spans multiple document sections, but context windows are finite
+- Relevant information spans multiple documents and sections, but context windows are finite
 - The system must handle both quantitative queries ("What was Q3 revenue?") and qualitative ones ("What are the main risk factors?")
 - Every response must cite its sources, or it can't be trusted or audited`,
       },
       {
         id: "approach",
         title: "The loop",
-        body: `A RAG architecture where the retrieval layer does the heavy lifting:
+        body: `A provenance-first RAG architecture where retrieval and verification do the heavy lifting:
 
-1. **Structure-aware ingestion** — SEC-EDGAR APIs fetch filings; chunking respects document structure, preserving tables and section boundaries instead of splitting mid-table
-2. **Semantic search** — ChromaDB vector store with \`text-embedding-3-large\`, combined with metadata filtering on company, filing date, and section type
-3. **Multi-stage retrieval** — broad initial retrieval, then reranking to surface the most relevant chunks per query
-4. **Constrained generation** — the generator may only answer from retrieved context, and must cite; automatic ticker and period parsing routes queries to the right filings`,
+1. **Structure-aware ingestion** — parsers preserve document, page, line, section, table, and source provenance instead of splitting blindly
+2. **Scoped retrieval** — ticker and fiscal-period parsing constrain a 384-dimensional Chroma index before dense and lexical ranking
+3. **Evidence assembly** — duplicate suppression and bounded context construction retain only the strongest source passages
+4. **Citation validation** — generated answers map back to an evidence ledger whose links open the exact PDF page and search the cited passage`,
       },
       {
         id: "system",
         title: "The build",
-        body: `- **FastAPI backend** — document ingestion, query processing, response generation
-- **ChromaDB** — persistent vector store with company/filing metadata for filtered retrieval
-- **LangChain orchestration** — the RAG pipeline, conversation memory, chain-of-thought reasoning
-- **Streamlit frontend** — chat interface with conversation history and source highlighting
-- **Cloud Run deployment** — live, with persistent conversation history`,
+        body: `- **FastAPI backend** — validated query contracts, provider boundaries, retrieval, citation selection, and source delivery
+- **ChromaDB + Sentence Transformers** — versioned local embeddings with deterministic company and period filters
+- **Vertex AI generation** — bounded production inference behind Google-authenticated frontend-to-backend calls
+- **Streamlit workspace** — analyst-oriented scope controls, evidence ledger, and responsive conversation history
+- **PDF evidence viewer** — page targeting, exact-text highlighting, and a native fallback for scanned or reformatted documents
+- **Cloud Run deployment** — isolated frontend and API services with readiness, smoke, and freshness checks`,
       },
       {
         id: "evidence",
         title: "Evidence",
-        body: `Trust in a RAG system is an eval problem, so evaluation is part of the build, not a postscript:
+        body: `Trust in a RAG system is a verification problem, so provenance is part of the data contract:
 
-- A **multi-model evaluation pipeline uses Claude Opus as judge**, scoring responses on accuracy, relevance, and faithfulness to the source documents
-- Answers carry **line-level citations** back into the filing, so any number can be checked against the original in one click
-- The corpus spans multiple years of filings across companies, exercising retrieval across heterogeneous document structures`,
+- Every indexed chunk carries **page and line provenance**, with section and table identifiers where available
+- Answers expose an **evidence ledger** rather than hiding retrieved context behind a confidence score
+- Citation links open the source on the relevant page and highlight the matched passage when the PDF text layer supports it
+- Automated tests cover retrieval scope, citation integrity, auth boundaries, document delivery, and deployment configuration`,
         figure: {
           kind: "citation-stack",
           caption: "A grounded-answer contract: the response is assembled only from retrieved filing passages and retains a line-level trail back to each source.",
@@ -502,9 +504,10 @@ The goal: an assistant that answers natural-language questions about company fin
       {
         id: "impact",
         title: "Impact",
-        body: `- Time-to-insight cut from hours of manual reading to seconds of conversation
-- Automatic ticker and period parsing makes queries frictionless
-- Deployed live on Cloud Run with persistent conversation history`,
+        body: `- Searches 4,967 indexed passages across a 15-ticker production corpus
+- Automatic ticker and period parsing narrows the research universe before retrieval
+- Source-linked answers make the supporting page, lines, and excerpt immediately inspectable
+- Deployed as isolated frontend and API services on Cloud Run`,
       },
     ],
   },
@@ -514,7 +517,7 @@ const FEATURED_SLUGS = [
   "deuce-tennis-forecast",
   "airbnb-data-analyst-agent",
   "btc-early-detection",
-  "financial-rag-chatbot",
+  "filing-intelligence-rag",
 ] as const;
 
 export const FEATURED_CASE_STUDIES = FEATURED_SLUGS.map((slug) =>
