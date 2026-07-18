@@ -12,6 +12,7 @@ import { DrawRule } from "@/components/motion/draw-rule";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { ScrambleLabel } from "@/components/motion/scramble";
+import { ProjectActions } from "@/components/project-actions";
 import { FactSheet } from "./fact-sheet";
 import { CitedMetrics } from "./cited-metric";
 import { Pager } from "./pager";
@@ -44,6 +45,16 @@ function Figure({ section }: { section: CaseSection }) {
 }
 
 export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
+  const liveHref = cs.links.find((link) => link.label.toLowerCase().startsWith("live"))?.href;
+  const githubHref = cs.links.find((link) => link.label === "GitHub")?.href;
+  const companyHref = cs.links.find(
+    (link) => link.href !== liveHref && link.href !== githubHref
+  )?.href;
+  const unavailableNote =
+    !liveHref && !githubHref
+      ? "Private client system · public website and source are unavailable"
+      : undefined;
+
   return (
     <article>
       {/* header */}
@@ -66,6 +77,15 @@ export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
           className="mt-5 max-w-prose font-sans text-[1.0625rem] leading-relaxed text-muted"
         >
           {cs.subtitle}
+        </Reveal>
+        <Reveal trigger="mount" delay={0.46} className="mt-7">
+          <ProjectActions
+            liveHref={liveHref}
+            githubHref={githubHref}
+            companyHref={companyHref}
+            statusNote={cs.availabilityNote}
+            unavailableNote={unavailableNote}
+          />
         </Reveal>
       </div>
 

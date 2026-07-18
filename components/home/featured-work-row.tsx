@@ -5,9 +5,12 @@ import { DrawRule } from "@/components/motion/draw-rule";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
+import { ProjectActions } from "@/components/project-actions";
 
 export function FeaturedWorkRow({ cs, index }: { cs: CaseStudy; index: number }) {
   const itemNumber = String(index + 1).padStart(2, "0");
+  const liveHref = cs.links.find((link) => link.label.toLowerCase().startsWith("live"))?.href;
+  const githubHref = cs.links.find((link) => link.label === "GitHub")?.href;
 
   return (
     <article className="group relative isolate overflow-hidden border-b border-line">
@@ -56,6 +59,13 @@ export function FeaturedWorkRow({ cs, index }: { cs: CaseStudy; index: number })
               <p data-line className="mono-label mt-2.5">
                 {cs.tech.join(" · ")}
               </p>
+              <div data-line className="relative z-20 mt-5">
+                <ProjectActions
+                  liveHref={liveHref}
+                  githubHref={githubHref}
+                  statusNote={cs.availabilityNote}
+                />
+              </div>
             </Reveal>
           </div>
           <span

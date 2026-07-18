@@ -3,8 +3,8 @@ export type IndexProject = {
   year: string;
   oneLiner: string;
   tech: string[];
-  live?: string;
-  repo?: string;
+  live: string;
+  repo: string;
 };
 
 /** Compact index — these ship as one row each; the deep narratives live in case-studies.ts. */
