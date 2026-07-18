@@ -1,5 +1,7 @@
 # Lessons
 
+- Treat portfolio project naming as public product branding, not deployment bookkeeping. Do not put a contributor's personal name into repository or service names unless explicitly requested; use a neutral, memorable project name and propagate it consistently across the standalone repository, deployment, case study, profile README, and redirects without modifying the shared source repository.
+
 - A portfolio project is not fully surfaced when its live and GitHub URLs exist only in underlying content or a detail page. Every homepage project presentation should expose clearly labeled, visually prominent destination actions; preserve honest exceptions for proprietary work that has no public repository or deployment.
 
 - When a user asks for an "independent copy" of a collaborative repository, clarify the intended provenance treatment before publishing. Do not remove co-author attribution, required license notices, or commit authorship in order to present shared work as solely authored; offer a clean-room reimplementation or an attributed standalone repository instead.

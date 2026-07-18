@@ -272,8 +272,8 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 - [x] Verify the Filing Intelligence RAG README, repository metadata, CI, deployment, and local/remote parity.
 - [x] Replace the stale Financial RAG project name, repository, live URL, description, stack, and evidence claims in the portfolio content and GitHub profile README.
 - [x] Preserve and validate the existing unpublished portfolio improvements while excluding unrelated generated task artifacts.
-- [ ] Commit and push the GitHub profile README and portfolio website to their own repositories.
-- [ ] Verify the Vercel production deployment, public project links, GitHub profile rendering, CI, and repository parity.
+- [x] Commit and push the GitHub profile README and portfolio website to their own repositories.
+- [x] Verify the Vercel production deployment, public project links, GitHub profile rendering, CI, and repository parity.
 
 ### Acceptance criteria
 
@@ -281,3 +281,12 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 - No active portfolio or profile content links to the shared Financial RAG repository or its deployment.
 - Portfolio typecheck, lint, production build, end-to-end tests, GitHub Actions, Vercel deployment, and public smoke checks pass.
 - The Filing Intelligence RAG, profile README, and portfolio repositories are clean and synchronized with their remotes.
+
+### Review
+
+- Filing Intelligence RAG remains isolated in `ARJUNVARMA2000/filing-intelligence-rag`; its README, GitHub default branch, Cloud Run frontend, and Cloud Run API were verified against commit `c52df97`.
+- The GitHub profile README was published at commit `9bc64cd` and now links the project name, standalone repository, and live workspace.
+- Portfolio PR #4 merged as `dd04085`; both protected-branch Quality checks, the Vercel production deployment, and the public production smoke workflow passed.
+- Public checks returned 200 for the homepage, new case-study route, Filing Intelligence RAG frontend, and API health endpoint. The old `/work/financial-rag-chatbot` route returns a permanent 308 redirect to `/work/filing-intelligence-rag`.
+- The portfolio repository homepage metadata now uses `https://arjun-varma.com`. Active portfolio and profile content contains the new project name and URLs; the shared Financial RAG repository was not changed.
+- All tracked portfolio work is synchronized with GitHub. The pre-existing untracked `tasks/hatch-pip-run/` generation workspace was intentionally preserved and excluded from the release.
