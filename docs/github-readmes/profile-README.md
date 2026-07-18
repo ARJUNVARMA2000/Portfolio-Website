@@ -9,7 +9,7 @@ Portfolio → [arjun-varma.com](https://arjun-varma.com/)
 | Project | What it is | Stack |
 |---|---|---|
 | [Airbnb Data Analyst Agent](https://github.com/ARJUNVARMA2000/airbnb-data-analyst-agent) | Multi-step agent that plans → writes → executes SQL + pandas + charts for Airbnb questions with narrated citations. | Agents · Tool use · SQL · pandas · Evals |
-| [Filing Intelligence RAG](https://github.com/ARJUNVARMA2000/filing-intelligence-rag) · [Live demo](https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app) | Evidence-first research across filings, earnings decks, and transcripts with page-level citations and highlighted PDF verification. | FastAPI · ChromaDB · Sentence Transformers · Vertex AI · Streamlit · Cloud Run |
+| [Filing Intelligence RAG](https://github.com/ARJUNVARMA2000/filing-intelligence-rag) · [Live demo](https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app) | Evidence-first research across filings, earnings decks, and transcripts with page-level citations and highlighted PDF verification. | Next.js · React · TypeScript · FastAPI · ChromaDB · Vertex AI · Cloud Run |
 | [ClassPulse](https://github.com/ARJUNVARMA2000/ClassPulse) | Live classroom theme extraction via SSE. 5-model OpenRouter fallback. | FastAPI · React · OpenRouter · Railway |
 | [Citation Format Checker](https://github.com/ARJUNVARMA2000/citation-format-checker) | APA 7 / MLA 9 / Chicago 17 violation detector with rule IDs + quoted evidence. | Vertex AI · Gemini 2.0 Flash Lite · pytest · Cloud Run |
 | [Tweet Bot](https://github.com/ARJUNVARMA2000/tweet-bot) | Chrome MV3 extension. Rhetorical-strategy-tagged tweet suggestions; voice-learning from selections. | Chrome MV3 · Claude via OpenRouter |
@@ -20,7 +20,7 @@ Portfolio → [arjun-varma.com](https://arjun-varma.com/)
 
 **ZS Associates** · Pune · Feb 2022 – Jun 2025. Promoted Decision Analytics Associate Intern → Associate → Associate Consultant → Advanced Data Science Associate Consultant. Built org-wide analytics/ML platforms for a Fortune 500 healthcare client's $10B oncology portfolio (adopted by 1,000+ reps); developed the **BTC early detection model** (250M claims, ~45-day earlier identification) presented at **PMSA 2025**; PU-learning for patient-journey label inference; drift monitoring for production pipelines.
 
-**SunCulture** · AI Engineer Intern · Sep 2025 – Dec 2025. RAG-augmented classifier for 7M+ farmer transactions across 500+ categories driving microloan creditworthiness in East Africa. 99% accuracy on a 10K holdout; 95% reduction in manual review.
+**SunCulture** (Series-B Agtech Startup) · AI Engineer Intern · Sep 2025 – Dec 2025. RAG-augmented classifier for 7M+ farmer transactions across 500+ categories driving microloan creditworthiness in East Africa. 99% accuracy on a 10K holdout; 95% reduction in manual review.
 
 ### Education
 
