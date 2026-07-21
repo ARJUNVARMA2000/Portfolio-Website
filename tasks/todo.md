@@ -290,3 +290,18 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 - Public checks returned 200 for the homepage, new case-study route, Filing Intelligence RAG frontend, and API health endpoint. The old `/work/financial-rag-chatbot` route returns a permanent 308 redirect to `/work/filing-intelligence-rag`.
 - The portfolio repository homepage metadata now uses `https://arjun-varma.com`. Active portfolio and profile content contains the new project name and URLs; the shared Financial RAG repository was not changed.
 - All tracked portfolio work is synchronized with GitHub. The pre-existing untracked `tasks/hatch-pip-run/` generation workspace was intentionally preserved and excluded from the release.
+
+## 2026-07-21 - Add unlisted second resume cut at /resume2
+
+### Plan
+
+- [x] Add the newer resume PDF to `public/` alongside the existing one.
+- [x] Serve it at the extensionless `/resume2` URL via a Next.js rewrite.
+- [x] Confirm `/resume.pdf` and its site links are untouched.
+
+### Review
+
+- `public/resume2.pdf` added; `next.config.mjs` rewrites `/resume2` -> `/resume2.pdf`, matching the existing `/1984` pattern.
+- Verified: `/resume2` returns 200 `application/pdf`, 41,643 bytes, body starts `%PDF-1.4`, and its sha256 is byte-identical to the source file. `/resume.pdf` still returns the prior 63,759-byte file.
+- Deliberately unlisted: not in `app/sitemap.ts`, not linked from nav, footer, hero, or the chat system prompt. `SITE.resume` still points at `/resume.pdf`.
+- Two resume versions are now live. This cut fills in the Novo Nordisk bullets, moves BTC early detection from Projects into the ZS Advanced Data Science role, drops GAFFER, reorders projects, and adds a Reporting skills line.
