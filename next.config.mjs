@@ -26,6 +26,12 @@ const nextConfig = {
         source: "/1984",
         destination: "/1984.html",
       },
+      // Unlisted second resume cut (public/resume2.pdf) at a clean URL.
+      // Not linked from the site or the sitemap; shared deliberately.
+      {
+        source: "/resume2",
+        destination: "/resume2.pdf",
+      },
     ];
   },
 };
