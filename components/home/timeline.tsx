@@ -77,7 +77,7 @@ function TimelineBody() {
               {exp.location} · {exp.period}
             </p>
             {exp.current && (
-              <span className="mt-2.5 inline-block animate-pulse border border-accent px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.16em] text-accent [animation-duration:2.6s] motion-reduce:animate-none">
+              <span className="mt-2.5 inline-block animate-pulse border border-accent px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.16em] text-accent-text [animation-duration:2.6s] motion-reduce:animate-none">
                 current
               </span>
             )}
@@ -97,7 +97,7 @@ function TimelineBody() {
                       data-li
                       className="flex gap-2.5 font-sans text-[0.875rem] leading-relaxed text-muted"
                     >
-                      <span className="font-mono text-accent" aria-hidden>
+                      <span className="font-mono text-accent-text" aria-hidden>
                         —
                       </span>
                       {b}

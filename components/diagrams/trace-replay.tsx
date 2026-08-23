@@ -388,7 +388,7 @@ export function TraceReplay() {
               aria-pressed={i === runIdx}
               className={`border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] transition-colors ${
                 i === runIdx
-                  ? "border-accent bg-accent text-term"
+                  ? "border-accent-term bg-accent-term text-term"
                   : "border-term-line text-term-muted hover:border-term-muted hover:text-term-fg"
               }`}
             >
@@ -420,7 +420,7 @@ export function TraceReplay() {
         </div>
 
         <div ref={bodyRef} className="max-h-[420px] flex-1 overflow-y-auto px-4 py-4">
-          <p className="mb-4 font-mono text-[13px] text-accent">❯ {run.question}</p>
+          <p className="mb-4 font-mono text-[13px] text-accent-term">❯ {run.question}</p>
           {run.steps.map((s, i) => (
             <StepRow key={`${run.id}-${i}`} step={s} />
           ))}
@@ -460,7 +460,7 @@ export function TraceReplay() {
         <button
           type="button"
           onClick={togglePlay}
-          className="border border-accent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-accent transition-colors hover:bg-accent hover:text-term"
+          className="border border-accent-term px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-accent-term transition-colors hover:bg-accent-term hover:text-term"
         >
           {playing ? "pause" : "play"}
         </button>

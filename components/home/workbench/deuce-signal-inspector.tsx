@@ -38,7 +38,7 @@ export function DeuceSignalInspector() {
             Four families of match evidence feed one calibrated forecast. Select a signal to see what it adds.
           </p>
         </div>
-        <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent">
+        <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent-text">
           walk-forward
         </span>
       </div>
@@ -59,7 +59,7 @@ export function DeuceSignalInspector() {
                     : "border-line bg-bg text-muted hover:border-muted hover:text-ink"
                 }`}
               >
-                <span className={`font-mono text-[10px] ${active ? "text-accent" : "text-muted"}`}>
+                <span className={`font-mono text-[10px] ${active ? "text-accent-text" : "text-muted"}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="min-w-0">
@@ -83,11 +83,11 @@ export function DeuceSignalInspector() {
           <div aria-hidden className="dot-grid absolute inset-0 opacity-50" />
           <div className="relative">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent font-mono text-[10px] text-bg">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-text font-mono text-[10px] text-bg">
                 {String(selected + 1).padStart(2, "0")}
               </span>
               <div className="h-px flex-1 bg-accent" />
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">selected signal</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent-text">selected signal</span>
             </div>
             <output aria-live="polite" className="mt-5 block">
               <span className="font-serif text-2xl leading-tight text-ink">{signal.label}</span>
@@ -100,9 +100,9 @@ export function DeuceSignalInspector() {
               <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted">model</span>
               <strong className="mt-1 block font-serif text-lg font-medium text-ink">XGBoost</strong>
             </div>
-            <span aria-hidden className="justify-self-center font-mono text-accent max-sm:rotate-90">→</span>
+            <span aria-hidden className="justify-self-center font-mono text-accent-text max-sm:rotate-90">→</span>
             <div className="border border-accent bg-accent-soft p-3 text-center">
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">calibrated</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent-text">calibrated</span>
               <strong className="mt-1 block font-serif text-lg font-medium text-ink">win probability</strong>
             </div>
           </div>

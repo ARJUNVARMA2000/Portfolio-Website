@@ -352,3 +352,31 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 - Verified `npm run typecheck`, `npm run lint`, and `npm run build`. The production build remains 172 kB first-load JS on `/`. Playwright passes 13 desktop/mobile tests with one intentional duplicate reduced-motion mobile skip; the new regression scrolls offscreen mobile metric cards before checking their animated values.
 - In-app browser verification passed at 1440px and 390px for the hero, Selected Projects, More Shipped Work, experience, toolbox, and DEUCE/Filing Intelligence case-study metrics. Sticky desktop and stacked mobile behavior remain intact, every inspected surface has zero horizontal overflow, and the browser console is clean.
 - All eight affected live/GitHub destinations return HTTP 200. The local sitemap uses `2026-08-22`, `/resume.pdf` remains byte-identical to the approved Data Science/MLE source, and stale DEUCE/Novo/Streamlit strings are absent from active site content.
+
+## 2026-08-22 - Beautiful UI interaction pass
+
+### Plan
+
+- [x] Upgrade the Ask terminal with a compact responsive composer, elapsed streaming feedback, contextual starter/follow-up prompts, safe clickable links, and case-study source chips without exposing fabricated reasoning.
+- [x] Turn More Shipped Work into a progressively enhanced Project Explorer with direct navigation, grounded project categories, lightweight search, accessible filter tabs, a gliding active state, and a complete server-rendered fallback.
+- [x] Add a responsive case-study section navigator: sticky section rail on desktop, horizontally scrollable tabs on mobile, scroll-spy state, keyboard-safe anchors, and reduced-motion-compatible behavior.
+- [x] Split the brand accent into decorative and text-safe tokens so small orange text reaches WCAG AA contrast while the existing visual identity remains intact.
+- [x] Add focused Playwright coverage for the Ask UI, project filtering/search, direct Projects navigation, case-study navigation, active state, keyboard interaction, responsive overflow, and reduced motion.
+- [x] Run TypeScript, lint, production build, and full Playwright verification on a dedicated local server; complete desktop and mobile browser QA and record the results below.
+
+### Acceptance criteria
+
+- Assistant answers stream into an accessible live region, render only safe HTTP(S)/internal links, expose relevant case-study sources and follow-up prompts, and remain usable at 320px without horizontal overflow.
+- Every shipped project remains present in the initial HTML; filters and search can hide rows only after hydration, announce the result count, and are fully keyboard operable.
+- Every case-study section remains reachable by a normal hash link; the navigator reflects the visible section without hijacking native scrolling and does not obscure headings beneath sticky chrome.
+- Normal-size orange text meets a 4.5:1 contrast ratio on both the editorial and terminal backgrounds; decorative orange surfaces and motion motifs remain visually consistent.
+- Existing project links, workbench instruments, case-study figures, chat focus management, body scroll locking, and reduced-motion fallbacks continue to pass.
+
+### Review
+
+- Ask is now a compact, focus-managed terminal with case-aware starters and follow-ups, preparing/streaming elapsed feedback, safe internal/HTTPS links, known-source chips, announced failures, and reliable same-page/cross-page navigation. Long answers scroll inside the locked dialog, unbroken content wraps, and every mobile control remains at least 44px high at 320px.
+- More Shipped Work is now a progressively enhanced Project Explorer. All five projects and destinations remain in no-JavaScript HTML; hydrated users get grounded category filters, visible technology context, search, an announced result count, a measured gliding indicator, accessible clear/reset controls, and a scrollbar-free mobile filter strip.
+- Every case study now has normal hash-addressable section navigation: a sticky desktop rail and a solid-background horizontal mobile strip with one visible current location. Native section links cannot stall when browser visibility changes, headings clear the sticky chrome, and direct hashes/reduced motion remain intact.
+- The original `#d9480f` brand orange remains on decorative borders, rails, and marks. Small editorial text uses `#b83a0c`, terminal text uses `#e85d24`, and text-bearing orange fills use the darker token; tested contrast is at least 4.5:1 on paper, white, terminal, and orange-tinted surfaces.
+- Verification passes: `npm run typecheck`, `npm run lint`, `git diff --check`, and `npm run build`. The full Playwright matrix reports 33 passed and 7 intentional duplicate-project skips; a post-polish Project Explorer run reports 6 passed and 2 intentional skips. Production output remains 173 kB first-load JS on `/` and 163 kB on `/work/[slug]`.
+- In-app browser QA passed at 1440px, 390px, and 320px for the Project Explorer, Ask terminal, case-study rail, hash offsets, focus, touch sizes, nested scrolling, and horizontal overflow. No runtime errors appeared; the only local log was the expected undeployed Vercel Analytics notice.

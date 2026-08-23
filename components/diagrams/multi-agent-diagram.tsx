@@ -119,7 +119,7 @@ export function MultiAgentDiagram() {
 
       {/* message bus */}
       <line data-bus x1="10" y1="96" x2="550" y2="96" stroke="var(--accent)" strokeWidth="2" />
-      <text data-bus-label x="10" y="88" fontFamily={MONO} fontSize="10" fill="var(--accent)">
+      <text data-bus-label x="10" y="88" fontFamily={MONO} fontSize="10" fill="var(--accent-text)">
         {BUS_LABEL}
       </text>
 
@@ -196,7 +196,7 @@ export function MultiAgentDiagram() {
       {/* output */}
       <line data-out-stem x1="280" y1="236" x2="280" y2="254" stroke="var(--ink)" strokeWidth="1.2" />
       <rect data-out-rect x="60" y="254" width="440" height="30" fill="var(--accent-soft)" stroke="var(--accent)" strokeWidth="1.4" />
-      <text data-out-text x="280" y="273" fontFamily={MONO} fontSize="11" fill="var(--accent)" textAnchor="middle">
+      <text data-out-text x="280" y="273" fontFamily={MONO} fontSize="11" fill="var(--accent-text)" textAnchor="middle">
         cited answer + chart + replayable trace
       </text>
     </svg>

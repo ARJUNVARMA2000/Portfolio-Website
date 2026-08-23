@@ -126,7 +126,7 @@ export function Hero() {
           Data Scientist / ML Engineer
         </span>
         <span data-hero-loc>— New York</span>
-        <span data-hero-tag className="ml-auto text-accent">
+        <span data-hero-tag className="ml-auto text-accent-text">
           [ {SITE.availability.toLowerCase()} ]
         </span>
       </p>

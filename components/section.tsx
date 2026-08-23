@@ -17,7 +17,7 @@ export function Section({ id, index, label, children, className = "" }: SectionP
       <DrawRule className="absolute left-0 top-0" />
       <div className="mx-auto max-w-wrap px-5 py-[clamp(56px,8vh,104px)] sm:px-8">
         <h2 className="mono-label mb-10 flex items-baseline gap-3">
-          <span className="text-accent">{index}</span>
+          <span className="text-accent-text">{index}</span>
           <ScrambleLabel text={`/ ${label}`} />
         </h2>
         {children}

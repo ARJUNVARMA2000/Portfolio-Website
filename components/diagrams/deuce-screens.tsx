@@ -13,7 +13,7 @@ export function DeuceScreens() {
         <div key={screen.src} className="overflow-hidden border border-line bg-bg">
           <div className="flex items-center justify-between border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">
             <span>{screen.label}</span>
-            <span className="text-accent">Live</span>
+            <span className="text-accent-text">Live</span>
           </div>
           <Image
             src={screen.src}

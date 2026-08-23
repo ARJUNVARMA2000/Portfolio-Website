@@ -103,9 +103,9 @@ export function CitedMetrics({ metrics }: { metrics: Metric[] }) {
           className="relative bg-surface p-5 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_32px_var(--accent-glow)]"
         >
           <span data-edge aria-hidden className="absolute left-0 top-0 h-full w-px bg-accent" />
-          <div className="stat-value text-[clamp(1.7rem,3.4vw,2.3rem)] text-accent">
+          <div className="stat-value text-[clamp(1.7rem,3.4vw,2.3rem)] text-accent-text">
             <span data-value>{m.value}</span>
-            <sup data-cite className="ml-1 inline-block font-mono text-[0.45em] text-accent">
+            <sup data-cite className="ml-1 inline-block font-mono text-[0.45em] text-accent-text">
               *{i + 1}
             </sup>
           </div>

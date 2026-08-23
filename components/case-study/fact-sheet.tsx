@@ -17,7 +17,7 @@ export function FactSheet({ cs }: { cs: CaseStudy }) {
       <Row label="Role">{cs.role}</Row>
       <Row label="Period">{cs.period}</Row>
       <Row label="Status">
-        <span className="border border-accent px-1.5 py-px text-[11px] uppercase tracking-[0.14em] text-accent">
+        <span className="border border-accent px-1.5 py-px text-[11px] uppercase tracking-[0.14em] text-accent-text">
           {cs.status}
         </span>
       </Row>
@@ -31,7 +31,7 @@ export function FactSheet({ cs }: { cs: CaseStudy }) {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+                className="text-accent-text underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
               >
                 {l.label} ↗
               </a>

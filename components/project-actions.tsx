@@ -39,7 +39,7 @@ export function ProjectActions({
           <a
             href={liveHref}
             {...externalLinkProps}
-            className={`${base} border-accent bg-accent text-bg hover:border-ink hover:bg-ink`}
+            className={`${base} border-accent-text bg-accent-text text-bg hover:border-ink hover:bg-ink`}
           >
             <span
               aria-hidden
@@ -52,7 +52,7 @@ export function ProjectActions({
           <a
             href={githubHref}
             {...externalLinkProps}
-            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent`}
+            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent-text`}
           >
             GitHub <span aria-hidden>↗</span>
           </a>
@@ -60,7 +60,7 @@ export function ProjectActions({
         {caseStudyHref && (
           <Link
             href={caseStudyHref}
-            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent`}
+            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent-text`}
           >
             Case study <span aria-hidden>→</span>
           </Link>
@@ -69,14 +69,14 @@ export function ProjectActions({
           <a
             href={companyHref}
             {...externalLinkProps}
-            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent`}
+            className={`${base} border-ink bg-surface text-ink hover:border-accent hover:text-accent-text`}
           >
             Company website <span aria-hidden>↗</span>
           </a>
         )}
       </div>
       {statusNote && (
-        <p className="mt-3 flex items-center gap-2 font-mono text-[9px] uppercase leading-relaxed tracking-[0.1em] text-accent">
+        <p className="mt-3 flex items-center gap-2 font-mono text-[9px] uppercase leading-relaxed tracking-[0.1em] text-accent-text">
           <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
           {statusNote}
         </p>
