@@ -12,7 +12,7 @@ function MarqueePhrase() {
       <span className="font-mono text-[12px] uppercase tracking-[0.22em] text-muted">
         Available January 2027
       </span>
-      <span className="font-serif text-[15px] italic text-accent">let&rsquo;s talk</span>
+      <span className="font-serif text-[15px] italic text-accent-text">let&rsquo;s talk</span>
       <span className="font-mono text-[12px] text-line" aria-hidden>
         —
       </span>
@@ -37,7 +37,7 @@ export function Footer() {
         <div aria-hidden className="dot-grid dot-fade absolute inset-0" />
         <div className="relative mx-auto max-w-wrap px-5 py-[clamp(56px,8vh,96px)] sm:px-8">
           <div className="mono-label mb-8 flex items-baseline gap-3">
-            <span className="text-accent">05</span>
+            <span className="text-accent-text">05</span>
             <ScrambleLabel text="/ CONTACT" />
           </div>
 
@@ -47,7 +47,7 @@ export function Footer() {
             stagger={0.05}
             className="max-w-[24ch] font-serif text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.05] tracking-[-0.02em]"
           >
-            {SITE.availability}. <em className="text-accent">Let&rsquo;s talk.</em>
+            {SITE.availability}. <em className="text-accent-text">Let&rsquo;s talk.</em>
           </SplitReveal>
 
           <Reveal delay={0.2}>
@@ -97,7 +97,7 @@ export function Footer() {
             </div>
             <p data-meta className="mono-label">
               Next.js · Vercel · the chat cites the case studies — press{" "}
-              <span className="text-accent">⌘K</span>
+              <span className="text-accent-text">⌘K</span>
             </p>
           </Reveal>
         </div>

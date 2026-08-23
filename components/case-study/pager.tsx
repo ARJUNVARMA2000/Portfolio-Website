@@ -23,7 +23,7 @@ function PagerCard({
         className={`relative block no-underline ${align === "right" ? "sm:text-right" : ""}`}
       >
         <span className="mono-label">{kicker}</span>
-        <span className="mt-1.5 block font-serif text-lg text-ink transition-colors group-hover:text-accent">
+        <span className="mt-1.5 block font-serif text-lg text-ink transition-colors group-hover:text-accent-text">
           {title}
         </span>
       </Link>

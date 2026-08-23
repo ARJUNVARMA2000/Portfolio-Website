@@ -20,7 +20,7 @@ export function useLenis() {
   return useContext(LenisContext);
 }
 
-const NAV_OFFSET = -64;
+const NAV_OFFSET = 0;
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -60,6 +60,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
       const anchor = (e.target as HTMLElement).closest?.("a[href]");
       if (!anchor) return;
+      if (anchor.hasAttribute("data-native-hash")) return;
       const href = anchor.getAttribute("href") ?? "";
       const hashIdx = href.indexOf("#");
       if (hashIdx === -1) return;
@@ -68,7 +69,6 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       const target = document.querySelector(href.slice(hashIdx));
       if (!target) return;
       e.preventDefault();
-      e.stopPropagation();
       history.pushState(null, "", href);
       lenis.scrollTo(target as HTMLElement, { offset: NAV_OFFSET });
     };

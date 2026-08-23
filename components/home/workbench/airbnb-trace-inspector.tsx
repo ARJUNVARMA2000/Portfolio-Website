@@ -133,7 +133,7 @@ export function AirbnbTraceInspector({ steps }: { steps: PreviewStep[] }) {
             <button
               type="button"
               onClick={togglePlay}
-              className="min-h-11 border border-accent px-4 font-mono text-[10px] uppercase tracking-[0.12em] text-accent transition-colors hover:bg-accent hover:text-term"
+              className="min-h-11 border border-accent-term px-4 font-mono text-[10px] uppercase tracking-[0.12em] text-accent-term transition-colors hover:bg-accent-term hover:text-term"
             >
               {playing ? "pause" : active >= steps.length - 1 ? "replay" : "play"}
             </button>

@@ -13,8 +13,10 @@ import { Reveal } from "@/components/motion/reveal";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { ScrambleLabel } from "@/components/motion/scramble";
 import { ProjectActions } from "@/components/project-actions";
+import { AskProjectButton } from "@/components/chat/ask-project-button";
 import { FactSheet } from "./fact-sheet";
 import { CitedMetrics } from "./cited-metric";
+import { CaseStudyNavigator } from "./case-study-navigator";
 import { Pager } from "./pager";
 
 function Figure({ section }: { section: CaseSection }) {
@@ -59,7 +61,7 @@ export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
     <article>
       {/* header */}
       <div className="mx-auto max-w-wrap px-5 pb-12 pt-12 sm:px-8 sm:pt-16">
-        <Link href="/#work" className="mono-label u-line !text-muted hover:!text-accent">
+        <Link href="/#work" className="mono-label u-line !text-muted hover:!text-accent-text">
           <ScrambleLabel text="← work" trigger="mount" />
         </Link>
         <SplitReveal
@@ -98,38 +100,51 @@ export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
       </div>
 
       {/* narrative */}
-      <div className="mx-auto max-w-wrap px-5 sm:px-8">
-        {cs.sections.map((section, i) => (
-          <section id={section.id} key={section.id} className="relative scroll-mt-20 py-12 first-of-type:mt-14 sm:py-16">
-            <DrawRule className="absolute left-0 top-0" />
-            <div className="mono-label mb-8 flex items-baseline gap-3">
-              <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <ScrambleLabel text={`/ ${section.id.toUpperCase()}`} />
-            </div>
-            <div className="mx-auto max-w-prose">
-              <SplitReveal
-                as="h2"
-                type="lines"
-                className="mb-5 font-serif text-[clamp(1.35rem,2.6vw,1.7rem)] tracking-[-0.01em]"
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
+        <div className="xl:grid xl:grid-cols-[128px_minmax(0,1fr)] xl:gap-8">
+          <CaseStudyNavigator sections={cs.sections.map(({ id, title }) => ({ id, title }))} />
+          <div className="min-w-0">
+            {cs.sections.map((section, i) => (
+              <section
+                id={section.id}
+                key={section.id}
+                className="relative scroll-mt-10 py-12 first-of-type:mt-14 sm:py-16 xl:scroll-mt-2"
               >
-                {section.title}
-              </SplitReveal>
-              <Reveal childSelector=".cs-prose > *" stagger={0.06} start="top 85%">
-                <div className="cs-prose">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.body}</ReactMarkdown>
+                <DrawRule className="absolute left-0 top-0" />
+                <div className="mono-label mb-8 flex items-baseline gap-3">
+                  <span className="text-accent-text">{String(i + 1).padStart(2, "0")}</span>
+                  <ScrambleLabel text={`/ ${section.id.toUpperCase()}`} />
                 </div>
-              </Reveal>
-            </div>
-            <Figure section={section} />
-          </section>
-        ))}
+                <div className="mx-auto max-w-prose">
+                  <SplitReveal
+                    as="h2"
+                    type="lines"
+                    className="mb-5 font-serif text-[clamp(1.35rem,2.6vw,1.7rem)] tracking-[-0.01em]"
+                  >
+                    {section.title}
+                  </SplitReveal>
+                  <Reveal childSelector=".cs-prose > *" stagger={0.06} start="top 85%">
+                    <div className="cs-prose">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.body}</ReactMarkdown>
+                    </div>
+                  </Reveal>
+                </div>
+                <Figure section={section} />
+              </section>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* footer */}
       <div className="mx-auto max-w-wrap px-5 pb-16 sm:px-8">
-        <Reveal as="p" className="mb-8 border-t border-line pt-8 font-mono text-[12px] text-muted">
-          Questions about this project? Press <span className="text-accent">⌘K</span> — the chat
-          answers from these case studies and cites them.
+        <Reveal className="mb-8 border-t border-line pt-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-mono text-[12px] leading-relaxed text-muted">
+              Questions about this project? The chat answers from these case studies and links back to them.
+            </p>
+            <AskProjectButton />
+          </div>
         </Reveal>
         <Reveal>
           <Pager slug={cs.slug} />

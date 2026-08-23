@@ -16,6 +16,9 @@ const config: Config = {
         line: "var(--line)",
         accent: {
           DEFAULT: "var(--accent)",
+          text: "var(--accent-text)",
+          display: "var(--accent)",
+          term: "var(--accent-term)",
           soft: "var(--accent-soft)",
         },
         term: {

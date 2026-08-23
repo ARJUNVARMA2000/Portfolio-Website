@@ -52,7 +52,7 @@ export function ClaimReadyHandoffInspector() {
             Four specialists build one shared case record. Select a stage to see what it adds.
           </p>
         </div>
-        <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent">
+        <span className="shrink-0 border border-accent px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent-text">
           CaseFacts
         </span>
       </div>
@@ -77,7 +77,7 @@ export function ClaimReadyHandoffInspector() {
                 <span
                   aria-hidden
                   className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border font-mono text-[9px] ${
-                    active ? "border-accent bg-accent text-bg" : "border-line bg-surface text-muted"
+                    active ? "border-accent-text bg-accent-text text-bg" : "border-line bg-surface text-muted"
                   }`}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -97,7 +97,7 @@ export function ClaimReadyHandoffInspector() {
           <div aria-hidden className="dot-grid absolute inset-0 opacity-45" />
           <output aria-live="polite" className="relative block">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent-text">
                 stage {String(selected + 1).padStart(2, "0")}
               </span>
               <span className="h-px min-w-6 flex-1 bg-accent" />

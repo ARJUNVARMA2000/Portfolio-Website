@@ -9,6 +9,7 @@ import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
 
 const LINKS = [
   { label: "Work", href: "/#work" },
+  { label: "Projects", href: "/#projects" },
   { label: "Experience", href: "/#experience" },
   { label: "About", href: "/#about" },
 ];
@@ -41,7 +42,7 @@ export function Nav() {
           start: 0,
           end: "max",
           onUpdate: (self) => {
-            yTo(self.direction === 1 && self.scroll() > 120 ? -101 : 0);
+            yTo(!isCaseStudy && self.direction === 1 && self.scroll() > 120 ? -101 : 0);
             header.classList.toggle("nav-scrolled", self.scroll() > 40);
           },
         });
@@ -76,7 +77,7 @@ export function Nav() {
   );
 
   return (
-    <header ref={ref} className="nav-shell sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
+    <header ref={ref} className="nav-shell sticky top-0 z-40 bg-bg">
       <nav className="relative mx-auto flex h-14 max-w-wrap items-center justify-between px-5 sm:px-8">
         <Link
           data-nav-item
@@ -85,7 +86,7 @@ export function Nav() {
         >
           Arjun&nbsp;Varma
         </Link>
-        <div className="flex items-center gap-2 sm:gap-7">
+        <div className="flex items-center gap-2 sm:gap-4 lg:gap-7">
           <button
             data-nav-item
             type="button"
@@ -119,8 +120,11 @@ export function Nav() {
             <button
               data-nav-item
               type="button"
-              onClick={() => window.dispatchEvent(new Event("open-ask"))}
-              className="mono-label border border-ink px-2.5 py-1.5 !text-ink transition-colors hover:border-accent hover:bg-accent hover:!text-bg"
+              onClick={(event) => {
+                event.currentTarget.focus();
+                window.dispatchEvent(new Event("open-ask"));
+              }}
+              className="mono-label border border-ink px-2.5 py-1.5 !text-ink transition-colors hover:border-accent-text hover:bg-accent-text hover:!text-bg"
             >
               <span>ask</span><span className="hidden sm:inline">&nbsp;⌘K</span>
             </button>
@@ -139,14 +143,14 @@ export function Nav() {
                 className="flex items-center justify-between border-b border-line px-3 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink last:border-b-0"
               >
                 <span>{link.label}</span>
-                <span className="text-accent">0{index + 1}</span>
+                <span className="text-accent-text">0{index + 1}</span>
               </Link>
             ))}
           </div>
         )}
       </nav>
       {isCaseStudy && (
-        <div data-progress aria-hidden className="absolute bottom-0 left-0 h-[2px] w-full bg-accent" />
+        <div data-progress aria-hidden className="absolute bottom-0 left-0 h-[2px] w-full bg-accent-display" />
       )}
     </header>
   );

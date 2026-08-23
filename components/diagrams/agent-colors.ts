@@ -7,5 +7,5 @@ export const AGENT_COLORS: Record<AgentName, string> = {
   db: "#9aa1a8",
   validator: "#7fbf8e",
   chart: "#b48ead",
-  narrator: "#d9480f",
+  narrator: "#e85d24",
 };

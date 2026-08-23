@@ -1,6 +1,9 @@
+export type ProjectCategory = "Retrieval" | "Forecasting" | "Agents" | "LLM products";
+
 export type IndexProject = {
   title: string;
   year: string;
+  category: ProjectCategory;
   oneLiner: string;
   tech: string[];
   live: string;
@@ -13,6 +16,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "Filing Intelligence RAG",
     year: "2026",
+    category: "Retrieval",
     oneLiner:
       "Evidence-first research across 4,967 indexed passages from 128 filings, earnings decks, and call transcripts spanning 15 companies. Deterministic retrieval, bounded context, and page/line citations open directly in the source PDF; 72 automated checks cover retrieval, authentication, API contracts, and production builds.",
     tech: ["Python", "FastAPI", "ChromaDB", "Next.js", "GCP Cloud Run"],
@@ -23,6 +27,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "GAFFER: Live World Cup Forecasting Platform",
     year: "2026",
+    category: "Forecasting",
     oneLiner:
       "Forecasts the 2026 World Cup from ~49K international matches using Elo, a time-weighted Dixon-Coles goal model, squad-value blending, and 50,000 Monte Carlo runs. Walk-forward evaluation across 8,136 matches since 2018 reached 0.887 log loss versus a 1.05 baseline; frozen pre-match predictions are graded against Kalshi as the hourly pipeline refreshes.",
     tech: ["Python", "pandas", "NumPy", "Next.js", "GitHub Actions", "Firebase"],
@@ -32,6 +37,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "ClaimReady",
     year: "2026",
+    category: "Agents",
     oneLiner:
       "Planner-led workflow with four specialists that turns contracts, invoices, emails, and screenshots into structured NYC small-claims packets with multimodal extraction, legal retrieval, and typed handoffs.",
     tech: ["OpenAI Agents SDK", "FastAPI", "Next.js", "GCP"],
@@ -41,6 +47,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "ClassPulse",
     year: "2026",
+    category: "LLM products",
     oneLiner:
       "Live classroom theme extraction — students answer via QR, an LLM clusters responses into themed cards every 10s over SSE, with a 5-model fallback chain.",
     tech: ["FastAPI", "React", "SSE", "OpenRouter"],
@@ -50,6 +57,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "SeanceAI",
     year: "2025",
+    category: "Agents",
     oneLiner:
       "Conversations with 60+ historical figures under era-appropriate knowledge boundaries; Dinner-Party mode runs 2–5 figure multi-agent dialogue.",
     tech: ["Flask", "OpenRouter", "SSE"],
@@ -59,6 +67,7 @@ export const PROJECT_INDEX: IndexProject[] = [
   {
     title: "Citation Format Checker",
     year: "2026",
+    category: "LLM products",
     oneLiner:
       "Narrow-scope chatbot that flags APA 7 / MLA 9 / Chicago 17 violations with rule-IDs and quoted evidence; three-method eval suite, 30+ test cases.",
     tech: ["Vertex AI", "FastAPI", "Cloud Run"],

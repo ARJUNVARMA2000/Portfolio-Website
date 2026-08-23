@@ -81,7 +81,7 @@ export function EvidenceWorkbench({
               <article className="grid min-w-0 scroll-mt-20 gap-8 py-10 lg:min-h-[125svh] lg:grid-cols-[minmax(240px,0.68fr)_minmax(0,1.42fr)] lg:gap-12 lg:py-14 motion-reduce:lg:min-h-0">
                 <div className="min-w-0 lg:pt-10">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[12px] tabular-nums text-accent">{itemNumber}</span>
+                    <span className="font-mono text-[12px] tabular-nums text-accent-text">{itemNumber}</span>
                     <span className="h-px w-10 bg-line" />
                     <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted">selected project</span>
                   </div>
@@ -93,7 +93,7 @@ export function EvidenceWorkbench({
                   <dl className="mt-7 grid gap-3 border-t border-line pt-5">
                     {study.metrics.map((metric) => (
                       <div key={metric.label} title={metric.provenance} className="grid grid-cols-[auto_1fr] items-baseline gap-3">
-                        <dt className="font-mono text-[13px] tabular-nums text-accent">{metric.value}</dt>
+                        <dt className="font-mono text-[13px] tabular-nums text-accent-text">{metric.value}</dt>
                         <dd className="font-mono text-[9px] uppercase tracking-[0.08em] text-muted">{metric.label}</dd>
                       </div>
                     ))}
@@ -116,7 +116,7 @@ export function EvidenceWorkbench({
                         href={study.secondaryLink.href}
                         target={study.secondaryLink.external ? "_blank" : undefined}
                         rel={study.secondaryLink.external ? "noreferrer" : undefined}
-                        className="mt-3 inline-flex min-h-10 items-center font-mono text-[9px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent"
+                        className="mt-3 inline-flex min-h-10 items-center font-mono text-[9px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent-text"
                       >
                         {study.secondaryLink.label}&nbsp;→
                       </Link>
@@ -133,7 +133,7 @@ export function EvidenceWorkbench({
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-ink bg-bg px-3.5 py-2.5">
                       <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink">{meta.label}</span>
                       <span className="ml-auto font-mono text-[9px] tabular-nums text-muted">{itemNumber} / {String(studies.length).padStart(2, "0")}</span>
-                      <span className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-accent">
+                      <span className="flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-accent-text">
                         <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
                         {meta.status}
                       </span>

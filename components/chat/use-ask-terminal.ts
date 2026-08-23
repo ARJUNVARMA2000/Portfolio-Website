@@ -7,6 +7,7 @@ export function useAskTerminal() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    document.documentElement.dataset.chatReady = "true";
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
@@ -22,6 +23,7 @@ export function useAskTerminal() {
     window.addEventListener("keydown", onKey);
     window.addEventListener("open-ask", onOpen);
     return () => {
+      delete document.documentElement.dataset.chatReady;
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("open-ask", onOpen);
     };
