@@ -135,16 +135,17 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(about).toContainText("Postgres");
     await expect(about).toContainText("GCP Cloud Run");
 
-    await page.goto("/work/filing-intelligence-rag", { waitUntil: "domcontentloaded" });
-    const filingCaseStudy = page.locator("article");
+    const caseStudyPage = await page.context().newPage();
+    await caseStudyPage.emulateMedia({ reducedMotion: "reduce" });
+    await caseStudyPage.goto("/work/filing-intelligence-rag", { waitUntil: "domcontentloaded" });
+    const filingCaseStudy = caseStudyPage.locator("article");
     const documentMetric = filingCaseStudy.locator("[data-card]").filter({ hasText: "source documents" });
     const verificationMetric = filingCaseStudy
       .locator("[data-card]")
       .filter({ hasText: "automated verification checks" });
-    await documentMetric.scrollIntoViewIfNeeded();
     await expect(documentMetric.locator("[data-value]")).toHaveText("128");
-    await verificationMetric.scrollIntoViewIfNeeded();
     await expect(verificationMetric.locator("[data-value]")).toHaveText("72");
+    await caseStudyPage.close();
   });
 
   test("preserves case studies and exposes prominent public project destinations", async ({ page, request, baseURL }) => {
