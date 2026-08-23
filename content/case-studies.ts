@@ -40,29 +40,38 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "deuce-tennis-forecast",
     title: "DEUCE Tennis Forecast",
     subtitle:
-      "An ATP and WTA forecasting system that combines surface-aware Elo, point-level performance, player context, calibration, and Monte Carlo simulation.",
+      "A live ATP and WTA forecasting platform that combines surface-aware Elo, opponent-adjusted serve and return modeling, calibrated XGBoost, and tournament simulation.",
     org: "Personal",
     role: "Designed & built solo",
     period: "2026",
     status: "live",
     metrics: [
       {
-        value: "88,275",
+        value: "87,957",
         label: "matches in walk-forward evaluation",
-        provenance: "45,762 ATP and 42,513 WTA matches, evaluated chronologically",
+        provenance: "45,831 ATP and 42,126 WTA scored matches, evaluated chronologically",
       },
       {
-        value: "0.1947",
+        value: "0.1950",
         label: "ATP Brier score",
-        provenance: "seed-bagged, Platt-calibrated XGBoost combiner",
+        provenance: "five-seed calibrated XGBoost ensemble; 69.6% walk-forward accuracy",
       },
       {
-        value: "318",
-        label: "automated tests",
-        provenance: "222 pytest and 96 Vitest tests across data, model, API, and interface layers",
+        value: "0.2017",
+        label: "WTA Brier score",
+        provenance: "five-seed calibrated XGBoost ensemble; 68.5% walk-forward accuracy",
       },
     ],
-    tech: ["Python", "XGBoost", "Elo", "Markov models", "Monte Carlo", "FastAPI", "React", "Firebase"],
+    tech: [
+      "Python",
+      "XGBoost",
+      "Elo",
+      "Markov models",
+      "Monte Carlo",
+      "Next.js",
+      "GitHub Actions",
+      "Firebase",
+    ],
     links: [
       { label: "Live forecast", href: "https://deuce-forecast.web.app/" },
       { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/tennis-elo" },
@@ -94,7 +103,7 @@ DEUCE turns those signals into calibrated match probabilities, tournament simula
 2. **Serve and return modeling** estimates point-winning probabilities after adjusting for opponent quality
 3. **A point-to-match Markov model** converts point probabilities into games, sets, and match outcomes
 4. **Context and style features** add rest, fatigue, head-to-head history, home advantage, and matchup tendencies
-5. **Seed-bagged XGBoost** combines the signals, followed by Platt calibration so a 70% forecast behaves like one over time
+5. **A five-seed XGBoost ensemble** combines 42 features, followed by Platt calibration so a 70% forecast behaves like one over time
 
 The interface shows the resulting probability alongside the factors that moved it, rather than presenting a black-box pick.`,
         figure: {
@@ -105,7 +114,7 @@ The interface shows the resulting probability alongside the factors that moved i
       {
         id: "system",
         title: "The product",
-        body: `A scheduled pipeline refreshes match data hourly and retrains daily. Source-freshness sentinels catch silent upstream failures before they become confident-looking forecasts. The product spans 14 views across both tours: upcoming matches, tournament draws, rankings, player profiles, form, style, and model diagnostics.
+        body: `A scheduled pipeline refreshes and deploys match data hourly and retrains daily. Schema and freshness gates, failure alerts, recoverable snapshots, and Python/TypeScript CI catch silent upstream or serving failures before they become confident-looking forecasts. The product covers both tours through a live Match Center, tournament draws, rankings, player dossiers, style analysis, and model-versus-market diagnostics.
 
 Monte Carlo simulation carries match probabilities through a tournament bracket, producing round-by-round advancement and title odds rather than a collection of disconnected picks.`,
         figure: {
@@ -116,20 +125,20 @@ Monte Carlo simulation carries match probabilities through a tournament bracket,
       {
         id: "evidence",
         title: "Evidence",
-        body: `The evaluation is walk-forward: every prediction is generated using only information available before that match. It covers **45,762 ATP and 42,513 WTA matches**.
+        body: `The evaluation is walk-forward: every prediction is generated using only information available before that match. The measured 2010–2026 research window covers **45,831 ATP and 42,126 WTA matches**, or **87,957** in total.
 
-- The calibrated combiner reaches a **0.1947 ATP Brier score** and **0.2015 WTA Brier score**
+- Surface Elo scores **0.2006 ATP / 0.2114 WTA Brier**; the calibrated XGBoost ensemble improves that to **0.1950 / 0.2017**
+- Walk-forward accuracy is **69.6% ATP** and **68.5% WTA**
 - A published bookmaker benchmark is roughly 0.196; on DEUCE's own odds-matched subset, the closing line still leads 0.201 to 0.203 — an important boundary on the claim
-- **318 automated tests** cover ingestion, modeling, API behavior, and the interface
-- Model pages expose calibration and evaluation rather than reducing quality to win rate alone`,
+- Frozen pre-match forecasts, model scorecards, and market comparisons expose evaluation rather than reducing quality to win rate alone`,
       },
       {
         id: "impact",
         title: "What shipped",
         body: `- One public product for ATP and WTA forecasts, rankings, player analysis, and tournament simulation
-- A reproducible modeling pipeline with chronological evaluation and explicit calibration
-- Hourly data refreshes, daily retraining, and freshness monitoring
-- Transparent comparisons that show where the model is strong and where the market remains stronger`,
+- A reproducible modeling pipeline with chronological evaluation, explicit calibration, and immutable pre-match records
+- Hourly multi-source refreshes, daily retraining, schema/freshness gates, and automated Firebase delivery
+- Transparent scorecards and market comparisons that show where the model is strong and where the market remains stronger`,
       },
     ],
   },
@@ -137,7 +146,7 @@ Monte Carlo simulation carries match probabilities through a tournament bracket,
     slug: "airbnb-data-analyst-agent",
     title: "Airbnb Data Analyst Agent",
     subtitle:
-      "Five specialized agents that plan, write, validate, chart, and narrate SQL analytics — every number cited back to source rows.",
+      "A reusable multi-agent analytics copilot that plans, writes, validates, charts, and narrates SQL analysis — every number cited back to source rows.",
     org: "Columbia · Agentic AI for Analytics",
     role: "Designed & built solo",
     period: "2026",
@@ -170,7 +179,7 @@ Monte Carlo simulation carries match probabilities through a tournament bracket,
         title: "The problem",
         body: `Analysts spend hours translating business questions into SQL, pulling data, checking it, and reformatting the answer into something a stakeholder can consume. Most LLM "text-to-SQL" demos hallucinate schema, fail silently on bad queries, or skip the last-mile steps that actually matter: a chart, a citation, a sanity check.
 
-The goal: a system that behaves like a junior analyst with guardrails — it decomposes the question, writes SQL that actually runs, validates the result before showing it, plots the data, and cites the rows it used.`,
+The live Airbnb implementation is the demonstration surface for a reusable analytics copilot: it decomposes the question, writes SQL that actually runs, validates the result before showing it, plots the data, and cites the rows it used. The same adapter contract supports DuckDB, Postgres, and Snowflake.`,
       },
       {
         id: "constraint",
@@ -431,21 +440,21 @@ The loop that kept it improving: errors from each batch were hand-labeled and fo
     metrics: [
       {
         value: "4,967",
-        label: "indexed source chunks",
-        provenance: "deployed production index manifest and readiness smoke test",
+        label: "indexed source passages",
+        provenance: "packaged corpus spanning 128 documents and 15 companies",
       },
       {
-        value: "15",
-        label: "ticker corpus",
-        provenance: "deployed data coverage endpoint and packaged production corpus",
+        value: "128",
+        label: "source documents",
+        provenance: "filings, earnings decks, and call transcripts across a 15-company corpus",
       },
       {
-        value: "1 click",
-        label: "source verification",
-        provenance: "evidence ledger opens the cited PDF page and highlights the matching passage",
+        value: "72",
+        label: "automated verification checks",
+        provenance: "64 Python checks and 8 frontend checks across retrieval, auth, APIs, and builds",
       },
     ],
-    tech: ["Next.js", "React", "TypeScript", "FastAPI", "ChromaDB", "Vertex AI", "GCP Cloud Run"],
+    tech: ["Python", "Next.js", "TypeScript", "FastAPI", "ChromaDB", "Vertex AI", "GCP Cloud Run"],
     links: [
       { label: "Live demo", href: "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app" },
       { label: "GitHub", href: "https://github.com/ARJUNVARMA2000/filing-intelligence-rag" },
@@ -495,7 +504,7 @@ The goal: a research workspace that answers natural-language questions with **so
 - Every indexed chunk carries **page and line provenance**, with section and table identifiers where available
 - Answers expose an **evidence ledger** rather than hiding retrieved context behind a confidence score
 - Citation links open the source on the relevant page and highlight the matched passage when the PDF text layer supports it
-- Automated tests cover retrieval scope, citation integrity, auth boundaries, document delivery, and deployment configuration`,
+- **72 automated checks** — 64 Python and 8 frontend — cover retrieval scope, citation integrity, auth boundaries, API contracts, document delivery, and production builds`,
         figure: {
           kind: "citation-stack",
           caption: "A grounded-answer contract: the response is assembled only from retrieved filing passages and retains a line-level trail back to each source.",
@@ -504,9 +513,10 @@ The goal: a research workspace that answers natural-language questions with **so
       {
         id: "impact",
         title: "Impact",
-        body: `- Searches 4,967 indexed passages across a 15-ticker production corpus
+        body: `- Searches 4,967 indexed passages across 128 source documents and 15 companies
 - Automatic ticker and period parsing narrows the research universe before retrieval
-- Source-linked answers make the supporting page, lines, and excerpt immediately inspectable
+- Source-linked answers make the supporting page, lines, and excerpt immediately inspectable in one click
+- A 72-check verification baseline protects retrieval, authentication, API, and build contracts
 - Deployed as isolated frontend and API services on Cloud Run`,
       },
     ],

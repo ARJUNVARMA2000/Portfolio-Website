@@ -14,18 +14,18 @@ export const PROJECT_INDEX: IndexProject[] = [
     title: "Filing Intelligence RAG",
     year: "2026",
     oneLiner:
-      "Evidence-first research across filings, earnings decks, and transcripts with quarter-aware retrieval, source-linked answers, and highlighted PDF verification.",
-    tech: ["FastAPI", "ChromaDB", "Vertex AI", "Streamlit", "GCP Cloud Run"],
+      "Evidence-first research across 4,967 indexed passages from 128 filings, earnings decks, and call transcripts spanning 15 companies. Deterministic retrieval, bounded context, and page/line citations open directly in the source PDF; 72 automated checks cover retrieval, authentication, API contracts, and production builds.",
+    tech: ["Python", "FastAPI", "ChromaDB", "Next.js", "GCP Cloud Run"],
     live: "https://filing-intelligence-rag-7pj7nolpla-uc.a.run.app",
     repo: "https://github.com/ARJUNVARMA2000/filing-intelligence-rag",
     caseStudy: "/work/filing-intelligence-rag",
   },
   {
-    title: "World Cup 2026 Forecast",
+    title: "GAFFER: Live World Cup Forecasting Platform",
     year: "2026",
     oneLiner:
-      "GAFFER — a team-strength model for the 2026 World Cup: Elo + a Dixon-Coles goal model + Transfermarkt squad value, run through 50,000 Monte Carlo simulations for live title odds that update as the games are played.",
-    tech: ["Python", "NumPy", "Next.js", "Firebase"],
+      "Forecasts the 2026 World Cup from ~49K international matches using Elo, a time-weighted Dixon-Coles goal model, squad-value blending, and 50,000 Monte Carlo runs. Walk-forward evaluation across 8,136 matches since 2018 reached 0.887 log loss versus a 1.05 baseline; frozen pre-match predictions are graded against Kalshi as the hourly pipeline refreshes.",
+    tech: ["Python", "pandas", "NumPy", "Next.js", "GitHub Actions", "Firebase"],
     live: "https://gaffer-wc26.web.app",
     repo: "https://github.com/ARJUNVARMA2000/wc-2026-gaffer",
   },

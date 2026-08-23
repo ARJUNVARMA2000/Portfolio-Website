@@ -150,9 +150,9 @@ export function Hero() {
             className="mt-5 max-w-[58ch] font-sans text-[1rem] leading-relaxed text-muted"
           >
             Data science intern at <strong className="font-medium text-ink">Novo Nordisk</strong>,
-            working on next-best engagement and pre-launch analytics. M.S. in Data Science at{" "}
+            working on propensity scoring, next-best engagement, and LLM decision support. M.S. in Data Science at{" "}
             <strong className="font-medium text-ink">Columbia</strong>. Before that, three years at
-            ZS building ML for healthcare clients.
+            ZS building production ML and healthcare analytics.
           </p>
 
           <div data-hero-contact className="mt-8 flex flex-wrap gap-x-6 gap-y-2">

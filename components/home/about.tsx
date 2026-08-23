@@ -69,9 +69,9 @@ export function About() {
         I work on the part of machine learning that starts after the demo.
       </ScrubStatement>
       <Reveal as="p" className="mt-6 max-w-[58ch] font-sans text-[0.9375rem] leading-relaxed text-muted">
-        My work spans forecasting, healthcare analytics, and agent workflows. Across them, the
-        recurring problems are the same: reliable data, honest evaluation, useful interfaces,
-        and enough monitoring to know when a system stops working.
+        My work spans forecasting, experimentation, healthcare analytics, and agent workflows.
+        Across them, the recurring problems are the same: reliable data, honest evaluation,
+        useful interfaces, and enough monitoring to know when a system stops working.
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2">
@@ -89,10 +89,11 @@ export function About() {
           </div>
         </div>
         <div>
-          <h3 className="mono-label mb-4">
-            Toolbox <span className="text-muted">— {Object.keys(SKILLS).join(" · ")}</span>
-          </h3>
-          <Reveal className="space-y-3 border-t border-line pt-4">
+          <h3 className="mono-label">Toolbox</h3>
+          <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.08em] text-muted">
+            {Object.keys(SKILLS).join(" · ")}
+          </p>
+          <Reveal className="mt-4 space-y-3 border-t border-line pt-4">
             <Marquee speed={32}>
               {rows[0].map((s) => (
                 <SkillChip key={s} label={s} />

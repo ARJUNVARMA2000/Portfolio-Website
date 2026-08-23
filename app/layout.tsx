@@ -6,6 +6,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ChatMount } from "@/components/chat/chat-mount";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { SITE } from "@/content/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,13 +29,12 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://arjun-varma.com"),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Arjun Varma — Data Scientist & ML Engineer",
+    default: SITE.title,
     template: "%s — Arjun Varma",
   },
-  description:
-    "Data Scientist and ML Engineer building forecasting, decision-support, and agentic systems. Data Science Intern at Novo Nordisk and M.S. Data Science candidate at Columbia.",
+  description: SITE.description,
   alternates: { canonical: "/" },
   keywords: [
     "Arjun Varma",
@@ -42,6 +42,8 @@ export const metadata: Metadata = {
     "Machine Learning Engineer",
     "Columbia University",
     "Novo Nordisk",
+    "Experimentation",
+    "Propensity Scoring",
     "Agentic AI",
     "RAG",
     "LLM",
@@ -49,22 +51,20 @@ export const metadata: Metadata = {
     "Python",
     "PySpark",
   ],
-  authors: [{ name: "Arjun Varma", url: "https://www.linkedin.com/in/varma-arjun/" }],
-  creator: "Arjun Varma",
+  authors: [{ name: SITE.name, url: SITE.linkedin }],
+  creator: SITE.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Arjun Varma — Data Scientist & ML Engineer",
-    description:
-      "Forecasting, decision-support, and agentic systems — from reliable data and evaluation through deployed products.",
-    siteName: "Arjun Varma",
-    url: "https://arjun-varma.com",
+    title: SITE.title,
+    description: SITE.description,
+    siteName: SITE.name,
+    url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arjun Varma — Data Scientist & ML Engineer",
-    description:
-      "Forecasting, decision-support, and agentic systems — from reliable data and evaluation through deployed products.",
+    title: SITE.title,
+    description: SITE.description,
   },
   robots: {
     index: true,
