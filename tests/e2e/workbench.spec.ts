@@ -101,6 +101,53 @@ test.describe("Evidence Workbench deployment contracts", () => {
     await expect(btc.getByTestId("btc-index-marker")).toHaveAttribute("style", /left: 57%/);
   });
 
+  test("surfaces the resume-aligned DS and MLE evidence", async ({ page }) => {
+    await openWorkbench(page);
+
+    const deuce = articleFor(page, "DEUCE Tennis Forecast");
+    await expect(deuce).toContainText("87,957");
+    await expect(deuce).toContainText("0.1950");
+    await expect(deuce).toContainText("0.2017");
+
+    const experience = page.locator("#experience");
+    await expect(experience).toContainText("Jun 2026 — present");
+    await expect(experience).toContainText("~500 of 10,000+ providers");
+    await expect(experience).toContainText("5.2x top-decile lift");
+    await expect(experience).toContainText("MLflow tracking");
+    await expect(experience).toContainText("real-world evidence modeling");
+
+    const gaffer = page.locator("#projects [data-row]").filter({
+      hasText: "GAFFER: Live World Cup Forecasting Platform",
+    });
+    await expect(gaffer).toContainText("~49K international matches");
+    await expect(gaffer).toContainText("8,136 matches");
+    await expect(gaffer).toContainText("0.887 log loss versus a 1.05 baseline");
+
+    const filing = page.locator("#projects [data-row]").filter({ hasText: "Filing Intelligence RAG" });
+    await expect(filing).toContainText("4,967 indexed passages");
+    await expect(filing).toContainText("128 filings");
+    await expect(filing).toContainText("72 automated checks");
+
+    const about = page.locator("#about");
+    await expect(about).toContainText("Propensity scoring");
+    await expect(about).toContainText("Causal inference");
+    await expect(about).toContainText("Walk-forward validation");
+    await expect(about).toContainText("Postgres");
+    await expect(about).toContainText("GCP Cloud Run");
+
+    const caseStudyPage = await page.context().newPage();
+    await caseStudyPage.emulateMedia({ reducedMotion: "reduce" });
+    await caseStudyPage.goto("/work/filing-intelligence-rag", { waitUntil: "domcontentloaded" });
+    const filingCaseStudy = caseStudyPage.locator("article");
+    const documentMetric = filingCaseStudy.locator("[data-card]").filter({ hasText: "source documents" });
+    const verificationMetric = filingCaseStudy
+      .locator("[data-card]")
+      .filter({ hasText: "automated verification checks" });
+    await expect(documentMetric.locator("[data-value]")).toHaveText("128");
+    await expect(verificationMetric.locator("[data-value]")).toHaveText("72");
+    await caseStudyPage.close();
+  });
+
   test("preserves case studies and exposes prominent public project destinations", async ({ page, request, baseURL }) => {
     await openWorkbench(page);
 

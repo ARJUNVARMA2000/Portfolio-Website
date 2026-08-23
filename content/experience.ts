@@ -17,14 +17,16 @@ export const EXPERIENCE: Experience[] = [
   {
     org: "Novo Nordisk",
     location: "Plainsboro, NJ",
-    period: "Jun 2026 — Aug 2026",
+    period: "Jun 2026 — present",
     current: true,
     roles: [
       {
         title: "Data Science Intern — Commercial Data Science",
-        period: "Jun 2026 — Aug 2026",
+        period: "Jun 2026 — present",
         bullets: [
-          "Building next-best-engagement models and an LLM layer that turns HCP-level model drivers into tailored field guidance across access, efficacy, competitor prescribing, and GLP-1 adoption.",
+          "Improved propensity scoring and next-best-engagement models, then built an LLM decision-support layer that turns behavioral, access, competitive, and adoption signals into explainable field guidance.",
+          "Integrated longitudinal claims with unmet-need, market-opportunity, and early-adoption signals to prioritize ~500 of 10,000+ providers nationwide.",
+          "Achieved 5.2x top-decile lift with an XGBoost propensity model using provider profile, prescribing, access, and engagement features; combined predictions with rule-based signals into explainable priority tiers and a nationwide planning dashboard.",
           "Supporting pre-launch analytics for investigational denecimig (Mim8), informing HCP targeting and field readiness.",
         ],
       },
@@ -40,23 +42,24 @@ export const EXPERIENCE: Experience[] = [
         period: "Feb 2025 — Jun 2025",
         bullets: [
           "Shipped the biliary tract cancer early-detection model — 250M patient-claims scored monthly, in production.",
-          "Unified 5+ data sources into an org-wide analytics platform used by 100+ stakeholders on a $10B oncology portfolio; cut weekly reporting from days to minutes.",
+          "Reduced weekly decision cycles from days to minutes for 100+ stakeholders across a $10B portfolio by translating 5+ high-volume sources into a reusable Spark/SQL data warehouse, product KPIs, and self-service analyses.",
+          "Productionized models with MLflow tracking, feature and prediction drift monitoring, and CI validation to reduce silent failures.",
         ],
       },
       {
         title: "Decision Analytics Associate Consultant",
         period: "Jul 2024 — Jan 2025",
         bullets: [
-          "Built and deployed Positive-Unlabeled learning models that lifted customer-journey coverage from ~40% to ~95% in medical transaction data.",
-          "Implemented feature and prediction drift monitoring plus CI unit tests for production pipelines; led a 5-member team modernizing legacy business rules (~50 hrs/mo saved, >99% first-pass quality).",
+          "Built and deployed positive-unlabeled learning models that recovered missing categorical labels in sparse medical transaction data, expanding analytical coverage from ~40% to 95% across segments and territories.",
+          "Raised first-pass analytical quality above 99% and saved ~50 hours per month by leading a five-member modernization of legacy business rules into validated, reusable logic.",
         ],
       },
       {
         title: "Decision Analytics Associate",
         period: "Feb 2022 — Jun 2024",
         bullets: [
-          "Engineered PySpark/SQL ETL across healthcare sources covering millions of patients for $4B+ oncology drug analytics.",
-          "Defined audit-ready patient cohort inclusion/exclusion logic robust to missing and miscoded fields.",
+          "Established audit-ready real-world evidence modeling and segmentation across $4B+ in products by designing cohort and entity features over millions of incomplete and miscoded records.",
+          "Engineered PySpark/SQL ETL across healthcare sources and defined patient inclusion and exclusion logic robust to missing and miscoded fields.",
         ],
       },
     ],

@@ -305,3 +305,50 @@ Problem: visitors couldn't tell the work rows open full case studies. Click targ
 - Verified: `/resume2` returns 200 `application/pdf`, 41,643 bytes, body starts `%PDF-1.4`, and its sha256 is byte-identical to the source file. `/resume.pdf` still returns the prior 63,759-byte file.
 - Deliberately unlisted: not in `app/sitemap.ts`, not linked from nav, footer, hero, or the chat system prompt. `SITE.resume` still points at `/resume.pdf`.
 - Two resume versions are now live. This cut fills in the Novo Nordisk bullets, moves BTC early detection from Projects into the ZS Advanced Data Science role, drops GAFFER, reorders projects, and adds a Reporting skills line.
+
+## 2026-08-22 - Publish Data Science/MLE resume
+
+### Plan
+
+- [x] Replace the public `resume.pdf` with the Desktop Data Science/MLE resume, preserving the existing `/resume.pdf` URL and all site links.
+- [x] Leave the unlisted `resume2.pdf` and unrelated portfolio content unchanged.
+- [x] Verify source/output byte identity, PDF metadata and searchable text, rendered layout, link annotations, and the production build.
+- [x] Record the completed verification in a review section.
+
+### Review
+
+- Replaced `public/resume.pdf` with the Desktop Data Science/MLE resume without re-exporting or modifying the supplied PDF; source and public copies share SHA-256 `a12e9e8bf42290e3fdac7d40cd25d8a5aaa06e7dc2c69e9fb63124a7798bdee9`.
+- Verified the one-page letter PDF is tagged, searchable, visually clean, and includes 13 contact/project link annotations. Key Data Science/MLE text, including the 5.2x Novo propensity lift and current project evidence, extracts correctly.
+- Confirmed a production server returns `/resume.pdf` as `200 application/pdf` with the expected 76,296-byte body. The unlisted `/resume2` response remains byte-identical to its existing file.
+- `npm run build` passes on Next.js 14.2.35 after installing the lockfile dependencies with `npm ci`; no application source, content, routes, or lockfiles changed.
+
+## 2026-08-22 - Align portfolio content with Data Science/MLE resume
+
+### Plan
+
+- [x] Refresh the public identity surfaces: update the site timestamp and metadata source, and revise the hero credential sentence to reflect propensity scoring, next-best engagement, and LLM decision support without adding a hero metric strip.
+- [x] Expand the experience timeline from the resume: add the quantified Novo provider-prioritization and 5.2x-lift work, keep the public pre-launch context as a website-only detail, and distribute the fuller ZS production-ML, data-warehouse, modernization, and RWE evidence across the existing role progression.
+- [x] Reconcile project evidence with the resume and current repositories: correct DEUCE's walk-forward population and Brier scores, add GAFFER's 49K-match / 8,136-match evaluation and market-comparison details, describe the Airbnb project as a reusable multi-agent analytics copilot without renaming its public case study, and add Filing Intelligence's 128-document corpus and 72-check verification baseline.
+- [x] Replace the flattened toolbox with the resume's DS/MLE capability groups, including experimentation, causal inference, ranking/recommendation, probabilistic forecasting, validation/monitoring, data warehousing, databases, and cloud deployment.
+- [x] Keep the public resume, structured content, case studies, project URLs, chat context, metadata, and repository README consistent; preserve all current live/GitHub/case-study actions and do not change unrelated projects or visual architecture.
+- [x] Add focused regression assertions for the refreshed experience, metrics, skills, and destinations.
+- [x] Verify stale-copy removal, TypeScript, lint, production build, desktop/mobile rendering, motion and interaction behavior, horizontal overflow, and every affected live/GitHub link on a dedicated local server.
+
+### Acceptance criteria
+
+- The homepage and case studies contain the resume's strongest current DS/MLE evidence without conflicting DEUCE, GAFFER, Novo, or Filing Intelligence figures.
+- Resume-linked projects retain prominent, correctly labeled Live Website, GitHub, and Case Study actions wherever those destinations exist.
+- The hero stays concise and metric-free; detailed evidence remains in experience and project sections.
+- The website chat receives the refreshed facts through the shared structured content rather than a separate manually duplicated resume summary.
+- No deployment, commit, or unrelated portfolio redesign is included in this task.
+
+### Review
+
+- Updated the hero and experience timeline with the resume's current Novo propensity-scoring, provider-prioritization, 5.2x top-decile lift, explainable tiering, and LLM decision-support work. Preserved the public Mim8 pre-launch context as a fourth website-only detail and expanded ZS role history with MLflow, drift/CI, Spark/SQL warehousing, positive-unlabeled learning, modernization, and audit-ready RWE evidence.
+- Corrected DEUCE to the current repository-backed 87,957-match evaluation, 0.1950 ATP / 0.2017 WTA Brier scores, and 69.6% / 68.5% walk-forward accuracy. Added its five-seed 42-feature ensemble, frozen forecasts, market scorecards, and production gates; browser QA prompted separate ATP/WTA metric cards for clean desktop presentation.
+- Expanded GAFFER with ~49K source matches, 50,000 simulations, an 8,136-match walk-forward evaluation, 0.887 vs 1.05 log loss, frozen pre-match grading, Kalshi comparison, and hourly operations. Preserved the Airbnb case-study brand while identifying it as a reusable multi-agent analytics copilot with DuckDB, Postgres, and Snowflake adapters.
+- Expanded Filing Intelligence to show 4,967 passages, 128 documents, 15 companies, and 72 automated checks; updated the stack from the stale Streamlit entry to the current Python/FastAPI/Next.js/Cloud Run implementation.
+- Replaced the old flat toolbox with six DS/MLE groups covering programming, experimentation, evaluation/monitoring, applied AI, data/MLOps, and databases/cloud. Metadata now consumes the shared `SITE` record, the chat prompt retains availability separately, and the repository README reflects the same project evidence.
+- Verified `npm run typecheck`, `npm run lint`, and `npm run build`. The production build remains 172 kB first-load JS on `/`. Playwright passes 13 desktop/mobile tests with one intentional duplicate reduced-motion mobile skip; the new regression scrolls offscreen mobile metric cards before checking their animated values.
+- In-app browser verification passed at 1440px and 390px for the hero, Selected Projects, More Shipped Work, experience, toolbox, and DEUCE/Filing Intelligence case-study metrics. Sticky desktop and stacked mobile behavior remain intact, every inspected surface has zero horizontal overflow, and the browser console is clean.
+- All eight affected live/GitHub destinations return HTTP 200. The local sitemap uses `2026-08-22`, `/resume.pdf` remains byte-identical to the approved Data Science/MLE source, and stale DEUCE/Novo/Streamlit strings are absent from active site content.

@@ -52,6 +52,7 @@ Ground rules:
 
 ## Who Arjun is
 ${SITE.description}
+Availability: ${SITE.availability}.
 Working approach: he builds the full path from data and evaluation through a reliable, stakeholder-facing product, with monitoring and traceability appropriate to the problem.
 
 ## Case studies (deep narratives, each has its own page)

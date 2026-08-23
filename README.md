@@ -7,19 +7,19 @@ The source for [arjun-varma.com](https://arjun-varma.com): an editorial portfoli
 ## What is here
 
 - Evidence-led case studies with stated metric provenance
-- DEUCE tennis forecasting across ATP and WTA, including model evaluation and product views
-- Production healthcare ML work from ZS Associates and current pre-launch / next-best-engagement work at Novo Nordisk
+- DEUCE tennis forecasting across 87,957 ATP/WTA walk-forward matches, including model evaluation, market comparisons, and product views
+- Propensity scoring, explainable next-best engagement, and LLM decision support from Novo Nordisk, plus production healthcare ML and real-world evidence work from ZS Associates
 - Interactive project figures for DEUCE, the Airbnb Data Analyst Agent, ClaimReady, and BTC early detection
-- A compact index of other shipped products, including GAFFER and ClassPulse
+- A compact index of other shipped products, including GAFFER's walk-forward World Cup benchmark and ClassPulse
 - An optional portfolio chat that answers from the same structured content used by the site
 - Responsive navigation, reduced-motion support, project-specific social cards, and structured metadata
 
 ## Featured case studies
 
-1. [DEUCE Tennis Forecast](https://arjun-varma.com/work/deuce-tennis-forecast) — surface-aware Elo, point-level modeling, calibrated XGBoost, and Monte Carlo tournament simulation
-2. [Airbnb Data Analyst Agent](https://arjun-varma.com/work/airbnb-data-analyst-agent) — five specialized agents for planned, validated, cited SQL analysis
+1. [DEUCE Tennis Forecast](https://arjun-varma.com/work/deuce-tennis-forecast) — surface-aware Elo, opponent-adjusted point modeling, calibrated XGBoost, and Monte Carlo tournament simulation
+2. [Airbnb Data Analyst Agent](https://arjun-varma.com/work/airbnb-data-analyst-agent) — a reusable multi-agent analytics copilot for planned, validated, cited SQL analysis across pluggable warehouses
 3. [Biliary Tract Cancer Early Detection](https://arjun-varma.com/work/btc-early-detection) — leakage-safe early identification over large-scale claims data
-4. [Filing Intelligence RAG](https://arjun-varma.com/work/filing-intelligence-rag) — evidence-first financial research with page-level citations and highlighted PDF verification
+4. [Filing Intelligence RAG](https://arjun-varma.com/work/filing-intelligence-rag) — evidence-first financial research across 128 documents with page/line citations, highlighted PDF verification, and 72 automated checks
 
 ## Stack
 
