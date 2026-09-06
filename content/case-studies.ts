@@ -2,6 +2,16 @@ export type Metric = {
   value: string;
   label: string;
   provenance: string;
+  kind?: "evaluation" | "contract" | "architecture" | "production" | "verification" | "corpus" | "recognition";
+  /** Label local explanatory notes as notes; a link alone does not make a claim an independent evaluation. */
+  source?: { label: string; href: string };
+};
+
+export type CaseStudySummary = {
+  contribution: string;
+  decision: string;
+  result: string;
+  limitation: string;
 };
 
 export type FigureKind =
@@ -28,6 +38,7 @@ export type CaseStudy = {
   role: string;
   period: string;
   status: "production" | "live" | "shipped";
+  summary: CaseStudySummary;
   metrics: Metric[];
   tech: string[];
   links: { label: string; href: string }[];
@@ -45,21 +56,33 @@ export const CASE_STUDIES: CaseStudy[] = [
     role: "Designed & built solo",
     period: "2026",
     status: "live",
+    summary: {
+      contribution: "Designed and built the modeling pipeline, live product, and scheduled delivery solo.",
+      decision: "Combine tennis-specific signals with calibrated XGBoost, and evaluate chronologically so future form cannot leak into past predictions.",
+      result: "Across 87,957 walk-forward matches, the ensemble reached 0.1950 ATP and 0.2017 WTA Brier scores; the product serves forecasts for both tours.",
+      limitation: "The closing market remains stronger on the odds-matched subset: 0.201 Brier versus the model's 0.203. The full evaluation and that subset are different comparisons.",
+    },
     metrics: [
       {
         value: "87,957",
         label: "matches in walk-forward evaluation",
         provenance: "45,831 ATP and 42,126 WTA scored matches, evaluated chronologically",
+        kind: "evaluation",
+        source: { label: "Evaluation methodology notes", href: "/work/deuce-tennis-forecast#evidence" },
       },
       {
         value: "0.1950",
         label: "ATP Brier score",
         provenance: "five-seed calibrated XGBoost ensemble; 69.6% walk-forward accuracy",
+        kind: "evaluation",
+        source: { label: "Evaluation methodology notes", href: "/work/deuce-tennis-forecast#evidence" },
       },
       {
         value: "0.2017",
         label: "WTA Brier score",
         provenance: "five-seed calibrated XGBoost ensemble; 68.5% walk-forward accuracy",
+        kind: "evaluation",
+        source: { label: "Evaluation methodology notes", href: "/work/deuce-tennis-forecast#evidence" },
       },
     ],
     tech: [
@@ -146,26 +169,38 @@ Monte Carlo simulation carries match probabilities through a tournament bracket,
     slug: "airbnb-data-analyst-agent",
     title: "Airbnb Data Analyst Agent",
     subtitle:
-      "A reusable multi-agent analytics copilot that plans, writes, validates, charts, and narrates SQL analysis — every number cited back to source rows.",
+      "A reusable multi-agent analytics copilot that plans, writes, validates, charts, and narrates SQL analysis, with source-row citations and inspectable traces.",
     org: "Columbia · Agentic AI for Analytics",
     role: "Designed & built solo",
     period: "2026",
     status: "live",
+    summary: {
+      contribution: "Designed and built the analytics copilot solo, from warehouse tools and agent contracts to validation and answer delivery.",
+      decision: "Give each agent a typed contract and put validation before narration, with a bounded retry path for failed or mismatched queries.",
+      result: "A live demo answers multi-step questions with SQL, charts, source-row citations, and inspectable traces. The recorded example shows recovery from an invalid column.",
+      limitation: "The citation requirement is a system contract, not a measured 100% success rate. Recorded runs demonstrate behavior on specific questions, not every possible query.",
+    },
     metrics: [
       {
         value: "5",
         label: "agents on a typed message bus",
         provenance: "planner · SQL · validator · chart · narrator — every step inspectable and replayable",
+        kind: "architecture",
+        source: { label: "Agent architecture notes", href: "/work/airbnb-data-analyst-agent#approach" },
       },
       {
         value: "×3",
         label: "retry budget, exponential backoff",
         provenance: "validator-triggered on tool errors and intent mismatch",
+        kind: "contract",
+        source: { label: "Recorded example & checks", href: "/work/airbnb-data-analyst-agent#evidence" },
       },
       {
-        value: "100%",
-        label: "numbers cited to source rows",
-        provenance: "narrator contract — uncited claims don't ship",
+        value: "Required",
+        label: "source-row citations",
+        provenance: "narrator contract; not a measured citation-success rate",
+        kind: "contract",
+        source: { label: "Citation contract notes", href: "/work/airbnb-data-analyst-agent#evidence" },
       },
     ],
     tech: ["FastAPI", "LangChain", "DuckDB / Postgres / Snowflake", "OpenAI function calling", "matplotlib", "pytest"],
@@ -193,7 +228,7 @@ The live Airbnb implementation is the demonstration surface for a reusable analy
       {
         id: "approach",
         title: "The loop",
-        body: `Instead of one prompt doing everything badly, five specialized agents each own one contract:
+        body: `Five specialized agents each own one contract:
 
 1. **Planner** — decomposes the natural-language question into a plan of sub-queries and tool calls
 2. **SQL Agent** — writes SQL against the live warehouse schema, with access to \`db.schema()\` and \`db.query(sql)\`
@@ -228,7 +263,9 @@ The warehouse layer is pluggable: DuckDB for the live demo (NYC Airbnb data), wi
         title: "Evidence",
         body: `Guardrails are only real if you can watch them fire. Below are recorded runs from the system — step through them. The first run includes a hallucinated column name, the database error it caused, and the validator catching and fixing it.
 
-What keeps the system honest in production:
+These examples show the validation and retry paths on recorded questions. Requiring source-row citations is a narrator contract; no aggregate citation-success rate is reported here.
+
+The implemented checks include:
 
 - **SQL dry-run + row-count sanity check** before any query result is trusted
 - **Null / type audit** before any chart is rendered
@@ -245,7 +282,7 @@ What keeps the system honest in production:
         id: "impact",
         title: "Impact",
         body: `- Handles multi-step analytics questions end-to-end with auditable traces
-- Every answer is grounded — users can drill into the exact rows the agent cited
+- Source-row citations let users inspect the evidence behind the answer
 - Regression evals plus per-query latency/cost tracking keep production behavior measurable
 - Designed to plug into any warehouse with a SQL-compatible adapter`,
       },
@@ -260,21 +297,33 @@ What keeps the system honest in production:
     role: "Advanced Data Science Associate Consultant",
     period: "2024 — 2025",
     status: "production",
+    summary: {
+      contribution: "Worked on the BTC early-detection system as an Advanced Data Science Associate Consultant at ZS, with the project team.",
+      decision: "Mask the latest 45 days of claims at every prediction date so training and evaluation reflect the delay the production model faces.",
+      result: "The deployed pipeline scores 250M patient-claims monthly and identifies likely BTC patients approximately 45 days earlier than the claims-lag baseline.",
+      limitation: "This is proprietary client work. Patient data, source code, and numerical precision/recall results are not public; the case study explains the methodology and reported production scope.",
+    },
     metrics: [
       {
         value: "~45d",
         label: "earlier identification",
         provenance: "vs. the standard 45-day claims-lag baseline, leakage-masked backtest",
+        kind: "evaluation",
+        source: { label: "Evaluation methodology notes", href: "/work/btc-early-detection#evidence" },
       },
       {
         value: "250M",
         label: "patient-claims scored / month",
         provenance: "automated monthly refresh, in production",
+        kind: "production",
+        source: { label: "Production methodology notes", href: "/work/btc-early-detection#system" },
       },
       {
         value: "PMSA '25",
         label: "methodology presented",
         provenance: "client funded replication across other tumors and brands",
+        kind: "recognition",
+        source: { label: "Reported impact notes", href: "/work/btc-early-detection#impact" },
       },
     ],
     tech: ["PySpark", "XGBoost", "SHAP", "K-means / GMM", "NLP clustering", "MLflow"],
@@ -323,7 +372,7 @@ Two things made it survivable in production rather than a slide-deck model:
       {
         id: "evidence",
         title: "Evidence",
-        body: `The ~45-day advantage is measured against the claims-lag baseline under the masked-data protocol — the model never saw information it wouldn't have had in production.
+        body: `The ~45-day advantage is measured against the claims-lag baseline under the masked-data protocol — the model never saw information it wouldn't have had in production. This is a methodology description of proprietary client work; the underlying patient data, evaluation report, and numerical precision/recall results are not publicly available.
 
 - Substantial lift in early BTC identification versus the heuristic rules it replaced
 - Clinician-acceptable precision, with interpretable per-patient feature effects via SHAP
@@ -352,21 +401,33 @@ Two things made it survivable in production rather than a slide-deck model:
     role: "Data science & ML",
     period: "2025",
     status: "production",
+    summary: {
+      contribution: "Worked on transaction classification and its integration with SunCulture's credit-scoring workflow in a data science and ML role.",
+      decision: "Use rules for familiar transactions, retrieval-assisted classification for the long tail, and confidence thresholds to route uncertain cases to human review.",
+      result: "The pipeline standardized 7M+ transactions, with reported 99% accuracy on a 10,000-item holdout and a 95% reduction in manual-review volume.",
+      limitation: "This case study describes internal work. The transaction dataset and holdout results are not published as a public evaluation artifact.",
+    },
     metrics: [
       {
         value: "99%",
         label: "classification accuracy",
         provenance: "10,000-item hand-labeled holdout set",
+        kind: "evaluation",
+        source: { label: "Holdout methodology notes", href: "/work/sunculture-transaction-intelligence#evidence" },
       },
       {
         value: "−95%",
         label: "manual-review volume",
         provenance: "confidence-gated human-in-the-loop routing",
+        kind: "production",
+        source: { label: "Reported review-volume notes", href: "/work/sunculture-transaction-intelligence#evidence" },
       },
       {
         value: "7M+",
         label: "transactions standardized",
         provenance: "500+ category targets, free-text descriptions",
+        kind: "production",
+        source: { label: "Production scope notes", href: "/work/sunculture-transaction-intelligence#constraint" },
       },
     ],
     tech: ["Python", "RAG", "LLM classification", "REST"],
@@ -437,21 +498,33 @@ The loop that kept it improving: errors from each batch were hand-labeled and fo
     role: "Product and RAG engineering",
     period: "2026",
     status: "live",
+    summary: {
+      contribution: "Built the research product and retrieval workflow, including scoped search, evidence assembly, citation verification, and the PDF reading experience.",
+      decision: "Preserve page and line provenance during ingestion, constrain retrieval by company and period, and keep the source evidence visible alongside each answer.",
+      result: "A deployed research workspace searches 4,967 passages from 128 documents across 15 companies, backed by 72 automated verification checks.",
+      limitation: "Corpus size and passing checks describe coverage and engineering verification, not measured answer accuracy. PDF highlighting also depends on the document's text layer.",
+    },
     metrics: [
       {
         value: "4,967",
         label: "indexed source passages",
         provenance: "packaged corpus spanning 128 documents and 15 companies",
+        kind: "corpus",
+        source: { label: "Corpus & verification notes", href: "/work/filing-intelligence-rag#evidence" },
       },
       {
         value: "128",
         label: "source documents",
         provenance: "filings, earnings decks, and call transcripts across a 15-company corpus",
+        kind: "corpus",
+        source: { label: "Corpus & verification notes", href: "/work/filing-intelligence-rag#evidence" },
       },
       {
         value: "72",
         label: "automated verification checks",
         provenance: "64 Python checks and 8 frontend checks across retrieval, auth, APIs, and builds",
+        kind: "verification",
+        source: { label: "Verification scope notes", href: "/work/filing-intelligence-rag#evidence" },
       },
     ],
     tech: ["Python", "Next.js", "TypeScript", "FastAPI", "ChromaDB", "Vertex AI", "GCP Cloud Run"],

@@ -1,3 +1,71 @@
+# 2026-09-06 — Implement portfolio improvements
+
+## Merge verification follow-up
+
+- [x] Diagnose the Linux WebKit CI failure from its trace: source navigation released the chat scroll lock but left its dialog mounted while waiting for the closing animation.
+- [x] Dismiss internal-source navigation synchronously while retaining animated Escape/Close behavior and the conversation transcript.
+- [x] Verify the added animation-independent navigation regression locally: all 14 applicable chat browser tests pass (eight device-specific duplicates skipped), plus lint, TypeScript, six unit tests, and production build.
+
+The required GitHub checks are rerun on this fix before merging PR #11 into main; the pull request records their final status and merge result.
+
+The owner approved implementation of the review recommendations. This checklist is the implementation check-in; proceed with the agreed direction.
+
+Publication update: after reviewing the local preview, the owner explicitly approved pushing these changes to the configured GitHub remote. The implementation review below records validation before that publication step.
+
+## Design specification
+
+- Audience/job: recruiters and technical interviewers should identify relevant DS/MLE work, verify contribution and results, and open a project or contact Arjun.
+- Palette: preserve paper `#fafaf7`, ink `#15171a`, muted `#62686e`, line `#e3e3dc`, decorative orange `#d9480f`, and readable orange `#b83a0c` from the existing tokens.
+- Type: Fraunces display, Familjen Grotesk body, JetBrains Mono for evidence and utility labels; raise meaningful small text to at least 11–12px.
+- Layout: compact identity → four visual project entries → concise expandable experience → recorded agent walkthrough → complete project directory → capabilities/education → contact.
+- Signature: a real recorded answer with inspectable failure, correction, and cited output. Product previews use existing screenshots or clearly labelled diagrams/recorded outputs, never invented product screenshots.
+- Critique: four equally oversized explanatory panels duplicate the same reading effort. Replace their forced viewport heights with compact previews and keep architecture instruments behind explicit disclosure. No hero metrics, slogans, invented contributions, or invented evaluations.
+
+## Plan
+
+- [x] Introduce a shared project catalogue and source-grounded contribution/decision/result/limitation summaries; distinguish evaluation results, contracts, and architecture counts.
+- [x] Rebuild homepage hierarchy, visual previews, compact mobile hero, expandable experience, and capability links; preserve prominent project destinations.
+- [x] Improve the existing Airbnb recorded walkthrough with answer-first context and inspectable original steps; preserve reduced motion and no-JavaScript content.
+- [x] Render useful case-study summaries and accessible evidence links/notes; make real DEUCE screenshots inspectable.
+- [x] Unify project discovery across all featured and secondary work, with honest private-project exceptions.
+- [x] Fix chat context grounding, bounded request history, length/throttle/service errors, and new-conversation recovery; add boundary coverage.
+- [x] Migrate Next.js and CI Node to supported versions, adapting framework interfaces and lint configuration.
+- [x] Run typecheck, lint, production build, unit/API contract tests, and desktop/mobile browser regressions on a dedicated local server; visually review 1440px, 390px, and 320px.
+- [x] Reconcile docs and historical plans, record review results, and open a local preview.
+
+## Review
+
+- Implemented the compact four-project gallery, actual DEUCE screenshot and recorded Airbnb output, labelled ClaimReady/BTC schematics, native evidence disclosures, earlier expandable experience, three recorded agent examples, all-nine-project discovery, and capability links. ClaimReady remains explicitly collaborative; private work has honest unavailable-link notes. No new ownership claims or benchmark measurements were invented.
+- All five case studies now expose contribution, decision, result, and limitation summaries. Metric qualifiers and methodology links are visible and usable on touch; internal evidence jumps respect sticky navigation. Original DEUCE screenshots open at full size. At 320px, the header's Resume action moves into the Sections menu and controls retain 44px targets.
+- Chat uses shared request limits while retaining the full visible transcript; supports retry, reset, length guidance, distinct throttling/service errors, and interrupted-stream recovery. Its source context now includes roles, full narratives, limitations, and section citations. Mocked tests cover the real route and stream protocol without paid model requests.
+- Supported framework baseline: Next.js 16.3.4, React 19.2.8, and Node 24 engines/CI. ESLint 9 flat configuration replaces the removed Next lint command; route parameters and metadata use the current asynchronous interface. The supported Webpack compiler is explicit because Turbopack's child-process IPC is restricted in this workspace.
+- Verification: route generation and TypeScript, ESLint, six unit/API contract tests, and the production build passed. Final full browser run against the fresh production server at `http://127.0.0.1:3100`: **45 passed, 13 intentionally skipped** across desktop Chromium and mobile WebKit. Skips avoid duplicating device-specific contracts; no applicable tests remain failing. Coverage includes no-JavaScript content, reduced motion, keyboard/focus behavior, chat recovery, all project instruments, search, project destinations, screenshots, evidence navigation, and 320px overflow. `git diff --check` passed.
+- Visual review at 1440px, 390px, and 320px confirmed readable previews, summaries, mobile controls, and recorded answers. Experience begins around 1,995px at 1440 × 900 and 3,159px at 390 × 844 (about two and four viewport heights respectively). The previous review measured 7,162px at 1560 × 1027 and 8,954px at 390 × 844. These are layout observations, not measured hiring/conversion outcomes.
+- Remaining maintenance is reconciled in `plans/README.md`: the legacy AI SDK retains a high-severity transitive jsondiffpatch advisory (reachability not established), ESLint 9 awaits compatible ESLint 10 peers, and Next warns that Edge runtime is deprecated. Local verification ran under the installed Node 26.5.0; Node 24 is declared but the hosting-account setting has not been inspected. No external benchmark reproduction or live model-answer quality evaluation was performed.
+- Source resume and historical source documents were preserved. Changes are local; nothing has been committed, pushed, or deployed.
+
+---
+
+# 2026-09-06 — Website improvement review
+
+## Plan
+
+- [x] Read the current site structure, previous decisions, and existing improvement plans.
+- [x] Review the live desktop and mobile visitor experience and a representative case study.
+- [x] Audit content, interactions, technical risks, and verification coverage in parallel.
+- [x] Vet the evidence and recommend a prioritized design and product direction.
+- [x] Record the review with recommendations ready for selection into implementation plans.
+
+## Review
+
+- Saved the decision brief in `plans/review-2026-09-06.md`, against `eee57e2`, and linked it from the historical plan index.
+- Live review measured Experience at approximately seven desktop viewport heights and eleven mobile viewport heights below the top. Recommended a compact visual homepage, explicit personal contribution and evidence, one deeper inspectable example, and coherent project discovery.
+- Vetted chat history-limit/recovery and missing narrative-context findings, evidence-label/link gaps, and unsupported Next/CI Node versions. Kept design options separate from confirmed defects and documented prior decisions that remain intentional.
+- Typecheck and uncached lint passed; the technical audit checked production dependencies and reproduced chat request boundaries with a mocked provider. No application source changed, no packages were installed, and nothing was deployed. Full build/E2E, performance metrics, production analytics, and external product benchmark verification were outside this review.
+- Detailed implementation plans await the owner's selection from the review.
+
+---
+
 # Premium Motion Rewrite — "Field Notes, Animated"
 
 Plan: `~/.claude/plans/i-need-cool-animations-peppy-umbrella.md` (approved)

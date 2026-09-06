@@ -1,6 +1,7 @@
-export type ProjectCategory = "Retrieval" | "Forecasting" | "Agents" | "LLM products";
+export type ProjectCategory = "Retrieval" | "Forecasting" | "Agents" | "LLM products" | "Production ML";
 
 export type IndexProject = {
+  slug: string;
   title: string;
   year: string;
   category: ProjectCategory;
@@ -11,9 +12,11 @@ export type IndexProject = {
   caseStudy?: string;
 };
 
-/** Compact index — these ship as one row each; the deep narratives live in case-studies.ts. */
+/** Project records without a full narrative, plus Filing's extended index description.
+ * Public discovery consumes the unified registry in project-catalog.ts. */
 export const PROJECT_INDEX: IndexProject[] = [
   {
+    slug: "filing-intelligence-rag",
     title: "Filing Intelligence RAG",
     year: "2026",
     category: "Retrieval",
@@ -25,6 +28,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     caseStudy: "/work/filing-intelligence-rag",
   },
   {
+    slug: "gaffer",
     title: "GAFFER: Live World Cup Forecasting Platform",
     year: "2026",
     category: "Forecasting",
@@ -35,6 +39,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     repo: "https://github.com/ARJUNVARMA2000/wc-2026-gaffer",
   },
   {
+    slug: "claimready",
     title: "ClaimReady",
     year: "2026",
     category: "Agents",
@@ -45,6 +50,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     repo: "https://github.com/Agentic-AI-Project-Columbia/claimready",
   },
   {
+    slug: "classpulse",
     title: "ClassPulse",
     year: "2026",
     category: "LLM products",
@@ -55,6 +61,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     repo: "https://github.com/ARJUNVARMA2000/ClassPulse",
   },
   {
+    slug: "seance-ai",
     title: "SeanceAI",
     year: "2025",
     category: "Agents",
@@ -65,6 +72,7 @@ export const PROJECT_INDEX: IndexProject[] = [
     repo: "https://github.com/ARJUNVARMA2000/Seance_AI",
   },
   {
+    slug: "citation-format-checker",
     title: "Citation Format Checker",
     year: "2026",
     category: "LLM products",

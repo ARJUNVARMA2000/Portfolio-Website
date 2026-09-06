@@ -46,6 +46,24 @@ body {
   outline-offset: 2px;
 }
 
+.project-disclosure > summary,
+.experience-detail > summary {
+  list-style: none;
+}
+
+.project-disclosure > summary::-webkit-details-marker,
+.experience-detail > summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure-icon {
+  transition: transform 180ms ease;
+}
+
+details[open] > summary .disclosure-icon {
+  transform: rotate(45deg);
+}
+
 /* ── Shared primitives ─────────────────────────────────── */
 
 .mono-label {

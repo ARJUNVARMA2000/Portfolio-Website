@@ -4,14 +4,15 @@ import { CASE_STUDIES, getCaseStudy } from "@/content/case-studies";
 import { CaseStudyArticle } from "@/components/case-study/article";
 import { SITE } from "@/content/site";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return CASE_STUDIES.map((cs) => ({ slug: cs.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const cs = getCaseStudy(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const cs = getCaseStudy(slug);
   if (!cs) return {};
   return {
     title: cs.title,
@@ -26,8 +27,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function CaseStudyPage({ params }: Props) {
-  const cs = getCaseStudy(params.slug);
+export default async function CaseStudyPage({ params }: Props) {
+  const { slug } = await params;
+  const cs = getCaseStudy(slug);
   if (!cs) notFound();
   const projectSchema = {
     "@context": "https://schema.org",

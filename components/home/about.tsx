@@ -1,111 +1,53 @@
-"use client";
-
-import { useRef } from "react";
+import Link from "next/link";
 import { EDUCATION } from "@/content/site";
 import { SKILLS } from "@/content/skills";
 import { Section } from "@/components/section";
-import { Reveal } from "@/components/motion/reveal";
-import { Marquee } from "@/components/motion/marquee";
-import { gsap, SplitText, useGSAP, MOTION_OK } from "@/lib/gsap";
 
-function ScrubStatement({ children }: { children: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-
-  useGSAP(
-    (_, contextSafe) => {
-      const el = ref.current;
-      if (!el || !contextSafe) return;
-      gsap.matchMedia().add(MOTION_OK, () => {
-        const build = contextSafe(() => {
-          const split = SplitText.create(el, { type: "words", aria: "auto" });
-          gsap.fromTo(
-            split.words,
-            { opacity: 0.14 },
-            {
-              opacity: 1,
-              stagger: 0.04,
-              ease: "none",
-              scrollTrigger: {
-                trigger: el,
-                start: "top 78%",
-                end: "top 30%",
-                scrub: 0.6,
-              },
-            }
-          );
-        });
-        document.fonts.ready.then(build);
-      });
-    },
-    { scope: ref }
-  );
-
-  return (
-    <p
-      ref={ref}
-      className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.4rem)] italic leading-[1.2] tracking-[-0.015em]"
-    >
-      {children}
-    </p>
-  );
-}
-
-function SkillChip({ label }: { label: string }) {
-  return (
-    <span className="mx-1.5 my-1 inline-block shrink-0 border border-line bg-surface px-3 py-1.5 font-mono text-[12px] text-ink">
-      {label}
-    </span>
-  );
-}
+const CAPABILITIES = [
+  { title: "Forecasting & evaluation", detail: "Chronological backtests, calibration, and uncertainty.", project: "DEUCE Tennis Forecast", href: "/work/deuce-tennis-forecast#evidence" },
+  { title: "Agent workflows", detail: "Typed tools, validation, and recovery from failed queries.", project: "Airbnb Data Analyst Agent", href: "/work/airbnb-data-analyst-agent#trace" },
+  { title: "Production ML", detail: "Claims pipelines, leakage controls, and interpretable models.", project: "BTC Early Detection", href: "/work/btc-early-detection" },
+  { title: "Retrieval & citations", detail: "Scoped retrieval and answers grounded in source documents.", project: "Filing Intelligence RAG", href: "/work/filing-intelligence-rag" },
+];
 
 export function About() {
-  const allSkills = Object.values(SKILLS).flat();
-  const mid = Math.ceil(allSkills.length / 2);
-  const rows = [allSkills.slice(0, mid), allSkills.slice(mid)];
-
   return (
-    <Section id="about" index="04" label="ABOUT">
-      <ScrubStatement>
-        I work on the part of machine learning that starts after the demo.
-      </ScrubStatement>
-      <Reveal as="p" className="mt-6 max-w-[58ch] font-sans text-[0.9375rem] leading-relaxed text-muted">
+    <Section id="about" index="05" label="About">
+      <p className="max-w-[62ch] text-lg leading-relaxed text-muted">
         My work spans forecasting, experimentation, healthcare analytics, and agent workflows.
-        Across them, the recurring problems are the same: reliable data, honest evaluation,
-        useful interfaces, and enough monitoring to know when a system stops working.
-      </Reveal>
-
-      <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2">
-        <div>
-          <h3 className="mono-label mb-4">Education</h3>
-          <div className="space-y-5">
-            {EDUCATION.map((ed) => (
-              <Reveal key={ed.school} className="border-t border-line pt-3">
-                <p className="font-sans text-[0.9375rem] font-medium text-ink">{ed.school}</p>
-                <p className="mt-0.5 font-sans text-[0.875rem] text-muted">{ed.degree}</p>
-                <p className="mono-label mt-1.5">{ed.period}</p>
-                <p className="mt-1.5 font-mono text-[11px] leading-relaxed text-muted">{ed.note}</p>
-              </Reveal>
-            ))}
+        I build the data pipelines, evaluation, and interfaces around the model.
+      </p>
+      <div className="mt-7 grid gap-x-7 gap-y-5 sm:grid-cols-2">
+        {CAPABILITIES.map((capability) => (
+          <div key={capability.title} className="border-t border-line pt-4">
+            <h3 className="text-base font-medium">{capability.title}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted">{capability.detail}</p>
+            <Link href={capability.href} className="mt-1 inline-flex min-h-11 items-center text-xs text-accent-text underline decoration-line underline-offset-4">{capability.project} →</Link>
           </div>
-        </div>
-        <div>
-          <h3 className="mono-label">Toolbox</h3>
-          <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.08em] text-muted">
-            {Object.keys(SKILLS).join(" · ")}
-          </p>
-          <Reveal className="mt-4 space-y-3 border-t border-line pt-4">
-            <Marquee speed={32}>
-              {rows[0].map((s) => (
-                <SkillChip key={s} label={s} />
-              ))}
-            </Marquee>
-            <Marquee speed={26} reverse>
-              {rows[1].map((s) => (
-                <SkillChip key={s} label={s} />
-              ))}
-            </Marquee>
-          </Reveal>
-        </div>
+        ))}
+      </div>
+      <details className="experience-detail mt-5 border-y border-line">
+        <summary className="flex min-h-12 cursor-pointer items-center justify-between py-3 text-sm">
+          All skills <span aria-hidden className="disclosure-icon font-mono text-accent-text">+</span>
+        </summary>
+        <dl className="grid gap-5 pb-6 sm:grid-cols-2">
+          {Object.entries(SKILLS).map(([category, skills]) => (
+            <div key={category}>
+              <dt className="mb-2 text-sm font-medium">{category}</dt>
+              <dd className="text-sm leading-relaxed text-muted">{skills.join(" · ")}</dd>
+            </div>
+          ))}
+        </dl>
+      </details>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        {EDUCATION.map((education) => (
+          <div key={education.school}>
+            <h3 className="font-serif text-xl">{education.school}</h3>
+            <p className="mt-1 text-sm">{education.degree}</p>
+            <p className="mt-2 font-mono text-[11px] text-muted">{education.period}</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted">{education.note}</p>
+          </div>
+        ))}
       </div>
     </Section>
   );

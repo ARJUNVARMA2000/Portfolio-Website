@@ -3,6 +3,7 @@ import { WorkList } from "@/components/home/work-list";
 import { ProjectIndex } from "@/components/home/project-index";
 import { Timeline } from "@/components/home/timeline";
 import { About } from "@/components/home/about";
+import { RecordedWalkthrough } from "@/components/home/recorded-walkthrough";
 import { SITE } from "@/content/site";
 
 export default function Home() {
@@ -28,8 +29,9 @@ export default function Home() {
       />
       <Hero />
       <WorkList />
-      <ProjectIndex />
       <Timeline />
+      <RecordedWalkthrough />
+      <ProjectIndex />
       <About />
     </main>
   );

@@ -44,5 +44,7 @@ export function ScrambleLabel({
     { scope: ref, dependencies: [text], revertOnUpdate: true }
   );
 
+  // Forward the ref to React; createElement does not read ref.current.
+  // eslint-disable-next-line react-hooks/refs
   return createElement(Tag, { ref, className }, text);
 }

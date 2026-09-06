@@ -1,6 +1,10 @@
 import { expect, test } from "@playwright/test";
 
-const SHIPPED_PROJECTS = [
+const ALL_PROJECTS = [
+  "DEUCE Tennis Forecast",
+  "Airbnb Data Analyst Agent",
+  "ClaimReady",
+  "Biliary Tract Cancer Early Detection",
   "Filing Intelligence RAG",
   "GAFFER: Live World Cup Forecasting Platform",
   "ClassPulse",
@@ -16,41 +20,47 @@ test.describe("Project Explorer", () => {
     await page.goto("/#projects", { waitUntil: "domcontentloaded" });
 
     const explorer = page.locator("[data-project-explorer]");
-    await expect(explorer.locator("[data-row]")).toHaveCount(5);
-    await expect(explorer.getByRole("group", { name: "Filter shipped projects" })).toHaveCount(0);
+    await expect(explorer.locator("[data-row]")).toHaveCount(9);
+    await expect(explorer.getByRole("group", { name: "Filter projects" })).toHaveCount(0);
     await expect(explorer.getByRole("searchbox")).toHaveCount(0);
-    for (const title of SHIPPED_PROJECTS) {
+    for (const title of ALL_PROJECTS) {
       await expect(explorer.getByRole("heading", { level: 3, name: title, exact: true })).toHaveCount(1);
     }
-    for (const row of await explorer.locator("[data-row]").all()) {
+    for (const row of await explorer.locator('[data-row]:not([data-project-slug="btc-early-detection"])').all()) {
       await expect(row.getByRole("link", { name: /live website/i })).toHaveCount(1);
       await expect(row.getByRole("link", { name: /github/i })).toHaveCount(1);
     }
+    const privateProject = explorer.locator('[data-project-slug="btc-early-detection"]');
+    await expect(privateProject.getByRole("link", { name: /live website|github/i })).toHaveCount(0);
+    await expect(privateProject.getByRole("link", { name: /case study/i })).toHaveAttribute("href", "/work/btc-early-detection");
+    await expect(privateProject).toContainText("Proprietary client work");
+    await expect(explorer).not.toContainText("SunCulture");
     await context.close();
   });
 
   test("filters, searches, announces results, and resets", async ({ page }) => {
     await page.goto("/#projects", { waitUntil: "domcontentloaded" });
     const explorer = page.locator("[data-project-explorer]");
-    const filters = explorer.getByRole("group", { name: "Filter shipped projects" });
+    const filters = explorer.getByRole("group", { name: "Filter projects" });
     const status = explorer.getByRole("status");
     await expect(filters).toBeVisible();
-    await expect(status).toHaveText("5 projects");
+    await expect(status).toHaveText("9 projects");
 
     const forecasting = filters.getByRole("button", { name: "Forecasting", exact: true });
     await forecasting.click();
     await expect(forecasting).toHaveAttribute("aria-pressed", "true");
-    await expect(explorer.locator("[data-row]")).toHaveCount(1);
+    await expect(explorer.locator("[data-row]")).toHaveCount(2);
+    await expect(explorer).toContainText("DEUCE Tennis Forecast");
     await expect(explorer).toContainText("GAFFER: Live World Cup Forecasting Platform");
-    await expect(status).toHaveText("1 project");
+    await expect(status).toHaveText("2 projects");
 
     await filters.getByRole("button", { name: "All", exact: true }).click();
-    const search = explorer.getByRole("searchbox", { name: "Search shipped projects" });
+    const search = explorer.getByRole("searchbox", { name: "Search projects" });
     await search.fill("FastAPI");
-    await expect(explorer.locator("[data-row]")).toHaveCount(3);
-    await expect(status).toHaveText("3 projects");
-    await expect(explorer.locator("[data-row]")).toHaveText([/FastAPI/, /FastAPI/, /FastAPI/]);
-    for (const title of ["Filing Intelligence RAG", "ClassPulse", "Citation Format Checker"]) {
+    await expect(explorer.locator("[data-row]")).toHaveCount(5);
+    await expect(status).toHaveText("5 projects");
+    await expect(explorer.locator("[data-row]")).toHaveText([/FastAPI/, /FastAPI/, /FastAPI/, /FastAPI/, /FastAPI/]);
+    for (const title of ["Airbnb Data Analyst Agent", "ClaimReady", "Filing Intelligence RAG", "ClassPulse", "Citation Format Checker"]) {
       await expect(explorer.getByRole("heading", { level: 3, name: title, exact: true })).toHaveCount(1);
     }
     const clear = explorer.getByRole("button", { name: "Clear project search" });
@@ -58,7 +68,7 @@ test.describe("Project Explorer", () => {
     expect(clearBox?.width ?? 0).toBeGreaterThanOrEqual(44);
     expect(clearBox?.height ?? 0).toBeGreaterThanOrEqual(44);
     await clear.click();
-    await expect(status).toHaveText("5 projects");
+    await expect(status).toHaveText("9 projects");
 
     await search.fill("not-a-project");
     await expect(status).toHaveText("0 projects");
@@ -66,8 +76,31 @@ test.describe("Project Explorer", () => {
     const reset = explorer.getByRole("button", { name: "Reset filters" });
     expect((await reset.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
     await reset.click();
-    await expect(explorer.locator("[data-row]")).toHaveCount(5);
-    await expect(status).toHaveText("5 projects");
+    await expect(explorer.locator("[data-row]")).toHaveCount(9);
+    await expect(status).toHaveText("9 projects");
+  });
+
+  test("finds featured projects and combines search with categories", async ({ page }) => {
+    await page.goto("/#projects", { waitUntil: "domcontentloaded" });
+    const explorer = page.locator("[data-project-explorer]");
+    const search = explorer.getByRole("searchbox", { name: "Search projects" });
+    for (const [query, title] of [
+      ["deuce", "DEUCE Tennis Forecast"],
+      ["ClaimReady", "ClaimReady"],
+      ["  bTc  ", "Biliary Tract Cancer Early Detection"],
+    ]) {
+      await search.fill(query);
+      await expect(explorer.locator("[data-row]")).toHaveCount(1);
+      await expect(explorer.getByRole("heading", { name: title, exact: true })).toBeVisible();
+    }
+    const filters = explorer.getByRole("group", { name: "Filter projects" });
+    await filters.getByRole("button", { name: "Production ML", exact: true }).click();
+    await expect(explorer.getByRole("status")).toHaveText("1 project");
+    await search.fill("ClaimReady");
+    await expect(explorer.getByRole("status")).toHaveText("0 projects");
+    await filters.getByRole("button", { name: "Agents", exact: true }).click();
+    await expect(explorer.getByRole("status")).toHaveText("1 project");
+    await expect(explorer).toContainText("Collaborative project");
   });
 
   test("supports keyboard filtering and a reduced-motion gliding indicator", async ({ page }, testInfo) => {
@@ -75,7 +108,7 @@ test.describe("Project Explorer", () => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/#projects", { waitUntil: "domcontentloaded" });
     const explorer = page.locator("[data-project-explorer]");
-    const filters = explorer.getByRole("group", { name: "Filter shipped projects" });
+    const filters = explorer.getByRole("group", { name: "Filter projects" });
     const indicator = explorer.locator("[data-filter-indicator]");
     await expect(indicator).toBeVisible();
     const before = await indicator.boundingBox();
@@ -84,7 +117,9 @@ test.describe("Project Explorer", () => {
     await agents.focus();
     await agents.press("Enter");
     await expect(agents).toHaveAttribute("aria-pressed", "true");
-    await expect(explorer.locator("[data-row]")).toHaveCount(1);
+    await expect(explorer.locator("[data-row]")).toHaveCount(3);
+    await expect(explorer).toContainText("Airbnb Data Analyst Agent");
+    await expect(explorer).toContainText("ClaimReady");
     await expect(explorer).toContainText("SeanceAI");
     await expect.poll(async () => (await indicator.boundingBox())?.x).not.toBe(before?.x);
     const transitionSeconds = await indicator.evaluate((element) =>

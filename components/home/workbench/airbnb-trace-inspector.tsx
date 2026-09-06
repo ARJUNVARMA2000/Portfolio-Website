@@ -11,12 +11,11 @@ export function AirbnbTraceInspector({ steps }: { steps: PreviewStep[] }) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if (!playing) return;
-    if (active >= steps.length - 1) {
-      setPlaying(false);
-      return;
-    }
-    const timer = window.setTimeout(() => setActive((current) => current + 1), 1250);
+    if (!playing || active >= steps.length - 1) return;
+    const timer = window.setTimeout(() => {
+      setActive((current) => current + 1);
+      if (active + 1 >= steps.length - 1) setPlaying(false);
+    }, 1250);
     return () => window.clearTimeout(timer);
   }, [active, playing, steps.length]);
 

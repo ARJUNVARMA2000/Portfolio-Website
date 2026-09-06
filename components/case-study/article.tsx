@@ -16,6 +16,7 @@ import { ProjectActions } from "@/components/project-actions";
 import { AskProjectButton } from "@/components/chat/ask-project-button";
 import { FactSheet } from "./fact-sheet";
 import { CitedMetrics } from "./cited-metric";
+import { ProjectSummary } from "./project-summary";
 import { CaseStudyNavigator } from "./case-study-navigator";
 import { Pager } from "./pager";
 
@@ -93,6 +94,7 @@ export function CaseStudyArticle({ cs }: { cs: CaseStudy }) {
 
       {/* fact sheet + metrics */}
       <div className="mx-auto max-w-wrap px-5 sm:px-8">
+        <ProjectSummary summary={cs.summary} />
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,420px)_1fr]">
           <FactSheet cs={cs} />
           <CitedMetrics metrics={cs.metrics} />
