@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent, ReactNode } from "react";
+import type { FormEvent, MouseEvent, ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useChat } from "ai/react";
 import { usePathname } from "next/navigation";
 import { gsap, useGSAP, SCRAMBLE_CHARS } from "@/lib/gsap";
+import { boundedChatHistory, CHAT_LIMITS, chatFailure, type ChatFailure } from "@/lib/chat-contract";
 
 const HOME_SUGGESTIONS = [
   "What's the strongest proof he can build production ML?",
@@ -147,14 +148,47 @@ type Phase = "open" | "closing" | "closed";
 
 export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
-  const { messages, input, handleInputChange, handleSubmit, append, isLoading, error } = useChat({
+  const [failure, setFailure] = useState<ChatFailure | null>(null);
+  const [inputNotice, setInputNotice] = useState<string | null>(null);
+  const { messages, input, setInput, append, reload, setMessages, isLoading } = useChat({
     api: "/api/chat",
+    keepLastMessageOnError: true,
+    experimental_prepareRequestBody: ({ messages: transcript }) => ({
+      messages: boundedChatHistory(transcript),
+    }),
+    onResponse: (response) => {
+      if (!response.ok) setFailure(chatFailure(response.status, response.headers.get("retry-after")));
+    },
+    onError: () => setFailure((current) => current ?? chatFailure()),
   });
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const backdropRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const sendQuestion = (question: string) => {
+    if (isLoading) return;
+    if (!question.trim() || question.length > CHAT_LIMITS.messageChars) {
+      setInputNotice("Questions can be up to 2,000 characters. Shorten yours before sending.");
+      return;
+    }
+    setFailure(null);
+    setInputNotice(null);
+    setInput("");
+    void append({ role: "user", content: question.trim() });
+  };
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    sendQuestion(input);
+  };
+  const newConversation = () => {
+    setMessages([]);
+    setInput("");
+    setFailure(null);
+    setInputNotice(null);
+    inputRef.current?.focus();
+  };
 
   // Phase machine so the exit animation can play before the DOM goes away.
   const [phase, setPhase] = useState<Phase>(open ? "open" : "closed");
@@ -200,13 +234,8 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
     onClose();
   };
 
-  useEffect(() => {
-    if (open) {
-      setPhase("open");
-    } else {
-      setPhase((current) => (current === "open" ? "closing" : current));
-    }
-  }, [open]);
+  if (open && phase !== "open") setPhase("open");
+  if (!open && phase === "open") setPhase("closing");
 
   useGSAP(
     () => {
@@ -336,6 +365,15 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
           </span>
           <button
             type="button"
+            onClick={newConversation}
+            disabled={isLoading || (messages.length === 0 && !failure)}
+            className="min-h-11 shrink-0 border border-term-line px-2 py-1 normal-case tracking-normal transition-colors hover:border-accent hover:text-term-fg disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0"
+            aria-label="Start a new conversation"
+          >
+            new chat
+          </button>
+          <button
+            type="button"
             onClick={onClose}
             className="min-h-11 shrink-0 border border-term-line px-2.5 py-1 normal-case tracking-normal transition-colors hover:border-accent hover:text-term-fg sm:min-h-0 sm:px-2"
             aria-label="Close portfolio chat"
@@ -361,7 +399,7 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
                   data-chip
                   type="button"
                   disabled={isLoading}
-                  onClick={() => append({ role: "user", content: s })}
+                  onClick={() => sendQuestion(s)}
                   className="min-h-11 border border-term-line px-2.5 py-1.5 text-left text-[11px] text-term-muted transition-colors hover:border-accent hover:text-term-fg disabled:cursor-wait disabled:opacity-60 sm:min-h-0"
                 >
                   {s}
@@ -405,7 +443,7 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
           })}
           </div>
           {isLoading && <StreamingStatus streaming={streaming} />}
-          {!isLoading && !error && messages[messages.length - 1]?.role === "assistant" && (
+          {!isLoading && !failure && messages[messages.length - 1]?.role === "assistant" && (
             <div className="mb-3 border-t border-term-line pt-3">
               <p className="mb-2 text-[10px] uppercase tracking-[0.12em] text-term-muted">follow up</p>
               <div role="group" aria-label="Follow-up questions" className="flex flex-wrap gap-2">
@@ -414,7 +452,7 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
                     key={prompt}
                     data-chip
                     type="button"
-                    onClick={() => append({ role: "user", content: prompt })}
+                    onClick={() => sendQuestion(prompt)}
                     className="min-h-11 border border-term-line px-2.5 py-1.5 text-left text-[11px] text-term-muted transition-colors hover:border-accent hover:text-term-fg sm:min-h-0"
                   >
                     {prompt}
@@ -423,15 +461,26 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
               </div>
             </div>
           )}
-          {error && (
-            <p role="alert" className="mb-3 text-[#e07a6a]">
-              chat is temporarily unavailable — use email, GitHub, or the resume instead.
-            </p>
+          {failure && (
+            <div className="mb-3">
+              <p role="alert" className="text-[#e07a6a]">{failure.message}</p>
+              {failure.kind === "unavailable" && messages.length > 0 && (
+                <button
+                  type="button"
+                  disabled={isLoading}
+                  onClick={() => { setFailure(null); void reload(); }}
+                  className="mt-2 min-h-11 border border-term-line px-2.5 py-1.5 text-[11px] text-term-muted transition-colors hover:border-accent hover:text-term-fg disabled:opacity-50 sm:min-h-0"
+                >
+                  Retry question
+                </button>
+              )}
+            </div>
           )}
         </div>
 
         {/* input */}
-        <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-term-line px-3 py-2.5 sm:gap-2.5 sm:px-3.5">
+        <form onSubmit={handleSubmit} className="border-t border-term-line px-3 py-2.5 sm:px-3.5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
           <span className="text-accent-term">❯</span>
           {input.length === 0 && <span aria-hidden className="caret-blink -mr-1" />}
           <label htmlFor="ask-terminal-input" className="sr-only">Ask a question about Arjun Varma</label>
@@ -439,7 +488,19 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
             id="ask-terminal-input"
             ref={inputRef}
             value={input}
-            onChange={handleInputChange}
+            onChange={(event) => {
+              setInput(event.target.value);
+              setInputNotice(null);
+            }}
+            maxLength={CHAT_LIMITS.messageChars}
+            aria-describedby="ask-terminal-input-hint"
+            onPaste={(event) => {
+              const selected = (event.currentTarget.selectionEnd ?? 0) - (event.currentTarget.selectionStart ?? 0);
+              if (input.length - selected + event.clipboardData.getData("text").length > CHAT_LIMITS.messageChars) {
+                event.preventDefault();
+                setInputNotice("That paste exceeds 2,000 characters. Shorten the question before pasting.");
+              }
+            }}
             disabled={isLoading}
             enterKeyHint="send"
             placeholder={isLoading ? "…" : "ask anything about Arjun"}
@@ -453,6 +514,14 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
           >
             send <span aria-hidden>↵</span>
           </button>
+          </div>
+          <p id="ask-terminal-input-hint" aria-live="polite" className="mt-2 text-[10px] leading-relaxed text-term-muted">
+            {inputNotice ?? (input.length >= CHAT_LIMITS.messageChars
+              ? "2,000-character limit reached. Shorten the question to add more."
+              : input.length >= 1_800
+                ? `${input.length.toLocaleString()} / 2,000 characters`
+                : "Up to 2,000 characters. Long chats use recent messages for context.")}
+          </p>
         </form>
       </div>
     </div>

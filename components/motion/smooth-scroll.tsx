@@ -43,6 +43,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
     document.addEventListener("visibilitychange", onVisibilityChange);
+    // Publish the browser-only imperative instance to consumers after attaching it.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLenis(instance);
 
     return () => {

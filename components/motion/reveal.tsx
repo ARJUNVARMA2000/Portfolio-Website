@@ -55,5 +55,7 @@ export function Reveal({
     { scope: ref }
   );
 
+  // Forward the ref to React; createElement does not read ref.current.
+  // eslint-disable-next-line react-hooks/refs
   return createElement(Tag, { ref, className }, children);
 }

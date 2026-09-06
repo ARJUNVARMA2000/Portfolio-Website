@@ -1,195 +1,40 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SITE } from "@/content/site";
-import {
-  gsap,
-  SplitText,
-  useGSAP,
-  MOTION_OK,
-  EASE_OUT,
-  EASE_INOUT,
-  SCRAMBLE_CHARS,
-} from "@/lib/gsap";
-
-const CONTACT = [
-  { label: "Email", href: `mailto:${SITE.email}` },
-  { label: "GitHub", href: SITE.github },
-  { label: "LinkedIn", href: SITE.linkedin },
-  { label: "Resume", href: SITE.resume },
-];
+import { SplitReveal } from "@/components/motion/split-reveal";
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-
-  useGSAP(
-    (_, contextSafe) => {
-      const root = ref.current;
-      if (!root || !contextSafe) return;
-      const q = gsap.utils.selector(root);
-
-      gsap.matchMedia().add(MOTION_OK, () => {
-        // Hidden states live in JS only — reduced-motion/no-JS users get the full page.
-        gsap.set(
-          q("[data-hero-role], [data-hero-loc], [data-hero-tag], [data-hero-contact] a, [data-hero-cap]"),
-          { autoAlpha: 0 }
-        );
-        gsap.set(q("[data-hero-cred]"), { autoAlpha: 0, y: 12 });
-        gsap.set(q("h1"), { autoAlpha: 0 });
-        gsap.set(q("[data-hero-lede]"), { autoAlpha: 0 });
-        gsap.set(q("[data-hero-frame]"), { clipPath: "inset(100% 0% 0% 0%)" });
-        gsap.set(q("[data-hero-img]"), { scale: 1.18 });
-
-        const build = contextSafe(() => {
-          const h1 = q("h1")[0];
-          const lede = q("[data-hero-lede]")[0];
-          if (!h1 || !lede) return;
-
-          const h1Split = SplitText.create(h1, { type: "chars", mask: "chars", aria: "auto" });
-          const ledeSplit = SplitText.create(lede, { type: "lines", mask: "lines", aria: "auto" });
-
-          const tl = gsap.timeline({ defaults: { ease: EASE_OUT } });
-
-          // 1 — mono role line decodes; availability tag flickers in like a cursor.
-          tl.set(q("[data-hero-role]"), { autoAlpha: 1 })
-            .to(q("[data-hero-role]"), {
-              duration: 0.9,
-              scrambleText: {
-                text: "Data Scientist / ML Engineer",
-                chars: SCRAMBLE_CHARS,
-                speed: 0.8,
-              },
-            })
-            .to(q("[data-hero-loc]"), { autoAlpha: 1, duration: 0.4 }, 0.3)
-            .to(
-              q("[data-hero-tag]"),
-              { keyframes: [{ autoAlpha: 1 }, { autoAlpha: 0.35 }, { autoAlpha: 1 }], duration: 0.5 },
-              0.8
-            );
-
-          // 2 — the name: characters rise out of their masks.
-          tl.set(h1, { autoAlpha: 1 }, 0.15).from(
-            h1Split.chars,
-            { yPercent: 110, duration: 1.0, stagger: 0.022 },
-            0.15
-          );
-
-          // 3 — lede lines follow.
-          tl.set(lede, { autoAlpha: 1 }, 0.45).from(
-            ledeSplit.lines,
-            { yPercent: 110, duration: 0.9, stagger: 0.09 },
-            0.45
-          );
-
-          // 4 — portrait wipes open while the image settles to scale.
-          tl.to(
-            q("[data-hero-frame]"),
-            { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: EASE_INOUT },
-            0.4
-          )
-            .to(q("[data-hero-img]"), { scale: 1, duration: 1.4, ease: EASE_INOUT }, 0.4)
-            .to(q("[data-hero-cap]"), { autoAlpha: 1, duration: 0.5 }, 1.2)
-            .to(
-              q("[data-hero-cap] span:first-child"),
-              {
-                duration: 0.7,
-                scrambleText: { text: "fig. 00 — the author", chars: SCRAMBLE_CHARS, speed: 0.8 },
-              },
-              1.2
-            );
-
-          // 5 — credentials, then contact links.
-          tl.to(q("[data-hero-cred]"), { autoAlpha: 1, y: 0, duration: 0.7 }, 0.75).to(
-            q("[data-hero-contact] a"),
-            { autoAlpha: 1, duration: 0.5, stagger: 0.06 },
-            0.9
-          );
-        });
-
-        // Fraunces must be measurable before SplitText runs.
-        document.fonts.ready.then(build);
-      });
-    },
-    { scope: ref }
-  );
-
   return (
-    <section
-      ref={ref}
-      className="relative mx-auto max-w-wrap px-5 pb-16 pt-[clamp(48px,9vh,110px)] sm:px-8"
-    >
-      <div aria-hidden className="dot-grid dot-fade absolute inset-0 -z-10" />
-
-      <p className="mono-label flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span data-hero-role className="!text-ink">
-          Data Scientist / ML Engineer
-        </span>
-        <span data-hero-loc>— New York</span>
-        <span data-hero-tag className="ml-auto text-accent-text">
-          [ {SITE.availability.toLowerCase()} ]
-        </span>
+    <section aria-label="Introduction" className="relative mx-auto max-w-wrap px-5 pb-10 pt-10 sm:px-8 sm:pb-14 sm:pt-16">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 font-mono text-[11px] text-muted">
+        <p>Data Scientist / ML Engineer <span className="hidden sm:inline">· New York</span></p>
+        <p className="flex items-center gap-2 text-accent-text">
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+          {SITE.availability}
+        </p>
+      </div>
+      <div className="mt-7 grid grid-cols-[minmax(0,1fr)_68px] items-center gap-x-5 sm:mt-9 sm:grid-cols-[minmax(0,1fr)_136px] sm:gap-x-12">
+        <SplitReveal as="h1" type="chars" trigger="mount" className="font-serif text-[clamp(2.7rem,7.6vw,5.5rem)] font-medium leading-[1] tracking-[-0.045em]">
+          Arjun Varma
+        </SplitReveal>
+        <Image src="/images/profile.png" alt="Arjun Varma" width={1024} height={1536} priority sizes="(min-width: 640px) 136px, 68px" className="row-span-2 h-[88px] w-[68px] self-start border border-line object-cover object-top sm:h-[166px] sm:w-[136px]" />
+        <p className="col-span-2 mt-5 max-w-[48ch] text-[1.125rem] leading-snug sm:col-span-1 sm:mt-6 sm:text-[1.4rem]">
+          I build forecasting, decision-support, and agentic systems, from data and evaluation to deployed products.
+        </p>
+      </div>
+      <p className="mt-5 max-w-[65ch] text-[0.9375rem] leading-relaxed text-muted">
+        Data science intern at <strong className="font-medium text-ink">Novo Nordisk</strong>.
+        M.S. Data Science at <strong className="font-medium text-ink">Columbia</strong>.
+        Previously, three years building production ML and analytics at <strong className="font-medium text-ink">ZS</strong>.
       </p>
-
-      <div className="mt-10 grid grid-cols-1 items-start gap-x-14 gap-y-10 md:grid-cols-[1fr_minmax(200px,240px)]">
-        <div>
-          <h1 className="font-serif text-[clamp(2.8rem,7vw,4.6rem)] font-medium leading-[1.02] tracking-[-0.025em]">
-            Arjun Varma
-          </h1>
-
-          <p
-            data-hero-lede
-            className="mt-6 max-w-[44ch] font-sans text-[clamp(1.125rem,2.4vw,1.375rem)] leading-snug text-ink"
-          >
-            I build forecasting, decision-support, and agentic systems — from data pipelines
-            and model evaluation through deployed products.
-          </p>
-
-          <p
-            data-hero-cred
-            className="mt-5 max-w-[58ch] font-sans text-[1rem] leading-relaxed text-muted"
-          >
-            Data science intern at <strong className="font-medium text-ink">Novo Nordisk</strong>,
-            working on propensity scoring, next-best engagement, and LLM decision support. M.S. in Data Science at{" "}
-            <strong className="font-medium text-ink">Columbia</strong>. Before that, three years at
-            ZS building production ML and healthcare analytics.
-          </p>
-
-          <div data-hero-contact className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            {CONTACT.map((c) => (
-              <a
-                key={c.label}
-                href={c.href}
-                target={c.href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="mono-label u-line !text-ink"
-              >
-                {c.label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <figure className="w-[200px] md:w-auto md:justify-self-end">
-          <div className="border border-line bg-surface p-2">
-            <div data-hero-frame className="overflow-hidden">
-              <Image
-                data-hero-img
-                src="/images/profile.png"
-                alt="Arjun Varma"
-                width={1024}
-                height={1536}
-                priority
-                sizes="(min-width: 768px) 240px, 200px"
-                className="block h-auto w-full"
-              />
-            </div>
-          </div>
-          <figcaption data-hero-cap className="mono-label mt-2 flex justify-between">
-            <span>fig. 00 — the author</span>
-            <span>NYC</span>
-          </figcaption>
-        </figure>
+      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px]">
+        <Link href="/#work" className="inline-flex min-h-11 items-center gap-5 border border-ink bg-ink px-4 text-bg no-underline transition-colors hover:border-accent-text hover:bg-accent-text">
+          Selected work <span aria-hidden>↓</span>
+        </Link>
+        <a href={SITE.resume} target="_blank" rel="noopener noreferrer" className="u-line inline-flex min-h-11 items-center">Resume ↗</a>
+        <a href={`mailto:${SITE.email}`} className="u-line inline-flex min-h-11 items-center">Email</a>
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="u-line inline-flex min-h-11 items-center">GitHub ↗</a>
+        <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="u-line inline-flex min-h-11 items-center">LinkedIn ↗</a>
       </div>
     </section>
   );

@@ -29,7 +29,7 @@ export function ProjectActions({
   reverse = false,
   className = "",
 }: ProjectActionsProps) {
-  const size = compact ? "min-h-10 px-3 text-[9px]" : "min-h-11 px-4 text-[10px]";
+  const size = compact ? "min-h-11 px-3 text-[11px]" : "min-h-11 px-4 text-[11px]";
   const base = `${size} inline-flex items-center justify-center gap-2 border font-mono uppercase tracking-[0.11em] no-underline transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-0.5`;
 
   return (
@@ -76,13 +76,13 @@ export function ProjectActions({
         )}
       </div>
       {statusNote && (
-        <p className="mt-3 flex items-center gap-2 font-mono text-[9px] uppercase leading-relaxed tracking-[0.1em] text-accent-text">
-          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+        <p className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-muted">
+          <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
           {statusNote}
         </p>
       )}
       {unavailableNote && (
-        <p className="mt-3 font-mono text-[9px] uppercase leading-relaxed tracking-[0.1em] text-muted">
+        <p className="mt-3 text-xs leading-relaxed text-muted">
           {unavailableNote}
         </p>
       )}

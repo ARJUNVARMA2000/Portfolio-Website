@@ -8,19 +8,24 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
 
 const LINKS = [
-  { label: "Work", href: "/#work" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Experience", href: "/#experience" },
-  { label: "About", href: "/#about" },
+  { label: "Work", href: "/#work", index: "01" },
+  { label: "Projects", href: "/#projects", index: "04" },
+  { label: "Experience", href: "/#experience", index: "02" },
+  { label: "About", href: "/#about", index: "05" },
 ];
 
 export function Nav() {
   const ref = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const [menuPath, setMenuPath] = useState(pathname);
   const isCaseStudy = pathname?.startsWith("/work") ?? false;
 
-  useEffect(() => setMobileOpen(false), [pathname]);
+  // Reset before rendering a new route so an open menu never flashes on navigation.
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setMobileOpen(false);
+  }
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -78,7 +83,7 @@ export function Nav() {
 
   return (
     <header ref={ref} className="nav-shell sticky top-0 z-40 bg-bg">
-      <nav className="relative mx-auto flex h-14 max-w-wrap items-center justify-between px-5 sm:px-8">
+      <nav className="relative mx-auto flex h-14 max-w-wrap items-center justify-between gap-3 px-5 sm:px-8">
         <Link
           data-nav-item
           href="/"
@@ -93,7 +98,7 @@ export function Nav() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-sections"
             onClick={() => setMobileOpen((value) => !value)}
-            className="mono-label u-line !text-ink sm:hidden"
+            className="mono-label u-line inline-flex min-h-11 items-center !text-ink sm:hidden"
           >
             Sections
           </button>
@@ -112,7 +117,7 @@ export function Nav() {
             href={SITE.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="mono-label u-line !text-ink"
+            className="mono-label u-line hidden min-h-11 items-center !text-ink min-[360px]:inline-flex"
           >
             Resume
           </a>
@@ -124,7 +129,7 @@ export function Nav() {
                 event.currentTarget.focus();
                 window.dispatchEvent(new Event("open-ask"));
               }}
-              className="mono-label border border-ink px-2.5 py-1.5 !text-ink transition-colors hover:border-accent-text hover:bg-accent-text hover:!text-bg"
+              className="mono-label min-h-11 border border-ink px-2.5 py-1.5 !text-ink transition-colors hover:border-accent-text hover:bg-accent-text hover:!text-bg"
             >
               <span>ask</span><span className="hidden sm:inline">&nbsp;⌘K</span>
             </button>
@@ -135,7 +140,7 @@ export function Nav() {
             id="mobile-sections"
             className="absolute left-5 right-5 top-[calc(100%+1px)] border border-line bg-bg p-2 shadow-xl sm:hidden"
           >
-            {LINKS.map((link, index) => (
+            {LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
@@ -143,9 +148,12 @@ export function Nav() {
                 className="flex items-center justify-between border-b border-line px-3 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink last:border-b-0"
               >
                 <span>{link.label}</span>
-                <span className="text-accent-text">0{index + 1}</span>
+                <span className="text-accent-text">{link.index}</span>
               </Link>
             ))}
+            <a href={SITE.resume} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center px-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink min-[360px]:hidden">
+              Resume ↗
+            </a>
           </div>
         )}
       </nav>

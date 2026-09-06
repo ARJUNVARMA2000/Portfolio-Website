@@ -6,8 +6,9 @@ export const alt = "Arjun Varma project case study";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function ProjectOpenGraphImage({ params }: { params: { slug: string } }) {
-  const cs = getCaseStudy(params.slug);
+export default async function ProjectOpenGraphImage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const cs = getCaseStudy(slug);
   const title = cs?.title ?? "Project case study";
   const metrics = cs?.metrics.slice(0, 3) ?? [];
 
