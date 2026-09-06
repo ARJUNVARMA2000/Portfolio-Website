@@ -231,6 +231,8 @@ export function AskTerminal({ open, onClose }: { open: boolean; onClose: () => v
   const handleInternalNavigate = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     const [path, hash] = href.split("#", 2);
     if (path === pathname && !hash) event.preventDefault();
+    // Navigation must dismiss the dialog even if the browser suspends animation frames.
+    setPhase("closed");
     onClose();
   };
 

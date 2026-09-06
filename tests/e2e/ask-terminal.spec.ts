@@ -114,6 +114,28 @@ test.describe("Ask terminal", () => {
     await expect(dialog).toHaveCount(0);
   });
 
+  test("dismisses source navigation even when animation frames stop", async ({ page }) => {
+    await installChatStream(page, ["Read [DEUCE](/work/deuce-tennis-forecast)."], 0);
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const { dialog } = await openAsk(page);
+    await dialog.getByRole("group", { name: "Suggested questions" }).getByRole("button").first().click();
+    await expect(dialog.getByRole("group", { name: "Follow-up questions" })).toBeVisible();
+    const source = dialog.getByRole("group", { name: "Case-study sources" }).getByRole("link", { name: "DEUCE Tennis Forecast" });
+    // Stop future animation frames at the navigation click, after actionability checks.
+    await page.evaluate(() => {
+      const requestFrame = window.requestAnimationFrame;
+      const suspendFrames = () => {
+        window.requestAnimationFrame = () => 0;
+        window.setTimeout(() => { window.requestAnimationFrame = requestFrame; }, 2_000);
+      };
+      window.addEventListener("click", suspendFrames, { capture: true, once: true });
+    });
+    await source.click();
+    await expect(dialog).toHaveCount(0, { timeout: 1_000 });
+    await expect(page).toHaveURL(/\/work\/deuce-tennis-forecast$/);
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+  });
+
   test("uses case-aware prompts and restores focus after Escape", async ({ page }) => {
     await page.goto("/work/deuce-tennis-forecast", { waitUntil: "domcontentloaded" });
     const { dialog, trigger } = await openAsk(page);

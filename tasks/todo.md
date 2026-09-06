@@ -1,5 +1,13 @@
 # 2026-09-06 — Implement portfolio improvements
 
+## Merge verification follow-up
+
+- [x] Diagnose the Linux WebKit CI failure from its trace: source navigation released the chat scroll lock but left its dialog mounted while waiting for the closing animation.
+- [x] Dismiss internal-source navigation synchronously while retaining animated Escape/Close behavior and the conversation transcript.
+- [x] Verify the added animation-independent navigation regression locally: all 14 applicable chat browser tests pass (eight device-specific duplicates skipped), plus lint, TypeScript, six unit tests, and production build.
+
+The required GitHub checks are rerun on this fix before merging PR #11 into main; the pull request records their final status and merge result.
+
 The owner approved implementation of the review recommendations. This checklist is the implementation check-in; proceed with the agreed direction.
 
 Publication update: after reviewing the local preview, the owner explicitly approved pushing these changes to the configured GitHub remote. The implementation review below records validation before that publication step.
