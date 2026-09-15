@@ -24,7 +24,7 @@ The goal: an immersive educational experience that brings history to life throug
 
 1. **Historical research** — documented sources drive authentic personalities, speaking styles, and knowledge boundaries for 60+ figures
 2. **Dual conversation modes** — Seance Mode (1-on-1) and Dinner Party Mode (2–5 figures) for different interaction styles
-3. **Smart model selection** — OpenRouter integration with automatic fallback: primary free models (Gemini 2.0 Flash) with premium fallbacks (GPT-4o, Claude Sonnet)
+3. **Model selection** — OpenRouter integration with selectable model tiers, GPT-4o Mini as the default, and GPT-4o Mini fallback when a non-default selection fails
 4. **Museum-themed design** — dark UI with gold accents, SVG portraits, smooth animations
 5. **Progressive features** — contextual suggestions, conversation history, save/resume, export options
 
@@ -34,13 +34,10 @@ The goal: an immersive educational experience that brings history to life throug
 flowchart LR
     U[User] --> F[Flask + SSE]
     F --> P[Prompt builder<br/>persona + era boundary]
-    P --> OR[OpenRouter]
-    OR -->|primary| G[Gemini 2.0 Flash]
-    OR -->|fallback 1| C[Claude Sonnet 4]
-    OR -->|fallback 2| O[GPT-4o]
-    G --> S[Stream to client]
-    C --> S
-    O --> S
+    P --> OR[OpenRouter selected model<br/>default: GPT-4o Mini]
+    OR --> S[Stream to client]
+    OR -. non-default model failure .-> FB[GPT-4o Mini fallback]
+    FB --> S
 ```
 
 **Components:**

@@ -1,3 +1,24 @@
+# 2026-09-15 — Gemini retirement documentation migration
+
+The owner approved implementation and pull requests for the cross-repository migration plan on September 15, 2026. This repository's scope is the environment example and saved current README templates; merges and deployment are outside that approval.
+
+## Plan
+
+- [x] Read repository instructions and lessons; inspect current model guidance and the corresponding app configurations.
+- [x] Replace obsolete model-selection guidance in `.env.example`.
+- [x] Align Citation Format Checker and ClassPulse templates with their approved Gemini 3.5 Flash-Lite migrations.
+- [x] Correct the SeanceAI template's model-selection and fallback description from its current application source.
+- [x] Verify stale-model references, inspect documentation links and the final diff, and record the review.
+
+## Review
+
+- Replaced obsolete `.env.example` alternatives with the [OpenRouter model directory](https://openrouter.ai/models), retaining the portfolio chat's `openai/gpt-4o-mini` default. Confirmed the linked directory opens successfully.
+- Updated the Citation Format Checker template and profile summary to Gemini 3.5 Flash-Lite; updated the first ClassPulse fallback to the same model family. The corresponding application changes are delivered in their own migration pull requests.
+- Matched SeanceAI's model-selection prose and diagram to its current `app.py` and README: selectable OpenRouter tiers, GPT-4o Mini default, and GPT-4o Mini fallback for a failing non-default selection. No SeanceAI runtime change is implied.
+- Validation: `git diff --check` passed; an `rg` scan of `.env.example` and `docs/github-readmes` found no Gemini 1.5, 2.0, or 2.5 model guidance. Inspected the full documentation diff and retained the existing results, historical plans, runtime source, and dependencies. Application tests are not applicable to these documentation-only edits.
+
+---
+
 # 2026-09-06 — Implement portfolio improvements
 
 ## Merge verification follow-up
