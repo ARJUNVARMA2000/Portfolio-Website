@@ -1,3 +1,21 @@
+# 2026-09-25 — Publish shareable healthcare resume
+
+The owner requested publishing the Desktop Healthcare PDF with a shareable link. The implementation check-in selected `/resume-healthcare` and `/resume-healthcare.pdf` using the site's existing static-PDF rewrite pattern.
+
+## Plan
+
+- [x] Add the supplied Desktop PDF unchanged as `public/resume-healthcare.pdf` and provide a `/resume-healthcare` rewrite.
+- [x] Verify the production build and local PDF responses, including unchanged existing resume URLs.
+- [ ] Publish through the existing Vercel workflow and verify the live healthcare PDF.
+
+## Review
+
+- Source and public healthcare PDFs are byte-identical (SHA-256 `fe00d1517a725b3fe1b0e840a477e164a4225da6ef5ad2c1673b68b73edd8026`). The one-page source was already visually reviewed during the comparison. Its content is unchanged, including the previously reported Novo date.
+- Publication adds a separate directly shareable document; the default Resume links and existing PDFs are preserved.
+- Production build passes. A fresh local production server returns HTTP 200 `application/pdf` with exact file hashes for `/resume-healthcare`, `/resume-healthcare.pdf`, `/resume.pdf`, and `/resume2`. `git diff --check` and an independent scope/rewrite review pass. Required release checks and production verification follow publication of this commit.
+
+---
+
 # 2026-09-15 — Gemini retirement documentation migration
 
 The owner approved implementation and pull requests for the cross-repository migration plan on September 15, 2026. This repository's scope is the environment example and saved current README templates; merges and deployment are outside that approval.

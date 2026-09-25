@@ -32,6 +32,11 @@ const nextConfig = {
         source: "/resume2",
         destination: "/resume2.pdf",
       },
+      // Healthcare resume for direct sharing.
+      {
+        source: "/resume-healthcare",
+        destination: "/resume-healthcare.pdf",
+      },
     ];
   },
 };
