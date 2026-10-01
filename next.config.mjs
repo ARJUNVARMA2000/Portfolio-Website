@@ -37,6 +37,11 @@ const nextConfig = {
         source: "/resume-healthcare",
         destination: "/resume-healthcare.pdf",
       },
+      // Life sciences FDE resume for direct sharing.
+      {
+        source: "/resume-fde",
+        destination: "/resume-fde.pdf",
+      },
     ];
   },
 };
