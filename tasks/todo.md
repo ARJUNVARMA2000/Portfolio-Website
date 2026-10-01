@@ -1,3 +1,21 @@
+# 2026-10-01 — Publish life sciences FDE resume
+
+The owner requested publishing the completed tailored resume on the personal website for sharing. The implementation check-in selected `/resume-fde.pdf` and the clean `/resume-fde` alias using the existing static-PDF deployment pattern.
+
+## Plan
+
+- [x] Prepare an isolated release from current remote main and add the exact completed PDF plus the clean URL.
+- [x] Verify PDF identity, production build, and local HTTP responses for the new and existing resume URLs.
+- [ ] Publish through the existing GitHub/Vercel workflow and verify the public PDF without authentication.
+
+## Review
+
+- Added the supplied PDF unchanged as `public/resume-fde.pdf`, with a `/resume-fde` rewrite. SHA-256: `db17cc175878960ce76c8159a0ab530d28927ce0fcc473a824fcdf5a95c9af62`.
+- Prepared from remote main in an isolated checkout. Existing resume PDFs, public destinations, homepage, and unrelated local work are preserved.
+- Independent review and production build passed. Local HTTP checks return 200 `application/pdf` with exact expected bytes and no redirects for `/resume-fde`, `/resume-fde.pdf`, `/resume.pdf`, `/resume2`, and `/resume-healthcare`. Publication and live verification follow the release checks.
+
+---
+
 # 2026-09-25 — Publish shareable healthcare resume
 
 The owner requested publishing the Desktop Healthcare PDF with a shareable link. The implementation check-in selected `/resume-healthcare` and `/resume-healthcare.pdf` using the site's existing static-PDF rewrite pattern.
